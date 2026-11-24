@@ -987,7 +987,7 @@ dialog#pk::backdrop{background:#0e0b08}
 .lbsel{display:flex;flex-direction:column;gap:3px;font:600 .62rem var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-left:auto}
 .lbsel select{font:400 1rem var(--serif);letter-spacing:0;text-transform:none;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:3px 18px 3px 0}
 .lbk{list-style:none;margin:10px 0 0;padding:0}
-.lbr{display:grid;grid-template-columns:56px minmax(0,1fr) auto auto;gap:14px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--line)}
+.lbr{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--line)}
 .lbn{font:300 2.1rem/1 var(--serif);color:transparent;-webkit-text-stroke:1px var(--muted);text-align:center}
 .lbr.top .lbn{-webkit-text-stroke-color:var(--gold);font-size:2.8rem}
 .lbr.top .lba b{font-size:1.4rem}
@@ -1002,6 +1002,8 @@ dialog#pk::backdrop{background:#0e0b08}
 #v-estudio .sgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:760px){#v-estudio .sgrid.two{grid-template-columns:1fr}}
 .hmw .hm{max-width:640px}
+
+.lbb{display:block;height:6px;background:var(--line);border-radius:0}.lbb i{display:block;height:100%;background:var(--ink)}.lbr.top .lbb i,.lbr.me .lbb i{background:var(--gold)}.lba small b{font-weight:600;color:var(--ink)}.lba small{margin-top:6px}
 </style>
 </head>
 <body>
@@ -1013,7 +1015,7 @@ dialog#pk::backdrop{background:#0e0b08}
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Estudiar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
       <button type="button" role="menuitem" data-v="textos"><i>I</i><b>Textos</b><span>Comentarios con clave de corrección</span></button><button type="button" role="menuitem" data-v="fuentes"><i>II</i><b>Fuentes históricas</b><span>Mapas, cuadros, carteles y fotografías</span></button><button type="button" role="menuitem" data-v="personajes"><i>III</i><b>Personajes</b><span>Semblanzas con fechas y enlaces</span></button><button type="button" role="menuitem" data-v="tiempo"><i>IV</i><b>Cronología</b><span>Hitos por tema y epígrafe</span></button></div></div>
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Practicar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
-      <button type="button" role="menuitem" data-v="examenes"><i>I</i><b>Exámenes</b><span>Evaluaciones y ordinario, con solucionario</span></button><button type="button" role="menuitem" data-v="simulacro"><i>II</i><b>Comentario cronometrado</b><span>Comenta un documento con cronómetro</span></button><button type="button" role="menuitem" data-v="juegos"><i>III</i><b>Juegos</b><span>Retos diarios, insignias y rangos</span></button><button type="button" role="menuitem" data-v="taller"><i>IV</i><b>Taller</b><span>Plan, comentario, esquemas y chuleta</span></button><button type="button" role="menuitem" data-v="album"><i>V</i><b>Álbum</b><span>Cromos de personajes y sobres</span></button><button type="button" role="menuitem" data-v="clasif"><i>VI</i><b>Clasificación</b><span>Compite con tu clase, con alias</span></button></div></div>
+      <button type="button" role="menuitem" data-v="examenes"><i>I</i><b>Exámenes</b><span>Evaluaciones y ordinario, con solucionario</span></button><button type="button" role="menuitem" data-v="simulacro"><i>II</i><b>Comentario cronometrado</b><span>Comenta un documento con cronómetro</span></button><button type="button" role="menuitem" data-v="juegos"><i>III</i><b>Juegos</b><span>Retos diarios, insignias y rangos</span></button><button type="button" role="menuitem" data-v="taller"><i>IV</i><b>Taller</b><span>Plan, comentario, esquemas y chuleta</span></button><button type="button" role="menuitem" data-v="album"><i>V</i><b>Álbum</b><span>Cromos de personajes y sobres</span></button><button type="button" role="menuitem" data-v="clasif"><i>VI</i><b>Clasificación</b><span>Compite con tu clase, de forma anónima</span></button></div></div>
     <button type="button" class="nv" data-v="estudio">Mi estudio</button>
   </nav>
   <div class="tools">
@@ -1116,7 +1118,7 @@ dialog#pk::backdrop{background:#0e0b08}
    <h2>Currículo</h2><p>Decreto 64/2022 de la Comunidad de Madrid (LOMLOE) y modelo de examen de la PAU de Historia de España 2026-27.</p>
    <h2>Imágenes</h2><p>Proceden de las presentaciones de clase y de fuentes públicas (archivos, museos y Wikimedia Commons) y se usan con fines docentes y sin ánimo de lucro. Las obras anteriores al siglo XX suelen ser de dominio público; las posteriores y las fotografías pueden estar protegidas por sus autores. Algunos gráficos son de elaboración propia a partir de datos oficiales. Si eres titular de derechos y quieres que se retire o se acredite una imagen, comunícaselo al profesor.</p>
    <h2>Textos</h2><p>Los textos históricos se reproducen con fines educativos; cada ficha indica su procedencia cuando se conoce.</p>
-   <h2>Tus datos</h2><p>No hay cuentas, cookies ni analítica. Tu progreso, tus notas y tus exámenes se guardan solo en tu navegador. Si quieres llevártelos a otro dispositivo, usa «Exportar copia» en Mi estudio. La única excepción es la clasificación, que es voluntaria: si entras, se publica el alias que elijas (nunca tu nombre real), tu grupo y tus cifras de estudio (puntos, racha, cromos). Puedes salir cuando quieras y tu fila se borra.</p>
+   <h2>Tus datos</h2><p>No hay cuentas, cookies ni analítica. Tu progreso, tus notas y tus exámenes se guardan solo en tu navegador. Si quieres llevártelos a otro dispositivo, usa «Exportar copia» en Mi estudio. La única excepción es la clasificación, que es voluntaria: si entras, se publican solo tus cifras de estudio (puntos, racha, cromos) con un identificador aleatorio, sin nombre, alias ni grupo. Puedes salir cuando quieras y tu fila se borra.</p>
    <h2>Compartir</h2><p><button class="btn" type="button" id="shf2">Compartir con QR</button></p>
   </div>
 </section>
@@ -2033,10 +2035,10 @@ function statsHTML(){
 
 /* ---------- v13: clasificación pública ---------- */
 const LB_URL="https://historiapau.pages.dev/api/lb";
-const LBS={d:null,tab:"xpT",grp:"",busy:false,err:"",t:0,jt:null};
+const LBS={d:null,tab:"xpT",busy:false,err:"",t:0,jt:null};
 const LBg=()=>{const g=G();return g.lb&&typeof g.lb==="object"?g.lb:null};
 function lbId(){const g=G();if(!g.lb)g.lb={};if(!g.lb.id){const a=new Uint8Array(12);(crypto||window.crypto).getRandomValues(a);g.lb.id=[...a].map(x=>x.toString(16).padStart(2,"0")).join("")}return g.lb.id}
-function lbPayload(){const l=LBg()||{};return{id:lbId(),alias:l.alias||"",grp:l.grp||"otro",xp:totalXP(),streak:streak(),cards:alCount(),badges:Object.keys(G().badges).length,mins:minTot()}}
+function lbPayload(){return{id:lbId(),xp:totalXP(),streak:streak(),cards:alCount(),badges:Object.keys(G().badges).length,mins:minTot()}}
 async function lbCall(method,q,body,hdr){
   const c=new AbortController(),to=setTimeout(()=>c.abort(),9000);
   try{const r=await fetch(LB_URL+(q||""),{method,signal:c.signal,headers:Object.assign(body?{"content-type":"application/json"}:{},hdr||{}),body:body?JSON.stringify(body):undefined});
@@ -2046,64 +2048,63 @@ async function lbCall(method,q,body,hdr){
   finally{clearTimeout(to)}}
 async function lbLoad(){
   LBS.busy=true;LBS.err="";if($("#v-clasif").classList.contains("on"))renderClasif();
-  const l=LBg(),j=await lbCall("GET","?"+(l&&l.on?"id="+l.id+"&":"")+(LBS.grp?"g="+LBS.grp:""));
+  const l=LBg(),j=await lbCall("GET","?"+(l&&l.on?"id="+l.id:""));
   LBS.busy=false;if(j.ok){LBS.d=j;LBS.t=Date.now()}else LBS.err=j.error||"Error";
   if((location.hash||"").slice(1)==="clasif")renderClasif()}
 async function lbPush(){const l=LBg();if(!l||!l.on)return null;const j=await lbCall("POST","",lbPayload());if(j.ok){LBS.d=Object.assign({},j);LBS.t=Date.now()}return j}
 function lbSoon(){const l=LBg();if(!l||!l.on)return;clearTimeout(LBS.jt);LBS.jt=setTimeout(()=>{lbPush()},45000)}
 const lbWeekLabel=w=>{const d=new Date((w*7-3)*864e5);return d.toLocaleDateString("es-ES",{day:"numeric",month:"long",timeZone:"UTC"})};
 const nf=x=>(x||0).toLocaleString("es-ES");
-function lbRow(r,i,tab,me){
-  const mine=me&&r.alias===me.alias,main={xpT:`${nf(r.xp)} XP`,wk:`+${nf(r.wxp)} esta semana`,streak:`${r.streak} ${r.streak===1?"día":"días"}`,cards:`${r.cards} cromos`}[tab];
-  const sub={xpT:`racha ${r.streak} · ${r.cards} cromos`,wk:`${nf(r.xp)} XP en total`,streak:`${nf(r.xp)} XP`,cards:`${nf(r.xp)} XP`}[tab];
-  return `<li class="lbr${mine?" me":""}${i<3?" top":""}"><span class="lbn">${i+1}</span><span class="lba"><b>${esc(r.alias)}</b>${mine?` <em>(tú)</em>`:""}<small>${sub}</small></span><span class="lbg">${r.grp==="otro"?"":"2.º "+esc(r.grp.slice(1))}</span><span class="lbv">${main}</span></li>`}
+function lbRow(r,i,tab,me,mx){
+  const mine=!!(me&&r.xp===me.xp&&r.streak===me.streak&&r.cards===me.cards&&r.mins===me.mins&&r.wxp===me.wxp),v={xpT:r.xp,wk:r.wxp,streak:r.streak,cards:r.cards}[tab],
+   main={xpT:`${nf(r.xp)} XP`,wk:`+${nf(r.wxp)} esta semana`,streak:`${r.streak} ${r.streak===1?"día":"días"}`,cards:`${r.cards} cromos`}[tab],
+   sub={xpT:`racha ${r.streak} · ${r.cards} cromos`,wk:`${nf(r.xp)} XP en total`,streak:`${nf(r.xp)} XP`,cards:`${nf(r.xp)} XP`}[tab];
+  return `<li class="lbr${mine?" me":""}${i<3?" top":""}"><span class="lbn">${i+1}</span><span class="lba"><span class="lbb" aria-hidden="true"><i style="width:${mx?Math.max(3,Math.round(100*v/mx)):3}%"></i></span><small>${mine?"<b>Tú</b> · ":""}${sub}</small></span><span class="lbv">${main}</span></li>`}
 function renderClasif(){
   const V=$("#v-clasif");if(!V)return;
   const l=LBg(),on=!!(l&&l.on),d=LBS.d,tab=LBS.tab;
   const me=d&&d.me,list=(d&&d[tab])||[];
   const tabs=[["xpT","Total"],["wk","Esta semana"],["streak","Racha"],["cards","Cromos"]];
   const rk={xpT:me&&me.rank,wk:me&&me.rankW,streak:me&&me.rankS,cards:me&&me.rankC}[tab];
-  V.innerHTML=`<div class="vh"><h1>Clasificación de la clase</h1><p>Compite con tus compañeros. Solo se publica el alias que elijas y tus cifras de estudio; nada más.</p></div>
-  ${on?`<div class="card lbme"><div><div class="eyebrow" style="margin:0">Estás dentro como</div><h2>${esc(l.alias)}</h2><p class="note" style="margin:2px 0 0">${me?`Puesto <b>${me.rank}</b> de ${d.n} · ${nf(me.xp)} XP · +${nf(me.wxp)} esta semana`:(LBS.busy?"Sincronizando…":"Aún sin sincronizar")}</p></div><div class="row"><button class="btn primary" id="lbup" type="button">Actualizar mis puntos</button><button class="btn" id="lbout" type="button">Salir de la clasificación</button></div></div>`
-   :`<div class="card lbjoin"><h2>Entra en la clasificación</h2><p class="note">Elige un alias que no sea tu nombre real. Se mostrará junto a tus puntos (XP), tu racha y tus cromos. Puedes salir cuando quieras y tu fila se borra. No hay cookies ni seguimiento.</p>
-    <div class="row" style="align-items:flex-end"><div class="field"><label for="lba">Alias (3–16 caracteres)</label><input id="lba" maxlength="16" autocomplete="off" placeholder="p. ej. Almanzor"></div><div class="field"><label for="lbgp">Tu grupo</label><select id="lbgp"><option value="2B">2.º B</option><option value="2C">2.º C</option><option value="otro">Otro</option></select></div></div>
-    <label class="check" style="margin-top:10px"><input type="checkbox" id="lbok"> Entiendo que mi alias y mis puntos serán visibles para cualquiera que abra la clasificación.</label>
+  V.innerHTML=`<div class="vh"><h1>Clasificación de la clase</h1><p>Compite con tus compañeros, de forma anónima. Solo se publican cifras: nadie ve quién eres.</p></div>
+  ${on?`<div class="card lbme"><div><div class="eyebrow" style="margin:0">Participas de forma anónima</div><h2>${me?`Puesto ${me.rank}`:"…"}</h2><p class="note" style="margin:2px 0 0">${me?`De ${d.n} participantes · ${nf(me.xp)} XP · +${nf(me.wxp)} esta semana`:(LBS.busy?"Sincronizando…":"Aún sin sincronizar")}</p></div><div class="row"><button class="btn primary" id="lbup" type="button">Actualizar mis puntos</button><button class="btn" id="lbout" type="button">Salir de la clasificación</button></div></div>`
+   :`<div class="card lbjoin"><h2>Entra en la clasificación</h2><p class="note">Sin alias, sin nombre, sin grupo. Se publican solo tus puntos (XP), tu racha y tus cromos, sin ningún dato que te identifique. Puedes salir cuando quieras y tu fila se borra. No hay cookies ni seguimiento.</p>
     <div class="row" style="margin-top:12px"><button class="btn primary" id="lbjoin" type="button">Entrar</button><span class="note" id="lbmsg" role="alert"></span></div></div>`}
   ${LBS.err&&!d?`<div class="warn" style="margin-top:14px">${esc(LBS.err)} <button class="btn small" id="lbretry" type="button">Reintentar</button></div>`:""}
-  ${d?`<div class="stats4" style="margin-top:18px"><div class="stt"><b>${d.n}</b><span>participantes${LBS.grp?" en el grupo":""}</span></div><div class="stt"><b>${nf(d.xp)}</b><span>XP entre todos</span></div><div class="stt"><b>${Math.round(d.mins/60)} h</b><span>de estudio sumadas</span></div><div class="stt"><b>${lbWeekLabel(d.week)}</b><span>inicio de la semana</span></div></div>`:""}
+  ${d?`<div class="stats4" style="margin-top:18px"><div class="stt"><b>${d.n}</b><span>participantes</span></div><div class="stt"><b>${nf(d.xp)}</b><span>XP entre todos</span></div><div class="stt"><b>${Math.round(d.mins/60)} h</b><span>de estudio sumadas</span></div><div class="stt"><b>${lbWeekLabel(d.week)}</b><span>inicio de la semana</span></div></div>`:""}
   <div class="lbf"><div class="tlseg" role="tablist" aria-label="Clasificación">${tabs.map(([k,n])=>`<button class="seg" role="tab" data-lt="${k}" aria-current="${tab===k}">${n}</button>`).join("")}</div>
-   <label class="lbsel">Grupo<select id="lbg"><option value="">Toda la clase</option><option value="2B">2.º B</option><option value="2C">2.º C</option></select></label><button class="btn small" id="lbrf" type="button">${LBS.busy?"Cargando…":"↻ Refrescar"}</button></div>
+   <button class="btn small" id="lbrf" style="margin-left:auto" type="button">${LBS.busy?"Cargando…":"↻ Refrescar"}</button></div>
   ${me&&rk?`<p class="note" style="margin:10px 0 0">Tu puesto en esta lista: <b>${rk}</b>.</p>`:""}
-  ${list.length?`<ol class="lbk">${list.map((r,i)=>lbRow(r,i,tab,me)).join("")}</ol>`:`<p class="muted" style="margin-top:18px">${LBS.busy?"Cargando…":(d?"Todavía no hay nadie en esta lista. ¡Sé el primero!":"")}</p>`}
-  <p class="alleg">Los puntos se calculan en tu dispositivo; el servidor limita las subidas anormales y el profesor puede expulsar a quien haga trampas o use un alias inadecuado. La clasificación se actualiza cada vez que estudias y cuando pulsas «Actualizar».</p>`;
-  $("#lbg").value=LBS.grp;
+  ${list.length?`<ol class="lbk">${list.map((r,i)=>lbRow(r,i,tab,me,Math.max(1,...list.map(x=>({xpT:x.xp,wk:x.wxp,streak:x.streak,cards:x.cards}[tab])))) ).join("")}</ol>`:`<p class="muted" style="margin-top:18px">${LBS.busy?"Cargando…":(d?"Todavía no hay nadie en esta lista. ¡Sé el primero!":"")}</p>`}
+  <p class="alleg">Los puntos se calculan en tu dispositivo; el servidor limita las subidas anormales y el profesor puede retirar filas con cifras imposibles. La clasificación se actualiza cada vez que estudias y cuando pulsas «Actualizar».</p>`;
   $$("[data-lt]",V).forEach(b=>b.onclick=()=>{LBS.tab=b.dataset.lt;renderClasif()});
-  $("#lbg").onchange=e=>{LBS.grp=e.target.value;lbLoad()};$("#lbrf").onclick=()=>lbLoad();
+  $("#lbrf").onclick=()=>lbLoad();
   const rt=$("#lbretry");if(rt)rt.onclick=()=>lbLoad();
   const up=$("#lbup");if(up)up.onclick=async()=>{up.disabled=true;const j=await lbPush();if(j&&!j.ok)toast(j.error||"No se pudo actualizar.");else toast("Puntos actualizados");lbLoad()};
   const out=$("#lbout");if(out)out.onclick=async()=>{if(!out.dataset.sure){out.dataset.sure="1";out.textContent="¿Seguro? Pulsa otra vez";return}const j=await lbCall("DELETE","?id="+lbId());if(j.ok){G().lb.on=0;saveST();LBS.d=null;toast("Has salido de la clasificación");lbLoad()}else toast(j.error||"No se pudo salir.")};
-  const jn=$("#lbjoin");if(jn)jn.onclick=async()=>{const m=$("#lbmsg"),al=$("#lba").value.replace(/\s+/g," ").trim();
-    if(!$("#lbok").checked){m.textContent="Marca la casilla para continuar.";return}
-    if(al.length<3){m.textContent="El alias debe tener al menos 3 caracteres.";return}
-    jn.disabled=true;m.textContent="Entrando…";const g=G();lbId();g.lb.alias=al;g.lb.grp=$("#lbgp").value;g.lb.on=1;
+  const jn=$("#lbjoin");if(jn)jn.onclick=async()=>{const m=$("#lbmsg");
+    jn.disabled=true;m.textContent="Entrando…";const g=G();lbId();g.lb.on=1;delete g.lb.alias;delete g.lb.grp;
     const j=await lbCall("POST","",lbPayload());
-    if(j.ok){saveST();LBS.d=Object.assign({},j);LBS.t=Date.now();toast("¡Ya estás en la clasificación!");lbLoad()}else{g.lb.on=0;jn.disabled=false;m.textContent=j.error||"No se pudo entrar."}};
+    if(j.ok){saveST();LBS.d=Object.assign({},j);LBS.t=Date.now();toast("Ya participas en la clasificación");lbLoad()}else{g.lb.on=0;jn.disabled=false;m.textContent=j.error||"No se pudo entrar."}};
 }
-function lbBanner(){return `<div class="albn alt" id="lbbn" role="link" tabindex="0"><span class="sb" aria-hidden="true">🏆</span><div><h3>Clasificación de la clase</h3><p>${(LBg()&&LBg().on)?"Ya estás dentro: mira tu puesto.":"Compite con un alias: puntos, racha y cromos."}</p></div><button class="btn" type="button">Ver clasificación</button></div>`}
+function lbBanner(){return `<div class="albn alt" id="lbbn" role="link" tabindex="0"><span class="sb" aria-hidden="true">🏆</span><div><h3>Clasificación de la clase</h3><p>${(LBg()&&LBg().on)?"Ya estás dentro: mira tu puesto.":"Compite de forma anónima: puntos, racha y cromos."}</p></div><button class="btn" type="button">Ver clasificación</button></div>`}
 function initClasif(){
   document.addEventListener("click",e=>{if(e.target.closest("#lbbn"))go("clasif")});
   document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.id==="lbbn"){e.preventDefault();go("clasif")}})}
 /* moderación (panel del profesor): ADMIN_TOKEN configurado en Cloudflare */
 async function profeMod(V){
   const d=document.createElement("div");d.className="card";d.style.marginTop="14px";
-  d.innerHTML=`<h3 style="font-size:1.05rem;margin-bottom:4px">Moderar la clasificación</h3><p class="note" style="margin:0 0 10px">Introduce tu clave de moderación para ver a los participantes y expulsar a quien haga falta. La clave solo se guarda mientras la pestaña esté abierta.</p><div class="row" style="align-items:flex-end"><div class="field"><label for="mdt">Clave</label><input id="mdt" type="password" autocomplete="off"></div><button class="btn" id="mdgo" type="button">Cargar participantes</button></div><div id="mdl" style="margin-top:12px"></div>`;
+  d.innerHTML=`<h3 style="font-size:1.05rem;margin-bottom:4px">Moderar la clasificación</h3><p class="note" style="margin:0 0 10px">La clasificación es anónima: solo puedes retirar filas con cifras imposibles o vaciarla entera. La clave se guarda mientras la pestaña esté abierta.</p><div class="row" style="align-items:flex-end"><div class="field"><label for="mdt">Clave</label><input id="mdt" type="password" autocomplete="off"></div><button class="btn" id="mdgo" type="button">Cargar filas</button><button class="btn" id="mdall" type="button">Vaciar clasificación</button></div><div id="mdl" style="margin-top:12px"></div>`;
   V.appendChild(d);
   const t=$("#mdt",d);try{t.value=sessionStorage.getItem("hde2_mod")||""}catch(e){}
+  const hd=()=>({"x-admin":t.value});
   $("#mdgo",d).onclick=async()=>{try{sessionStorage.setItem("hde2_mod",t.value)}catch(e){}
-    const j=await lbCall("GET","?");const L=$("#mdl",d);if(!j.ok){L.textContent=j.error;return}
-    L.innerHTML=`<table class="tbl"><thead><tr><th>Alias</th><th>Grupo</th><th>XP</th><th>Estudio</th><th></th></tr></thead><tbody>${j.xpT.map(r=>`<tr><td>${esc(r.alias)}</td><td>${esc(r.grp)}</td><td>${nf(r.xp)}</td><td>${fmtMin(r.mins)}</td><td><button class="btn small" data-x="${esc(r.alias)}" type="button">Expulsar</button></td></tr>`).join("")}</tbody></table>`;
-    $$("[data-x]",L).forEach(b=>b.onclick=async()=>{if(!b.dataset.sure){b.dataset.sure="1";b.textContent="¿Seguro?";return}const k=await lbCall("DELETE","?alias="+encodeURIComponent(b.dataset.x),null,{"x-admin":t.value});if(k.ok){b.closest("tr").remove();toast("Expulsado")}else toast(k.error||"No autorizado")})}}
-
+    const j=await lbCall("GET","?",null,hd());const L=$("#mdl",d);if(!j.ok){L.textContent=j.error;return}
+    if(!j.xpT.length||!j.xpT[0].id){L.textContent=j.xpT.length?"Clave incorrecta.":"No hay filas.";return}
+    L.innerHTML=`<table class="tbl"><thead><tr><th>Puesto</th><th>XP</th><th>Racha</th><th>Cromos</th><th>Estudio</th><th></th></tr></thead><tbody>${j.xpT.map((r,i)=>`<tr><td>${i+1}</td><td>${nf(r.xp)}</td><td>${r.streak}</td><td>${r.cards}</td><td>${fmtMin(r.mins)}</td><td><button class="btn small" data-x="${esc(r.id)}" type="button">Retirar</button></td></tr>`).join("")}</tbody></table>`;
+    $$("[data-x]",L).forEach(b=>b.onclick=async()=>{if(!b.dataset.sure){b.dataset.sure="1";b.textContent="¿Seguro?";return}const k=await lbCall("DELETE","?id="+encodeURIComponent(b.dataset.x),null,hd());if(k.ok){b.closest("tr").remove();toast("Fila retirada")}else toast(k.error||"No autorizado")})};
+  $("#mdall",d).onclick=async function(){if(!this.dataset.sure){this.dataset.sure="1";this.textContent="¿Seguro? Pulsa otra vez";return}
+    const k=await lbCall("DELETE","?all=1",null,hd());this.dataset.sure="";this.textContent="Vaciar clasificación";toast(k.ok?"Clasificación vaciada":(k.error||"No autorizado"))}}
 /* ---------- v7: voz ---------- */
 const TTS=typeof speechSynthesis!=="undefined"&&typeof SpeechSynthesisUtterance!=="undefined";
 let SPK={on:false,btn:null};
