@@ -946,6 +946,62 @@ dialog#pk::backdrop{background:#0e0b08}
 .cro .nt{display:none;font:400 4.1cqw/1.3 var(--sans);color:rgba(26,21,16,.62);margin-top:1.4cqw;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 @container (min-width:205px){.cro .nt{display:-webkit-box}}
 .cro.r3 .nt{color:rgba(40,25,5,.72)}
+/* ===== v13 · estadísticas personales y clasificación ===== */
+#v-clasif{--vc:var(--gold)}
+#v-clasif .vh:before{content:"Practicar · competir"}#v-clasif .vh:after{content:"X"}
+#v-estudio .vh:after{content:"XI"}
+/* estadísticas */
+.hmw{overflow-x:auto;padding:8px 0 4px}
+.hm{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:3px;min-width:440px}
+.hm i,.hml i{display:block;aspect-ratio:1;border-radius:2px}
+.hm i.hz{visibility:hidden}
+.hl0{background:var(--surface2);box-shadow:inset 0 0 0 1px var(--line)}
+.hl1{background:color-mix(in srgb,var(--gold) 30%,var(--surface2))}
+.hl2{background:color-mix(in srgb,var(--gold) 55%,var(--surface2))}
+.hl3{background:color-mix(in srgb,var(--gold) 80%,var(--surface2))}
+.hl4{background:color-mix(in srgb,var(--gold) 100%,#6b4a10 35%)}
+.hml{display:flex;align-items:center;gap:4px;margin-top:6px;font:600 .64rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hml i{width:12px;height:12px;aspect-ratio:auto}.hml span:first-child{margin-right:4px}.hml span:nth-child(7){margin-left:4px}
+.xpc{display:block;margin-top:8px}.xpc .ar{fill:color-mix(in srgb,var(--gold) 24%,transparent)}.xpc .ln{fill:none;stroke:var(--gold);stroke-width:2;stroke-linejoin:round}.xpc circle{fill:var(--gold)}
+.xpl{display:flex;justify-content:space-between;gap:8px;font:.74rem var(--sans);color:var(--muted)}.xpl b{color:var(--ink)}
+.gsts{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;margin-top:10px}
+.gst{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--line);background:var(--surface2)}
+.gst span{font-size:1.1rem}.gst b{font:300 1.8rem/1 var(--serif);letter-spacing:-.02em}.gst small{font:.7rem var(--sans);color:var(--muted)}
+.tbs{display:flex;flex-direction:column}
+.tb{display:grid;grid-template-columns:28px minmax(0,1.5fr) minmax(70px,2fr) 100px;gap:12px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.tb .tn{font:300 1.35rem/1 var(--serif);color:var(--muted)}
+.tb .tt{font:.86rem var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb .tbar{height:6px;background:var(--line);display:block}.tb .tbar i{display:block;height:100%;background:var(--ink)}
+.tb .tv{font:600 .74rem var(--sans);text-align:right;color:var(--muted)}
+.tb.weak .tbar i{background:var(--accent)}.tb.weak .tv,.tb.weak .tn{color:var(--accent)}
+@media(max-width:620px){.tb{grid-template-columns:24px 1fr 88px}.tb .tbar{grid-column:2/4;grid-row:2}.tb .tn{grid-row:1/3}}
+/* clasificación */
+.albn.alt{margin-top:10px}
+.lbme{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;background:var(--ink0);color:#efe6d3;border:0;border-top:3px solid var(--gold);border-radius:0;padding:24px 28px}
+.lbme h2{font:400 2.2rem/1.05 var(--serif);color:#f4ead6;margin:2px 0}.lbme .note{color:#bfb49d}.lbme .eyebrow{color:var(--gold)}
+.lbme .btn{background:transparent;border-color:#5b4f3c;color:#efe6d3}.lbme .btn.primary{background:var(--gold);border-color:var(--gold);color:#1a1510;font-weight:600}
+.lbjoin{border-top:3px solid var(--gold);border-radius:0}.lbjoin h2{font:400 1.7rem/1.1 var(--serif)}.lbjoin .note{max-width:68ch}
+.lbf{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-top:26px;padding-top:14px;border-top:1px solid var(--ink)}
+.lbf .tlseg{display:flex;flex-wrap:wrap;gap:0;margin:0}
+.lbf .seg{padding:9px 16px;font:500 .95rem var(--serif)}
+.lbsel{display:flex;flex-direction:column;gap:3px;font:600 .62rem var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-left:auto}
+.lbsel select{font:400 1rem var(--serif);letter-spacing:0;text-transform:none;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:3px 18px 3px 0}
+.lbk{list-style:none;margin:10px 0 0;padding:0}
+.lbr{display:grid;grid-template-columns:56px minmax(0,1fr) auto auto;gap:14px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--line)}
+.lbn{font:300 2.1rem/1 var(--serif);color:transparent;-webkit-text-stroke:1px var(--muted);text-align:center}
+.lbr.top .lbn{-webkit-text-stroke-color:var(--gold);font-size:2.8rem}
+.lbr.top .lba b{font-size:1.4rem}
+.lba b{font:500 1.15rem/1.2 var(--serif)}.lba em{font:italic .85rem var(--serif);color:var(--muted)}
+.lba small{display:block;font:.74rem var(--sans);color:var(--muted);margin-top:2px}
+.lbg{font:600 .66rem var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lbv{font:400 1.15rem var(--serif);text-align:right;white-space:nowrap}
+.lbr.me{background:color-mix(in srgb,var(--gold) 15%,transparent);box-shadow:inset 3px 0 0 var(--gold)}
+@media(max-width:620px){.lbr{grid-template-columns:40px minmax(0,1fr) auto;gap:10px}.lbg{display:none}.lbn{font-size:1.7rem}.lbr.top .lbn{font-size:2.2rem}.lbf .seg{padding:8px 11px}.lbme{padding:20px}}
+.gapx{height:14px}
+#v-estudio .stats4.sm .stt b{font-size:clamp(1.7rem,3.2vw,2.4rem);white-space:nowrap}
+#v-estudio .sgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){#v-estudio .sgrid.two{grid-template-columns:1fr}}
+.hmw .hm{max-width:640px}
 </style>
 </head>
 <body>
@@ -957,7 +1013,7 @@ dialog#pk::backdrop{background:#0e0b08}
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Estudiar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
       <button type="button" role="menuitem" data-v="textos"><i>I</i><b>Textos</b><span>Comentarios con clave de corrección</span></button><button type="button" role="menuitem" data-v="fuentes"><i>II</i><b>Fuentes históricas</b><span>Mapas, cuadros, carteles y fotografías</span></button><button type="button" role="menuitem" data-v="personajes"><i>III</i><b>Personajes</b><span>Semblanzas con fechas y enlaces</span></button><button type="button" role="menuitem" data-v="tiempo"><i>IV</i><b>Cronología</b><span>Hitos por tema y epígrafe</span></button></div></div>
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Practicar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
-      <button type="button" role="menuitem" data-v="examenes"><i>I</i><b>Exámenes</b><span>Evaluaciones y ordinario, con solucionario</span></button><button type="button" role="menuitem" data-v="simulacro"><i>II</i><b>Comentario cronometrado</b><span>Comenta un documento con cronómetro</span></button><button type="button" role="menuitem" data-v="juegos"><i>III</i><b>Juegos</b><span>Retos diarios, insignias y rangos</span></button><button type="button" role="menuitem" data-v="taller"><i>IV</i><b>Taller</b><span>Plan, comentario, esquemas y chuleta</span></button><button type="button" role="menuitem" data-v="album"><i>V</i><b>Álbum</b><span>Cromos de personajes y sobres</span></button></div></div>
+      <button type="button" role="menuitem" data-v="examenes"><i>I</i><b>Exámenes</b><span>Evaluaciones y ordinario, con solucionario</span></button><button type="button" role="menuitem" data-v="simulacro"><i>II</i><b>Comentario cronometrado</b><span>Comenta un documento con cronómetro</span></button><button type="button" role="menuitem" data-v="juegos"><i>III</i><b>Juegos</b><span>Retos diarios, insignias y rangos</span></button><button type="button" role="menuitem" data-v="taller"><i>IV</i><b>Taller</b><span>Plan, comentario, esquemas y chuleta</span></button><button type="button" role="menuitem" data-v="album"><i>V</i><b>Álbum</b><span>Cromos de personajes y sobres</span></button><button type="button" role="menuitem" data-v="clasif"><i>VI</i><b>Clasificación</b><span>Compite con tu clase, con alias</span></button></div></div>
     <button type="button" class="nv" data-v="estudio">Mi estudio</button>
   </nav>
   <div class="tools">
@@ -1050,6 +1106,7 @@ dialog#pk::backdrop{background:#0e0b08}
 <section class="view" id="v-estudio"></section>
 <section class="view" id="v-juegos"></section>
 <section class="view" id="v-album"></section>
+<section class="view" id="v-clasif"></section>
 <section class="view" id="v-taller"></section>
 <section class="view" id="v-profe"></section>
 <section class="view" id="v-acerca">
@@ -1059,7 +1116,7 @@ dialog#pk::backdrop{background:#0e0b08}
    <h2>Currículo</h2><p>Decreto 64/2022 de la Comunidad de Madrid (LOMLOE) y modelo de examen de la PAU de Historia de España 2026-27.</p>
    <h2>Imágenes</h2><p>Proceden de las presentaciones de clase y de fuentes públicas (archivos, museos y Wikimedia Commons) y se usan con fines docentes y sin ánimo de lucro. Las obras anteriores al siglo XX suelen ser de dominio público; las posteriores y las fotografías pueden estar protegidas por sus autores. Algunos gráficos son de elaboración propia a partir de datos oficiales. Si eres titular de derechos y quieres que se retire o se acredite una imagen, comunícaselo al profesor.</p>
    <h2>Textos</h2><p>Los textos históricos se reproducen con fines educativos; cada ficha indica su procedencia cuando se conoce.</p>
-   <h2>Tus datos</h2><p>No hay cuentas, cookies ni analítica. Tu progreso, tus notas y tus exámenes se guardan solo en tu navegador. Si quieres llevártelos a otro dispositivo, usa «Exportar copia» en Mi estudio.</p>
+   <h2>Tus datos</h2><p>No hay cuentas, cookies ni analítica. Tu progreso, tus notas y tus exámenes se guardan solo en tu navegador. Si quieres llevártelos a otro dispositivo, usa «Exportar copia» en Mi estudio. La única excepción es la clasificación, que es voluntaria: si entras, se publica el alias que elijas (nunca tu nombre real), tu grupo y tus cifras de estudio (puntos, racha, cromos). Puedes salir cuando quieras y tu fila se borra.</p>
    <h2>Compartir</h2><p><button class="btn" type="button" id="shf2">Compartir con QR</button></p>
   </div>
 </section>
@@ -1108,7 +1165,7 @@ function init(){
   $("#dlg").addEventListener("click",e=>{if(e.target===$("#dlg"))$("#dlg").close()});
   initTheme();initLightbox();
   $("#fcx").onclick=()=>$("#fc").close();$("#fc").addEventListener("keydown",e=>{if(!FC)return;if(e.key===" "||e.key==="Enter"){if(!FC.flip){e.preventDefault();fcKey("f")}}else if(e.key.length===1&&"123".includes(e.key)&&FC.flip)fcKey(String(+e.key-1))});
-  initSearch();initV7();initAlbum();renderInicio();initPools();initPersonajes();initTiempo();initSimulacro();initExamenes();renderMine();route();syncInit();document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.db&&Date.now()-SYNC.last>60000)pullRemote()});
+  initSearch();initV7();initAlbum();initStats();initClasif();renderInicio();initPools();initPersonajes();initTiempo();initSimulacro();initExamenes();renderMine();route();syncInit();document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.db&&Date.now()-SYNC.last>60000)pullRemote()});
 }
 function route(){
   let v=(location.hash||"#inicio").slice(1);if(!$("#v-"+v))v="inicio";
@@ -1119,6 +1176,7 @@ function route(){
   if(v==="examenes")renderMine();
   if(v==="juegos")renderJuegos();
   if(v==="album")renderAlbum();
+  if(v==="clasif"){if(!LBS.d||Date.now()-LBS.t>20000)lbLoad();else renderClasif()}
   if(v==="taller")renderTaller();
   if(v==="profe")renderProfe();
   stopSpeak();
@@ -1243,7 +1301,7 @@ let ST=(()=>{
   return b})();
 const SYNC={db:null,uid:null,state:"local",last:0,busy:false,again:false};
 let ST_TIMER=null;
-function saveST(){if(typeof checkBadges==="function")checkBadges();LS.set("state",ST);clearTimeout(ST_TIMER);ST_TIMER=setTimeout(pushRemote,2500);if(SYNC.busy)SYNC.again=true;renderSyncPill()}
+function saveST(){try{statSnap()}catch(e){}if(typeof checkBadges==="function")checkBadges();LS.set("state",ST);clearTimeout(ST_TIMER);ST_TIMER=setTimeout(pushRemote,2500);if(SYNC.busy)SYNC.again=true;renderSyncPill()}
 const act=(n=1)=>{const k=dayKeyN(dayNum());ST.act[k]=(ST.act[k]||0)+n};
 function streak(){let n=0,d=dayNum();const has=x=>(ST.act[dayKeyN(x)]||0)>0;if(!has(d))d--;while(has(d)){n++;d--}return n}
 const PG=id=>ST.prog[id]||(ST.prog[id]={s:0,f:0,n:0,p:0,v:0,t:0});
@@ -1265,7 +1323,9 @@ function mergeST(a,b){
    g.badges=g.badges||{};for(const x in (h.badges||{}))g.badges[x]=Math.min(g.badges[x]||1e15,h.badges[x]);
    {const seen=new Set((g.log||[]).map(x=>x.ts));g.log=[...(g.log||[]),...(h.log||[]).filter(x=>x&&!seen.has(x.ts))].sort((x,y)=>y.ts-x.ts).slice(0,500)}
    if(h.alias&&!g.alias)g.alias=h.alias;g.init=g.init||h.init;
-   if(h.album&&typeof h.album==="object"){const A=g.album&&typeof g.album==="object"?g.album:(g.album={});A.own=A.own||{};for(const x in (h.album.own||{}))A.own[x]=Math.min(A.own[x]||1e15,h.album.own[x]);A.opened=Math.max(A.opened||0,h.album.opened||0);A.bonus=Math.max(A.bonus==null?1:A.bonus,h.album.bonus||0);A.xp=Math.max(A.xp||0,h.album.xp||0);if((h.album.day||"")>(A.day||""))A.day=h.album.day}}
+   if(h.album&&typeof h.album==="object"){const A=g.album&&typeof g.album==="object"?g.album:(g.album={});A.own=A.own||{};for(const x in (h.album.own||{}))A.own[x]=Math.min(A.own[x]||1e15,h.album.own[x]);A.opened=Math.max(A.opened||0,h.album.opened||0);A.bonus=Math.max(A.bonus==null?1:A.bonus,h.album.bonus||0);A.xp=Math.max(A.xp||0,h.album.xp||0);if((h.album.day||"")>(A.day||""))A.day=h.album.day}
+   if(h.st&&typeof h.st==="object"){const S=g.st&&typeof g.st==="object"?g.st:(g.st={});S.bt=S.bt||{};S.bg=S.bg||{};S.snap=S.snap||{};S.min=S.min||{};for(const m of ["bt","bg"])for(const x in (h.st[m]||{})){const u=S[m][x]||[0,0],v=h.st[m][x]||[0,0];S[m][x]=[Math.max(u[0],v[0]),Math.max(u[1],v[1])]}for(const m of ["snap","min"])for(const x in (h.st[m]||{}))S[m][x]=Math.max(S[m][x]||0,h.st[m][x]||0)}
+   if(h.lb&&typeof h.lb==="object"&&!g.lb)g.lb=h.lb}
   return a}
 /* nube (capacidad db del artefacto): opcional y a prueba de ausencia */
 const SECS={core:["prog","act","del"],notes:["notes"],hl:["hl"],srs:["srs"],log:["hist","exams"],v7:["plan","game","cm","esq","cmp"]};
@@ -1498,6 +1558,7 @@ function renderEstudio(){
    <div class="card"><h3 style="font-size:1.05rem">Mis notas</h3>${lst(notes,"Las notas que escribas en un documento aparecerán aquí.")}</div>
    <div class="card"><h3 style="font-size:1.05rem">Simulacros</h3>${ST.hist.length?`<p class="note" style="margin:2px 0 6px">${ST.hist.length} guardados · media ${avg.toFixed(1)} / 4</p>${bars}<ul class="stl" style="margin-top:6px">${ST.hist.slice(0,4).map(x=>`<li class="note">${esc(x.f)} · ${esc(x.t.length>40?x.t.slice(0,38)+"…":x.t)} · <b>${x.tot.toFixed(1)}</b></li>`).join("")}</ul>`:`<p class="note">Aún no has guardado ningún simulacro.</p>`}<p style="margin:10px 0 0"><button class="btn small" data-go2="simulacro">Hacer un simulacro</button></p></div>
   </div>
+  ${statsHTML()}
   <div class="card" style="margin-top:14px"><h3 style="font-size:1.05rem">Copia de seguridad</h3><p class="note" style="margin:4px 0 10px">Tu progreso vive en este navegador. Si lo vas a usar en otro dispositivo (o limpias los datos del navegador), exporta una copia e impórtala allí: se combina con lo que ya tengas.</p>
    <div class="row"><button class="btn" id="bkx">Exportar copia</button><button class="btn" id="bki">Importar copia</button><input type="file" id="bkf" accept=".json,application/json" hidden></div><div class="note" id="bknote" style="margin-top:8px"></div></div>${profeCard()}<p class="note" style="margin-top:10px"><a href="#profe">Soy profesor: abrir el panel de clase</a></p>`;
   renderSyncPill();
@@ -1787,6 +1848,7 @@ function wireGm(q){
       const p=k*2;GM.pts+=p;GM.res.push(k===5);$("#ordok").remove();
       q.perfect=k===5;gmFb(q,k===5,p,`${k} de 5 en su sitio.`)}}}
 function gmFb(q,ok,p,extra){
+  try{statRec(q,ok)}catch(e){}
   const last=GM.i>=GM.qs.length-1;
   $("#gmfb").innerHTML=`<div class="${ok?"info":"warn"}" style="margin-top:12px"><b>${ok?"¡Correcto!":(q.type==="ord"?"Casi.":"No era esa.")} ${p?`+${p} puntos`:"0 puntos"}.</b> ${extra?esc(extra)+" ":""}${q.why||""}</div><div class="row" style="margin-top:8px">${q.open?`<button class="btn small" id="gmopen">Abrir la ficha</button>`:""}<button class="btn primary" id="gmnext" style="margin-left:auto">${last?"Ver resultado":"Siguiente"}</button></div>`;
   const nb=$("#gmnext");nb.focus({preventScroll:true});nb.onclick=()=>{GM.i++;gmDraw()};
@@ -1815,6 +1877,7 @@ function renderJuegos(){
   <div class="card rank"><div class="rb2" aria-hidden="true">${["🪶","📜","🗄","🧭","🔍","🏺","🎓","🏛"][r.i]}</div><div style="flex:1;min-width:220px"><div class="eyebrow" style="margin:0">Tu rango</div><h2 style="font-size:1.5rem;margin:2px 0 6px">${esc(r.name)}</h2><div class="pbar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div><p class="note" style="margin:6px 0 0">${r.xp} XP${r.next?` · faltan ${r.next-r.xp} para «${esc(r.nname)}»`:" · rango máximo"}</p></div>
    <div class="stats4" style="margin:0;flex:1;min-width:240px"><div class="stt"><b>${streak()}</b><span>días seguidos</span></div><div class="stt"><b>${got}<small style="font-size:.9rem;color:var(--muted)"> / ${BADGES.length}</small></b><span>insignias</span></div></div></div>
   ${albumBanner()}
+  ${lbBanner()}
   ${efeHTML()?`<div style="margin-top:14px" id="efj">${efeHTML()}</div>`:""}
   <div class="sech"><h2>Retos para toda la clase</h2><span class="note">Mismas preguntas para todos: comparad puntuaciones</span></div>
   <div class="sgrid" style="margin-top:0">
@@ -1920,6 +1983,126 @@ function initAlbum(){
   pk.addEventListener("click",e=>{if(e.target.closest("#pkx"))pk.close()});
   document.addEventListener("click",e=>{const b=e.target.closest("#albn");if(b)go("album")});
   document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.id==="albn"){e.preventDefault();go("album")}})}
+
+/* ---------- v13: estadísticas personales ---------- */
+function ST_(){const g=G();const s=g.st&&typeof g.st==="object"?g.st:(g.st={});s.bt=s.bt||{};s.bg=s.bg||{};s.snap=s.snap||{};s.min=s.min||{};return s}
+const qTema=q=>(q.doc&&q.doc.tema)||(q.open&&DOCM[q.open]&&DOCM[q.open].tema)||(q.person&&PM[q.person]&&PM[q.person].tema)||null;
+function statRec(q,ok){const s=ST_(),k=q.kind||"x",t=qTema(q);
+  const a=s.bg[k]||(s.bg[k]=[0,0]);a[1]++;if(ok)a[0]++;
+  if(t){const b=s.bt[t]||(s.bt[t]=[0,0]);b[1]++;if(ok)b[0]++}}
+function statSnap(){if(!PEOPLE.length)return;const s=ST_(),k=dayKeyN(dayNum());s.snap[k]=totalXP();
+  const ks=Object.keys(s.snap).sort();if(ks.length>150)ks.slice(0,ks.length-150).forEach(x=>delete s.snap[x]);
+  if(typeof lbSoon==="function")lbSoon()}
+const minTot=()=>{try{return Object.values(ST_().min).reduce((a,b)=>a+b,0)}catch(e){return 0}};
+let LASTI=Date.now();
+function initStats(){
+  ["pointerdown","keydown","scroll","touchstart"].forEach(e=>addEventListener(e,()=>{LASTI=Date.now()},{passive:true,capture:true}));
+  setInterval(()=>{if(document.hidden||Date.now()-LASTI>90000)return;const s=ST_(),k=dayKeyN(dayNum());s.min[k]=(s.min[k]||0)+1;LS.set("state",ST)},60000)}
+const fmtMin=m=>m>=60?`${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")} min`:`${m} min`;
+function statsHTML(){
+  const s=ST_(),today=dayNum();
+  let wk=0;for(let i=0;i<7;i++)wk+=s.min[dayKeyN(today-i)]||0;
+  const tot=minTot();let ok=0,n=0;Object.values(s.bg).forEach(v=>{ok+=v[0];n+=v[1]});
+  /* calendario de actividad: 20 semanas, de lunes a domingo */
+  const mon=today-((today+3)%7),W=20;let cells="",days=0;
+  for(let c=0;c<W;c++)for(let r=0;r<7;r++){
+    const d=mon-(W-1-c)*7+r,k=dayKeyN(d);
+    if(d>today){cells+=`<i class="hz"></i>`;continue}
+    const m=s.min[k]||0,a=(ST.act[k]||0)>0;let l=0;if(m>0||a)l=m>60?4:m>30?3:m>10?2:1;if(l)days++;
+    cells+=`<i class="hl${l}" title="${esc(new Date(d*864e5).toLocaleDateString("es-ES",{day:"numeric",month:"short",timeZone:"UTC"}))}: ${m?m+" min":(a?"actividad":"sin actividad")}"></i>`}
+  /* evolución de la experiencia (30 días) */
+  const keys=[];for(let i=29;i>=0;i--)keys.push(dayKeyN(today-i));
+  let last=null;const prior=Object.keys(s.snap).filter(k=>k<keys[0]).sort().pop();if(prior)last=s.snap[prior];
+  const pts=keys.map(k=>{if(s.snap[k]!=null)last=s.snap[k];return last});
+  const have=pts.filter(v=>v!=null).length;
+  let xpc=`<p class="note" style="margin:6px 0 0">La gráfica se dibuja a medida que estudies: cada día guarda tus puntos.</p>`;
+  if(have>=2){const vs=pts.map(v=>v==null?pts.find(x=>x!=null):v),mn=Math.min(...vs),mx=Math.max(...vs),rg=Math.max(1,mx-mn);
+    const X=i=>6+i*(288/29),Y=v=>70-((v-mn)/rg)*56,line=vs.map((v,i)=>`${i?"L":"M"}${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join("");
+    xpc=`<svg viewBox="0 0 300 84" width="100%" role="img" aria-label="Puntos de experiencia en los últimos 30 días" class="xpc"><path d="${line}L${X(29)} 76L6 76Z" class="ar"/><path d="${line}" class="ln"/><circle cx="${X(29)}" cy="${Y(vs[29]).toFixed(1)}" r="3"/></svg><div class="xpl"><span>hace 30 días · ${vs[0].toLocaleString("es-ES")} XP</span><span>hoy · <b>${vs[29].toLocaleString("es-ES")} XP</b></span></div>`}
+  /* aciertos por tema */
+  const rows=TEMAS.map(t=>{const[o,m]=s.bt[t.n]||[0,0];return{t,o,m,p:m?o/m:null}});
+  const weak=rows.filter(r=>r.m>=5).sort((a,b)=>a.p-b.p)[0];
+  const tb=rows.map(r=>`<div class="tb${weak&&weak.t===r.t?" weak":""}"><span class="tn">${r.t.n}</span><span class="tt">${esc(r.t.nombre)}</span><span class="tbar"><i style="width:${r.m?Math.round(r.p*100):0}%"></i></span><span class="tv">${r.m?Math.round(r.p*100)+" % · "+r.o+"/"+r.m:"—"}</span></div>`).join("");
+  const gm=Object.entries(GAMES).map(([k,x])=>{const[o,m]=s.bg[k]||[0,0];return `<div class="gst"><span aria-hidden="true">${x.ic}</span><b>${m?Math.round(o/m*100)+" %":"—"}</b><small>${esc(x.n)}${m?` · ${m} resp.`:""}</small></div>`}).join("");
+  return `<div class="sech" style="margin-top:34px"><h2>Mis estadísticas</h2><span class="note">Se guardan en este navegador</span></div>
+  <div class="stats4 sm"><div class="stt"><b>${fmtMin(wk)}</b><span>de estudio esta semana</span></div><div class="stt"><b>${fmtMin(tot)}</b><span>en total</span></div><div class="stt"><b>${n?Math.round(ok/n*100)+" %":"—"}</b><span>de aciertos en juegos${n?` (${n})`:""}</span></div><div class="stt"><b>${maxStreak()}</b><span>mejor racha, en días</span></div></div>
+  <div class="gapx"></div><div class="card"><h3 style="font-size:1.05rem">Actividad de las últimas 20 semanas</h3><div class="hmw"><div class="hm" role="img" aria-label="Calendario de actividad: ${days} días con estudio">${cells}</div></div><div class="hml"><span>menos</span><i class="hl0"></i><i class="hl1"></i><i class="hl2"></i><i class="hl3"></i><i class="hl4"></i><span>más</span><span class="note" style="margin-left:auto">${days} días con actividad</span></div></div>
+  <div class="sgrid two" style="margin-top:14px"><div class="card"><h3 style="font-size:1.05rem">Tus puntos, mes a mes</h3>${xpc}</div>
+   <div class="card"><h3 style="font-size:1.05rem">Aciertos por juego</h3><div class="gsts">${gm}</div></div></div>
+  <div class="card" style="margin-top:14px"><h3 style="font-size:1.05rem">Aciertos por tema</h3><p class="note" style="margin:4px 0 8px">Solo cuentan las preguntas de los juegos. ${weak?`Tu punto más débil ahora: <b>tema ${weak.t.n}</b> (${Math.round(weak.p*100)} %). <button class="btn small" data-t="${weak.t.n}" type="button">Ver sus documentos</button>`:"Con 5 respuestas en un tema, te señalo el más flojo."}</p><div class="tbs">${tb}</div></div>`}
+
+/* ---------- v13: clasificación pública ---------- */
+const LB_URL="https://historiapau.pages.dev/api/lb";
+const LBS={d:null,tab:"xpT",grp:"",busy:false,err:"",t:0,jt:null};
+const LBg=()=>{const g=G();return g.lb&&typeof g.lb==="object"?g.lb:null};
+function lbId(){const g=G();if(!g.lb)g.lb={};if(!g.lb.id){const a=new Uint8Array(12);(crypto||window.crypto).getRandomValues(a);g.lb.id=[...a].map(x=>x.toString(16).padStart(2,"0")).join("")}return g.lb.id}
+function lbPayload(){const l=LBg()||{};return{id:lbId(),alias:l.alias||"",grp:l.grp||"otro",xp:totalXP(),streak:streak(),cards:alCount(),badges:Object.keys(G().badges).length,mins:minTot()}}
+async function lbCall(method,q,body,hdr){
+  const c=new AbortController(),to=setTimeout(()=>c.abort(),9000);
+  try{const r=await fetch(LB_URL+(q||""),{method,signal:c.signal,headers:Object.assign(body?{"content-type":"application/json"}:{},hdr||{}),body:body?JSON.stringify(body):undefined});
+    let j=null;try{j=await r.json()}catch(e){}
+    return j||{ok:false,error:"Respuesta no válida del servidor."}}
+  catch(e){return{ok:false,error:"No se pudo conectar. Comprueba tu conexión; si usas la copia de claude.ai, abre la web en historiapau.pages.dev."}}
+  finally{clearTimeout(to)}}
+async function lbLoad(){
+  LBS.busy=true;LBS.err="";if($("#v-clasif").classList.contains("on"))renderClasif();
+  const l=LBg(),j=await lbCall("GET","?"+(l&&l.on?"id="+l.id+"&":"")+(LBS.grp?"g="+LBS.grp:""));
+  LBS.busy=false;if(j.ok){LBS.d=j;LBS.t=Date.now()}else LBS.err=j.error||"Error";
+  if((location.hash||"").slice(1)==="clasif")renderClasif()}
+async function lbPush(){const l=LBg();if(!l||!l.on)return null;const j=await lbCall("POST","",lbPayload());if(j.ok){LBS.d=Object.assign({},j);LBS.t=Date.now()}return j}
+function lbSoon(){const l=LBg();if(!l||!l.on)return;clearTimeout(LBS.jt);LBS.jt=setTimeout(()=>{lbPush()},45000)}
+const lbWeekLabel=w=>{const d=new Date((w*7-3)*864e5);return d.toLocaleDateString("es-ES",{day:"numeric",month:"long",timeZone:"UTC"})};
+const nf=x=>(x||0).toLocaleString("es-ES");
+function lbRow(r,i,tab,me){
+  const mine=me&&r.alias===me.alias,main={xpT:`${nf(r.xp)} XP`,wk:`+${nf(r.wxp)} esta semana`,streak:`${r.streak} ${r.streak===1?"día":"días"}`,cards:`${r.cards} cromos`}[tab];
+  const sub={xpT:`racha ${r.streak} · ${r.cards} cromos`,wk:`${nf(r.xp)} XP en total`,streak:`${nf(r.xp)} XP`,cards:`${nf(r.xp)} XP`}[tab];
+  return `<li class="lbr${mine?" me":""}${i<3?" top":""}"><span class="lbn">${i+1}</span><span class="lba"><b>${esc(r.alias)}</b>${mine?` <em>(tú)</em>`:""}<small>${sub}</small></span><span class="lbg">${r.grp==="otro"?"":"2.º "+esc(r.grp.slice(1))}</span><span class="lbv">${main}</span></li>`}
+function renderClasif(){
+  const V=$("#v-clasif");if(!V)return;
+  const l=LBg(),on=!!(l&&l.on),d=LBS.d,tab=LBS.tab;
+  const me=d&&d.me,list=(d&&d[tab])||[];
+  const tabs=[["xpT","Total"],["wk","Esta semana"],["streak","Racha"],["cards","Cromos"]];
+  const rk={xpT:me&&me.rank,wk:me&&me.rankW,streak:me&&me.rankS,cards:me&&me.rankC}[tab];
+  V.innerHTML=`<div class="vh"><h1>Clasificación de la clase</h1><p>Compite con tus compañeros. Solo se publica el alias que elijas y tus cifras de estudio; nada más.</p></div>
+  ${on?`<div class="card lbme"><div><div class="eyebrow" style="margin:0">Estás dentro como</div><h2>${esc(l.alias)}</h2><p class="note" style="margin:2px 0 0">${me?`Puesto <b>${me.rank}</b> de ${d.n} · ${nf(me.xp)} XP · +${nf(me.wxp)} esta semana`:(LBS.busy?"Sincronizando…":"Aún sin sincronizar")}</p></div><div class="row"><button class="btn primary" id="lbup" type="button">Actualizar mis puntos</button><button class="btn" id="lbout" type="button">Salir de la clasificación</button></div></div>`
+   :`<div class="card lbjoin"><h2>Entra en la clasificación</h2><p class="note">Elige un alias que no sea tu nombre real. Se mostrará junto a tus puntos (XP), tu racha y tus cromos. Puedes salir cuando quieras y tu fila se borra. No hay cookies ni seguimiento.</p>
+    <div class="row" style="align-items:flex-end"><div class="field"><label for="lba">Alias (3–16 caracteres)</label><input id="lba" maxlength="16" autocomplete="off" placeholder="p. ej. Almanzor"></div><div class="field"><label for="lbgp">Tu grupo</label><select id="lbgp"><option value="2B">2.º B</option><option value="2C">2.º C</option><option value="otro">Otro</option></select></div></div>
+    <label class="check" style="margin-top:10px"><input type="checkbox" id="lbok"> Entiendo que mi alias y mis puntos serán visibles para cualquiera que abra la clasificación.</label>
+    <div class="row" style="margin-top:12px"><button class="btn primary" id="lbjoin" type="button">Entrar</button><span class="note" id="lbmsg" role="alert"></span></div></div>`}
+  ${LBS.err&&!d?`<div class="warn" style="margin-top:14px">${esc(LBS.err)} <button class="btn small" id="lbretry" type="button">Reintentar</button></div>`:""}
+  ${d?`<div class="stats4" style="margin-top:18px"><div class="stt"><b>${d.n}</b><span>participantes${LBS.grp?" en el grupo":""}</span></div><div class="stt"><b>${nf(d.xp)}</b><span>XP entre todos</span></div><div class="stt"><b>${Math.round(d.mins/60)} h</b><span>de estudio sumadas</span></div><div class="stt"><b>${lbWeekLabel(d.week)}</b><span>inicio de la semana</span></div></div>`:""}
+  <div class="lbf"><div class="tlseg" role="tablist" aria-label="Clasificación">${tabs.map(([k,n])=>`<button class="seg" role="tab" data-lt="${k}" aria-current="${tab===k}">${n}</button>`).join("")}</div>
+   <label class="lbsel">Grupo<select id="lbg"><option value="">Toda la clase</option><option value="2B">2.º B</option><option value="2C">2.º C</option></select></label><button class="btn small" id="lbrf" type="button">${LBS.busy?"Cargando…":"↻ Refrescar"}</button></div>
+  ${me&&rk?`<p class="note" style="margin:10px 0 0">Tu puesto en esta lista: <b>${rk}</b>.</p>`:""}
+  ${list.length?`<ol class="lbk">${list.map((r,i)=>lbRow(r,i,tab,me)).join("")}</ol>`:`<p class="muted" style="margin-top:18px">${LBS.busy?"Cargando…":(d?"Todavía no hay nadie en esta lista. ¡Sé el primero!":"")}</p>`}
+  <p class="alleg">Los puntos se calculan en tu dispositivo; el servidor limita las subidas anormales y el profesor puede expulsar a quien haga trampas o use un alias inadecuado. La clasificación se actualiza cada vez que estudias y cuando pulsas «Actualizar».</p>`;
+  $("#lbg").value=LBS.grp;
+  $$("[data-lt]",V).forEach(b=>b.onclick=()=>{LBS.tab=b.dataset.lt;renderClasif()});
+  $("#lbg").onchange=e=>{LBS.grp=e.target.value;lbLoad()};$("#lbrf").onclick=()=>lbLoad();
+  const rt=$("#lbretry");if(rt)rt.onclick=()=>lbLoad();
+  const up=$("#lbup");if(up)up.onclick=async()=>{up.disabled=true;const j=await lbPush();if(j&&!j.ok)toast(j.error||"No se pudo actualizar.");else toast("Puntos actualizados");lbLoad()};
+  const out=$("#lbout");if(out)out.onclick=async()=>{if(!out.dataset.sure){out.dataset.sure="1";out.textContent="¿Seguro? Pulsa otra vez";return}const j=await lbCall("DELETE","?id="+lbId());if(j.ok){G().lb.on=0;saveST();LBS.d=null;toast("Has salido de la clasificación");lbLoad()}else toast(j.error||"No se pudo salir.")};
+  const jn=$("#lbjoin");if(jn)jn.onclick=async()=>{const m=$("#lbmsg"),al=$("#lba").value.replace(/\s+/g," ").trim();
+    if(!$("#lbok").checked){m.textContent="Marca la casilla para continuar.";return}
+    if(al.length<3){m.textContent="El alias debe tener al menos 3 caracteres.";return}
+    jn.disabled=true;m.textContent="Entrando…";const g=G();lbId();g.lb.alias=al;g.lb.grp=$("#lbgp").value;g.lb.on=1;
+    const j=await lbCall("POST","",lbPayload());
+    if(j.ok){saveST();LBS.d=Object.assign({},j);LBS.t=Date.now();toast("¡Ya estás en la clasificación!");lbLoad()}else{g.lb.on=0;jn.disabled=false;m.textContent=j.error||"No se pudo entrar."}};
+}
+function lbBanner(){return `<div class="albn alt" id="lbbn" role="link" tabindex="0"><span class="sb" aria-hidden="true">🏆</span><div><h3>Clasificación de la clase</h3><p>${(LBg()&&LBg().on)?"Ya estás dentro: mira tu puesto.":"Compite con un alias: puntos, racha y cromos."}</p></div><button class="btn" type="button">Ver clasificación</button></div>`}
+function initClasif(){
+  document.addEventListener("click",e=>{if(e.target.closest("#lbbn"))go("clasif")});
+  document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.id==="lbbn"){e.preventDefault();go("clasif")}})}
+/* moderación (panel del profesor): ADMIN_TOKEN configurado en Cloudflare */
+async function profeMod(V){
+  const d=document.createElement("div");d.className="card";d.style.marginTop="14px";
+  d.innerHTML=`<h3 style="font-size:1.05rem;margin-bottom:4px">Moderar la clasificación</h3><p class="note" style="margin:0 0 10px">Introduce tu clave de moderación para ver a los participantes y expulsar a quien haga falta. La clave solo se guarda mientras la pestaña esté abierta.</p><div class="row" style="align-items:flex-end"><div class="field"><label for="mdt">Clave</label><input id="mdt" type="password" autocomplete="off"></div><button class="btn" id="mdgo" type="button">Cargar participantes</button></div><div id="mdl" style="margin-top:12px"></div>`;
+  V.appendChild(d);
+  const t=$("#mdt",d);try{t.value=sessionStorage.getItem("hde2_mod")||""}catch(e){}
+  $("#mdgo",d).onclick=async()=>{try{sessionStorage.setItem("hde2_mod",t.value)}catch(e){}
+    const j=await lbCall("GET","?");const L=$("#mdl",d);if(!j.ok){L.textContent=j.error;return}
+    L.innerHTML=`<table class="tbl"><thead><tr><th>Alias</th><th>Grupo</th><th>XP</th><th>Estudio</th><th></th></tr></thead><tbody>${j.xpT.map(r=>`<tr><td>${esc(r.alias)}</td><td>${esc(r.grp)}</td><td>${nf(r.xp)}</td><td>${fmtMin(r.mins)}</td><td><button class="btn small" data-x="${esc(r.alias)}" type="button">Expulsar</button></td></tr>`).join("")}</tbody></table>`;
+    $$("[data-x]",L).forEach(b=>b.onclick=async()=>{if(!b.dataset.sure){b.dataset.sure="1";b.textContent="¿Seguro?";return}const k=await lbCall("DELETE","?alias="+encodeURIComponent(b.dataset.x),null,{"x-admin":t.value});if(k.ok){b.closest("tr").remove();toast("Expulsado")}else toast(k.error||"No autorizado")})}}
 
 /* ---------- v7: voz ---------- */
 const TTS=typeof speechSynthesis!=="undefined"&&typeof SpeechSynthesisUtterance!=="undefined";
@@ -2155,6 +2338,7 @@ function renderProfe(){
   <div class="card" style="margin-top:14px;overflow:auto"><h3 style="font-size:1.05rem;margin-bottom:4px">Mapa de calor: % de documentos dominados</h3><p class="note" style="margin:0 0 8px">Cuanto más verde, más dominado. La última fila es la media de la clase.</p><table class="cmpt heat"><thead><tr><th>Alumno</th>${TEMAS.map(t=>`<th title="${esc(t.nombre)}">T${t.n}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.alias||"(sin nombre)")}</td>${TEMAS.map(t=>{const x=(r.temas||[]).find(y=>y.n===t.n),v=x&&x.tot?x.dom/x.tot:null;return `<td style="background:${cellC(v)}">${v==null?"":Math.round(v*100)}</td>`}).join("")}</tr>`).join("")}<tr><th>Media</th>${avg.map(v=>`<td style="background:${cellC(v)}"><b>${v==null?"":Math.round(v*100)}</b></td>`).join("")}</tr></tbody></table>
    <p class="note" style="margin-top:8px">Temas más flojos: ${TEMAS.map((t,i)=>[t,avg[i]]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]).slice(0,3).map(x=>`<b>T${x[0].n}</b> ${esc(x[0].nombre.slice(0,32))} (${Math.round(x[1]*100)} %)`).join(" · ")||"—"}</p></div>`:""}`;
   $("#pfl").onclick=()=>$("#pff").click();
+  profeMod(V);
   $("#pff").onchange=async e=>{let ok=0,bad=0;for(const f of e.target.files){try{const o=JSON.parse(await f.text());if(o&&o.app==="historia-espana-pau-informe"&&Array.isArray(o.temas)){const k=(o.alias||f.name);PROF=PROF.filter(x=>(x.alias||"")!==(o.alias||"\u0000"));PROF.push(o);ok++}else bad++}catch(x){bad++}}e.target.value="";toast(`${ok} informes cargados${bad?` · ${bad} no válidos`:""}.`);renderProfe()};
   const z=$("#pfz");if(z)z.onclick=()=>{PROF=[];renderProfe()};
   const c=$("#pfc");if(c)c.onclick=()=>{const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;const h=["Alumno","Rango","XP","Racha","Simulacros","Media simulacros","Tarjetas dominadas","Reto semanal",...TEMAS.map(t=>"Tema "+t.n+" dominado %")];const L=[h.map(q).join(";")].concat(rows.map(r=>[r.alias,r.rango,r.xp,r.racha,(r.sim||{}).n,(r.sim||{}).media,r.tarjetas,r.weekly&&r.weekly[ws],...TEMAS.map(t=>{const x=(r.temas||[]).find(y=>y.n===t.n);return x&&x.tot?Math.round(x.dom/x.tot*100):""})].map(q).join(";")));dlFile("clase-historia-espana.csv","﻿"+L.join("\n"),"text/csv;charset=utf-8")}}
