@@ -6,18 +6,18 @@ No necesita servidor ni compilación: es una página estática (`index.html` + `
 
 ## Publicar con GitHub Pages
 
-1. Crea un repositorio nuevo (por ejemplo `historia-espana`). Con la cuenta gratuita debe ser **público**.
+1. Crea un repositorio nuevo (por ejemplo `historia`). Con la cuenta gratuita debe ser **público**.
 2. Sube todo el contenido de esta carpeta a la raíz del repositorio. Con la web de GitHub solo se pueden subir 100 archivos cada vez, así que es más cómodo usar **GitHub Desktop** o `git`:
    ```
    git init
    git add .
    git commit -m "Historia de España PAU"
    git branch -M main
-   git remote add origin https://github.com/TU_USUARIO/historia-espana.git
+   git remote add origin https://github.com/TU_USUARIO/historia.git
    git push -u origin main
    ```
 3. En el repositorio: **Settings → Pages → Build and deployment → Deploy from a branch → `main` / `(root)` → Save**.
-4. En uno o dos minutos la web estará en `https://TU_USUARIO.github.io/historia-espana/`.
+4. En uno o dos minutos la web estará en `https://TU_USUARIO.github.io/historia/`.
 
 El archivo `.nojekyll` evita que GitHub procese la carpeta con Jekyll.
 
