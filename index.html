@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#15110d">
 <meta name="description" content="Textos, fuentes históricas, personajes, exámenes y juegos para estudiar Historia de España de 2.º de Bachillerato (PAU Madrid).">
-<meta property="og:type" content="website"><meta property="og:title" content="Historia de España · 2.º Bachillerato"><meta property="og:description" content="Textos con clave, fuentes históricas, personajes, exámenes tipo PAU y juegos."><meta property="og:image" content="https://imolina-1.github.io/historia/og.png"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website"><meta property="og:title" content="Historia de España · 2.º Bachillerato"><meta property="og:description" content="Textos con clave, fuentes históricas, personajes, exámenes tipo PAU y juegos."><meta property="og:image" content="https://historiapau.pages.dev/og.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315110d'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23d9a653' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23d9a653'%3EH%3C/text%3E%3C/svg%3E">
 <style>@font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/fraunces-latin-wght-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-wght-normal.woff2) format("woff2")}
@@ -609,6 +609,8 @@ details.clave,details.epd,.pc,.fs,.temasel details,.sheetwrap,table.cov,.std,.rt
 .acerca{max-width:760px}.acerca h2{font:400 1.5rem var(--serif);letter-spacing:-.02em;margin:30px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
 .acerca p,.acerca li{font:400 1.08rem/1.6 var(--text)}.acerca ul{padding-left:1.2rem}
 
+.evt{font:italic 400 1rem var(--serif);color:var(--muted);margin:2px 0 10px}
+.act2 p{font-size:.95rem}
 </style>
 </head>
 <body>
@@ -1705,7 +1707,7 @@ function initV7(){
   checkBadges()}
 
 /* ---------- v8: navegación, compartir, iconos ---------- */
-const PUBLIC_URL="https://imolina-1.github.io/historia/";
+const PUBLIC_URL="https://historiapau.pages.dev/";
 const IC={
  exam:'<svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
  sim:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.8 1.8M9.5 3h5"/></svg>',
@@ -1751,7 +1753,7 @@ function renderInicio(){
   $("#v-inicio").innerHTML=`
   <div class="hero2"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
    <div class="hcol"><span class="eyebrow">2.º de Bachillerato · PAU Madrid 2026-27</span><h1>Historia de España, <em>a la manera de la PAU</em></h1>
-    <p>Textos, fuentes históricas, personajes y exámenes para estudiar el curso entero con el formato del modelo oficial de Madrid 2026-27.</p>
+    <p>Textos, fuentes, personajes y exámenes con el formato de la PAU de Madrid.</p>
     <div class="cta"><button class="btn primary big" data-go="examenes">Generar un examen</button><button class="btn big" data-go="fuentes">Explorar las fuentes</button></div>
     <div class="stats2">${st.map(([n,l,c])=>`<div style="--sc:var(${c})"><b data-n="${n}">0</b><span>${l}</span></div>`).join("")}</div></div>
    <div class="hcar" id="hcar">${car.map((d,i)=>`<button class="hs ${i?"":"on"}" data-id="${d.id}" aria-label="${esc(d.titulo)}"><div class="hbg" style="background-image:url('${d.imgs[0].f}')"></div><img src="${d.imgs[0].f}" alt="${esc(d.imgs[0].cap||d.titulo)}"><div class="hcap"><b>${esc(d.titulo.length>74?d.titulo.slice(0,72)+"…":d.titulo)}</b><span>${d.tipo} · Epígrafe ${d.ep}${d.year!=null?" · "+fy(d.year):""}</span></div></button>`).join("")}<div class="hdots">${car.map((d,i)=>`<i data-i="${i}" class="${i?"":"on"}"></i>`).join("")}</div></div>
@@ -1762,18 +1764,18 @@ function renderInicio(){
   <div class="route rv">${TEMAS.map(t=>`<button class="rt ${t.bloque}" data-tm="${t.n}" title="${esc(t.n+". "+t.nombre)}">${t.n}</button>`).join("")}</div>
   <div class="rtl rv"><span style="grid-column:span 1">Antigua</span><span style="grid-column:span 1">Media</span><span style="grid-column:span 1">Moderna</span><span style="grid-column:span 4">Siglo XIX · Bloque B</span><span style="grid-column:span 4">Siglo XX · Bloque C</span><span style="grid-column:span 4">Transición y democracia · Bloque D</span></div>
   <div class="actions2 rv">
-   <button class="act2 k1" data-go="examenes"><div class="ic">${IC.exam}</div><h3>Generar un examen</h3><p>Evaluaciones u ordinario tipo PAU, con solucionario.</p></button>
-   <button class="act2 k2" data-go="simulacro"><div class="ic">${IC.sim}</div><h3>Documento a contrarreloj</h3><p>Cronómetro, tres preguntas y autoevaluación.</p></button>
-   <button class="act2 k3" data-go="fuentes"><div class="ic">${IC.fuentes}</div><h3>Fuentes históricas</h3><p>${nf} mapas, cuadros, caricaturas, fotos y carteles.</p></button>
-   <button class="act2 k4" data-go="tiempo"><div class="ic">${IC.tiempo}</div><h3>Recorrer la cronología</h3><p>Hitos, personajes y fuentes por tema y epígrafe.</p></button>
-   <button class="act2 k5" data-go="personajes"><div class="ic">${IC.pers}</div><h3>Personajes</h3><p>${PEOPLE.length} semblanzas con enlace a Wikipedia y a la RAH.</p></button>
-   <button class="act2 k6" data-go="juegos"><div class="ic">${IC.juegos}</div><h3>Juegos</h3><p>Detective de fuentes, retos diarios, insignias y rangos.</p></button>
-   <button class="act2 k7" data-go="taller"><div class="ic">${IC.taller}</div><h3>Taller</h3><p>Plan hasta el examen, comentario con autocorrección, esquemas y chuleta.</p></button>
-    <button class="act2 k8" data-go="estudio"><div class="ic">${IC.estudio}</div><h3>Mi estudio</h3><p>Tu progreso, tarjetas de repaso, notas y copia de seguridad.</p></button>
+   <button class="act2 k1" data-go="examenes"><div class="ic">${IC.exam}</div><h3>Generar un examen</h3><p>Tipo PAU, con solucionario.</p></button>
+   <button class="act2 k2" data-go="simulacro"><div class="ic">${IC.sim}</div><h3>Documento a contrarreloj</h3><p>Con cronómetro y autoevaluación.</p></button>
+   <button class="act2 k3" data-go="fuentes"><div class="ic">${IC.fuentes}</div><h3>Fuentes históricas</h3><p>${nf} mapas, cuadros y carteles.</p></button>
+   <button class="act2 k4" data-go="tiempo"><div class="ic">${IC.tiempo}</div><h3>Recorrer la cronología</h3><p>Hitos y personajes por tema.</p></button>
+   <button class="act2 k5" data-go="personajes"><div class="ic">${IC.pers}</div><h3>Personajes</h3><p>${PEOPLE.length} semblanzas con enlaces.</p></button>
+   <button class="act2 k6" data-go="juegos"><div class="ic">${IC.juegos}</div><h3>Juegos</h3><p>Retos diarios, insignias y rangos.</p></button>
+   <button class="act2 k7" data-go="taller"><div class="ic">${IC.taller}</div><h3>Taller</h3><p>Plan de estudio, esquemas y chuleta.</p></button>
+    <button class="act2 k8" data-go="estudio"><div class="ic">${IC.estudio}</div><h3>Mi estudio</h3><p>Progreso, repaso y notas.</p></button>
   </div>
   <div class="sech rv"><h2>El curso por evaluaciones</h2></div>
   <div class="evs rv">${EVD.map(([n,c,s,b,sub])=>{const ts=D.presets[n],eps=EPS.filter(e=>ts.includes(e.tema));const a=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="texto").length,f=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="fuente").length,np=PEOPLE.filter(p=>ts.includes(p.tema)).length;
-    return `<div class="ev ${c}"><h3>${n}</h3><div class="sub">${sub}</div><ul>${TEMAS.filter(t=>ts.includes(t.n)).map(t=>`<li><b>${t.n}.</b> ${esc(t.nombre)}</li>`).join("")}</ul><p class="note" style="margin:0 0 12px">${a} textos · ${f} fuentes · ${np} personajes · ${eps.length} epígrafes</p><div class="row"><button class="btn primary small" data-std="${s}">Generar examen</button><button class="btn small" data-pool="textos" data-b="${b}">Textos</button><button class="btn small" data-pool="fuentes" data-b="${b}">Fuentes</button></div></div>`}).join("")}</div>
+    return `<div class="ev ${c}"><h3>${n}</h3><div class="sub">${sub}</div><div class="evt">${ts.length>1?"Temas "+ts[0]+" a "+ts[ts.length-1]:""}</div><p class="note" style="margin:0 0 12px">${a} textos · ${f} fuentes · ${np} personajes · ${eps.length} epígrafes</p><div class="row"><button class="btn primary small" data-std="${s}">Generar examen</button><button class="btn small" data-pool="textos" data-b="${b}">Textos</button><button class="btn small" data-pool="fuentes" data-b="${b}">Fuentes</button></div></div>`}).join("")}</div>
   <div class="sech rv"><h2>Para hoy</h2></div>
   <div class="daily rv">
    <button class="card doc ${doc.bloque}" data-id="${doc.id}"><div class="meta"><span class="chip ${doc.bloque}">Texto del día</span><span class="chip">${doc.ep}</span></div><h3>${esc(doc.titulo)}</h3><span class="epn">${esc(EPM[doc.ep].nombre)}</span></button>
