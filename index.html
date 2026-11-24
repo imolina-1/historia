@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#15110d">
 <meta name="description" content="Textos, fuentes históricas, personajes, exámenes y juegos para estudiar Historia de España de 2.º de Bachillerato (PAU Madrid).">
-<meta property="og:type" content="website"><meta property="og:title" content="Historia de España · 2.º Bachillerato"><meta property="og:description" content="Textos con clave, fuentes históricas, personajes, exámenes tipo PAU y juegos. Colegio Tajamar."><meta property="og:image" content="https://imolina-1.github.io/historia/og.png"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website"><meta property="og:title" content="Historia de España · 2.º Bachillerato"><meta property="og:description" content="Textos con clave, fuentes históricas, personajes, exámenes tipo PAU y juegos."><meta property="og:image" content="https://imolina-1.github.io/historia/og.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315110d'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23d9a653' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23d9a653'%3EH%3C/text%3E%3C/svg%3E">
 <style>@font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/fraunces-latin-wght-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-wght-normal.woff2) format("woff2")}
@@ -513,41 +513,10 @@ main.wrap{padding-top:34px}
 .sech h2{font-size:clamp(1.7rem,3.2vw,2.5rem);font-weight:300;letter-spacing:-.03em}
 .view{counter-reset:sec}.sech h2:before{counter-increment:sec;content:counter(sec,decimal-leading-zero);font:600 .68rem var(--sans);letter-spacing:.16em;color:var(--accent);vertical-align:.9em;margin-right:.9em}
 .sech .note{font:italic 1rem var(--text)}
-/* --- portada --- */
-#v-inicio{margin-top:-34px}
-.hero2{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(24px,5vw,72px);align-items:center;margin:0 calc(50% - 50vw);padding:clamp(34px,5vw,64px) max(24px,calc(50vw - 580px)) clamp(44px,5vw,60px);border:0;border-radius:0;box-shadow:none;overflow:hidden;color:var(--paper);
-  background:radial-gradient(900px 520px at 88% 12%,rgba(217,166,83,.20),transparent 62%),radial-gradient(760px 520px at -4% 108%,rgba(154,42,29,.34),transparent 60%),#14100c}
-.hero2:before{content:"1492 — 1978";position:absolute;right:-2vw;bottom:-5vw;font:300 clamp(7rem,21vw,19rem)/.8 var(--serif);letter-spacing:-.05em;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(239,231,214,.085);pointer-events:none}
-.blob{display:none}
-.hero2 .eyebrow{display:flex;align-items:center;gap:12px;background:none;border:0;padding:0;border-radius:0;font:600 .7rem var(--sans);letter-spacing:.2em;color:var(--gold)}
-.hero2 .eyebrow:before{content:"";width:38px;height:1px;background:var(--gold)}
-.hero2 h1{font-size:clamp(2.9rem,6.2vw,5.6rem);font-weight:300;letter-spacing:-.045em;line-height:.93;margin:18px 0 22px;color:#f6efe0;max-width:none}
-.hero2 h1 em{display:block;font:italic 400 .82em/1.02 var(--text);letter-spacing:-.02em;margin-top:.08em;background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--gold)}
-.hero2 p{font:400 1.2rem/1.55 var(--text);color:#c9bfab;max-width:46ch}
-.cta{margin:30px 0 8px;gap:12px}
-.hero2 .btn{background:transparent;border:1px solid rgba(239,231,214,.35);color:var(--paper);border-radius:2px}
-.hero2 .btn:hover{border-color:var(--gold);color:#fff;background:rgba(217,166,83,.08)}
-.hero2 .btn.primary{background:var(--gold);border-color:var(--gold);color:#1b1306;box-shadow:none;font-weight:600}
-.hero2 .btn.primary:hover{background:#e8b862;filter:none}
-.btn.big{padding:13px 24px;font-size:.95rem;border-radius:2px;letter-spacing:.01em}
-.stats2{grid-template-columns:repeat(5,minmax(0,auto));gap:10px 28px;margin-top:34px}
-.stats2 div{border:0;border-top:1px solid rgba(239,231,214,.28);padding:11px 0 0}
-.stats2 b{font:300 2.6rem/1 var(--serif);color:#f6efe0;letter-spacing:-.03em}.stats2 span{font:600 .62rem var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#a89d88;display:block;margin-top:6px}
-.hcar{aspect-ratio:1/.9;border-radius:2px;background:#eee6d3;border:0;box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(239,231,214,.12);transform:rotate(1deg);overflow:hidden}
-.hcar:hover{transform:rotate(0)}
-.hs .hbg{display:none}
-.hs img{inset:18px 18px 94px;width:calc(100% - 36px);height:calc(100% - 112px);border-radius:0;box-shadow:none;background:#fff;border:1px solid rgba(40,30,18,.18)}
-.hs .hcap{background:none;color:#2a2219;padding:11px 20px 16px;border-top:1px solid rgba(40,30,18,.22);margin:0 18px;padding-left:0;padding-right:0}
-.hcar{counter-reset:lam}.hs{counter-increment:lam}
-.hs .hcap:before{content:"Lám. " counter(lam,upper-roman);display:block;font:600 .6rem var(--sans);letter-spacing:.18em;text-transform:uppercase;color:#9a2a1d;margin-bottom:3px}
-.hs .hcap b{font:500 1rem/1.2 var(--serif);color:#1d160e}.hs .hcap span{font:italic .85rem var(--text);color:#5b5144;opacity:1}
-.hdots{right:auto;left:22px;top:auto;bottom:auto;display:none}
-/* cinta de fechas y fuentes */
-.ticker{margin:0 calc(50% - 50vw);overflow:hidden;background:var(--gold);color:#1b1306;border-block:1px solid #b88a35;white-space:nowrap}
-.ticker .tt{display:inline-flex;gap:0;animation:mq 120s linear infinite;padding:11px 0;will-change:transform}
-.ticker span{font:500 .98rem var(--serif);letter-spacing:-.005em;padding:0 22px;position:relative}.ticker span b{font:600 .95rem var(--serif);margin-right:.45em;letter-spacing:.02em}
-.ticker span:after{content:"✦";position:absolute;right:-6px;top:50%;transform:translateY(-52%);font-size:.7rem;opacity:.6}
-.ticker:hover .tt{animation-play-state:paused}
+/* --- portada: se conserva la de v7; solo ajustes de tipografía --- */
+.hero2 h1{font-weight:600;letter-spacing:-.01em}
+.hero2 h1 em{font-weight:500;padding-right:.1em}
+
 .ribbon{margin:34px -6px 0}
 .rth{border-radius:2px;border:1px solid var(--line);filter:sepia(.45) saturate(.85) contrast(1.04);transition:filter .3s,transform .25s}
 .rth:hover{filter:none;transform:translateY(-5px)}
@@ -616,11 +585,10 @@ select:focus,input:focus,textarea:focus{border-color:var(--accent);outline:0;box
   .nv-i{height:auto}.nv-m{position:static;display:block;min-width:0;background:none;border:0;box-shadow:none;padding:0;animation:none;color:#efe7d6}
   .nv-m button{padding:14px 4px;color:#efe7d6;border-bottom:1px solid #2b241c;border-radius:0}.nv-m button b{font:300 1.7rem var(--serif);color:#efe7d6}.nv-m button span{color:#a89d88;font-size:.82rem}.nv-m button i{color:var(--gold)}
   .nv-m button:hover,.nv-m button[aria-selected=true]{background:none;box-shadow:none}.nv-m button[aria-selected=true] b{color:var(--gold)}
-  .hero2{grid-template-columns:1fr;padding-top:44px}.hcar{max-width:440px;transform:none}.stats2{grid-template-columns:repeat(3,auto)}
   .route{grid-template-columns:repeat(8,1fr)}
 }
-@media(max-width:560px){.vh h1{font-size:2.6rem}.stats2 b{font-size:2.1rem}.hero2 h1{font-size:3.2rem}.tools{gap:2px}}
-@media(prefers-reduced-motion:reduce){.ticker .tt{animation:none}.nv-m,.nv:after{animation:none;transition:none}}
+@media(max-width:560px){.vh h1{font-size:2.6rem}.tools{gap:2px}}
+@media(prefers-reduced-motion:reduce){.nv-m,.nv:after{animation:none;transition:none}}
 @media print{body:before,#sp,header.top,.foot{display:none!important}}
 .nv-i.shut .nv-m{display:none!important}
 .burger .x{display:none}body.menu .burger .m{display:none}body.menu .burger .x{display:block}
@@ -634,6 +602,13 @@ details.clave,details.epd,.pc,.fs,.temasel details,.sheetwrap,table.cov,.std,.rt
 .stt b,.stats4 b{font-family:var(--serif);font-weight:300}
 .card h2,.card h3{font-weight:400}
 
+/* créditos */
+.orn{display:flex;justify-content:center;color:var(--muted);margin:0 0 14px;opacity:.7}
+.foot{flex-direction:column;align-items:center;text-align:center;gap:6px;padding:34px 20px 54px;margin-top:40px}
+.foot p{margin:0;font-size:.86rem;color:var(--muted)}.foot .fl{font-size:.8rem}.foot a,.foot button{color:var(--muted)}
+.acerca{max-width:760px}.acerca h2{font:400 1.5rem var(--serif);letter-spacing:-.02em;margin:30px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
+.acerca p,.acerca li{font:400 1.08rem/1.6 var(--text)}.acerca ul{padding-left:1.2rem}
+
 </style>
 </head>
 <body>
@@ -645,7 +620,7 @@ details.clave,details.epd,.pc,.fs,.temasel details,.sheetwrap,table.cov,.std,.rt
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Estudiar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
       <button type="button" role="menuitem" data-v="textos"><i>I</i><b>Textos</b><span>Comentarios con clave de corrección</span></button><button type="button" role="menuitem" data-v="fuentes"><i>II</i><b>Fuentes históricas</b><span>Mapas, cuadros, carteles y fotografías</span></button><button type="button" role="menuitem" data-v="personajes"><i>III</i><b>Personajes</b><span>Semblanzas con fechas y enlaces</span></button><button type="button" role="menuitem" data-v="tiempo"><i>IV</i><b>Cronología</b><span>Hitos por tema y epígrafe</span></button></div></div>
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Practicar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
-      <button type="button" role="menuitem" data-v="examenes"><i>I</i><b>Exámenes</b><span>Evaluaciones y ordinario, con solucionario</span></button><button type="button" role="menuitem" data-v="simulacro"><i>II</i><b>Simulacro</b><span>Un documento, cronómetro y autoevaluación</span></button><button type="button" role="menuitem" data-v="juegos"><i>III</i><b>Juegos</b><span>Retos diarios, insignias y rangos</span></button><button type="button" role="menuitem" data-v="taller"><i>IV</i><b>Taller</b><span>Plan, comentario, esquemas y chuleta</span></button></div></div>
+      <button type="button" role="menuitem" data-v="examenes"><i>I</i><b>Exámenes</b><span>Evaluaciones y ordinario, con solucionario</span></button><button type="button" role="menuitem" data-v="simulacro"><i>II</i><b>Contrarreloj</b><span>Comenta un documento con cronómetro</span></button><button type="button" role="menuitem" data-v="juegos"><i>III</i><b>Juegos</b><span>Retos diarios, insignias y rangos</span></button><button type="button" role="menuitem" data-v="taller"><i>IV</i><b>Taller</b><span>Plan, comentario, esquemas y chuleta</span></button></div></div>
     <button type="button" class="nv" data-v="estudio">Mi estudio</button>
   </nav>
   <div class="tools">
@@ -690,7 +665,7 @@ details.clave,details.epd,.pc,.fs,.temasel details,.sheetwrap,table.cov,.std,.rt
 </section>
 
 <section class="view" id="v-simulacro">
-  <div class="vh"><h1>Simulacro de la Parte 2</h1><p>Comentario de un documento en las condiciones del examen: tres preguntas, cronómetro y autoevaluación con la clave.</p></div>
+  <div class="vh"><h1>Documento a contrarreloj</h1><p>Comenta un documento en condiciones de examen: tres preguntas, cronómetro y autoevaluación con la clave.</p></div>
   <div class="filters">
     <div class="field"><label for="sb">Bloque</label><select id="sb"><option value="">Todos</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
     <div class="field" style="flex:1;min-width:220px"><label for="sd">Documento</label><select id="sd"></select></div>
@@ -739,9 +714,20 @@ details.clave,details.epd,.pc,.fs,.temasel details,.sheetwrap,table.cov,.std,.rt
 <section class="view" id="v-juegos"></section>
 <section class="view" id="v-taller"></section>
 <section class="view" id="v-profe"></section>
-<section class="view" id="v-pendiente"></section>
+<section class="view" id="v-acerca">
+  <div class="vh"><h1>Créditos y derechos</h1><p>Quién ha hecho esta web, de dónde salen los materiales y cómo se usan.</p></div>
+  <div class="acerca">
+   <h2>Autoría</h2><p>Iván Molina Rincón, profesor de Historia. Textos, claves de corrección y selección de fuentes, a partir de los apuntes y materiales de clase. Diseño y programación desarrollados con Claude, de Anthropic.</p>
+   <h2>Currículo</h2><p>Decreto 64/2022 de la Comunidad de Madrid (LOMLOE) y modelo de examen de la PAU de Historia de España 2026-27.</p>
+   <h2>Imágenes</h2><p>Proceden de las presentaciones de clase y de fuentes públicas (archivos, museos y Wikimedia Commons) y se usan con fines docentes y sin ánimo de lucro. Las obras anteriores al siglo XX suelen ser de dominio público; las posteriores y las fotografías pueden estar protegidas por sus autores. Algunos gráficos son de elaboración propia a partir de datos oficiales. Si eres titular de derechos y quieres que se retire o se acredite una imagen, comunícaselo al profesor.</p>
+   <h2>Textos</h2><p>Los textos históricos se reproducen con fines educativos; cada ficha indica su procedencia cuando se conoce.</p>
+   <h2>Tus datos</h2><p>No hay cuentas, cookies ni analítica. Tu progreso, tus notas y tus exámenes se guardan solo en tu navegador. Si quieres llevártelos a otro dispositivo, usa «Exportar copia» en Mi estudio.</p>
+   <h2>Compartir</h2><p><button class="btn" type="button" id="shf2">Compartir con QR</button></p>
+  </div>
+</section>
+
 </main>
-<footer class="wrap foot"><b>Historia de España · 2.º Bachillerato</b><span>Colegio Tajamar</span><a href="#simulacro">Simulacro de la Parte 2</a><a href="#pendiente">Lo que falta</a><button type="button" id="shf">Compartir con QR</button></footer>
+<footer class="wrap foot"><div class="orn" aria-hidden="true"><svg viewBox="0 0 120 14" width="120" height="14"><path d="M0 7h46M74 7h46" stroke="currentColor" stroke-width="1" fill="none"/><path d="M60 1l5 6-5 6-5-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="52" cy="7" r="1.4" fill="currentColor"/><circle cx="68" cy="7" r="1.4" fill="currentColor"/></svg></div><p>Historia de España · 2.º de Bachillerato · Comunidad de Madrid · Decreto 64/2022 y modelo PAU</p><p class="fl"><a href="#acerca">Créditos y derechos</a> · © 2026 Iván Molina Rincón · <button type="button" id="shf">Compartir con QR</button></p></footer>
 <dialog id="dlg" aria-label="Detalle"><div class="dwrap"><button class="dx" id="dx" aria-label="Cerrar">✕</button><div id="dh"></div><div id="db"></div></div></dialog>
 <dialog id="vw" aria-label="Visor de imagen"><div class="vwin"><div class="vtop"><div class="vtitle" id="vt"></div><div class="vtools"><span id="vcount"></span><button id="vprev" aria-label="Imagen anterior" hidden>‹</button><button id="vnext" aria-label="Imagen siguiente" hidden>›</button><button id="vzo" aria-label="Alejar">−</button><button id="vz1" aria-label="Tamaño real">100 %</button><button id="vzi" aria-label="Acercar">+</button><button id="vzf" aria-label="Ajustar a la pantalla">Ajustar</button><button id="vcl" aria-label="Cerrar">✕</button></div></div><div class="vstage" id="vs"><img id="vi" alt="" draggable="false"></div><div><div class="vcap" id="vc"></div><div class="vhint">Rueda o pellizco para el zoom · arrastra para moverte · doble clic para acercar · ←/→ para cambiar de imagen</div></div></div></dialog>
 <dialog id="sh" aria-label="Compartir"><div class="shb"><button class="btn small" id="shx" type="button" aria-label="Cerrar">✕</button><h2>Comparte la web</h2><p>Apunta con la cámara del móvil al código.</p><div class="qr" id="shq"></div><div class="url" id="shu"></div><div class="row"><button class="btn primary" id="shc" type="button">Copiar enlace</button><button class="btn" id="shn" type="button">Compartir…</button><button class="btn" id="shp" type="button">Cartel para el aula</button></div></div></dialog>
@@ -783,7 +769,7 @@ function init(){
   $("#dlg").addEventListener("click",e=>{if(e.target===$("#dlg"))$("#dlg").close()});
   initTheme();initLightbox();
   $("#fcx").onclick=()=>$("#fc").close();$("#fc").addEventListener("keydown",e=>{if(!FC)return;if(e.key===" "||e.key==="Enter"){if(!FC.flip){e.preventDefault();fcKey("f")}}else if(e.key.length===1&&"123".includes(e.key)&&FC.flip)fcKey(String(+e.key-1))});
-  initSearch();initV7();renderInicio();initPools();initPersonajes();initTiempo();initSimulacro();initExamenes();renderPendiente();renderMine();route();syncInit();document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.db&&Date.now()-SYNC.last>60000)pullRemote()});
+  initSearch();initV7();renderInicio();initPools();initPersonajes();initTiempo();initSimulacro();initExamenes();renderMine();route();syncInit();document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.db&&Date.now()-SYNC.last>60000)pullRemote()});
 }
 function route(){
   let v=(location.hash||"#inicio").slice(1);if(!$("#v-"+v))v="inicio";
@@ -817,7 +803,7 @@ function docHTML(d){
   if(d.kind==="texto"){h+=readerHTML(d)}
   else{
     h+=figs(d);
-    if(!d.imgs.length){const pd=pendOf(d.id);h+=`<div class="imgpend"><b>Imagen pendiente.</b> ${pd?esc(pd.que):""} Mientras tanto: ${esc(d.descr)}</div>`}
+    
     if(d.paras.length)h+=`<div class="quote">${d.paras.map(p=>`<p>${esc(p)}</p>`).join("")}</div>`;
   }
   if(d.ref)h+=`<p class="ref">${esc(d.ref)}</p>`;
@@ -1736,12 +1722,7 @@ function shareURL(){const ok=/^https?:$/.test(location.protocol)&&location.hostn
 function qrSVG(text,fill){try{const q=qrcode(0,"M");q.addData(text);q.make();const n=q.getModuleCount();let p="";for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(q.isDark(r,c))p+=`M${c} ${r}h1v1h-1z`;return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 ${n+2} ${n+2}" shape-rendering="crispEdges" role="img" aria-label="Código QR del enlace"><path d="${p}" fill="${fill||"#15110d"}"/></svg>`}catch(e){return ""}}
 function openShare(){const u=shareURL();$("#shq").innerHTML=qrSVG(u);$("#shu").textContent=u.replace(/^https?:\/\//,"").replace(/\/$/,"");$("#shn").style.display=navigator.share?"":"none";if(!$("#sh").open)$("#sh").showModal()}
 function sharePoster(){const u=shareURL(),f=u.replace(/^https?:\/\//,"").replace(/\/$/,"");
- printHTML(`<!doctype html><meta charset="utf-8"><title>Cartel</title><style>@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;width:210mm;height:296mm;background:#15110d;color:#efe7d6;font-family:Georgia,serif;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22mm 16mm;text-align:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.k{font:700 11pt Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#d9a653}h1{font:300 56pt/.95 Georgia,serif;margin:7mm 0 0;letter-spacing:-.03em}h1 em{display:block;font-size:.58em;color:#d9a653;margin-top:3mm}p{font:italic 16pt Georgia,serif;color:#c9bfab;margin:0 0 4mm}.q{background:#fff;padding:7mm;width:124mm;height:124mm}.q svg{width:100%;height:100%}.u{font:700 26pt Arial,sans-serif;letter-spacing:-.01em;word-break:break-all;color:#fff}.s{font:10pt Arial,sans-serif;color:#a89d88}</style><div><div class="k">Colegio Tajamar · 2.º de Bachillerato</div><h1>Historia de España<em>a la manera de la PAU</em></h1></div><div class="q">${qrSVG(u)}</div><div><p>Escanea el código con la cámara del móvil</p><div class="u">${f}</div></div><div class="s">Textos · fuentes históricas · personajes · exámenes · juegos</div>`)}
-function tickerHTML(){const fy=y=>y<0?`${Math.abs(y).toLocaleString("es-ES")} a. C.`:String(y);
- const L=EVS.filter(e=>e.y>-5000&&e.t.length<=46).slice().sort((a,b)=>a.y-b.y);if(L.length<8)return"";
- const n=Math.min(30,L.length),st=L.length/n,P=[];for(let i=0;i<n;i++)P.push(L[Math.floor(i*st)]);
- const one=P.map(e=>`<span><b>${fy(e.y)}</b>${esc(e.t)}</span>`).join("");
- return `<div class="ticker" aria-hidden="true"><div class="tt">${one}${one}</div></div>`}
+ printHTML(`<!doctype html><meta charset="utf-8"><title>Cartel</title><style>@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;width:210mm;height:296mm;background:#15110d;color:#efe7d6;font-family:Georgia,serif;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22mm 16mm;text-align:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.k{font:700 11pt Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#d9a653}h1{font:300 56pt/.95 Georgia,serif;margin:7mm 0 0;letter-spacing:-.03em}h1 em{display:block;font-size:.58em;color:#d9a653;margin-top:3mm}p{font:italic 16pt Georgia,serif;color:#c9bfab;margin:0 0 4mm}.q{background:#fff;padding:7mm;width:124mm;height:124mm}.q svg{width:100%;height:100%}.u{font:700 26pt Arial,sans-serif;letter-spacing:-.01em;word-break:break-all;color:#fff}.s{font:10pt Arial,sans-serif;color:#a89d88}</style><div><div class="k">2.º de Bachillerato · PAU Madrid</div><h1>Historia de España<em>a la manera de la PAU</em></h1></div><div class="q">${qrSVG(u)}</div><div><p>Escanea el código con la cámara del móvil</p><div class="u">${f}</div></div><div class="s">Textos · fuentes históricas · personajes · exámenes · juegos</div>`)}
 function initNav(){
  const nav=$("#mainnav"),closeAll=()=>$$(".nv-i").forEach(x=>{x.classList.remove("open");x.querySelector(".nv-g").setAttribute("aria-expanded","false")});
  $$(".nv-g",nav).forEach(g=>g.addEventListener("click",e=>{e.stopPropagation();const it=g.parentElement,o=!it.classList.contains("open");closeAll();it.classList.toggle("open",o);g.setAttribute("aria-expanded",String(o))}));
@@ -1750,7 +1731,7 @@ function initNav(){
  document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeAll();document.body.classList.remove("menu");$("#burger").setAttribute("aria-expanded","false")}});
  $("#burger").onclick=()=>{const o=document.body.classList.toggle("menu");$("#burger").setAttribute("aria-expanded",String(o))};
  const sp=$("#sp");let tk=0;addEventListener("scroll",()=>{if(tk)return;tk=requestAnimationFrame(()=>{tk=0;const h=document.documentElement,m=h.scrollHeight-innerHeight;sp.style.width=(m>0?Math.min(100,scrollY/m*100):0)+"%"})},{passive:true});
- $("#shareb").onclick=openShare;const sf=$("#shf");if(sf)sf.onclick=openShare;
+ $("#shareb").onclick=openShare;["#shf","#shf2"].forEach(q=>{const b=$(q);if(b)b.onclick=openShare});
  $("#shx").onclick=()=>$("#sh").close();$("#sh").addEventListener("click",e=>{if(e.target===$("#sh"))$("#sh").close()});
  $("#shc").onclick=async()=>{try{await navigator.clipboard.writeText(shareURL());toast("Enlace copiado")}catch(e){const r=document.createRange();r.selectNodeContents($("#shu"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Selecciona el enlace y cópialo")}};
  $("#shn").onclick=()=>{navigator.share&&navigator.share({title:"Historia de España · 2.º Bachillerato",url:shareURL()}).catch(()=>{})};
@@ -1769,20 +1750,20 @@ function renderInicio(){
   const st=[[nt,"textos con clave","--a"],[nf,"fuentes históricas","--c"],[PEOPLE.length,"personajes","--b"],[EVS.length,"hitos","--d"],[EPS.length,"epígrafes","--a"]];
   $("#v-inicio").innerHTML=`
   <div class="hero2"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
-   <div class="hcol"><span class="eyebrow">Colegio Tajamar · 2.º de Bachillerato</span><h1>Historia de España, <em>a la manera de la PAU</em></h1>
+   <div class="hcol"><span class="eyebrow">2.º de Bachillerato · PAU Madrid 2026-27</span><h1>Historia de España, <em>a la manera de la PAU</em></h1>
     <p>Textos, fuentes históricas, personajes y exámenes para estudiar el curso entero con el formato del modelo oficial de Madrid 2026-27.</p>
     <div class="cta"><button class="btn primary big" data-go="examenes">Generar un examen</button><button class="btn big" data-go="fuentes">Explorar las fuentes</button></div>
     <div class="stats2">${st.map(([n,l,c])=>`<div style="--sc:var(${c})"><b data-n="${n}">0</b><span>${l}</span></div>`).join("")}</div></div>
    <div class="hcar" id="hcar">${car.map((d,i)=>`<button class="hs ${i?"":"on"}" data-id="${d.id}" aria-label="${esc(d.titulo)}"><div class="hbg" style="background-image:url('${d.imgs[0].f}')"></div><img src="${d.imgs[0].f}" alt="${esc(d.imgs[0].cap||d.titulo)}"><div class="hcap"><b>${esc(d.titulo.length>74?d.titulo.slice(0,72)+"…":d.titulo)}</b><span>${d.tipo} · Epígrafe ${d.ep}${d.year!=null?" · "+fy(d.year):""}</span></div></button>`).join("")}<div class="hdots">${car.map((d,i)=>`<i data-i="${i}" class="${i?"":"on"}"></i>`).join("")}</div></div>
   </div>
-  ${tickerHTML()}<div class="ribbon" aria-label="Cinta de fuentes históricas"><div class="rtrack">${[...rib,...rib].map(d=>`<button class="rth ${d.bloque}" data-id="${d.id}" data-t="${esc(d.titulo.slice(0,60))}" aria-label="${esc(d.titulo)}" style="background-image:url('${d.imgs[0].f}')"></button>`).join("")}</div></div>
+  <div class="ribbon" aria-label="Cinta de fuentes históricas"><div class="rtrack">${[...rib,...rib].map(d=>`<button class="rth ${d.bloque}" data-id="${d.id}" data-t="${esc(d.titulo.slice(0,60))}" aria-label="${esc(d.titulo)}" style="background-image:url('${d.imgs[0].f}')"></button>`).join("")}</div></div>
   <div class="mystrip rv" id="msx"></div><div id="efx"></div>
   <div class="sech rv" style="margin-top:26px"><h2>El curso de un vistazo</h2><span class="note">15 temas · pulsa uno para verlo en la cronología</span></div>
   <div class="route rv">${TEMAS.map(t=>`<button class="rt ${t.bloque}" data-tm="${t.n}" title="${esc(t.n+". "+t.nombre)}">${t.n}</button>`).join("")}</div>
   <div class="rtl rv"><span style="grid-column:span 1">Antigua</span><span style="grid-column:span 1">Media</span><span style="grid-column:span 1">Moderna</span><span style="grid-column:span 4">Siglo XIX · Bloque B</span><span style="grid-column:span 4">Siglo XX · Bloque C</span><span style="grid-column:span 4">Transición y democracia · Bloque D</span></div>
   <div class="actions2 rv">
    <button class="act2 k1" data-go="examenes"><div class="ic">${IC.exam}</div><h3>Generar un examen</h3><p>Evaluaciones u ordinario tipo PAU, con solucionario.</p></button>
-   <button class="act2 k2" data-go="simulacro"><div class="ic">${IC.sim}</div><h3>Practicar un documento</h3><p>Cronómetro, tres preguntas y autoevaluación.</p></button>
+   <button class="act2 k2" data-go="simulacro"><div class="ic">${IC.sim}</div><h3>Documento a contrarreloj</h3><p>Cronómetro, tres preguntas y autoevaluación.</p></button>
    <button class="act2 k3" data-go="fuentes"><div class="ic">${IC.fuentes}</div><h3>Fuentes históricas</h3><p>${nf} mapas, cuadros, caricaturas, fotos y carteles.</p></button>
    <button class="act2 k4" data-go="tiempo"><div class="ic">${IC.tiempo}</div><h3>Recorrer la cronología</h3><p>Hitos, personajes y fuentes por tema y epígrafe.</p></button>
    <button class="act2 k5" data-go="personajes"><div class="ic">${IC.pers}</div><h3>Personajes</h3><p>${PEOPLE.length} semblanzas con enlace a Wikipedia y a la RAH.</p></button>
@@ -2158,37 +2139,6 @@ async function save(name,make,sel){
   note.append("La descarga no está disponible aquí. Copia el HTML y guárdalo como .html: ",b,ta);
 }
 
-function renderPendiente(){
-  const falta=PEND.filter(p=>p.estado==="falta"),parc=PEND.filter(p=>p.estado==="parcial");
-  const vis=DOCS.filter(d=>d.kind==="fuente"),nt=DOCS.length-vis.length;
-  const sinVis=EPS.filter(e=>!vis.some(d=>d.ep===e.id));
-  const maxn=Math.max(...EPS.map(e=>e.ndocs));
-  const rows=EPS.map(e=>`<tr><td>${e.id}</td><td>${esc(e.nombre)}</td><td><span class="chip ${e.bloque}">${e.bloque}</span></td><td>${e.ndocs?`<span class="bar2" style="width:${Math.max(8,e.ndocs/maxn*80)}px"></span> ${e.ndocs}`:`<span class="bar2 zero"></span> 0`}</td><td>${e.npers}</td></tr>`).join("");
-  $("#v-pendiente").innerHTML=`
-  <div class="vh"><h1>Lo que falta</h1><p>Hay ${nt} textos y ${vis.length} fuentes históricas visuales. Las fuentes sin imagen no aparecen en la web ni en los exámenes hasta que las tengan.</p></div>
-  <div class="sech" style="margin-top:6px"><h2>Imágenes que necesito</h2><button class="btn" id="pdl">Descargar la lista</button></div>
-  <p class="note" id="pnote" style="margin-top:-4px"></p>
-  <div class="pend">${[...falta,...parc].map(p=>{const d=DOCM[p.id];return `<div class="card"><div class="meta"><span class="chip ${p.estado==="falta"?"miss":"part"}">${p.estado==="falta"?"Falta":"Mejorable"}</span><span class="chip ${d.bloque}">${p.id}</span><span class="chip">${d.ep}</span></div><h3 style="font-size:1rem">${esc(d.titulo)}</h3><p style="margin:0;font-size:.9rem"><b>${p.estado==="falta"?"Qué es":"Qué falta"}:</b> ${esc(p.que)}</p><p class="note" style="margin:0"><b>Dónde buscarla:</b> ${esc(p.donde)}</p><p class="note" style="margin:0">Nombre de archivo: <code>${p.archivo}</code></p></div>`}).join("")}</div>
-  <div class="sech"><h2>Fuentes con datos por confirmar</h2></div>
-  <p class="note" style="margin-top:-4px">Las imágenes proceden de tus presentaciones, pero no todas llevan pie con autor, título o fecha. He escrito la ficha con lo que se ve y con el contexto de la diapositiva; estos son los datos que conviene que revises (${(D.verificar||[]).length} fuentes).</p>
-  <div class="card"><ul style="margin:0;padding-left:1.1rem;display:grid;gap:6px;font-size:.88rem">${(D.verificar||[]).map(v=>{const d=DOCM[v.id];return d?`<li><b>${v.id}</b> · ${esc(d.titulo)} <span class="note">— ${esc(v.nota)} (${esc(v.ref)})</span></li>`:""}).join("")}</ul></div>
-  <div class="sech"><h2>Otros materiales</h2></div>
-  <div class="card"><ul style="margin:0;padding-left:1.1rem;display:grid;gap:7px">
-   <li><b>Epígrafes sin fuente histórica visual.</b> ${sinVis.map(e=>e.id).join(", ")}. Si hay una imagen, un mapa o un gráfico de esos epígrafes en tus presentaciones, dímelo y los incorporo. De los epígrafes 14.1, 14.2 y 15.1 (Bloque D) no hay presentaciones.</li>
-   <li><b>Gráficos de elaboración propia.</b> Los gráficos de población (D27), referéndums (D28, D29), elecciones (D30, D31) y el del censo de Floridablanca (A37) los he dibujado yo con datos de resultados oficiales publicados. Compruébalos antes de usarlos en un examen.</li>
-   <li><b>Pies de imagen por verificar.</b> Dos fichas tienen una atribución dudosa que conviene confirmar con tu presentación: el mapa del caciquismo (B41, atribuido a Gedeón) y el mapa de la batalla del Jarama (C57).</li>
-   <li><b>Textos que faltan.</b> Epígrafe 7.1 (población y ciudades): ninguno. 11.3: solo el Fuero del Trabajo; falta el Plan de Estabilización. 11.4: nada sobre exilio ni cultura. 13.2: faltan la evolución económica y la demográfica. En el Bloque D: Pactos de la Moncloa, adhesión a la CEE y Agenda 2030.</li>
-   <li><b>Personajes.</b> ${PEOPLE.length} fichas con semblanza propia, enlace al artículo exacto de Wikipedia y, en ${PEOPLE.filter(p=>p.rah).length} casos, a la ficha de la Real Academia de la Historia (el resto son personajes vivos o extranjeros). Revisa las semblanzas antes de usarlas en clase.</li>
-   <li><b>Exámenes.</b> La 1.ª, 2.ª y 3.ª evaluación y el ordinario siguen la estructura del modelo oficial. El solucionario remite a tus apuntes y a las claves de los corpus; no inventa respuestas. Si me pasas tus esquemas, los incorporo.</li>
-   <li><b>Etiquetas PAU.</b> Revisar la correspondencia entre textos y convocatorias de la etiqueta «PAU»${DOCS.filter(d=>/comprobar/.test(d.pau||"")).length?" (comprobar: "+esc(DOCS.filter(d=>/comprobar/.test(d.pau||"")).map(d=>d.id).join(", "))+")":""}.</li>
-  </ul></div>
-  <div class="sech"><h2>Cobertura por epígrafe</h2></div>
-  <div style="overflow:auto"><table class="cov"><thead><tr><th>Ep.</th><th>Epígrafe</th><th>Bl.</th><th>Documentos</th><th>Personajes</th></tr></thead><tbody>${rows}</tbody></table></div>`;
-  $("#pdl").onclick=()=>{
-    const body=`<h2>Imágenes que necesito para Historia de España</h2><p class="inst">Envíamelas con el nombre de archivo indicado (JPG o PNG).</p><ol>${[...falta,...parc].map(p=>`<li><b>${p.id} · ${esc(DOCM[p.id].titulo)}</b> (epígrafe ${DOCM[p.id].ep}) — ${p.estado==="falta"?"FALTA":"MEJORABLE"}.<br>${esc(p.que)}<br><i>Dónde: ${esc(p.donde)}</i><br>Archivo: ${p.archivo}</li>`).join("")}</ol>`;
-    save("imagenes-que-necesito.html",()=>wrapDoc(body,"Imágenes que necesito"),"#pnote");
-  };
-}
 </script>
 </body>
 </html>
