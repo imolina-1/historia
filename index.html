@@ -1004,6 +1004,21 @@ dialog#pk::backdrop{background:#0e0b08}
 .hmw .hm{max-width:640px}
 
 .lbb{display:block;height:6px;background:var(--line);border-radius:0}.lbb i{display:block;height:100%;background:var(--ink)}.lbr.top .lbb i,.lbr.me .lbb i{background:var(--gold)}.lba small b{font-weight:600;color:var(--ink)}.lba small{margin-top:6px}
+/* v13: Para hoy */
+.hoy{border:1px solid var(--line);background:var(--card);border-top:3px solid var(--gold);padding:22px 26px 16px}
+.hoyh{display:flex;gap:18px;align-items:center;margin-bottom:6px}
+.hoyh h3{font:400 1.7rem/1.1 var(--serif);margin:2px 0 0}
+.hoyh svg .rb{fill:none;stroke:var(--line);stroke-width:5}.hoyh svg .rf{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:butt;transform:rotate(-90deg);transform-origin:32px 32px;transition:stroke-dashoffset .5s}
+.hoyh svg text{font:500 15px var(--serif);fill:var(--ink)}
+.hol{list-style:none;margin:6px 0 0;padding:0}
+.hr{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+.hk{width:30px;height:30px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:500 .95rem var(--serif);color:var(--ink)}
+.hr.ok .hk{background:var(--ink);color:#fff;border-color:var(--ink)}:root[data-theme=dark] .hr.ok .hk{color:#1a1510}.hoyh .eyebrow{font:600 .64rem var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.hr.ok .ht b{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+.ht b{display:block;font:500 1.12rem/1.25 var(--serif)}.ht small{display:block;color:var(--muted);font:.8rem/1.4 var(--sans);margin-top:2px}
+.hoyf{margin:6px 0 0;padding-top:12px;border-top:1px solid var(--line);font:.85rem var(--sans);color:var(--muted)}
+.hoyf .lnk{background:none;border:0;padding:0;font:600 .85rem var(--sans);color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@media(max-width:560px){.hoy{padding:18px 16px 12px}.hr{grid-template-columns:30px minmax(0,1fr);}.hr .btn{grid-column:2;justify-self:start}.hoyh h3{font-size:1.4rem}}
 </style>
 </head>
 <body>
@@ -1167,7 +1182,7 @@ function init(){
   $("#dlg").addEventListener("click",e=>{if(e.target===$("#dlg"))$("#dlg").close()});
   initTheme();initLightbox();
   $("#fcx").onclick=()=>$("#fc").close();$("#fc").addEventListener("keydown",e=>{if(!FC)return;if(e.key===" "||e.key==="Enter"){if(!FC.flip){e.preventDefault();fcKey("f")}}else if(e.key.length===1&&"123".includes(e.key)&&FC.flip)fcKey(String(+e.key-1))});
-  initSearch();initV7();initAlbum();initStats();initClasif();renderInicio();initPools();initPersonajes();initTiempo();initSimulacro();initExamenes();renderMine();route();syncInit();document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.db&&Date.now()-SYNC.last>60000)pullRemote()});
+  initSearch();initV7();initAlbum();initStats();initClasif();initHoy();renderInicio();initPools();initPersonajes();initTiempo();initSimulacro();initExamenes();renderMine();route();syncInit();document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.db&&Date.now()-SYNC.last>60000)pullRemote()});
 }
 function route(){
   let v=(location.hash||"#inicio").slice(1);if(!$("#v-"+v))v="inicio";
@@ -1303,7 +1318,7 @@ let ST=(()=>{
   return b})();
 const SYNC={db:null,uid:null,state:"local",last:0,busy:false,again:false};
 let ST_TIMER=null;
-function saveST(){try{statSnap()}catch(e){}if(typeof checkBadges==="function")checkBadges();LS.set("state",ST);clearTimeout(ST_TIMER);ST_TIMER=setTimeout(pushRemote,2500);if(SYNC.busy)SYNC.again=true;renderSyncPill()}
+function saveST(){try{statSnap()}catch(e){}try{hoyCheck()}catch(e){}if(typeof checkBadges==="function")checkBadges();LS.set("state",ST);clearTimeout(ST_TIMER);ST_TIMER=setTimeout(pushRemote,2500);if(SYNC.busy)SYNC.again=true;renderSyncPill()}
 const act=(n=1)=>{const k=dayKeyN(dayNum());ST.act[k]=(ST.act[k]||0)+n};
 function streak(){let n=0,d=dayNum();const has=x=>(ST.act[dayKeyN(x)]||0)>0;if(!has(d))d--;while(has(d)){n++;d--}return n}
 const PG=id=>ST.prog[id]||(ST.prog[id]={s:0,f:0,n:0,p:0,v:0,t:0});
@@ -1570,7 +1585,7 @@ function renderEstudio(){
   $$("[data-go2]",V).forEach(b=>b.onclick=()=>go(b.dataset.go2));
   wireProfeCard();$("#bkx").onclick=bkExport;$("#bki").onclick=()=>$("#bkf").click();
   $("#bkf").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{bkImportText(await f.text())}catch(x){toast("No se pudo leer el archivo.")}e.target.value=""}}
-function renderMyStrip(){setTimeout(renderEf,0);
+function renderMyStrip(){setTimeout(renderEf,0);setTimeout(renderHoy,0);
   const el=$("#msx");if(!el)return;
   const du=dueInfo({p:1,e:1,f:1}).due.length,s=streak();
   const last=Object.entries(ST.prog).filter(([id,p])=>p.v&&DOCM[id]).sort((a,b)=>b[1].v-a[1].v)[0],ld=last?DOCM[last[0]]:null;
@@ -2105,6 +2120,52 @@ async function profeMod(V){
     $$("[data-x]",L).forEach(b=>b.onclick=async()=>{if(!b.dataset.sure){b.dataset.sure="1";b.textContent="¿Seguro?";return}const k=await lbCall("DELETE","?id="+encodeURIComponent(b.dataset.x),null,hd());if(k.ok){b.closest("tr").remove();toast("Fila retirada")}else toast(k.error||"No autorizado")})};
   $("#mdall",d).onclick=async function(){if(!this.dataset.sure){this.dataset.sure="1";this.textContent="¿Seguro? Pulsa otra vez";return}
     const k=await lbCall("DELETE","?all=1",null,hd());this.dataset.sure="";this.textContent="Vaciar clasificación";toast(k.ok?"Clasificación vaciada":(k.error||"No autorizado"))}}
+/* ---------- v13: «Para hoy» · sesión diaria adaptativa ---------- */
+const HOY_N=8,HOY_XP=25;
+const hoyT0=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime()};
+function hoyPick(){
+  const dk=dayKeyN(dayNum()),g=G(),tx=DOCS.filter(d=>d.kind==="texto"),doc=tx[SEED%tx.length],pp=PEOPLE[(SEED*7)%PEOPLE.length];
+  if(!g.hoy||typeof g.hoy!=="object")g.hoy={};
+  const h=g.hoy;
+  if(h.d!==dk||!TEMAS.some(t=>t.n===h.w)){
+    const s=ST_(),rows=TEMAS.map(t=>{const[o,m]=s.bt[t.n]||[0,0];return{t,m,p:m?o/m:null}});
+    const w=rows.filter(r=>r.m>=5).sort((a,b)=>a.p-b.p)[0];
+    if(w&&w.p<.9){h.w=w.t.n;h.why="Tu punto más débil: "+Math.round(w.p*100)+" % de aciertos"}
+    else{const seen=t=>{const l=DOCS.filter(d=>d.tema===t.n);return l.filter(d=>(ST.prog[d.id]||{}).v).length/Math.max(1,l.length)};
+      const o=TEMAS.slice().sort((a,b)=>seen(a)-seen(b)||((a.n+SEED)%17)-((b.n+SEED)%17))[0];h.w=o.n;h.why="El tema que menos has trabajado"}
+    h.d=dk}
+  return{doc,pp,w:TEMAS.find(t=>t.n===h.w)||TEMAS[0],why:h.why||""}}
+function hoyState(){
+  const t0=hoyT0(),P=hoyPick(),dk=dayKeyN(dayNum());
+  const txt=((ST.prog[P.doc.id]||{}).v||0)>=t0,fd=G().daily[dk];
+  const rv=Object.values(ST.srs).filter(v=>v&&v[2]>=t0).length;
+  const wk=DOCS.some(d=>d.tema===P.w.n&&d.id!==P.doc.id&&((ST.prog[d.id]||{}).v||0)>=t0);
+  return{P,txt,fd,rv,wk,done:[txt,fd!=null,rv>=HOY_N,wk]}}
+function hoyCheck(){
+  if(!DOCS.length)return;const S=hoyState(),h=G().hoy,dk=dayKeyN(dayNum());
+  if(S.done.every(Boolean)&&h.paid!==dk){h.paid=dk;h.n=(h.n||0)+1;const a=AL();a.xp+=HOY_XP;a.bonus++;
+    LS.set("state",ST);toast("Sesión de hoy completa: +"+HOY_XP+" XP y un sobre de regalo");setTimeout(renderHoy,0)}}
+function hoyHTML(){
+  const S=hoyState(),P=S.P,d=S.done,n=d.filter(Boolean).length,h=G().hoy||{},R=2*Math.PI*27,off=R*(1-n/4);
+  const row=(i,ic,t,sub,btn,key)=>`<li class="hr${d[i]?" ok":""}"><span class="hk" aria-hidden="true">${d[i]?"✓":ic}</span><div class="ht"><b>${t}</b><small>${sub}</small></div><button class="btn small${d[i]?"":" primary"}" type="button" data-hoy="${key}">${d[i]?"Repetir":btn}</button></li>`;
+  const tt=P.doc.titulo.length>64?P.doc.titulo.slice(0,62)+"…":P.doc.titulo;
+  const due=dueInfo({p:1,e:1,f:1}).due.length;
+  return `<div class="hoy"><div class="hoyh"><svg viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="${n} de 4 tareas hechas"><circle cx="32" cy="32" r="27" class="rb"/><circle cx="32" cy="32" r="27" class="rf" style="stroke-dasharray:${R.toFixed(1)};stroke-dashoffset:${off.toFixed(1)}"/><text x="32" y="38" text-anchor="middle">${n}/4</text></svg>
+   <div><span class="eyebrow" style="margin:0">Unos 10 minutos</span><h3>${n===4?"Sesión completa":"Tu sesión de hoy"}</h3><p class="note" style="margin:3px 0 0">${n===4?"Vuelve mañana: se mantiene tu racha y se renueva todo.":"Cuatro pasos que cambian cada día y se adaptan a tus fallos. Al cerrarlos: +"+HOY_XP+" XP y un sobre."}</p></div></div>
+   <ol class="hol">
+   ${row(0,"1","Comenta el texto del día",esc(tt)+" · epígrafe "+P.doc.ep,"Abrir","txt")}
+   ${row(1,"2","Fuente del día: dos preguntas",S.fd!=null?"Hoy has sacado "+S.fd+" de 20":"Una imagen nueva cada día · hasta 20 puntos","Jugar","fd")}
+   ${row(2,"3","Repasa "+HOY_N+" tarjetas",Math.min(S.rv,HOY_N)+" de "+HOY_N+" hechas hoy · "+due+(due===1?" pendiente":" pendientes")+" de repaso","Empezar","rv")}
+   ${row(3,"4","Refuerza el tema "+P.w.n,esc(P.w.nombre)+" · "+esc(S.P.why),"Ver textos","wk")}
+   </ol>
+   <p class="hoyf">De propina: <button class="lnk" type="button" data-hoy="pp">${esc(P.pp.nombre)}</button> · ${esc(P.pp.cargo)}${h.n?` <span class="hn">· ${h.n} ${h.n===1?"sesión completa":"sesiones completas"}</span>`:""}</p></div>`}
+function renderHoy(){const el=$("#hoyx");if(!el||!DOCS.length)return;el.innerHTML=hoyHTML()}
+function initHoy(){document.addEventListener("click",e=>{const b=e.target.closest("[data-hoy]");if(!b||!b.closest("#hoyx"))return;
+  const k=b.dataset.hoy,P=hoyPick();
+  if(k==="txt")openDoc(P.doc.id);else if(k==="pp")openPers(P.pp.id);
+  else if(k==="fd")gmStart("daily");
+  else if(k==="rv")fcStart({n:HOY_N,ev:"",p:1,e:1,f:1});
+  else if(k==="wk")openPool("textos",{t:P.w.n})})}
 /* ---------- v7: voz ---------- */
 const TTS=typeof speechSynthesis!=="undefined"&&typeof SpeechSynthesisUtterance!=="undefined";
 let SPK={on:false,btn:null};
@@ -2427,11 +2488,7 @@ function renderInicio(){
   <div class="evs rv">${EVD.map(([n,c,s,b,sub])=>{const ts=D.presets[n],eps=EPS.filter(e=>ts.includes(e.tema));const a=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="texto").length,f=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="fuente").length,np=PEOPLE.filter(p=>ts.includes(p.tema)).length;
     return `<div class="ev ${c}"><h3>${n}</h3><div class="sub">${sub}</div><div class="evt">${ts.length>1?"Temas "+ts[0]+" a "+ts[ts.length-1]:""}</div><p class="note" style="margin:0 0 12px">${a} textos · ${f} fuentes · ${np} personajes · ${eps.length} epígrafes</p><div class="row"><button class="btn primary small" data-std="${s}">Generar examen</button><button class="btn small" data-pool="textos" data-b="${b}">Textos</button><button class="btn small" data-pool="fuentes" data-b="${b}">Fuentes</button></div></div>`}).join("")}</div>
   <div class="sech rv"><h2>Para hoy</h2></div>
-  <div class="daily rv">
-   <button class="card doc ${doc.bloque}" data-id="${doc.id}"><div class="meta"><span class="chip ${doc.bloque}">Texto del día</span><span class="chip">${doc.ep}</span></div><h3>${esc(doc.titulo)}</h3><span class="epn">${esc(EPM[doc.ep].nombre)}</span></button>
-   <button class="card doc ${fd.bloque}" data-id="${fd.id}"><div class="thumb" style="background-image:url('${fd.imgs[0].f}');background-size:contain;background-repeat:no-repeat;background-color:#fff;height:130px"></div><div class="meta"><span class="chip ${fd.bloque}">Fuente del día</span><span class="chip">${fd.ep}</span></div><h3>${esc(fd.titulo)}</h3></button>
-   <button class="card pcard" data-pp="${pp.id}" style="--cc:${CATS[pp.cat][1]}">${monoHTML(pp)}<div><div class="meta" style="margin-bottom:4px"><span class="chip cat" style="--cc:${CATS[pp.cat][1]}">Personaje del día</span></div><h3>${esc(pp.nombre)}</h3><div class="yrs">${esc(life(pp))}</div><div class="role">${esc(pp.cargo)}</div></div></button>
-  </div>`;
+  <div class="rv" id="hoyx"></div>`;
   const V=$("#v-inicio");
   $$("[data-go]",V).forEach(b=>b.onclick=()=>go(b.dataset.go));
   $$("[data-std]",V).forEach(b=>b.onclick=()=>{go("examenes");runStd(b.dataset.std)});
@@ -2454,7 +2511,7 @@ function renderInicio(){
   const rv=$$(".rv",V);
   if("IntersectionObserver"in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.08});rv.forEach(x=>io.observe(x))}
   setTimeout(()=>rv.forEach(x=>x.classList.add("in")),1800);
-  renderMyStrip();
+  renderMyStrip();renderHoy();
 }
 
 /* ---------- textos y fuentes históricas ---------- */
