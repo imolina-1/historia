@@ -104,14 +104,14 @@ function pos(d) {
   var xw = d.xw || [], tot = 0, i, x = xpNow(), me = x > 0 ? bin(x) : -1, mx = 1;
   for (i = 0; i < 20; i++) { tot += xw[i] || 0; mx = Math.max(mx, xw[i] || 0); }
   var h = '<div class="pu-c pu-pos"><h3>Tu sitio en la clase</h3>';
-  if (tot < 10) return h + "<p>Cuando haya unos cuantos alumnos más estudiando esta semana verás aquí cómo vas.</p></div>";
+  if (tot < 10) return h + "<p>Aún hay pocos datos esta semana.</p></div>";
   var below = 0; if (me >= 0) { for (i = 0; i < me; i++) below += xw[i] || 0; below += (xw[me] || 0) / 2; }
   var pc = me >= 0 ? Math.max(1, Math.min(99, Math.round(below / tot * 100))) : null, o = "", W = 300, H = 62, bw = 12.4, g = 2.4;
   for (i = 0; i < 20; i++) {
     var v = xw[i] || 0, hh = Math.max(v ? 2 : 0.8, v / mx * (H - 16));
     o += '<rect class="b' + (i === me ? " t" : "") + '" x="' + (i * (bw + g) + 2).toFixed(1) + '" y="' + (H - 10 - hh).toFixed(1) + '" width="' + bw + '" height="' + hh.toFixed(1) + '" rx="2"><title>' + v + "</title></rect>";
   }
-  return h + (pc != null ? "<p style=\"font-size:1rem;color:var(--ink)\">Vas por delante del <b>" + pc + " %</b> de la clase que ha estudiado en los últimos 7 días.</p>" : "<p>Gana algo de XP y aparecerás en el gráfico.</p>") +
+  return h + (pc != null ? "<p style=\"font-size:1rem;color:var(--ink)\">Vas por delante del <b>" + pc + " %</b> de la clase que ha estudiado en los últimos 7 días.</p>" : "<p>Todavía no tienes XP.</p>") +
     '<svg class="pu-ch" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Reparto de la clase por XP">' + o + '<text x="2" y="' + (H - 1) + '">menos XP</text><text x="' + (W - 2) + '" y="' + (H - 1) + '" text-anchor="end">más XP</text></svg>' +
     "<p>" + nf(tot) + " dispositivos en los últimos 7 días" + (me >= 0 ? ". La barra marcada eres tú" : "") + ". No se guarda quién es quién, solo cuántos hay en cada tramo.</p></div>";
 }

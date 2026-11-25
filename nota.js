@@ -21,7 +21,7 @@ function calc(o, over) {
 window.tkNota = function (el) {
   var o = load();
   el.innerHTML =
-    '<div class="card" id="np"><p class="note" style="margin:0 0 12px">Calcula tu nota de acceso y de admisión con los datos que tengas hoy y mira qué compensa mejorar. Todo se calcula en tu navegador.</p>' +
+    '<div class="card" id="np"><p class="note" style="margin:0 0 12px">Calcula tu nota de acceso y de admisión y mira qué compensa mejorar.</p>' +
     '<div class="npg"><div class="field"><label for="np-nmb">Nota media de Bachillerato</label><input id="np-nmb" type="number" inputmode="decimal" min="5" max="10" step="0.01" value="' + o.nmb + '"></div></div>' +
     '<h3 class="nph">Fase de acceso: cuatro ejercicios</h3><div class="npg">' +
     EX.map(function (e) { return '<div class="field"><label for="np-' + e[0] + '">' + e[1] + '</label><input id="np-' + e[0] + '" type="number" inputmode="decimal" min="0" max="10" step="0.1" value="' + o[e[0]] + '"></div>'; }).join("") +
