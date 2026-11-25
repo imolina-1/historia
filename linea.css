@@ -1,7 +1,8 @@
 /* Línea del tiempo (vista #linea). Todo va acotado a #tl2 para no chocar con el resto. */
 #v-linea{padding:0;animation:none!important}
 body.ln .foot{display:none}
-body.ln{overflow:hidden}
+body.ln{overflow:visible}
+html:has(body.ln){overflow:hidden}
 #tl2{position:fixed;left:0;right:0;top:var(--hh,58px);bottom:0;overflow:hidden;background:#15110d;color:#f1e9d8;--hue:40;font-family:var(--sans);user-select:none;-webkit-user-select:none;touch-action:none;z-index:5}
 #tl2 *{box-sizing:border-box}
 #tl2 #tlbg{position:absolute;inset:0;background:radial-gradient(70% 60% at 22% 30%,hsl(var(--hue) 46% 22%/.8),transparent 70%),radial-gradient(60% 55% at 82% 78%,hsl(calc(var(--hue) + 30) 40% 16%/.85),transparent 70%),linear-gradient(180deg,#15110d,#0d0a07)}
@@ -15,11 +16,11 @@ body.ln{overflow:hidden}
 #tl2 .tlera{font:600 1.15rem var(--serif);letter-spacing:-.01em;color:var(--gold,#d9a653);text-align:right;transition:opacity .4s;max-width:46%}
 #tl2 #tlstage{position:absolute;inset:0;z-index:2}
 #tl2 .tlnone{position:absolute;top:42%;left:0;right:0;text-align:center;color:#b8ab95}
-#tl2 .tli{position:absolute;left:50%;top:42%;width:min(560px,80vw);transform-origin:50% 50%;will-change:transform,opacity;text-align:center;pointer-events:none;visibility:hidden}
+#tl2 .tli{contain:layout style;position:absolute;left:50%;top:42%;width:min(560px,80vw);transform-origin:50% 50%;will-change:transform,opacity;text-align:center;pointer-events:none;visibility:hidden}
 #tl2 .tli .y{font:600 clamp(3rem,8.4vw,6.6rem)/.95 var(--serif);letter-spacing:-.035em;white-space:nowrap;font-variant-numeric:lining-nums;color:#f6eedc}
 #tl2 .tli .y.long{font-size:clamp(1.8rem,4.6vw,3.4rem)}
 #tl2 .tli .evs{list-style:none;padding:0;margin:1.1em auto 0;display:flex;flex-direction:column;gap:8px;align-items:stretch;max-width:430px}
-#tl2 .tli .evs button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;cursor:pointer;text-align:left;padding:6px 14px 6px 6px;border-radius:10px;border:1.5px solid rgba(241,233,216,.16);background:rgba(21,17,13,.45);backdrop-filter:blur(6px);pointer-events:auto;transition:background .2s,border-color .2s,transform .2s}
+#tl2 .tli .evs button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;cursor:pointer;text-align:left;padding:6px 14px 6px 6px;border-radius:10px;border:1.5px solid rgba(241,233,216,.16);background:rgba(27,22,17,.78);pointer-events:auto;transition:background .2s,border-color .2s,transform .2s}
 #tl2 .tli .evs button:hover,#tl2 .tli .evs button:focus-visible{background:rgba(241,233,216,.1);border-color:var(--gold,#d9a653);transform:translateY(-1px)}
 #tl2 .tli .th{flex:none;width:46px;height:46px;border-radius:7px;overflow:hidden;background:#2a2218;display:grid;place-items:center}
 #tl2 .tli .th img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;pointer-events:none}

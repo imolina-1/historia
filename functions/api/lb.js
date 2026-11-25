@@ -31,17 +31,20 @@ async function board(DB,id,adm,T){
       me={...pub(r),rank:await cnt("xp",r.xp),rankW:(await run("SELECT COUNT(*) c FROM "+T+" WHERE "+wx+">?1",[mw]))[0].c+1,rankS:await cnt("streak",r.streak),rankC:await cnt("cards",r.cards)}}}
   return{week:w,n:agg.n,xp:agg.sx,mins:agg.sm,xpT:all.map(P),wk:byw.map(P),streak:bys.map(P),cards:byc.map(P),me}}
 /* «La clase en cifras»: contadores anónimos y agregados (sobres abiertos, preguntas, minutos…). Sin identificador de ninguna clase. */
-const PK=/^(ses|pk|nw|lg|q|qo|mn|hy|t\d{1,2}[ao])$/,CAP={ses:1,pk:30,nw:90,lg:30,q:400,qo:400,mn:120,hy:2};
+const PK=/^(ses|pk|nw|lg|q|qo|mn|hy|t\d{1,2}[ao]|xw\d{1,2})$/,CAP={ses:1,pk:30,nw:90,lg:30,q:400,qo:400,mn:120,hy:2};
+/* Posición en la clase sin identificador: cada dispositivo suma como mucho 1 a la casilla de su tramo de XP (xw0…xw19) una vez cada 7 días. */
 const day=(t=Date.now())=>Math.floor(t/864e5);
 async function pulse(DB,b){
   const run=async(sql,a=[])=>(await DB.prepare(sql).bind(...a).all()).results||[];
   const d=day(),T=b==="arte"?"lbA":"lb2";
-  const tot=await run("SELECT k, SUM(v) v FROM pu WHERE b=?1 GROUP BY k",[b]);
+  const tot=await run("SELECT k, SUM(v) v FROM pu WHERE b=?1 AND k NOT LIKE 'xw%' GROUP BY k",[b]);
   const rec=await run("SELECT d, k, v FROM pu WHERE b=?1 AND d>?2 AND k IN ('ses','pk','q','qo','mn','nw','lg','hy')",[b,d-30]);
   const t={};tot.forEach(r=>t[r.k]=r.v);
   const days={};rec.forEach(r=>{(days[r.d-(d-29)]||(days[r.d-(d-29)]={}))[r.k]=r.v});
   const pl=(await run("SELECT COUNT(*) n, COALESCE(SUM(CASE WHEN upd>=?1 THEN 1 ELSE 0 END),0) a FROM "+T,[d*864e5]))[0]||{n:0,a:0};
-  return{day:d,t,days,players:pl.n,activeToday:pl.a}}
+  const xr=await run("SELECT k, SUM(v) v FROM pu WHERE b=?1 AND d>?2 AND k LIKE 'xw%' GROUP BY k",[b,d-7]);
+  const xw=new Array(20).fill(0);xr.forEach(r=>{const i=+r.k.slice(2);if(i>=0&&i<20)xw[i]=r.v});
+  return{day:d,t,days,xw,players:pl.n,activeToday:pl.a}}
 const isAdm=(request,env)=>!!env.ADMIN_TOKEN&&request.headers.get("x-admin")===env.ADMIN_TOKEN;
 const okId=id=>/^[a-z0-9-]{16,48}$/.test(id);
 export async function onRequest({request,env}){
@@ -53,7 +56,7 @@ export async function onRequest({request,env}){
     if(request.method==="GET"){const o=await pulse(DB,PB);return new Response(JSON.stringify({ok:true,...o}),{status:200,headers:{...CORS,"cache-control":"public, max-age=45","content-type":"application/json;charset=utf-8"}})}
     if(request.method==="POST"){let b;try{b=await request.json()}catch(e){return J({ok:false,error:"Petición no válida."},400)}
       const dd=b&&b.d&&typeof b.d==="object"?b.d:{},d=day(),st=[];
-      for(const k of Object.keys(dd).slice(0,60)){if(!PK.test(k))continue;const cap=CAP[k]||(/^t\d+[ao]$/.test(k)?200:0),v=int(dd[k],cap);if(v>0)st.push(DB.prepare("INSERT INTO pu (b,d,k,v) VALUES (?1,?2,?3,?4) ON CONFLICT(b,d,k) DO UPDATE SET v=v+excluded.v").bind(PB,d,k,v))}
+      for(const k of Object.keys(dd).slice(0,60)){if(!PK.test(k))continue;const cap=CAP[k]||(/^t\d+[ao]$/.test(k)?200:/^xw\d+$/.test(k)?1:0),v=int(dd[k],cap);if(v>0)st.push(DB.prepare("INSERT INTO pu (b,d,k,v) VALUES (?1,?2,?3,?4) ON CONFLICT(b,d,k) DO UPDATE SET v=v+excluded.v").bind(PB,d,k,v))}
       if(st.length)await DB.batch(st);return J({ok:true,n:st.length})}
     if(request.method==="DELETE"){if(!isAdm(request,env))return J({ok:false,error:"No autorizado."},401);await DB.prepare("DELETE FROM pu WHERE b=?1").bind(PB).run();return J({ok:true})}}
   if(request.method==="GET"){

@@ -5,10 +5,10 @@
 (function () {
 "use strict";
 var $ = function (s, r) { return (r || document).querySelector(s); };
-var LS = { E: true, P: true, W: false };
+var LS = { E: true, P: true, W: true };
 var WT = null;                                    // tema de cada hecho mundial: el del hito español más cercano en el tiempo
 var G = [], els = [], N = 0, pos = 0, target = 0, hue = 40, htarget = 40, shown = -1, openU = null;
-var built = false, running = false, moved = false, hintOn = true, dirty = true, lastWave = 0;
+var lastHue = 0, built = false, running = false, moved = false, hintOn = true, dirty = true, lastWave = 0;
 var root, stage, rail, eraEl, bgEl, pn, sc, cv, cx, CW = 0, CH = 0, DPR = 1, cur, hintEl, cntEl;
 var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 var MARKS = [-1200000, -15000, -3000, -218, 409, 711, 1031, 1212, 1479, 1700, 1808, 1898, 1931, 1975, 2000];
@@ -85,7 +85,7 @@ function build() {
   root = $("#tl2");
   root.innerHTML =
     '<div id="tlbg"></div><canvas id="tlwaves" aria-hidden="true"></canvas>' +
-    '<div class="tlh"><div class="tlf" role="group" aria-label="Capas"><button type="button" class="on" data-l="E" aria-pressed="true">Hitos</button><button type="button" class="on" data-l="P" aria-pressed="true">Personajes</button><button type="button" data-l="W" aria-pressed="false">Mundo</button><span id="tlcnt"></span></div><div class="tlera" id="tlera" aria-live="polite"></div></div>' +
+    '<div class="tlh"><div class="tlf" role="group" aria-label="Capas"><button type="button" class="on" data-l="E" aria-pressed="true">Hitos</button><button type="button" class="on" data-l="P" aria-pressed="true">Personajes</button><button type="button" class="on" data-l="W" aria-pressed="true">Mundo</button><span id="tlcnt"></span></div><div class="tlera" id="tlera" aria-live="polite"></div></div>' +
     '<div id="tlstage"></div><div id="tlsc"></div><aside id="tlpn" role="dialog" aria-label="Ficha"></aside>' +
     '<button class="tlnavb" id="tlpv" type="button" aria-label="Anterior">‹</button><button class="tlnavb" id="tlnx" type="button" aria-label="Siguiente">›</button>' +
     '<div id="tlhint">Rueda, flechas o arrastra · pulsa una entrada para ver su ficha</div><div id="tlrail" aria-hidden="true"></div>';
@@ -107,7 +107,7 @@ function layout() {
     var x = (d < 0 ? -1 : 1) * (a < 1 ? a * gap : gap + (a - 1) * gap * .55);
     var o = a < 1 ? 1 - a * .72 : Math.max(0, .28 - (a - 1) * .14), y = a < 1 ? a * 10 : 10;
     el.style.transform = "translate(-50%,-50%) translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) scale(" + s.toFixed(3) + ")";
-    el.style.opacity = o.toFixed(3); el.style.filter = a > .05 && a < 2.2 ? "blur(" + (Math.min(a, 2) * 1.1).toFixed(2) + "px)" : "none";
+    el.style.opacity = o.toFixed(3);
   }
   if (cur) cur.style.left = (N > 1 ? pos / (N - 1) * 100 : 0) + "%";
 }
@@ -118,13 +118,13 @@ function focus() {
   var g = G[i]; htarget = hueOf(g.tema); eraEl.textContent = TEMAS[g.tema - 1].nombre;
   if (pn.classList.contains("on") && openU && !g.u.some(function (u) { return key(u) === openU; })) closePn();
 }
-function fit() { if (!cv) return; DPR = Math.min(window.devicePixelRatio || 1, 2); CW = cv.clientWidth; CH = cv.clientHeight; cv.width = CW * DPR; cv.height = CH * DPR; cx.setTransform(DPR, 0, 0, DPR, 0, 0); }
+function fit() { if (!cv) return; DPR = .6; CW = cv.clientWidth; CH = cv.clientHeight; cv.width = CW * DPR; cv.height = CH * DPR; cx.setTransform(DPR, 0, 0, DPR, 0, 0); }
 function waves(t) {
   cx.clearRect(0, 0, CW, CH); if (still) t = 0;
   for (var k = 0; k < 3; k++) {
     var amp = 26 + k * 16, ph = t * (.2 + k * .07) + k * 1.7 + pos * .35, base = CH * (.46 + k * .17), x, y;
     cx.beginPath();
-    for (x = 0; x <= CW; x += 14) { y = base + Math.sin(x / CW * Math.PI * (1.4 + k * .35) + ph) * amp + Math.sin(x / CW * Math.PI * 3.1 + ph * 1.6) * amp * .35; x ? cx.lineTo(x, y) : cx.moveTo(x, y); }
+    for (x = 0; x <= CW; x += 20) { y = base + Math.sin(x / CW * Math.PI * (1.4 + k * .35) + ph) * amp + Math.sin(x / CW * Math.PI * 3.1 + ph * 1.6) * amp * .35; x ? cx.lineTo(x, y) : cx.moveTo(x, y); }
     cx.strokeStyle = "hsla(" + (hue + k * 8) + ",55%,68%," + (.2 - k * .04) + ")"; cx.lineWidth = 1; cx.stroke();
     cx.lineTo(CW, CH); cx.lineTo(0, CH); cx.closePath(); cx.fillStyle = "hsla(" + (hue + k * 8) + ",45%," + (32 + k * 4) + "%,.07)"; cx.fill();
   }
@@ -136,9 +136,9 @@ function tick(now) {
   var d = target - pos, moving = Math.abs(d) > .0004;
   if (moving) pos += d * .095; else if (pos !== target) pos = target;
   var dh = htarget - hue; if (dh > 180) dh -= 360; else if (dh < -180) dh += 360;
-  var hmove = Math.abs(dh) > .05; if (hmove) { hue += dh * .04; bgEl.style.setProperty("--hue", hue.toFixed(1)); root.style.setProperty("--hue", hue.toFixed(1)); }
+  var hmove = Math.abs(dh) > .6; if (hmove) { hue += dh * .06; if (now - lastHue > 60) { lastHue = now; bgEl.style.setProperty("--hue", hue.toFixed(0)); } } else if (dh !== 0) { hue = htarget; bgEl.style.setProperty("--hue", hue.toFixed(0)); }
   if (moving || dirty) { layout(); focus(); dirty = false; }
-  if (now - lastWave > 33) { lastWave = now; waves(now / 1000); }          // 30 fps basta para el fondo
+  if (now - lastWave > (moving ? 80 : 60)) { lastWave = now; waves(now / 1000); }   // el fondo se mueve despacio: ~15 fps bastan
 }
 function stripTags(s) { return String(s || "").replace(/<[^>]+>/g, ""); }
 function chip(txt, attrs) { return '<button type="button" class="chp" ' + attrs + ">" + E(txt) + "</button>"; }

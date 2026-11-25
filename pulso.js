@@ -29,8 +29,18 @@ function flush(beacon) {
       .catch(function () { Object.keys(d).forEach(function (k) { q[k] = (q[k] || 0) + d[k]; }); save(); });
   } catch (e) { Object.keys(d).forEach(function (k) { q[k] = (q[k] || 0) + d[k]; }); save(); }
 }
+/* Posición en la clase, sin identificador: una vez cada 7 días el dispositivo suma 1 a la casilla de su tramo de XP (escala logarítmica, 20 tramos).
+   El servidor solo guarda cuántos dispositivos hay en cada tramo; no sabe cuáles. */
+function xpNow() { try { return Math.max(0, Math.floor(Number(C.xp && C.xp()) || 0)); } catch (e) { return 0; } }
+function bin(x) { return Math.max(0, Math.min(19, Math.floor(Math.log(x / 25 + 1) / Math.LN2 * 2))); }
+function dnum() { return Math.floor(Date.now() / 864e5); }
+function reportXp() {
+  var x = xpNow(), k = "pulso_xw_" + (C.b || "es"), last = +ls(k) || 0;
+  if (!on() || x < 1 || dnum() - last < 7) return;
+  ls(k, String(dnum())); add("xw" + bin(x), 1);
+}
 function today() { var d = new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
-function session() { var k = "pulso_ses_" + (C.b || "es"); if (on() && ls(k) !== today()) { ls(k, today()); add("ses", 1); } }
+function session() { var k = "pulso_ses_" + (C.b || "es"); if (on() && ls(k) !== today()) { ls(k, today()); add("ses", 1); } setTimeout(reportXp, 6000); }
 document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") flush(true); });
 window.addEventListener("pagehide", function () { flush(true); });
 if (Object.keys(q).length) timer = setTimeout(flush, 8000);
@@ -90,6 +100,21 @@ function chart(days, key) {
     '<text x="2" y="' + (H - 1) + '">hace 30 días</text><text x="' + (W - 2) + '" y="' + (H - 1) + '" text-anchor="end">hoy</text>' +
     (mx > 1 ? '<text x="' + Math.min(W - 40, Math.max(2, pk * (bw + g) - 8)) + '" y="8">máx. ' + nf(mx) + "</text>" : "") + "</svg>";
 }
+function pos(d) {
+  var xw = d.xw || [], tot = 0, i, x = xpNow(), me = x > 0 ? bin(x) : -1, mx = 1;
+  for (i = 0; i < 20; i++) { tot += xw[i] || 0; mx = Math.max(mx, xw[i] || 0); }
+  var h = '<div class="pu-c pu-pos"><h3>Tu sitio en la clase</h3>';
+  if (tot < 10) return h + "<p>Cuando haya unos cuantos alumnos más estudiando esta semana verás aquí cómo vas.</p></div>";
+  var below = 0; if (me >= 0) { for (i = 0; i < me; i++) below += xw[i] || 0; below += (xw[me] || 0) / 2; }
+  var pc = me >= 0 ? Math.max(1, Math.min(99, Math.round(below / tot * 100))) : null, o = "", W = 300, H = 62, bw = 12.4, g = 2.4;
+  for (i = 0; i < 20; i++) {
+    var v = xw[i] || 0, hh = Math.max(v ? 2 : 0.8, v / mx * (H - 16));
+    o += '<rect class="b' + (i === me ? " t" : "") + '" x="' + (i * (bw + g) + 2).toFixed(1) + '" y="' + (H - 10 - hh).toFixed(1) + '" width="' + bw + '" height="' + hh.toFixed(1) + '" rx="2"><title>' + v + "</title></rect>";
+  }
+  return h + (pc != null ? "<p style=\"font-size:1rem;color:var(--ink)\">Vas por delante del <b>" + pc + " %</b> de la clase que ha estudiado en los últimos 7 días.</p>" : "<p>Gana algo de XP y aparecerás en el gráfico.</p>") +
+    '<svg class="pu-ch" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Reparto de la clase por XP">' + o + '<text x="2" y="' + (H - 1) + '">menos XP</text><text x="' + (W - 2) + '" y="' + (H - 1) + '" text-anchor="end">más XP</text></svg>' +
+    "<p>" + nf(tot) + " dispositivos en los últimos 7 días" + (me >= 0 ? ". La barra marcada eres tú" : "") + ". No se guarda quién es quién, solo cuántos hay en cada tramo.</p></div>";
+}
 function body(d) {
   var t = d.t || {}, days = d.days || {}, hoy = days[29] || {}, ayer = days[28] || {};
   var pk = t.pk || 0, qn = t.q || 0, qo = t.qo || 0, mn = t.mn || 0, nw = t.nw || 0, lg = t.lg || 0;
@@ -114,6 +139,7 @@ function body(d) {
     '<h3 style="margin-top:16px">Preguntas por día</h3>' + chart(days, "q") + "</div>" +
     '<div class="pu-c"><h3>Aciertos por tema</h3><div class="pu-tm">' + rows + "</div>" +
     '<p style="margin-top:10px">' + (hard ? "Lo más difícil ahora: <b>tema " + hard.n + "</b> (" + Math.round(hard.p * 100) + " %)." : "Aparecerán cuando haya al menos 25 respuestas por tema.") + (best ? " Lo más dominado: <b>tema " + best.n + "</b> (" + Math.round(best.p * 100) + " %)." : "") + "</p></div></div>" +
+    '<div class="pu-row" style="grid-template-columns:1fr">' + pos(d) + "</div>" +
     '<div class="pu-k"><span><b>' + nf(d.players || 0) + "</b> en la clasificación · <b>" + nf(d.activeToday || 0) + "</b> activos hoy</span>" +
     '<span class="tg">Anónimo: solo se suman cifras, sin identificadores. <button type="button" class="pu-off" data-off>' + (on() ? "No contar mi actividad" : "Volver a contar mi actividad") + "</button></span></div>";
 }
@@ -149,6 +175,6 @@ function ticker(el, href) {
     el.innerHTML = '<span class="pu-live"><i aria-hidden="true"></i></span><span>' + txt + '</span><span class="go">Ver la clase en cifras →</span>';
   });
 }
-window.PULSO = { add: add, flush: flush, session: session, render: render, ticker: ticker, get: get, on: on };
+window.PULSO = { pos: function (cb) { get(function (d) { if (!d) return cb(null); var x = xpNow(), tot = 0, i; for (i = 0; i < 20; i++) tot += (d.xw || [])[i] || 0; if (tot < 10 || x < 1) return cb(null); var m = bin(x), b = 0; for (i = 0; i < m; i++) b += d.xw[i] || 0; b += (d.xw[m] || 0) / 2; cb(Math.max(1, Math.min(99, Math.round(b / tot * 100)))); }); }, add: add, flush: flush, session: session, render: render, ticker: ticker, get: get, on: on };
 session();
 })();

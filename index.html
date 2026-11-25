@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Historia de España · 2.º Bachillerato</title>
 <link rel="stylesheet" href="linea.css">
-<script defer src="mundo.js"></script><script defer src="linea.js"></script>
-<script>window.PULSO_CFG={b:"es",api:"https://historiapau.pages.dev/api/lb",link:"#clasif",temas:function(){return(typeof TEMAS!=="undefined"?TEMAS:[]).map(function(t){return{n:t.n,name:t.nombre}})}}</script><script src="pulso.js"></script>
+<script defer src="mundo.js"></script><script defer src="nota.js"></script><script defer src="anyo.js"></script><script defer src="linea.js"></script>
+<script>window.PULSO_CFG={b:"es",api:"https://historiapau.pages.dev/api/lb",link:"#clasif",xp:function(){return typeof totalXP==="function"?totalXP():0},temas:function(){return(typeof TEMAS!=="undefined"?TEMAS:[]).map(function(t){return{n:t.n,name:t.nombre}})}}</script><script src="pulso.js"></script>
 <script>try{const t=JSON.parse(localStorage.getItem("hde2_theme")||"null");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#15110d">
@@ -1061,7 +1061,7 @@ dialog#pk::backdrop{background:#0e0b08}
   <nav class="mainnav" id="mainnav" aria-label="Secciones">
     <button type="button" class="nv" data-v="inicio">Inicio</button>
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Estudiar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
-      <button type="button" role="menuitem" data-v="textos"><i>I</i><b>Textos</b><span>Comentarios con clave de corrección</span></button><button type="button" role="menuitem" data-v="fuentes"><i>II</i><b>Fuentes históricas</b><span>Mapas, cuadros, carteles y fotografías</span></button><button type="button" role="menuitem" data-v="personajes"><i>III</i><b>Personajes</b><span>Semblanzas con fechas y enlaces</span></button><button type="button" role="menuitem" data-v="tiempo"><i>IV</i><b>Cronología</b><span>Hitos por tema y epígrafe</span></button><button type="button" role="menuitem" data-v="linea"><i>V</i><b>Línea del tiempo</b><span>Año a año, con hitos y personajes</span></button></div></div>
+      <button type="button" role="menuitem" data-v="textos"><i>I</i><b>Textos</b><span>Comentarios con clave de corrección</span></button><button type="button" role="menuitem" data-v="fuentes"><i>II</i><b>Fuentes históricas</b><span>Mapas, cuadros, carteles y fotografías</span></button><button type="button" role="menuitem" data-v="personajes"><i>III</i><b>Personajes</b><span>Semblanzas con fechas y enlaces</span></button><button type="button" role="menuitem" data-v="tiempo"><i>IV</i><b>Cronología</b><span>Hitos por tema y epígrafe</span></button><button type="button" role="menuitem" data-v="linea"><i>V</i><b>Línea del tiempo</b><span>Año a año, con hitos, personajes y mundo</span></button><button type="button" role="menuitem" data-v="anyo"><i>VI</i><b>Un año</b><span>Mapa, España, mundo y arte en una pantalla</span></button></div></div>
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Practicar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
       <button type="button" role="menuitem" data-v="examenes"><i>I</i><b>Exámenes</b><span>Evaluaciones y ordinario, con solucionario</span></button><button type="button" role="menuitem" data-v="simulacro"><i>II</i><b>Comentario cronometrado</b><span>Comenta un documento con cronómetro</span></button><button type="button" role="menuitem" data-v="juegos"><i>III</i><b>Juegos</b><span>Retos diarios, insignias y rangos</span></button><button type="button" role="menuitem" data-v="taller"><i>IV</i><b>Taller</b><span>Plan, comentario, esquemas y chuleta</span></button><button type="button" role="menuitem" data-v="album"><i>V</i><b>Álbum</b><span>Cromos de personajes y sobres</span></button><button type="button" role="menuitem" data-v="clasif"><i>VI</i><b>Clasificación</b><span>Compite con tu clase, de forma anónima</span></button></div></div>
     <button type="button" class="nv" data-v="estudio">Mi estudio</button>
@@ -1093,6 +1093,7 @@ dialog#pk::backdrop{background:#0e0b08}
 </section>
 
 <section class="view" id="v-linea" aria-label="Línea del tiempo"><div id="tl2"></div></section>
+<section class="view" id="v-anyo" aria-label="Un año"></section>
 <section class="view" id="v-tiempo">
   <div class="vh"><h1>Cronología</h1><p>El curso entero, en orden. Cada tema tiene su hilo de hitos; dentro de cada epígrafe encuentras sus hitos, personajes y fuentes. Pulsa cualquier elemento para abrir su ficha.</p></div>
   <div class="tlnav" id="tlnav">
@@ -1225,6 +1226,7 @@ function route(){
   $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
   $$("nav.mainnav [data-v]").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));navSync(v);
   if(v==="linea")renderLinea();else if(window.lineaStop)lineaStop();
+  if(v==="anyo"&&window.renderAnyo){const q=new URLSearchParams(qs);renderAnyo({y:q.get("y")})}
   if(v==="tiempo")renderTL();
   if(v==="estudio")renderEstudio();
   if(v==="examenes")renderMine();
@@ -2238,7 +2240,7 @@ function speakDoc(id,btn){speakText(docVoice(DOCM[id]),btn)}
 
 /* ---------- v7: Taller ---------- */
 let TKTAB=LS.get("tktab","plan");
-const TKT=[["plan","📅 Plan hasta el examen"],["com","🖋 Comentario"],["esq","🗂 Esquemas"],["cmp","⚖ Comparador"],["chu","🧾 Chuleta"]];
+const TKT=[["plan","📅 Plan hasta el examen"],["com","🖋 Comentario"],["esq","🗂 Esquemas"],["cmp","⚖ Comparador"],["chu","🧾 Chuleta"],["nota","🎓 Nota PAU"]];
 function openTaller(tab){TKTAB=tab;LS.set("tktab",tab);if((location.hash||"#inicio")==="#taller")renderTaller();else go("taller")}
 function renderTaller(){
   const V=$("#v-taller");if(!V)return;
@@ -2246,7 +2248,7 @@ function renderTaller(){
   V.innerHTML=`<div class="vh"><h1>Taller</h1><p>Herramientas para estudiar con método: planifica, comenta, esquematiza, compara y prepara tu chuleta.</p></div>
   <div class="tkseg" role="tablist" aria-label="Herramientas">${TKT.map(([k,n])=>`<button role="tab" data-tk="${k}" aria-selected="${k===TKTAB}">${n}</button>`).join("")}</div><div id="tkb"></div>`;
   $$("[data-tk]",V).forEach(b=>b.onclick=()=>{TKTAB=b.dataset.tk;LS.set("tktab",TKTAB);renderTaller()});
-  ({plan:tkPlan,com:tkCom,esq:tkEsq,cmp:tkCmp,chu:tkChu}[TKTAB]||tkPlan)($("#tkb"))}
+  ({plan:tkPlan,com:tkCom,esq:tkEsq,cmp:tkCmp,chu:tkChu,nota:window.tkNota}[TKTAB]||tkPlan)($("#tkb"))}
 const opt=(v,t,sel)=>`<option value="${esc(v)}"${sel?" selected":""}>${esc(t)}</option>`;
 const taSave=(ta,fn,ms=700)=>{let tm=null;ta.addEventListener("input",()=>{clearTimeout(tm);tm=setTimeout(fn,ms)})};
 
