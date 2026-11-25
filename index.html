@@ -583,15 +583,6 @@ select:focus,input:focus,textarea:focus{border-color:var(--accent);outline:0;box
 @media(max-width:900px){
   .burger{display:grid}
   .bt small{display:none}
-  nav.mainnav{position:fixed;inset:var(--hh) 0 0 0;height:auto;margin:0;flex-direction:column;align-items:stretch;gap:0;background:var(--ink0);padding:10px 22px 40px;overflow:auto;transform:translateY(-10px);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;z-index:50}
-  body.menu nav.mainnav{opacity:1;transform:none;visibility:visible}
-  body.menu{overflow:hidden}
-  .nv{height:auto;padding:16px 4px;font:300 1.9rem var(--serif);letter-spacing:-.02em;color:#efe7d6;border-bottom:1px solid #2b241c;width:100%;justify-content:space-between}
-  .nv:after{display:none}.nv[aria-selected=true]{color:var(--gold)}
-  .nv-g{pointer-events:none;color:var(--gold);font:600 .68rem var(--sans);letter-spacing:.2em;text-transform:uppercase;padding:22px 4px 8px;border:0}.nv-g svg{display:none}
-  .nv-i{height:auto}.nv-m{position:static;display:block;min-width:0;background:none;border:0;box-shadow:none;padding:0;animation:none;color:#efe7d6}
-  .nv-m button{padding:14px 4px;color:#efe7d6;border-bottom:1px solid #2b241c;border-radius:0}.nv-m button b{font:300 1.7rem var(--serif);color:#efe7d6}.nv-m button span{color:#a89d88;font-size:.82rem}.nv-m button i{color:var(--gold)}
-  .nv-m button:hover,.nv-m button[aria-selected=true]{background:none;box-shadow:none}.nv-m button[aria-selected=true] b{color:var(--gold)}
   .route{grid-template-columns:repeat(8,1fr)}
 }
 @media(max-width:560px){.vh h1{font-size:2.6rem}.tools{gap:2px}}
@@ -2489,7 +2480,8 @@ const IC={
  taller:'<svg viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0-5 5L3 18l3 3 6.5-6.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z"/></svg>'};
 const SUNI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>';
 const MOONI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
-function navSync(v){document.body.classList.remove("menu");$$(".nv-i").forEach(i=>i.classList.toggle("cur",!!i.querySelector('[data-v="'+v+'"]')))}
+function closeMenu(){document.body.classList.remove("menu");const b=$("#burger");if(b){b.setAttribute("aria-expanded","false");b.setAttribute("aria-label","Abrir menú")}}
+function navSync(v){closeMenu();$$(".nv-i").forEach(i=>i.classList.toggle("cur",!!i.querySelector('[data-v="'+v+'"]')))}
 function shareURL(){const ok=/^https?:$/.test(location.protocol)&&location.hostname&&!/claude|anthropic|localhost|^127\./.test(location.hostname);return ok?location.origin+location.pathname:PUBLIC_URL}
 function qrSVG(text,fill){try{const q=qrcode(0,"M");q.addData(text);q.make();const n=q.getModuleCount();let p="";for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(q.isDark(r,c))p+=`M${c} ${r}h1v1h-1z`;return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 ${n+2} ${n+2}" shape-rendering="crispEdges" role="img" aria-label="Código QR del enlace"><path d="${p}" fill="${fill||"#15110d"}"/></svg>`}catch(e){return ""}}
 function openShare(){const u=shareURL();$("#shq").innerHTML=qrSVG(u);$("#shu").textContent=u.replace(/^https?:\/\//,"").replace(/\/$/,"");$("#shn").style.display=navigator.share?"":"none";if(!$("#sh").open)$("#sh").showModal()}
@@ -2503,11 +2495,13 @@ function initNav(){
   it.addEventListener("mouseenter",()=>{if(!wide())return;clearTimeout(t);closeAll(it);set(it,true)});
   it.addEventListener("mouseleave",()=>{if(!wide())return;t=setTimeout(()=>set(it,false),160)});
   it.addEventListener("focusin",e=>{if(e.target.matches(":focus-visible")){clearTimeout(t);closeAll(it);if(wide())set(it,true)}});
-  it.addEventListener("focusout",e=>{if(e.relatedTarget&&!it.contains(e.relatedTarget))set(it,false)})});
- document.addEventListener("click",e=>{if(!e.target.closest(".nv-i"))closeAll()});
- nav.addEventListener("click",e=>{if(e.target.closest(".nv-m [data-v]")){closeAll();document.activeElement&&document.activeElement.blur&&document.activeElement.blur()}});
- document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeAll();document.body.classList.remove("menu");$("#burger").setAttribute("aria-expanded","false")}});
- $("#burger").onclick=()=>{const o=document.body.classList.toggle("menu");$("#burger").setAttribute("aria-expanded",String(o))};
+  it.addEventListener("focusout",e=>{if(wide()&&e.relatedTarget&&!it.contains(e.relatedTarget))set(it,false)})});
+ document.addEventListener("click",e=>{if(!e.target.closest(".nv-i,#burger"))closeAll()});
+ nav.addEventListener("click",e=>{if(e.target.closest("[data-v]")){closeAll();closeMenu();document.activeElement&&document.activeElement.blur&&document.activeElement.blur()}});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeAll();closeMenu()}});
+ $("#burger").onclick=()=>{const o=!document.body.classList.contains("menu");if(o){closeAll();const c=nav.querySelector(".nv-i.cur");if(c)set(c,true)}document.body.classList.toggle("menu",o);$("#burger").setAttribute("aria-expanded",String(o));$("#burger").setAttribute("aria-label",o?"Cerrar menú":"Abrir menú")};
+ $(".tools").addEventListener("click",e=>{if(!e.target.closest("#burger"))closeMenu()});
+ addEventListener("resize",()=>{if(innerWidth>900)closeMenu()});
  const sp=$("#sp");let tk=0;addEventListener("scroll",()=>{if(tk)return;tk=requestAnimationFrame(()=>{tk=0;const h=document.documentElement,m=h.scrollHeight-innerHeight;sp.style.width=(m>0?Math.min(100,scrollY/m*100):0)+"%"})},{passive:true});
  $("#shareb").onclick=openShare;["#shf","#shf2"].forEach(q=>{const b=$(q);if(b)b.onclick=openShare});
  $("#shx").onclick=()=>$("#sh").close();$("#sh").addEventListener("click",e=>{if(e.target===$("#sh"))$("#sh").close()});
