@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Historia de España · 2.º Bachillerato</title>
+<script>window.PULSO_CFG={b:"es",api:"https://historiapau.pages.dev/api/lb",link:"#clasif",temas:function(){return(typeof TEMAS!=="undefined"?TEMAS:[]).map(function(t){return{n:t.n,name:t.nombre}})}}</script><script src="pulso.js"></script>
 <script>try{const t=JSON.parse(localStorage.getItem("hde2_theme")||"null");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#15110d">
@@ -304,6 +305,7 @@ dialog#lb{max-width:96vw;width:auto;background:transparent;box-shadow:none;borde
 .zoomb{position:absolute;right:8px;bottom:8px;border:0;border-radius:999px;background:rgba(20,14,8,.72);color:#fff;font-size:.76rem;padding:5px 11px;cursor:pointer;backdrop-filter:blur(4px)}
 .zoomb:hover{background:rgba(20,14,8,.9)}
 .fig .figw img{max-height:min(64vh,640px)}
+#vi{transition:opacity .18s,filter .18s}#vi.ld{opacity:.25;filter:blur(4px)}
 dialog#vw{max-width:100vw;max-height:100vh;width:100vw;height:100vh;border-radius:0;background:#0d0b09;color:#eee;box-shadow:none}
 #vw::backdrop{background:#000}
 .vwin{display:grid;grid-template-rows:auto 1fr auto;height:100%}
@@ -1043,6 +1045,10 @@ dialog#pk::backdrop{background:#0e0b08}
 .pkc.g3 .fl.on .face.front{animation:aura 2.6s ease-in-out .9s infinite alternate}
 @keyframes aura{from{box-shadow:0 0 0 2px #ffe9a8,0 0 40px 4px rgba(255,214,120,.45)}to{box-shadow:0 0 0 2px #fff3c8,0 0 78px 14px rgba(255,214,120,.8)}}
 @media(prefers-reduced-motion:reduce){.pkc.g2 .fl.on .in,.pkc.g3 .fl.on .in{animation:none;transition:transform .5s}.pkc.g3:has(.fl.on):before,.pkc.g3:has(.fl.on):after,.pkc.g2:has(.fl.on):before,.pkc.g3 .fl.on .face.front{animation:none}.pkc.g3:has(.fl.on):before,.pkc.g3:has(.fl.on):after,.pkc.g2:has(.fl.on):before{display:none}}
+
+/* La clase en cifras */
+:root{--pu-bar:var(--accent);--pu-hi:var(--accent);--pu-hi-ink:var(--accent-ink);--pu-hi2:var(--accent)}
+#pulsoT,#pulsoH{display:flex}#pulsoT[hidden],#pulsoH[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -1158,6 +1164,7 @@ dialog#pk::backdrop{background:#0e0b08}
    <h2>Imágenes</h2><p>Proceden de las presentaciones de clase y de fuentes públicas (archivos, museos y Wikimedia Commons) y se usan con fines docentes y sin ánimo de lucro. Las obras anteriores al siglo XX suelen ser de dominio público; las posteriores y las fotografías pueden estar protegidas por sus autores. Algunos gráficos son de elaboración propia a partir de datos oficiales. Si eres titular de derechos y quieres que se retire o se acredite una imagen, comunícaselo al profesor.</p>
    <h2>Textos</h2><p>Los textos históricos se reproducen con fines educativos; cada ficha indica su procedencia cuando se conoce.</p>
    <h2>Tus datos</h2><p>No hay cuentas, cookies ni analítica. Tu progreso, tus notas y tus exámenes se guardan solo en tu navegador. Si quieres llevártelos a otro dispositivo, usa «Exportar copia» en Mi estudio. La única excepción es la clasificación, que es voluntaria: si entras, se publican solo tus cifras de estudio (puntos, racha, cromos) con un identificador aleatorio, sin nombre, alias ni grupo. Puedes salir cuando quieras y tu fila se borra.</p>
+   <p>Además, la web suma de forma anónima unos contadores (sobres abiertos, preguntas respondidas, minutos de estudio) para mostrar «La clase en cifras». No llevan identificador ni se pueden asociar a una persona, y puedes desactivarlos con el botón «No contar mi actividad» de esa sección.</p>
    <h2>Compartir</h2><p><button class="btn" type="button" id="shf2">Compartir con QR</button></p>
   </div>
 </section>
@@ -1235,7 +1242,7 @@ function shuffle(arr,r){const a=arr.slice();for(let i=a.length-1;i>0;i--){const 
 function segs(name){const p=name.split(/\.\s+/).map(s=>s.replace(/\.$/,"").trim()).filter(Boolean);return(p.length>=2&&p.every(s=>s.split(/\s+/).length>=3))?p:[name.replace(/\.$/,"")]}
 const stem=t=>{t=t.replace(/\.$/,"");return /^(Relacione|Elabore|Explique|Compare|Defina|Analice|Describa)/i.test(t)?t+".":"Explique: "+t+"."}
 const catChip=p=>`<span class="chip cat" style="--cc:${CATS[p.cat][1]}">${CATS[p.cat][0]}</span>`;
-function figs(d,withSrc=true){return (d.imgs||[]).map(i=>`<figure class="fig">${withSrc?`<div class="figw"><img src="${i.f}" alt="${esc(i.cap)}" title="Pulsa para ampliar" loading="lazy"><button class="zoomb" type="button" aria-label="Ampliar con zoom">⤢ Ampliar</button></div>`:`<img src="${i.f}" alt="${esc(i.cap)}" loading="lazy">`}<figcaption>${esc(i.cap)}${withSrc?`<span>${esc(i.src)}</span>`:""}</figcaption></figure>`).join("")}
+function figs(d,withSrc=true){return (d.imgs||[]).map(i=>`<figure class="fig">${withSrc?`<div class="figw"><img src="${i.f}" alt="${esc(i.cap)}" title="Pulsa para ampliar" decoding="async"><button class="zoomb" type="button" aria-label="Ampliar con zoom">⤢ Ampliar</button></div>`:`<img src="${i.f}" alt="${esc(i.cap)}" loading="lazy">`}<figcaption>${esc(i.cap)}${withSrc?`<span>${esc(i.src)}</span>`:""}</figcaption></figure>`).join("")}
 const pendOf=id=>PEND.find(p=>p.id===id&&p.estado==="falta");
 function docHTML(d){
   let h="";
@@ -1308,6 +1315,7 @@ function readerShell(id){
   [...db.children].forEach(n=>{(n.matches(".reader,.fig,.quote,.ref")||(n===first&&n.classList.contains("note"))?main:side).appendChild(n)});
   db.append(main,side);
   const L=readerList(d),i=L.indexOf(id);
+  [L[i+1],L[i-1],L[i+2]].forEach(x=>x&&preDoc(x));
   $("#dh").insertAdjacentHTML("afterbegin",`<div class="rnav"><button type="button" id="rexp" aria-pressed="false" title="Ampliar a casi toda la pantalla">⤢ Ampliar</button><button type="button" id="rsolo" aria-pressed="false" title="Oculta el panel lateral">Solo texto</button>${document.fullscreenEnabled?'<button type="button" id="rfs" title="Pantalla completa del navegador">⛶ Pantalla completa</button>':""}<span class="sp"></span><button type="button" id="rprev" ${i>0?"":"disabled"} aria-label="Anterior" title="Anterior (←)">←</button><span class="pos">${i>=0?(i+1)+" / "+L.length:""}</span><button type="button" id="rnext" ${i>=0&&i<L.length-1?"":"disabled"} aria-label="Siguiente" title="Siguiente (→)">→</button></div>`);
   $("#rexp").onclick=()=>{wide=!wide;LS.set("wide",wide);if(!wide&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});apply()};
   $("#rsolo").onclick=()=>{if(!wide){wide=true;LS.set("wide",true)}solo=!solo;LS.set("solo",solo);apply()};
@@ -1491,13 +1499,18 @@ function hlToggle(R,s){
 
 /* ---------- v6: visor de imágenes con zoom ---------- */
 const VW={list:[],i:0,s:1,x:0,y:0,fit:1,nw:0,nh:0};
+const PRE=new Map();
+function pre(src){if(src&&!PRE.has(src)){const i=new Image();i.decoding="async";i.src=src;PRE.set(src,i)}}
+function preDoc(id){const d=typeof DOCM!=="undefined"&&DOCM[id];if(d&&d.imgs)d.imgs.slice(0,3).forEach(m=>pre(m.f))}
+["pointerover","touchstart"].forEach(ev=>document.addEventListener(ev,e=>{const t=e.target.closest&&e.target.closest("[data-id],[data-did],[data-d]");if(t)preDoc(t.dataset.id||t.dataset.did||t.dataset.d)},{passive:true}));
 function initViewer(){
   const vw=$("#vw"),st=$("#vs"),im=$("#vi");
   const W=()=>st.clientWidth,H=()=>st.clientHeight;
   const paint=()=>{const w=VW.nw*VW.s,h=VW.nh*VW.s;VW.x=w<=W()?(W()-w)/2:Math.min(0,Math.max(W()-w,VW.x));VW.y=h<=H()?(H()-h)/2:Math.min(0,Math.max(H()-h,VW.y));im.style.transform=`translate(${VW.x}px,${VW.y}px) scale(${VW.s})`;$("#vz1").textContent=Math.round(VW.s*100)+" %"};
   VW.fitNow=()=>{if(!VW.nw)return;VW.fit=Math.min(W()/VW.nw,H()/VW.nh,2.5);VW.s=VW.fit;VW.x=(W()-VW.nw*VW.s)/2;VW.y=(H()-VW.nh*VW.s)/2;paint()};
   const zoomAt=(f,cx,cy)=>{const s2=Math.min(8,Math.max(VW.fit*.5,VW.s*f)),r=s2/VW.s;VW.x=cx-(cx-VW.x)*r;VW.y=cy-(cy-VW.y)*r;VW.s=s2;paint()};
-  VW.show=()=>{const it=VW.list[VW.i];im.onload=()=>{VW.nw=im.naturalWidth;VW.nh=im.naturalHeight;im.style.width=VW.nw+"px";im.style.height=VW.nh+"px";VW.fitNow()};VW.nw=0;im.src=it.src;im.alt=it.alt||"";$("#vt").textContent=it.t||"";$("#vc").textContent=it.cap||"";const m=VW.list.length>1;$("#vprev").hidden=$("#vnext").hidden=!m;$("#vcount").textContent=m?`${VW.i+1} / ${VW.list.length}`:"";if(im.complete&&im.naturalWidth)im.onload()};
+  VW.show=()=>{const it=VW.list[VW.i];const hit=PRE.get(it.src),warm=(hit&&hit.complete&&hit.naturalWidth)||(()=>{const t=new Image();t.src=it.src;return t.complete&&t.naturalWidth})();im.classList.toggle("ld",!warm);
+    [1,-1,2].forEach(k=>{const n=VW.list[VW.i+k];if(n)pre(n.src)});im.onload=()=>{im.classList.remove("ld");VW.nw=im.naturalWidth;VW.nh=im.naturalHeight;im.style.width=VW.nw+"px";im.style.height=VW.nh+"px";VW.fitNow()};VW.nw=0;im.src=it.src;im.alt=it.alt||"";$("#vt").textContent=it.t||"";$("#vc").textContent=it.cap||"";const m=VW.list.length>1;$("#vprev").hidden=$("#vnext").hidden=!m;$("#vcount").textContent=m?`${VW.i+1} / ${VW.list.length}`:"";if(im.complete&&im.naturalWidth)im.onload()};
   VW.open=(list,i)=>{VW.list=list;VW.i=i;if(!vw.open)vw.showModal();VW.show()};
   const step=d=>{if(VW.list.length>1){VW.i=(VW.i+d+VW.list.length)%VW.list.length;VW.show()}};
   $("#vzi").onclick=()=>zoomAt(1.4,W()/2,H()/2);$("#vzo").onclick=()=>zoomAt(1/1.4,W()/2,H()/2);
@@ -1919,6 +1932,7 @@ function renderJuegos(){
    <div class="stats4" style="margin:0;flex:1;min-width:240px"><div class="stt"><b>${streak()}</b><span>días seguidos</span></div><div class="stt"><b>${got}<small style="font-size:.9rem;color:var(--muted)"> / ${BADGES.length}</small></b><span>insignias</span></div></div></div>
   ${albumBanner()}
   ${lbBanner()}
+  <a id="pulsoT" hidden></a>
   ${efeHTML()?`<div style="margin-top:14px" id="efj">${efeHTML()}</div>`:""}
   <div class="sech"><h2>Retos para toda la clase</h2><span class="note">Mismas preguntas para todos: comparad puntuaciones</span></div>
   <div class="sgrid" style="margin-top:0">
@@ -1929,7 +1943,8 @@ function renderJuegos(){
   <div class="sech"><h2>Insignias</h2><span class="note">${got} de ${BADGES.length}</span></div>
   <div class="bdg">${BADGES.map(b=>{const[c,t]=b.f(s),on=!!g.badges[b.id];return `<div class="bd ${on?"":"lock"}" title="${esc(b.d)}"><span class="ic" aria-hidden="true">${b.ic}</span><b>${esc(b.n)}</b><span>${on?"✓ "+new Date(g.badges[b.id]).toLocaleDateString("es-ES"):Math.min(c,t)+" / "+t}</span><small>${esc(b.d)}</small></div>`}).join("")}</div>`;
   $$("[data-gm]",V).forEach(b=>b.onclick=()=>gmStart(b.dataset.gm));
-  $$("[data-efe]",V).forEach(b=>b.onclick=()=>{go("tiempo");setTimeout(()=>tlGoTema(+b.dataset.efe),250)})}
+  $$("[data-efe]",V).forEach(b=>b.onclick=()=>{go("tiempo");setTimeout(()=>tlGoTema(+b.dataset.efe),250)});
+  window.PULSO&&PULSO.ticker($("#pulsoT"))}
 
 /* ---------- v12: Álbum de la Historia (cromos de personajes y sobres) ---------- */
 const AL_XP=30;
@@ -1958,7 +1973,9 @@ function alOpen(){
     const from=(un.length&&Math.random()<.85)?un:cand;
     out.push({p:from[Math.floor(Math.random()*from.length)]})}
   out.forEach(o=>{if(a.own[o.p.id]){o.isNew=false;a.xp+=2}else{o.isNew=true;a.own[o.p.id]=Date.now()}});
-  a.opened++;saveST();return out}
+  a.opened++;saveST();
+  if(window.PULSO){PULSO.add("pk");const nw=out.filter(o=>o.isNew),lg=nw.filter(o=>alRar(o.p)===3).length;if(nw.length)PULSO.add("nw",nw.length);if(lg)PULSO.add("lg",lg)}
+  return out}
 
 let PK=null;
 function pkShow(){if(!$("#pk").open)$("#pk").showModal();pkSealed()}
@@ -2030,7 +2047,8 @@ function ST_(){const g=G();const s=g.st&&typeof g.st==="object"?g.st:(g.st={});s
 const qTema=q=>(q.doc&&q.doc.tema)||(q.open&&DOCM[q.open]&&DOCM[q.open].tema)||(q.person&&PM[q.person]&&PM[q.person].tema)||null;
 function statRec(q,ok){const s=ST_(),k=q.kind||"x",t=qTema(q);
   const a=s.bg[k]||(s.bg[k]=[0,0]);a[1]++;if(ok)a[0]++;
-  if(t){const b=s.bt[t]||(s.bt[t]=[0,0]);b[1]++;if(ok)b[0]++}}
+  if(t){const b=s.bt[t]||(s.bt[t]=[0,0]);b[1]++;if(ok)b[0]++}
+  if(window.PULSO){PULSO.add("q");if(ok)PULSO.add("qo");if(t){PULSO.add("t"+t+"a");if(ok)PULSO.add("t"+t+"o")}}}
 function statSnap(){if(!PEOPLE.length)return;const s=ST_(),k=dayKeyN(dayNum());s.snap[k]=totalXP();
   const ks=Object.keys(s.snap).sort();if(ks.length>150)ks.slice(0,ks.length-150).forEach(x=>delete s.snap[x]);
   if(typeof lbSoon==="function")lbSoon()}
@@ -2038,7 +2056,7 @@ const minTot=()=>{try{return Object.values(ST_().min).reduce((a,b)=>a+b,0)}catch
 let LASTI=Date.now();
 function initStats(){
   ["pointerdown","keydown","scroll","touchstart"].forEach(e=>addEventListener(e,()=>{LASTI=Date.now()},{passive:true,capture:true}));
-  setInterval(()=>{if(document.hidden||Date.now()-LASTI>90000)return;const s=ST_(),k=dayKeyN(dayNum());s.min[k]=(s.min[k]||0)+1;LS.set("state",ST)},60000)}
+  setInterval(()=>{if(document.hidden||Date.now()-LASTI>90000)return;const s=ST_(),k=dayKeyN(dayNum());s.min[k]=(s.min[k]||0)+1;LS.set("state",ST);window.PULSO&&PULSO.add("mn")},60000)}
 const fmtMin=m=>m>=60?`${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")} min`:`${m} min`;
 function statsHTML(){
   const s=ST_(),today=dayNum();
@@ -2106,6 +2124,7 @@ function renderClasif(){
   const tabs=[["xpT","Total"],["wk","Esta semana"],["streak","Racha"],["cards","Cromos"]];
   const rk={xpT:me&&me.rank,wk:me&&me.rankW,streak:me&&me.rankS,cards:me&&me.rankC}[tab];
   V.innerHTML=`<div class="vh"><h1>Clasificación de la clase</h1><p>Compite con tus compañeros, de forma anónima. Solo se publican cifras: nadie ve quién eres.</p></div>
+  <div id="pulso"></div>
   ${on?`<div class="card lbme"><div><div class="eyebrow" style="margin:0">Participas de forma anónima</div><h2>${me?`Puesto ${me.rank}`:"…"}</h2><p class="note" style="margin:2px 0 0">${me?`De ${d.n} participantes · ${nf(me.xp)} XP · +${nf(me.wxp)} esta semana`:(LBS.busy?"Sincronizando…":"Aún sin sincronizar")}</p></div><div class="row"><button class="btn primary" id="lbup" type="button">Actualizar mis puntos</button><button class="btn" id="lbout" type="button">Salir de la clasificación</button></div></div>`
    :`<div class="card lbjoin"><h2>Entra en la clasificación</h2><p class="note">Sin alias, sin nombre, sin grupo. Se publican solo tus puntos (XP), tu racha y tus cromos, sin ningún dato que te identifique. Puedes salir cuando quieras y tu fila se borra. No hay cookies ni seguimiento.</p>
     <div class="row" style="margin-top:12px"><button class="btn primary" id="lbjoin" type="button">Entrar</button><span class="note" id="lbmsg" role="alert"></span></div></div>`}
@@ -2116,6 +2135,7 @@ function renderClasif(){
   ${me&&rk?`<p class="note" style="margin:10px 0 0">Tu puesto en esta lista: <b>${rk}</b>.</p>`:""}
   ${list.length?`<ol class="lbk">${list.map((r,i)=>lbRow(r,i,tab,me,Math.max(1,...list.map(x=>({xpT:x.xp,wk:x.wxp,streak:x.streak,cards:x.cards}[tab])))) ).join("")}</ol>`:`<p class="muted" style="margin-top:18px">${LBS.busy?"Cargando…":(d?"Todavía no hay nadie en esta lista. ¡Sé el primero!":"")}</p>`}
   <p class="alleg">Los puntos se calculan en tu dispositivo; el servidor limita las subidas anormales y el profesor puede retirar filas con cifras imposibles. La clasificación se actualiza cada vez que estudias y cuando pulsas «Actualizar».</p>`;
+  if(window.PULSO)PULSO.render($("#pulso"));
   $$("[data-lt]",V).forEach(b=>b.onclick=()=>{LBS.tab=b.dataset.lt;renderClasif()});
   $("#lbrf").onclick=()=>lbLoad();
   const rt=$("#lbretry");if(rt)rt.onclick=()=>lbLoad();
@@ -2167,7 +2187,7 @@ function hoyState(){
   return{P,txt,fd,rv,wk,done:[txt,fd!=null,rv>=HOY_N,wk]}}
 function hoyCheck(){
   if(!DOCS.length)return;const S=hoyState(),h=G().hoy,dk=dayKeyN(dayNum());
-  if(S.done.every(Boolean)&&h.paid!==dk){h.paid=dk;h.n=(h.n||0)+1;const a=AL();a.xp+=HOY_XP;a.bonus++;
+  if(S.done.every(Boolean)&&h.paid!==dk){h.paid=dk;h.n=(h.n||0)+1;const a=AL();a.xp+=HOY_XP;a.bonus++;window.PULSO&&PULSO.add("hy");
     LS.set("state",ST);toast("Sesión de hoy completa: +"+HOY_XP+" XP y un sobre de regalo");setTimeout(renderHoy,0)}}
 function hoyHTML(){
   const S=hoyState(),P=S.P,d=S.done,n=d.filter(Boolean).length,h=G().hoy||{},R=2*Math.PI*27,off=R*(1-n/4);
@@ -2512,7 +2532,7 @@ function renderInicio(){
   <div class="evs rv">${EVD.map(([n,c,s,b,sub])=>{const ts=D.presets[n],eps=EPS.filter(e=>ts.includes(e.tema));const a=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="texto").length,f=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="fuente").length,np=PEOPLE.filter(p=>ts.includes(p.tema)).length;
     return `<div class="ev ${c}"><h3>${n}</h3><div class="sub">${sub}</div><div class="evt">${ts.length>1?"Temas "+ts[0]+" a "+ts[ts.length-1]:""}</div><p class="note" style="margin:0 0 12px">${a} textos · ${f} fuentes · ${np} personajes · ${eps.length} epígrafes</p><div class="row"><button class="btn primary small" data-std="${s}">Generar examen</button><button class="btn small" data-pool="textos" data-b="${b}">Textos</button><button class="btn small" data-pool="fuentes" data-b="${b}">Fuentes</button></div></div>`}).join("")}</div>
   <div class="sech rv"><h2>Para hoy</h2></div>
-  <div class="rv" id="hoyx"></div>`;
+  <div class="rv" id="hoyx"></div><a id="pulsoH" hidden></a>`;
   const V=$("#v-inicio");
   $$("[data-go]",V).forEach(b=>b.onclick=()=>go(b.dataset.go));
   $$("[data-std]",V).forEach(b=>b.onclick=()=>{go("examenes");runStd(b.dataset.std)});
@@ -2535,7 +2555,7 @@ function renderInicio(){
   const rv=$$(".rv",V);
   if("IntersectionObserver"in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.08});rv.forEach(x=>io.observe(x))}
   setTimeout(()=>rv.forEach(x=>x.classList.add("in")),1800);
-  renderMyStrip();renderHoy();
+  renderMyStrip();renderHoy();window.PULSO&&PULSO.ticker($("#pulsoH"));
 }
 
 /* ---------- textos y fuentes históricas ---------- */
