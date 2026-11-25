@@ -69,3 +69,7 @@ body.ln{overflow:hidden}
 #tl2 #tlpn li b{flex:none;width:5.4em;font:700 .76rem var(--sans);color:var(--gold,#d9a653);padding-top:.15em}
 @media (max-width:640px){#tl2 #tlcnt{display:none}#tl2 .tlnavb{display:none}#tl2 .tli .evs{max-width:92vw}#tl2 .tli.f:has(li:nth-child(5)) .evs{grid-template-columns:1fr;max-width:92vw}#tl2 .tlera{font-size:.95rem}#tl2 #tlpn{padding:60px 20px 28px}}
 @media (prefers-reduced-motion:reduce){#tl2 #tlpn{transition-duration:.01s}#tl2 .tli .evs button{transition:none}}
+
+#tl2 .tli .th.wd{background:rgba(241,233,216,.1);color:var(--gold,#d9a653);border:1.5px solid rgba(241,233,216,.3)}
+#tl2 #tlpn .pbtn.alt{background:transparent;color:var(--gold,#d9a653);border:1.5px solid var(--gold,#d9a653);text-decoration:none;display:inline-block}
+#tl2 #tlpn .pbtn.alt:hover{background:var(--gold,#d9a653);color:#1b130a}

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Historia de España · 2.º Bachillerato</title>
 <link rel="stylesheet" href="linea.css">
-<script defer src="linea.js"></script>
+<script defer src="mundo.js"></script><script defer src="linea.js"></script>
 <script>window.PULSO_CFG={b:"es",api:"https://historiapau.pages.dev/api/lb",link:"#clasif",temas:function(){return(typeof TEMAS!=="undefined"?TEMAS:[]).map(function(t){return{n:t.n,name:t.nombre}})}}</script><script src="pulso.js"></script>
 <script>try{const t=JSON.parse(localStorage.getItem("hde2_theme")||"null");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="robots" content="noindex,nofollow">
@@ -1174,7 +1174,7 @@ dialog#pk::backdrop{background:#0e0b08}
 </section>
 
 </main>
-<footer class="wrap foot"><div class="orn" aria-hidden="true"><svg viewBox="0 0 120 14" width="120" height="14"><path d="M0 7h46M74 7h46" stroke="currentColor" stroke-width="1" fill="none"/><path d="M60 1l5 6-5 6-5-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="52" cy="7" r="1.4" fill="currentColor"/><circle cx="68" cy="7" r="1.4" fill="currentColor"/></svg></div><p>Historia de España · 2.º de Bachillerato · Comunidad de Madrid · Decreto 64/2022 y modelo PAU</p><p class="fl"><a href="#acerca">Créditos y derechos</a> · © 2026 Iván Molina Rincón · <button type="button" id="shf">Compartir con QR</button></p></footer>
+<footer class="foot"><div class="wrap foot-in"><svg class="foot-mk" viewBox="0 0 24 24" width="11" height="11" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z" fill="currentColor"/></svg><p>Historia de España · 2.º Bachillerato · Madrid <i aria-hidden="true">/</i> <span id="fst"></span> <i aria-hidden="true">/</i> <a href="#acerca">Créditos y derechos</a> <i aria-hidden="true">/</i> © 2026 Iván Molina Rincón <i aria-hidden="true">/</i> <button type="button" id="shf">Compartir con QR</button></p></div></footer>
 <dialog id="dlg" aria-label="Detalle"><div class="dwrap"><button class="dx" id="dx" aria-label="Cerrar">✕</button><div id="dh"></div><div id="db"></div></div></dialog>
 <dialog id="vw" aria-label="Visor de imagen"><div class="vwin"><div class="vtop"><div class="vtitle" id="vt"></div><div class="vtools"><span id="vcount"></span><button id="vprev" aria-label="Imagen anterior" hidden>‹</button><button id="vnext" aria-label="Imagen siguiente" hidden>›</button><button id="vzo" aria-label="Alejar">−</button><button id="vz1" aria-label="Tamaño real">100 %</button><button id="vzi" aria-label="Acercar">+</button><button id="vzf" aria-label="Ajustar a la pantalla">Ajustar</button><button id="vcl" aria-label="Cerrar">✕</button></div></div><div class="vstage" id="vs"><img id="vi" alt="" draggable="false"></div><div><div class="vcap" id="vc"></div><div class="vhint">Rueda o pellizco para el zoom · arrastra para moverte · doble clic para acercar · ←/→ para cambiar de imagen</div></div></div></dialog>
 <dialog id="sh" aria-label="Compartir"><div class="shb"><button class="btn small" id="shx" type="button" aria-label="Cerrar">✕</button><h2>Comparte la web</h2><p>Apunta con la cámara del móvil al código.</p><div class="qr" id="shq"></div><div class="url" id="shu"></div><div class="row"><button class="btn primary" id="shc" type="button">Copiar enlace</button><button class="btn" id="shn" type="button">Compartir…</button><button class="btn" id="shp" type="button">Cartel para el aula</button></div></div></dialog>
@@ -1220,7 +1220,8 @@ function init(){
   initSearch();initV7();initAlbum();initStats();initClasif();initHoy();renderInicio();initPools();initPersonajes();initTiempo();initSimulacro();initExamenes();renderMine();route();syncInit();document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.db&&Date.now()-SYNC.last>60000)pullRemote()});
 }
 function route(){
-  let v=(location.hash||"#inicio").slice(1);if(!$("#v-"+v))v="inicio";
+  let v=(location.hash||"#inicio").slice(1);const qi=v.indexOf("?"),qs=qi<0?"":v.slice(qi+1);if(qi>=0)v=v.slice(0,qi);if(!$("#v-"+v))v="inicio";
+  if(v==="linea"&&qs&&window.lineaPend){const q=new URLSearchParams(qs),o={};if(q.get("k"))o.k=q.get("k");else if(q.get("t"))o.t=+q.get("t");else if(q.get("y")!=null&&q.get("y")!==""&&!isNaN(+q.get("y")))o.y=+q.get("y");lineaPend(o)}
   $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
   $$("nav.mainnav [data-v]").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));navSync(v);
   if(v==="linea")renderLinea();else if(window.lineaStop)lineaStop();
@@ -1287,6 +1288,9 @@ function openDoc(id){
   readerShell(id);
 }
 const monoHTML=p=>p.img?`<span class="mono pim"><img src="${p.img}" alt="" loading="lazy"></span>`:`<span class="mono">${esc(ini(p.nombre))}</span>`;
+const ARTE_URL="https://artepau.pages.dev/";
+const ARTE_X={"juan-de-herrera":1,"el-greco":1,"diego-velazquez":1,"bartolome-esteban-murillo":1,"pablo-picasso":1};
+window.arteHref=function(y,pid){if(pid&&ARTE_X[pid])return{u:ARTE_URL+"#a-"+pid,t:"Ficha en Historia del Arte"};if(y!=null&&y>=-500)return{u:ARTE_URL+"#cronologia?y="+Math.floor(y),t:"El arte de esa época"};return null};
 function openPers(id){
   const p=PM[id];if(!p)return;
   const eps=p.eps.map(e=>EPM[e]).filter(Boolean);
@@ -1301,7 +1305,7 @@ function openPers(id){
     ${docs.length?`<h3 style="font-size:1rem;margin:16px 0 6px">Documentos relacionados</h3><div class="row">${docs.slice(0,8).map(d=>`<button class="btn small" data-d="${d.id}">${d.id} · ${esc(d.titulo.length>38?d.titulo.slice(0,36)+"…":d.titulo)}</button>`).join("")}</div>`:""}
     <div class="row" style="margin-top:18px"><button class="btn primary" id="ptl">Ver en la cronología</button><button class="btn" id="ptl2">En la línea del tiempo</button>
     <a class="btn" target="_blank" rel="noopener" href="${wk}">Wikipedia ↗</a>
-    ${p.rah?`<a class="btn" target="_blank" rel="noopener" href="https://historia-hispanica.rah.es/biografias/${p.rah}">Semblanza en la RAH ↗</a>`:""}</div>
+    ${ARTE_X[p.id]?`<a class="btn" target="_blank" rel="noopener" href="${ARTE_URL}#a-${p.id}">En Historia del Arte ↗</a>`:""}${p.rah?`<a class="btn" target="_blank" rel="noopener" href="https://historia-hispanica.rah.es/biografias/${p.rah}">Semblanza en la RAH ↗</a>`:""}</div>
     <p class="note" style="margin-top:10px">Semblanza escrita por mí como resumen para el temario.${p.wk?` Wikipedia: artículo «${esc(p.wk.replace(/_/g," "))}».`:""} ${p.rah?`Biografía autorizada: <i>Real Academia de la Historia, Diccionario Biográfico Español</i> (el enlace abre la ficha de este personaje).`:"Sin ficha en el DB~e (personaje vivo o extranjero)."}${p.ic?` Imagen: <a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(p.ic.replace(/ /g,"_"))}">Wikimedia Commons</a>.`:""}</p>`);
   $("#ptl").onclick=()=>{$("#dlg").close();tlFocusPerson(p)};
   $("#ptl2").onclick=()=>{$("#dlg").close();lineaIr({k:"p"+p.id})};
@@ -1790,9 +1794,9 @@ function efeToday(){const d=new Date(),dd=d.getDate(),mm=d.getMonth()+1;const hi
   return{hoy:false,list:best?[best]:[],en:bd}}
 const MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 const efeTxt=e=>`${e[0]} de ${MESES[e[1]-1]} de ${e[2]}`;
-function efeHTML(){const r=efeToday();if(!r.list.length)return"";
+function efeHTML(max){const r=efeToday();if(!r.list.length||(max&&!r.hoy&&r.en>max))return"";
   return `<div class="efe"><div class="ef1"><span class="eyebrow" style="margin:0">${r.hoy?"Tal día como hoy":"Próxima efeméride · en "+r.en+(r.en===1?" día":" días")}</span>${r.list.map(e=>`<p><b>${efeTxt(e)}.</b> ${esc(e[3])} <button class="lnk" data-efe="${e[4]}">Ver en la cronología</button></p>`).join("")}</div></div>`}
-function renderEf(){const el=$("#efx");if(!el)return;el.innerHTML=efeHTML();$$("[data-efe]",el).forEach(b=>b.onclick=()=>{go("tiempo");setTimeout(()=>tlGoTema(+b.dataset.efe),250)})}
+function renderEf(){const el=$("#efx");if(!el)return;el.innerHTML=efeHTML(14);$$("[data-efe]",el).forEach(b=>b.onclick=()=>{go("tiempo");setTimeout(()=>tlGoTema(+b.dataset.efe),250)})}
 
 /* ---------- v7: motor de juegos ---------- */
 let GM=null;
@@ -2208,7 +2212,7 @@ function hoyHTML(){
    ${row(2,"3","Repasa "+HOY_N+" tarjetas",Math.min(S.rv,HOY_N)+" de "+HOY_N+" hechas hoy · "+due+(due===1?" pendiente":" pendientes")+" de repaso","Empezar","rv")}
    ${row(3,"4","Refuerza el tema "+P.w.n,esc(P.w.nombre)+" · "+esc(S.P.why),"Ver textos","wk")}
    </ol>
-   <p class="hoyf">De propina: <button class="lnk" type="button" data-hoy="pp">${esc(P.pp.nombre)}</button> · ${esc(P.pp.cargo)}${h.n?` <span class="hn">· ${h.n} ${h.n===1?"sesión completa":"sesiones completas"}</span>`:""}</p></div>`}
+   <p class="hoyf">De propina: <button class="lnk" type="button" data-hoy="pp">${esc(P.pp.nombre)}</button> · ${esc(P.pp.cargo)}${h.n?` <span class="hn">· ${h.n} ${h.n===1?"sesión completa":"sesiones completas"}</span>`:""}${streak()>0?` <span class="hn">· racha de ${streak()} ${streak()===1?"día":"días"}</span>`:""}</p></div>`}
 function renderHoy(){const el=$("#hoyx");if(!el||!DOCS.length)return;el.innerHTML=hoyHTML()}
 function initHoy(){document.addEventListener("click",e=>{const b=e.target.closest("[data-hoy]");if(!b||!b.closest("#hoyx"))return;
   const k=b.dataset.hoy,P=hoyPick();
@@ -2508,37 +2512,21 @@ function renderInicio(){
   const doc=tx[SEED%tx.length],fd=fu[(SEED*3)%fu.length],pp=PEOPLE[(SEED*7)%PEOPLE.length];
   const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
   const car=[];{const by={A:[],B:[],C:[],D:[]};shuf(fu).forEach(d=>(by[d.bloque]||by.A).push(d));let k=0;while(car.length<7&&k<40){for(const b of "ABCD"){if(by[b].length&&car.length<7)car.push(by[b].shift())}k++}}
-  const rib=shuf(fu).slice(0,22);
   const EVD=[["Evaluación 1","e1","ev1","A","Bloque A · de la Prehistoria a 1788"],["Evaluación 2","e2","ev2","B","Bloque B · el siglo XIX"],["Evaluación 3","e3","ev3","C","Bloques C y D · del siglo XX a la Transición"]];
-  const st=[[nt,"textos con clave","--a"],[nf,"fuentes históricas","--c"],[PEOPLE.length,"personajes","--b"],[EVS.length,"hitos","--d"],[EPS.length,"epígrafes","--a"]];
   $("#v-inicio").innerHTML=`
-  <div class="hero2"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
-   <div class="hcol"><span class="eyebrow">2.º de Bachillerato · PAU Madrid 2026-27</span><h1>Historia de España, <em>a la manera de la PAU</em></h1>
-    <p>Textos, fuentes, personajes y exámenes con el formato de la PAU de Madrid.</p>
-    <div class="cta"><button class="btn primary big" data-go="examenes">Generar un examen</button><button class="btn big" data-go="fuentes">Explorar las fuentes</button></div>
-    <div class="stats2">${st.map(([n,l,c])=>`<div style="--sc:var(${c})"><b data-n="${n}">0</b><span>${l}</span></div>`).join("")}</div></div>
+  <div class="hero2">
+   <div class="hcol"><span class="eyebrow">2.º de Bachillerato · PAU Madrid 2026-27</span><h1>Historia de <em>España</em></h1>
+    <div id="efx"></div>
+    <div class="cta"><button class="btn primary big" data-go="examenes">Generar un examen</button><button class="btn big" data-go="fuentes">Explorar las fuentes</button></div></div>
    <div class="hcar" id="hcar">${car.map((d,i)=>`<button class="hs ${i?"":"on"}" data-id="${d.id}" aria-label="${esc(d.titulo)}"><div class="hbg" style="background-image:url('${d.imgs[0].f}')"></div><img src="${d.imgs[0].f}" alt="${esc(d.imgs[0].cap||d.titulo)}"><div class="hcap"><b>${esc(d.titulo.length>74?d.titulo.slice(0,72)+"…":d.titulo)}</b><span>${d.tipo} · Epígrafe ${d.ep}${d.year!=null?" · "+fy(d.year):""}</span></div></button>`).join("")}<div class="hdots">${car.map((d,i)=>`<i data-i="${i}" class="${i?"":"on"}"></i>`).join("")}</div></div>
   </div>
-  <div class="ribbon" aria-label="Cinta de fuentes históricas"><div class="rtrack">${[...rib,...rib].map(d=>`<button class="rth ${d.bloque}" data-id="${d.id}" data-t="${esc(d.titulo.slice(0,60))}" aria-label="${esc(d.titulo)}" style="background-image:url('${d.imgs[0].f}')"></button>`).join("")}</div></div>
-  <div class="mystrip rv" id="msx"></div><div id="efx"></div>
-  <div class="sech rv" style="margin-top:26px"><h2>El curso de un vistazo</h2><span class="note">15 temas · pulsa uno para verlo en la cronología</span></div>
-  <div class="route rv">${TEMAS.map(t=>`<button class="rt ${t.bloque}" data-tm="${t.n}" title="${esc(t.n+". "+t.nombre)}">${t.n}</button>`).join("")}</div>
-  <div class="rtl rv"><span style="grid-column:span 1">Antigua</span><span style="grid-column:span 1">Media</span><span style="grid-column:span 1">Moderna</span><span style="grid-column:span 4">Siglo XIX · Bloque B</span><span style="grid-column:span 4">Siglo XX · Bloque C</span><span style="grid-column:span 4">Transición y democracia · Bloque D</span></div>
-  <div class="actions2 rv">
-   <button class="act2 k1" data-go="examenes"><div class="ic">${IC.exam}</div><h3>Generar un examen</h3><p>Tipo PAU, con solucionario.</p></button>
-   <button class="act2 k2" data-go="simulacro"><div class="ic">${IC.sim}</div><h3>Comentario cronometrado</h3><p>Con cronómetro y autoevaluación.</p></button>
-   <button class="act2 k3" data-go="fuentes"><div class="ic">${IC.fuentes}</div><h3>Fuentes históricas</h3><p>${nf} mapas, cuadros y carteles.</p></button>
-   <button class="act2 k4" data-go="linea"><div class="ic">${IC.tiempo}</div><h3>Línea del tiempo</h3><p>Hitos y personajes, año a año.</p></button>
-   <button class="act2 k5" data-go="personajes"><div class="ic">${IC.pers}</div><h3>Personajes</h3><p>${PEOPLE.length} semblanzas con enlaces.</p></button>
-   <button class="act2 k6" data-go="juegos"><div class="ic">${IC.juegos}</div><h3>Juegos</h3><p>Retos diarios, insignias y rangos.</p></button>
-   <button class="act2 k7" data-go="taller"><div class="ic">${IC.taller}</div><h3>Taller</h3><p>Plan de estudio, esquemas y chuleta.</p></button>
-    <button class="act2 k8" data-go="estudio"><div class="ic">${IC.estudio}</div><h3>Mi estudio</h3><p>Progreso, repaso y notas.</p></button>
-  </div>
-  <div class="sech rv"><h2>El curso por evaluaciones</h2></div>
+  <div class="sech rv"><h2>Para hoy</h2></div>
+  <div class="rv" id="hoyx"></div><a id="pulsoH" hidden></a>
+  <div class="sech rv"><h2>El curso por evaluaciones</h2><span class="note">Pulsa un tema para verlo en la cronología</span></div>
   <div class="evs rv">${EVD.map(([n,c,s,b,sub])=>{const ts=D.presets[n],eps=EPS.filter(e=>ts.includes(e.tema));const a=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="texto").length,f=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="fuente").length,np=PEOPLE.filter(p=>ts.includes(p.tema)).length;
     return `<div class="ev ${c}"><h3>${n}</h3><div class="sub">${sub}</div><div class="evt">${ts.length>1?"Temas "+ts[0]+" a "+ts[ts.length-1]:""}</div><p class="note" style="margin:0 0 12px">${a} textos · ${f} fuentes · ${np} personajes · ${eps.length} epígrafes</p><div class="row"><button class="btn primary small" data-std="${s}">Generar examen</button><button class="btn small" data-pool="textos" data-b="${b}">Textos</button><button class="btn small" data-pool="fuentes" data-b="${b}">Fuentes</button></div></div>`}).join("")}</div>
-  <div class="sech rv"><h2>Para hoy</h2></div>
-  <div class="rv" id="hoyx"></div><a id="pulsoH" hidden></a>`;
+  <div class="route rv">${TEMAS.map(t=>`<button class="rt ${t.bloque}" data-tm="${t.n}" title="${esc(t.n+". "+t.nombre)}">${t.n}</button>`).join("")}</div>`;
+  const fst=$("#fst");if(fst)fst.textContent=`${nt} textos · ${nf} fuentes · ${PEOPLE.length} personajes · ${EVS.length} hitos`;
   const V=$("#v-inicio");
   $$("[data-go]",V).forEach(b=>b.onclick=()=>go(b.dataset.go));
   $$("[data-std]",V).forEach(b=>b.onclick=()=>{go("examenes");runStd(b.dataset.std)});
@@ -2554,9 +2542,7 @@ function renderInicio(){
   const hc=$("#hcar");hc.onmouseenter=()=>paused=true;hc.onmouseleave=()=>paused=false;
   const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(!rm)HTIMER=setInterval(()=>{if(!paused&&V.classList.contains("on")&&!document.hidden)show(cur+1)},4800);
-  // contadores
-  const cnt=$$("[data-n]",V),run=()=>{cnt.forEach(el=>{const n=+el.dataset.n;if(rm){el.textContent=n;return}const t0=performance.now(),d=1300;const f=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=Math.round(n*e);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)})};
-  run();
+  // (sin contadores)
   // aparición al hacer scroll
   const rv=$$(".rv",V);
   if("IntersectionObserver"in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.08});rv.forEach(x=>io.observe(x))}

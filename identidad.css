@@ -166,3 +166,18 @@ dialog#dlg{border:2px solid var(--ink);border-radius:10px;box-shadow:8px 8px 0 v
 :root:not([data-theme=dark]) #v-estudio .stats4+.card{background:var(--ink)}
 .stats4{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
 #v-juegos .card,#v-estudio .card,#v-taller .card,#v-simulacro .card,#v-examenes .card{border:2px solid var(--ink);border-radius:8px}
+/* pie discreto (igual que Arte) */
+footer.foot{display:block;background:none;border-top:1px solid var(--line);margin-top:56px;padding:12px 0 16px}
+footer.foot .foot-in{display:flex;align-items:center;justify-content:center;gap:10px;font-size:.76rem;color:var(--muted);max-width:1200px;margin:0 auto;padding:0 20px;flex-wrap:wrap}
+footer.foot p{margin:0;font-size:inherit;color:inherit;text-align:center}
+footer.foot .foot-mk{flex:none;color:var(--muted);opacity:.8}
+footer.foot i{font-style:normal;opacity:.45;margin:0 .3em}
+footer.foot a,footer.foot button{color:inherit;font:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+footer.foot a:hover,footer.foot button:hover{color:var(--ink);text-decoration-color:var(--hl)}
+/* portada más ligera */
+.hero2 .blob{display:none}
+.hero2 .hcol .cta{margin-top:22px}
+.hcol .efe{margin:18px 0 0;padding:10px 14px;box-shadow:none;border-width:1px;max-width:46ch}
+.hcol .efe p{font-size:.92rem;margin:4px 0 0}
+.route{margin-top:26px}
+@media(max-width:600px){footer.foot #fst,footer.foot #fst+i{display:none}}

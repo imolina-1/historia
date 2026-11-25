@@ -5,7 +5,8 @@
 (function () {
 "use strict";
 var $ = function (s, r) { return (r || document).querySelector(s); };
-var LS = { E: true, P: true };
+var LS = { E: true, P: true, W: false };
+var WT = null;                                    // tema de cada hecho mundial: el del hito español más cercano en el tiempo
 var G = [], els = [], N = 0, pos = 0, target = 0, hue = 40, htarget = 40, shown = -1, openU = null;
 var built = false, running = false, moved = false, hintOn = true, dirty = true, lastWave = 0;
 var root, stage, rail, eraEl, bgEl, pn, sc, cv, cx, CW = 0, CH = 0, DPR = 1, cur, hintEl, cntEl;
@@ -18,10 +19,16 @@ function yl(y) {                                    // etiqueta del año; las ci
   return window.fy ? window.fy(y) : String(y);
 }
 function hueOf(t) { return Math.round(32 + (t - 1) * 24) % 360; }          // ocre → rojo → malva → azul → verde
-function key(u) { return u.k === "e" ? "e" + u.i : "p" + u.id; }
+function key(u) { return u.k === "e" ? "e" + u.i : u.k === "w" ? "w" + u.i : "p" + u.id; }
+function wtema(i) {
+  if (!WT) WT = window.MUNDO.map(function (w) { var b = EVS[0], d = 1e9; EVS.forEach(function (e) { var x = Math.abs(e.y - w.y); if (x < d) { d = x; b = e; } }); return b.tema; });
+  return WT[i];
+}
+var GLOBE = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg>';
 function units() {
   var out = [];
   if (LS.E) EVS.forEach(function (e, i) { out.push({ k: "e", i: i, y: e.y, tema: e.tema }); });
+  if (LS.W && window.MUNDO) MUNDO.forEach(function (w, i) { out.push({ k: "w", i: i, y: w.y, tema: wtema(i) }); });
   if (LS.P) PEOPLE.forEach(function (p) {
     var y = p.nac != null ? p.nac : p.mue; if (y == null) return;
     out.push({ k: "p", id: p.id, y: y, tema: p.tema, died: p.nac == null });
@@ -42,6 +49,10 @@ function cardHTML(u) {
     var e = EVS[u.i], ep = EPM[e.ep];
     return '<li><button type="button" data-k="' + key(u) + '"><span class="th ev" style="--h:' + hueOf(e.tema) + '">' + e.tema + '</span><span class="tx"><b>' + E(e.t) + "</b><small>Hito · " + E(ep ? ep.nombre : "") + "</small></span></button></li>";
   }
+  if (u.k === "w") {
+    var w = MUNDO[u.i];
+    return '<li><button type="button" data-k="' + key(u) + '"><span class="th wd">' + GLOBE + '</span><span class="tx"><b>' + E(w.t) + "</b><small>Mundo</small></span></button></li>";
+  }
   var p = PM[u.id];
   var th = p.img ? '<span class="th"><img data-src="' + E(p.img) + '" alt="" decoding="async" draggable="false"></span>'
     : '<span class="th ev" style="--h:' + hueOf(p.tema) + '">' + E(window.ini ? ini(p.nombre) : p.nombre.charAt(0)) + "</span>";
@@ -49,7 +60,7 @@ function cardHTML(u) {
 }
 function render() {
   group(); stage.textContent = ""; rail.textContent = ""; els = []; shown = -1;
-  if (!N) { stage.innerHTML = '<p class="tlnone">Activa al menos una capa (Hitos o Personajes).</p>'; return; }
+  if (!N) { stage.innerHTML = '<p class="tlnone">Activa al menos una capa.</p>'; return; }
   els = G.map(function (g) {
     var d = document.createElement("div"); d.className = "tli"; var t = yl(g.y);
     d.innerHTML = '<div class="y' + (t.length > 8 ? " long" : "") + '">' + E(t) + "</div>" +
@@ -74,7 +85,7 @@ function build() {
   root = $("#tl2");
   root.innerHTML =
     '<div id="tlbg"></div><canvas id="tlwaves" aria-hidden="true"></canvas>' +
-    '<div class="tlh"><div class="tlf" role="group" aria-label="Capas"><button type="button" class="on" data-l="E" aria-pressed="true">Hitos</button><button type="button" class="on" data-l="P" aria-pressed="true">Personajes</button><span id="tlcnt"></span></div><div class="tlera" id="tlera" aria-live="polite"></div></div>' +
+    '<div class="tlh"><div class="tlf" role="group" aria-label="Capas"><button type="button" class="on" data-l="E" aria-pressed="true">Hitos</button><button type="button" class="on" data-l="P" aria-pressed="true">Personajes</button><button type="button" data-l="W" aria-pressed="false">Mundo</button><span id="tlcnt"></span></div><div class="tlera" id="tlera" aria-live="polite"></div></div>' +
     '<div id="tlstage"></div><div id="tlsc"></div><aside id="tlpn" role="dialog" aria-label="Ficha"></aside>' +
     '<button class="tlnavb" id="tlpv" type="button" aria-label="Anterior">‹</button><button class="tlnavb" id="tlnx" type="button" aria-label="Siguiente">›</button>' +
     '<div id="tlhint">Rueda, flechas o arrastra · pulsa una entrada para ver su ficha</div><div id="tlrail" aria-hidden="true"></div>';
@@ -133,7 +144,9 @@ function stripTags(s) { return String(s || "").replace(/<[^>]+>/g, ""); }
 function chip(txt, attrs) { return '<button type="button" class="chp" ' + attrs + ">" + E(txt) + "</button>"; }
 function openU_(k) {
   var u = null, gi = -1;
-  G.some(function (g, i) { return g.u.some(function (x) { if (key(x) === k) { u = x; gi = i; return true; } return false; }); });
+  function find() { u = null; gi = -1; G.some(function (g, i) { return g.u.some(function (x) { if (key(x) === k) { u = x; gi = i; return true; } return false; }); }); }
+  find();
+  if (!u) { var L = k.charAt(0).toUpperCase(); if (LS[L] === false) { setLayer(L, true, k); find(); } }
   if (!u) return; openU = k;
   if (gi !== Math.round(target)) go(gi);
   var h = "", x = '<button class="x" type="button" aria-label="Cerrar">×</button>';
@@ -145,10 +158,18 @@ function openU_(k) {
       .sort(function (a, b) { return Math.abs(a.v.y - e.y) - Math.abs(b.v.y - e.y); }).slice(0, 6).sort(function (a, b) { return a.v.y - b.v.y; });
     h = x + '<div class="k">Tema ' + e.tema + " · " + E(TEMAS[e.tema - 1].nombre) + "</div><h2>" + E(e.t) + '</h2><div class="yr">' + E(yl(e.y)) + " · epígrafe " + E(e.ep) + "</div>" +
       "<h3>Epígrafe</h3><p class=\"sub\">" + E(ep ? ep.nombre : "") + "</p>" +
-      '<p class="pact"><button type="button" class="pbtn" data-full="e' + u.i + '">Abrir ficha completa</button></p>' +
+      '<p class="pact"><button type="button" class="pbtn" data-full="e' + u.i + '">Abrir ficha completa</button></p>' + arteLink(e.y) +
       (ps.length ? "<h3>Personajes del epígrafe</h3><div class=\"chs\">" + ps.map(function (p) { return chip(p.nombre, 'data-k="p' + p.id + '"'); }).join("") + "</div>" : "") +
       (ds.length ? "<h3>Documentos</h3><div class=\"chs\">" + ds.map(function (d) { return chip(d.id + " · " + (d.titulo.length > 30 ? d.titulo.slice(0, 28) + "…" : d.titulo), 'data-d="' + d.id + '"'); }).join("") + "</div>" : "") +
       (near.length ? "<h3>Más de este tema</h3><ul>" + near.map(function (o) { return '<li><button type="button" data-k="e' + o.i + '"><b>' + E(yl(o.v.y)) + "</b><span>" + E(o.v.t) + "</span></button></li>"; }).join("") + "</ul>" : "");
+  } else if (u.k === "w") {
+    var w = MUNDO[u.i];
+    var es = EVS.map(function (v, i) { return { v: v, i: i }; }).sort(function (a, b) { return Math.abs(a.v.y - w.y) - Math.abs(b.v.y - w.y); }).slice(0, 6).sort(function (a, b) { return a.v.y - b.v.y; });
+    var ws = MUNDO.map(function (v, i) { return { v: v, i: i }; }).filter(function (o) { return o.i !== u.i; }).sort(function (a, b) { return Math.abs(a.v.y - w.y) - Math.abs(b.v.y - w.y); }).slice(0, 3).sort(function (a, b) { return a.v.y - b.v.y; });
+    h = x + '<div class="k">Contexto internacional</div><h2>' + E(w.t) + '</h2><div class="yr">' + E(yl(w.y)) + "</div>" +
+      '<h3>Qué significa para España</h3><p class="sub">' + E(w.n) + "</p>" + arteLink(w.y) +
+      "<h3>En España, por entonces</h3><ul>" + es.map(function (o) { return '<li><button type="button" data-k="e' + o.i + '"><b>' + E(yl(o.v.y)) + "</b><span>" + E(o.v.t) + "</span></button></li>"; }).join("") + "</ul>" +
+      "<h3>Otros hechos del mundo</h3><ul>" + ws.map(function (o) { return '<li><button type="button" data-k="w' + o.i + '"><b>' + E(yl(o.v.y)) + "</b><span>" + E(o.v.t) + "</span></button></li>"; }).join("") + "</ul>";
   } else {
     var p = PM[u.id], eps = (p.eps || []).map(function (i) { return EPM[i]; }).filter(Boolean);
     var evs = EVS.map(function (v, i) { return { v: v, i: i }; }).filter(function (o) { return p.eps.indexOf(o.v.ep) >= 0; }).slice(0, 6);
@@ -156,15 +177,27 @@ function openU_(k) {
     h = x + (p.img ? '<div class="pimg"><img src="' + E(p.img) + '" alt="Retrato de ' + E(p.nombre) + '" draggable="false"></div>' : "") +
       '<div class="k">' + E(cat) + " · tema " + p.tema + "</div><h2>" + E(p.nombre) + '</h2><div class="yr">' + E(window.life ? life(p) : "") + " · " + E(p.cargo) + "</div>" +
       '<p class="sub">' + E(p.sem || p.nota) + "</p>" +
-      '<p class="pact"><button type="button" class="pbtn" data-full="p' + p.id + '">Abrir ficha completa</button></p>' +
+      '<p class="pact"><button type="button" class="pbtn" data-full="p' + p.id + '">Abrir ficha completa</button></p>' + arteLink(p.nac != null ? p.nac : p.mue, p.id) +
       (eps.length ? "<h3>Epígrafes</h3><p class=\"sub small\">" + eps.map(function (q) { return E(q.id + " · " + q.nombre); }).join("<br>") + "</p>" : "") +
       (evs.length ? "<h3>Hitos del epígrafe</h3><ul>" + evs.map(function (o) { return '<li><button type="button" data-k="e' + o.i + '"><b>' + E(yl(o.v.y)) + "</b><span>" + E(o.v.t) + "</span></button></li>"; }).join("") + "</ul>" : "");
   }
   pn.innerHTML = h; pn.classList.add("on"); sc.classList.add("on"); pn.scrollTop = 0;
   var xb = pn.querySelector(".x"); if (xb) xb.focus({ preventScroll: true });
 }
+function arteLink(y, pid) {
+  var a = window.arteHref && window.arteHref(y, pid);
+  return a ? '<p class="pact"><a class="pbtn alt" href="' + E(a.u) + '" target="_blank" rel="noopener">' + E(a.t) + " ↗</a></p>" : "";
+}
 function closePn() { pn.classList.remove("on"); sc.classList.remove("on"); openU = null; }
 function railTo(ev) { var r = rail.getBoundingClientRect(); go((ev.clientX - r.left) / r.width * (N - 1)); }
+function setLayer(l, on, keep) {
+  var b = root.querySelector('.tlf [data-l="' + l + '"]'); LS[l] = on;
+  if (b) { b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); }
+  var y = G[Math.round(target)] ? G[Math.round(target)].y : 1500, ky = null;
+  if (keep) { var m = keep.charAt(0) === "e" ? EVS[+keep.slice(1)] : keep.charAt(0) === "w" ? MUNDO[+keep.slice(1)] : PM[keep.slice(1)]; if (m) y = m.y != null ? m.y : (m.nac != null ? m.nac : m.mue); }
+  closePn(); render();
+  var gi = 0; G.some(function (g, k) { if (g.y >= y) { gi = k; return true; } gi = k; return false; }); go(gi); pos = target;
+}
 function bind() {
   pn.addEventListener("click", function (ev) {
     if (ev.target.closest(".x")) { closePn(); return; }
@@ -176,11 +209,9 @@ function bind() {
   stage.addEventListener("click", function (ev) { var b = ev.target.closest("button[data-k]"); if (b && !moved) openU_(b.dataset.k); });
   root.querySelector(".tlf").addEventListener("click", function (ev) {
     var b = ev.target.closest("button[data-l]"); if (!b) return;
-    var l = b.dataset.l, others = l === "E" ? LS.P : LS.E;
-    if (LS[l] && !others) return;                                  // siempre queda una capa activa
-    LS[l] = !LS[l]; b.classList.toggle("on", LS[l]); b.setAttribute("aria-pressed", String(LS[l]));
-    var y = G[Math.round(target)] ? G[Math.round(target)].y : 1500; closePn(); render();
-    var gi = 0; G.some(function (g, k) { if (g.y >= y) { gi = k; return true; } gi = k; return false; }); go(gi); pos = target;
+    var l = b.dataset.l, act = ["E", "P", "W"].filter(function (c) { return LS[c]; }).length;
+    if (LS[l] && act === 1) return;                                // siempre queda una capa activa
+    setLayer(l, !LS[l]);
   });
   var acc = 0, lastW = 0;
   root.addEventListener("wheel", function (ev) {
@@ -231,6 +262,7 @@ window.renderLinea = function () {
   dirty = true;
   if (open) { var k = G[Math.round(target)]; if (k) openU_(open); }
 };
+window.lineaPend = function (p) { pend = p || null; };
 window.lineaStop = function () { running = false; document.body.classList.remove("ln"); if (pn) closePn(); };
 /* abrir desde fuera: lineaIr({k:"e12"}|{k:"p"+id}|{t:4}|{y:1808}) */
 window.lineaIr = function (p) { pend = p || null; if (location.hash === "#linea") { if (built) renderLinea(); } else location.hash = "#linea"; };
