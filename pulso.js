@@ -67,11 +67,11 @@ var CSS = ".pu{margin:22px 0 10px}.pu-h{display:flex;align-items:baseline;justif
   ".pu-goal{height:14px;border-radius:999px;background:var(--line);overflow:hidden;margin:10px 0 8px}.pu-goal i{display:block;height:100%;border-radius:999px;background:var(--pu-bar,var(--ink));transition:width 1s cubic-bezier(.2,.8,.2,1)}" +
   ".pu-goal+p b{color:var(--ink)}" +
   ".pu-ch{width:100%;height:auto;display:block}.pu-ch .b{fill:var(--pu-bar,var(--ink));opacity:.35}.pu-ch .b.t{opacity:1;fill:var(--pu-hi2,var(--pu-bar,var(--ink)))}.pu-ch .b.m{opacity:.85}.pu-ch text{font-family:var(--ui,system-ui,sans-serif);font-weight:600;font-size:5.4px;fill:var(--muted)}" +
-  ".pu-tm{display:grid;gap:6px;margin-top:2px}.pu-t{display:grid;grid-template-columns:2.2ch 1fr 5.4ch;gap:8px;align-items:center;font-size:.86rem}.pu-t .n{font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}" +
+  ".pu-ch.pp text{font-size:9px}.pu-pos .pu-ch{max-height:170px}.pu-tm{display:grid;gap:6px;margin-top:2px}.pu-t{display:grid;grid-template-columns:2.2ch 1fr 5.4ch;gap:8px;align-items:center;font-size:.86rem}.pu-t .n{font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}" +
   ".pu-t .nm{position:relative;height:22px;border-radius:6px;background:var(--line);overflow:hidden}.pu-t .nm i{position:absolute;inset:0 auto 0 0;background:var(--pu-bar,var(--ink));opacity:.28;border-radius:6px}.pu-t .nm span{position:relative;display:block;padding:0 8px;line-height:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.8rem;color:var(--ink)}" +
   ".pu-t.hard .nm i{background:#d94a3a;opacity:.4}.pu-t.best .nm i{background:#2fb36b;opacity:.4}.pu-t .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}.pu-t.no .v{color:var(--muted);font-weight:500}" +
   ".pu-k{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;font-size:.78rem;color:var(--muted)}.pu-k b{color:var(--ink)}.pu-k .tg{margin-left:auto}" +
-  ".pu-off{all:unset;cursor:pointer;text-decoration:underline;text-underline-offset:2px}.pu-err{padding:14px;color:var(--muted)}" +
+  ".pu-off{all:unset;cursor:pointer;font-size:.72rem;text-decoration:underline;text-underline-offset:2px;opacity:.75}.pu-off:hover,.pu-off:focus-visible{opacity:1}.pu-err{padding:14px;color:var(--muted)}" +
   ".pu-tick{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0;padding:10px 14px;border:1px solid var(--line);background:var(--surface);border-radius:999px;font-size:.88rem;color:var(--ink);text-decoration:none;max-width:fit-content}" +
   ".pu-tick:hover{border-color:var(--ink)}.pu-tick b{font-variant-numeric:tabular-nums}.pu-tick .go{color:var(--muted);font-size:.8rem}" +
   "@media(prefers-reduced-motion:reduce){.pu-live i{animation:none}.pu-goal i{transition:none}}";
@@ -106,13 +106,13 @@ function pos(d) {
   var h = '<div class="pu-c pu-pos"><h3>Tu sitio en la clase</h3>';
   if (tot < 10) return h + "<p>Aún hay pocos datos esta semana.</p></div>";
   var below = 0; if (me >= 0) { for (i = 0; i < me; i++) below += xw[i] || 0; below += (xw[me] || 0) / 2; }
-  var pc = me >= 0 ? Math.max(1, Math.min(99, Math.round(below / tot * 100))) : null, o = "", W = 300, H = 62, bw = 12.4, g = 2.4;
+  var pc = me >= 0 ? Math.max(1, Math.min(99, Math.round(below / tot * 100))) : null, o = "", W = 600, H = 84, bw = 25, g = 5;
   for (i = 0; i < 20; i++) {
-    var v = xw[i] || 0, hh = Math.max(v ? 2 : 0.8, v / mx * (H - 16));
-    o += '<rect class="b' + (i === me ? " t" : "") + '" x="' + (i * (bw + g) + 2).toFixed(1) + '" y="' + (H - 10 - hh).toFixed(1) + '" width="' + bw + '" height="' + hh.toFixed(1) + '" rx="2"><title>' + v + "</title></rect>";
+    var v = xw[i] || 0, hh = Math.max(v ? 3 : 1, v / mx * (H - 22));
+    o += '<rect class="b' + (i === me ? " t" : "") + '" x="' + (i * (bw + g) + 2.5).toFixed(1) + '" y="' + (H - 10 - hh).toFixed(1) + '" width="' + bw + '" height="' + hh.toFixed(1) + '" rx="2"><title>' + v + "</title></rect>";
   }
   return h + (pc != null ? "<p style=\"font-size:1rem;color:var(--ink)\">Vas por delante del <b>" + pc + " %</b> de la clase que ha estudiado en los últimos 7 días.</p>" : "<p>Todavía no tienes XP.</p>") +
-    '<svg class="pu-ch" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Reparto de la clase por XP">' + o + '<text x="2" y="' + (H - 1) + '">menos XP</text><text x="' + (W - 2) + '" y="' + (H - 1) + '" text-anchor="end">más XP</text></svg>' +
+    '<svg class="pu-ch pp" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Reparto de la clase por XP">' + o + '<text x="2" y="' + (H - 1) + '">menos XP</text><text x="' + (W - 2) + '" y="' + (H - 1) + '" text-anchor="end">más XP</text></svg>' +
     "<p>" + nf(tot) + " dispositivos en los últimos 7 días" + (me >= 0 ? ". La barra marcada eres tú" : "") + ". No se guarda quién es quién, solo cuántos hay en cada tramo.</p></div>";
 }
 function body(d) {
@@ -140,8 +140,8 @@ function body(d) {
     '<div class="pu-c"><h3>Aciertos por tema</h3><div class="pu-tm">' + rows + "</div>" +
     '<p style="margin-top:10px">' + (hard ? "Lo más difícil ahora: <b>tema " + hard.n + "</b> (" + Math.round(hard.p * 100) + " %)." : "Aparecerán cuando haya al menos 25 respuestas por tema.") + (best ? " Lo más dominado: <b>tema " + best.n + "</b> (" + Math.round(best.p * 100) + " %)." : "") + "</p></div></div>" +
     '<div class="pu-row" style="grid-template-columns:1fr">' + pos(d) + "</div>" +
-    '<div class="pu-k"><span><b>' + nf(d.players || 0) + "</b> en la clasificación · <b>" + nf(d.activeToday || 0) + "</b> activos hoy</span>" +
-    '<span class="tg">Anónimo: solo se suman cifras, sin identificadores. <button type="button" class="pu-off" data-off>' + (on() ? "No contar mi actividad" : "Volver a contar mi actividad") + "</button></span></div>";
+    '<div class="pu-k"><span><b>' + nf(d.players || 0) + "</b> en el ranking · <b>" + nf(d.activeToday || 0) + "</b> activos hoy</span>" +
+    '<span class="tg"><button type="button" class="pu-off" data-off>' + (on() ? "No contar mi actividad" : "Volver a contar mi actividad") + "</button></span></div>";
 }
 function paint(el, d) {
   if (!el.isConnected) return;

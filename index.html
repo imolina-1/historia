@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Historia de España · 2.º Bachillerato</title>
+<link rel="preload" as="style" href="identidad.css">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-latin-wdth-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/inter-latin-wght-normal.woff2">
 <link rel="stylesheet" href="linea.css">
 <script defer src="mundo.js"></script><script defer src="nota.js"></script><script defer src="anyo.js"></script><script defer src="linea.js"></script>
 <script>window.PULSO_CFG={b:"es",api:"https://historiapau.pages.dev/api/lb",link:"#clasif",xp:function(){return typeof totalXP==="function"?totalXP():0},temas:function(){return(typeof TEMAS!=="undefined"?TEMAS:[]).map(function(t){return{n:t.n,name:t.nombre}})}}</script><script src="pulso.js"></script>
@@ -481,14 +484,14 @@ header.top .bar{display:flex;align-items:center;gap:14px;height:var(--hh);flex-w
 .bt{display:flex;flex-direction:column;line-height:1.1}.bt b{font:400 1.08rem var(--serif);letter-spacing:-.01em}.bt small{font:600 .6rem var(--sans);letter-spacing:.17em;text-transform:uppercase;color:var(--gold);margin-top:3px}
 nav.mainnav{display:flex;align-items:center;gap:2px;margin-left:auto;height:100%}
 .nv{background:none;border:0;color:#cfc6b4;font:500 .9rem var(--sans);padding:0 13px;height:100%;cursor:pointer;display:inline-flex;align-items:center;gap:6px;position:relative;white-space:nowrap;border-radius:0}
-.nv:hover,.nv-i:hover>.nv,.nv-i.open>.nv{color:#fff}
+.nv:hover,.nv-i.open>.nv{color:#fff}
 .nv:after{content:"";position:absolute;left:13px;right:13px;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s}
 .nv[aria-selected=true]:after,.nv-i.cur>.nv:after{transform:scaleX(1)}
 .nv[aria-selected=true],.nv-i.cur>.nv{color:#fff}
-.nv-g svg{width:10px;height:10px;transition:transform .2s;opacity:.7}.nv-i:hover .nv-g svg,.nv-i.open .nv-g svg{transform:rotate(180deg)}
+.nv-g svg{width:10px;height:10px;transition:transform .2s;opacity:.7}.nv-i.open .nv-g svg{transform:rotate(180deg)}
 .nv-i{position:relative;height:100%}
 .nv-m{position:absolute;top:calc(100% - 1px);left:-6px;min-width:330px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-top:2px solid var(--gold);padding:6px;box-shadow:0 24px 50px rgba(0,0,0,.32);display:none;z-index:40}
-.nv-i:hover .nv-m,.nv-i.open .nv-m,.nv-i:focus-within .nv-m{display:block;animation:mn .16s ease-out}
+.nv-i.open .nv-m{display:block;animation:mn .16s ease-out}
 @keyframes mn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .nv-m button{display:grid;grid-template-columns:34px 1fr;gap:0 10px;width:100%;text-align:left;background:none;border:0;padding:10px 12px;cursor:pointer;color:var(--ink);border-radius:2px}
 .nv-m button:hover,.nv-m button:focus-visible{background:var(--surface2)}
@@ -594,7 +597,6 @@ select:focus,input:focus,textarea:focus{border-color:var(--accent);outline:0;box
 @media(max-width:560px){.vh h1{font-size:2.6rem}.tools{gap:2px}}
 @media(prefers-reduced-motion:reduce){.nv-m,.nv:after{animation:none;transition:none}}
 @media print{body:before,#sp,header.top,.foot{display:none!important}}
-.nv-i.shut .nv-m{display:none!important}
 .burger .x{display:none}body.menu .burger .m{display:none}body.menu .burger .x{display:block}
 .act2.k8{--bc:#6f7d4a}
 /* unificación de radios y marcos en páginas interiores */
@@ -1211,7 +1213,7 @@ fetch("data.json").then(r=>{if(!r.ok)throw new Error(r.status);return r.json()})
 
 const effTheme=()=>document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
 function initTheme(){const b=$("#theme");const paint=()=>{const t=effTheme();b.innerHTML=t==="dark"?SUNI:MOONI;b.title=t==="dark"?"Cambiar a modo claro":"Cambiar a modo oscuro";b.setAttribute("aria-label",b.title)};paint();b.onclick=()=>{const n=effTheme()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;LS.set("theme",n);paint()}}
-function initLightbox(){initViewer();return;const lb=$("#lb");document.addEventListener("click",e=>{const im=e.target.closest(".fig img");if(im&&!im.closest(".exam")){$("#lbi").src=im.src;$("#lbi").alt=im.alt;$("#lbc").textContent=im.alt;lb.showModal()}else if(e.target.closest("#lb"))lb.close()})}
+function initLightbox(){initViewer()}
 function init(){
   $$("nav.mainnav [data-v]").forEach(b=>b.addEventListener("click",()=>{location.hash=b.dataset.v}));initNav();
   addEventListener("hashchange",route);
@@ -1251,7 +1253,7 @@ function shuffle(arr,r){const a=arr.slice();for(let i=a.length-1;i>0;i--){const 
 function segs(name){const p=name.split(/\.\s+/).map(s=>s.replace(/\.$/,"").trim()).filter(Boolean);return(p.length>=2&&p.every(s=>s.split(/\s+/).length>=3))?p:[name.replace(/\.$/,"")]}
 const stem=t=>{t=t.replace(/\.$/,"");return /^(Relacione|Elabore|Explique|Compare|Defina|Analice|Describa)/i.test(t)?t+".":"Explique: "+t+"."}
 const catChip=p=>`<span class="chip cat" style="--cc:${CATS[p.cat][1]}">${CATS[p.cat][0]}</span>`;
-function figs(d,withSrc=true){return (d.imgs||[]).map(i=>`<figure class="fig">${withSrc?`<div class="figw"><img src="${i.f}" alt="${esc(i.cap)}" title="Pulsa para ampliar" decoding="async"><button class="zoomb" type="button" aria-label="Ampliar con zoom">⤢ Ampliar</button></div>`:`<img src="${i.f}" alt="${esc(i.cap)}" loading="lazy">`}<figcaption>${esc(i.cap)}${withSrc?`<span>${esc(i.src)}</span>`:""}</figcaption></figure>`).join("")}
+function figs(d,withSrc=true){return (d.imgs||[]).map(i=>`<figure class="fig">${withSrc?`<div class="figw"><img src="${i.f}" alt="${esc(i.cap)}" title="Pulsa para ampliar" loading="lazy" decoding="async"><button class="zoomb" type="button" aria-label="Ampliar con zoom">⤢ Ampliar</button></div>`:`<img src="${i.f}" alt="${esc(i.cap)}" loading="lazy">`}<figcaption>${esc(i.cap)}${withSrc?`<span>${esc(i.src)}</span>`:""}</figcaption></figure>`).join("")}
 const pendOf=id=>PEND.find(p=>p.id===id&&p.estado==="falta");
 function docHTML(d){
   let h="";
@@ -1300,7 +1302,7 @@ function openPers(id){
   const docs=DOCS.filter(d=>p.eps.includes(d.ep));
   const evs=EVS.filter(e=>p.eps.includes(e.ep)).slice(0,6);
   const wk=p.wk?`https://es.wikipedia.org/wiki/${encodeURIComponent(p.wk)}`:`https://es.wikipedia.org/w/index.php?search=${encodeURIComponent(clean(p.nombre))}`;
-  openDlg(`<div class="row big" style="gap:18px;align-items:center;--cc:${CATS[p.cat][1]}">${p.img?`<span class="pbio"><img src="${p.img}" alt="Retrato de ${esc(clean(p.nombre))}"></span>`:monoHTML(p)}<div><div class="meta" style="margin-bottom:6px">${catChip(p)}<span class="chip">Tema ${p.tema}</span></div><h2 style="font-size:1.6rem">${esc(p.nombre)}</h2><div class="note">${esc(life(p))}${p.c?" · fechas aproximadas":""}</div></div></div>`,
+  openDlg(`<div class="row big" style="gap:18px;align-items:center;--cc:${CATS[p.cat][1]}">${p.img?`<span class="pbio"><img src="${p.img}" alt="Retrato de ${esc(clean(p.nombre))}" loading="lazy" decoding="async"></span>`:monoHTML(p)}<div><div class="meta" style="margin-bottom:6px">${catChip(p)}<span class="chip">Tema ${p.tema}</span></div><h2 style="font-size:1.6rem">${esc(p.nombre)}</h2><div class="note">${esc(life(p))}${p.c?" · fechas aproximadas":""}</div></div></div>`,
    `<p style="margin:16px 0 6px"><b>${esc(p.cargo)}</b></p>
     <p class="sem">${esc(p.sem||p.nota)}</p>
     <h3 style="font-size:1rem;margin:16px 0 6px">Epígrafes</h3><ul style="margin:0;padding-left:1.1rem">${eps.map(e=>`<li><b>${e.id}</b> · ${esc(e.nombre)}</li>`).join("")}</ul>
@@ -1570,11 +1572,11 @@ function fcStart(o){const deck=buildDeck(o);if(!deck.length){toast("No hay tarje
 function faces(x){
   if(x.type==="p"){const p=x.p,eps=p.eps.map(e=>EPM[e]?e+" · "+EPM[e].nombre:"").filter(Boolean).slice(0,2);
     return{tag:"Personaje · tema "+p.tema,front:`<div class="fq">¿Quién fue?</div><h2 class="fbig">${esc(p.nombre)}</h2><p class="note">${esc(life(p))}</p>`,
-      back:`<h2 class="fbig">${esc(p.nombre)}</h2><p><b>${esc(p.cargo)}</b> · ${esc(life(p))}</p>${p.img?`<figure class="fig fcimg"><div class="figw"><img src="${p.img}" alt="Retrato de ${esc(p.nombre)}"></div></figure>`:""}<p class="sem">${esc(p.sem||p.nota||"")}</p><p class="note">${eps.map(esc).join("<br>")}</p>`}}
+      back:`<h2 class="fbig">${esc(p.nombre)}</h2><p><b>${esc(p.cargo)}</b> · ${esc(life(p))}</p>${p.img?`<figure class="fig fcimg"><div class="figw"><img src="${p.img}" alt="Retrato de ${esc(p.nombre)}" loading="lazy" decoding="async"></div></figure>`:""}<p class="sem">${esc(p.sem||p.nota||"")}</p><p class="note">${eps.map(esc).join("<br>")}</p>`}}
   if(x.type==="e"){const e=x.e;return{tag:"Hito · tema "+e.tema,front:`<div class="fq">¿Cuándo ocurrió?</div><h2 class="fbig">${esc(e.t)}</h2>`,back:`<h2 class="fbig">${esc(e.t)}</h2><p class="fyear">${esc(fy(e.y))}</p><p class="note">${esc(e.ep)} · ${esc(EPM[e.ep]?EPM[e.ep].nombre:"")}</p>`}}
   const d=x.d,im=d.imgs[0];
-  return{tag:"Fuente histórica · "+d.id,front:`<div class="fq">Identifica esta fuente: tipo, época y epígrafe.</div><figure class="fig"><div class="figw"><img src="${im.f}" alt="Fuente histórica por identificar"><button class="zoomb" type="button" aria-label="Ampliar">⤢ Ampliar</button></div></figure>`,
-    back:`<figure class="fig"><div class="figw"><img src="${im.f}" alt="${esc(im.cap||d.titulo)}"></div></figure><h3>${esc(d.titulo)}</h3><p class="note">${esc(d.tipo||"")}${d.year!=null?" · "+esc(fy(d.year)):""} · Epígrafe ${esc(d.ep)} · ${esc(EPM[d.ep]?EPM[d.ep].nombre:"")}</p><p>${esc((d.clave&&d.clave.apuntes)||"")}</p>`}}
+  return{tag:"Fuente histórica · "+d.id,front:`<div class="fq">Identifica esta fuente: tipo, época y epígrafe.</div><figure class="fig"><div class="figw"><img src="${im.f}" alt="Fuente histórica por identificar" loading="lazy" decoding="async"><button class="zoomb" type="button" aria-label="Ampliar">⤢ Ampliar</button></div></figure>`,
+    back:`<figure class="fig"><div class="figw"><img src="${im.f}" alt="${esc(im.cap||d.titulo)}" loading="lazy" decoding="async"></div></figure><h3>${esc(d.titulo)}</h3><p class="note">${esc(d.tipo||"")}${d.year!=null?" · "+esc(fy(d.year)):""} · Epígrafe ${esc(d.ep)} · ${esc(EPM[d.ep]?EPM[d.ep].nombre:"")}</p><p>${esc((d.clave&&d.clave.apuntes)||"")}</p>`}}
 function fcDraw(){
   const box=$("#fcb");if(FC.i>=FC.deck.length)return fcEnd();
   const x=FC.deck[FC.i],f=faces(x);
@@ -1815,7 +1817,7 @@ function qDetective(r,full){
   const d=pick(withImg(),r),im=d.imgs[0],q={type:"mc",kind:"det",tag:full?"Fuente histórica":"Detective de fuentes",doc:d,prompt:"¿A qué tema pertenece esta fuente?",opts:temaOpts(d.tema,r),extra:[],full:!!full,pts:10,
    hints:[]};
   const cz=300+Math.floor(r()*80),cx=15+Math.floor(r()*70),cy=15+Math.floor(r()*70);
-  q.media=()=>q.full?`<div class="fig" style="margin:6px 0"><img src="${im.f}" alt="${esc(im.cap||"")}"></div>`:`<div class="crop" style="background-image:url('${im.f}');background-size:${cz}%;background-position:${cx}% ${cy}%" role="img" aria-label="Fragmento ampliado de una fuente histórica"></div>`;
+  q.media=()=>q.full?`<div class="fig" style="margin:6px 0"><img src="${im.f}" alt="${esc(im.cap||"")}" loading="lazy" decoding="async"></div>`:`<div class="crop" style="background-image:url('${im.f}');background-size:${cz}%;background-position:${cx}% ${cy}%" role="img" aria-label="Fragmento ampliado de una fuente histórica"></div>`;
   if(!full)q.hints.push(()=>{q.full=true;return"Imagen completa"});
   q.hints.push(()=>{q.extra.push(`Tipo de fuente: ${d.tipo}`);return"Tipo de fuente"});
   q.hints.push(()=>{q.extra.push(`Época: ${PERN[per(d.tema)]}`);return"Época"});
@@ -1856,7 +1858,7 @@ function qLoDijo(r){
   q.hints.push(()=>{q.extra.push(`Tema ${d.tema}: ${TEMAS.find(t=>t.n===d.tema).nombre}`);return"Tema"});
   q.why=`<b>${esc(clean(p.nombre))}</b>, en «${esc(d.titulo)}» (${esc(d.id)}).`;q.open=d.id;return q}
 function qEpoca(r,doc){
-  const d=doc,per0=per(d.tema),q={type:"mc",kind:"epoca",tag:"Fuente del día",doc:d,prompt:"¿A qué periodo pertenece?",extra:[],pts:10,hints:[],opts:["A","XIX","XX"].map(k=>({t:PERN[k][0].toUpperCase()+PERN[k].slice(1),ok:k===per0?1:0})),media:()=>`<div class="fig" style="margin:6px 0"><img src="${d.imgs[0].f}" alt=""></div>`};
+  const d=doc,per0=per(d.tema),q={type:"mc",kind:"epoca",tag:"Fuente del día",doc:d,prompt:"¿A qué periodo pertenece?",extra:[],pts:10,hints:[],opts:["A","XIX","XX"].map(k=>({t:PERN[k][0].toUpperCase()+PERN[k].slice(1),ok:k===per0?1:0})),media:()=>`<div class="fig" style="margin:6px 0"><img src="${d.imgs[0].f}" alt="" loading="lazy" decoding="async"></div>`};
   q.why=`Es del tema ${d.tema} (${esc(TEMAS.find(t=>t.n===d.tema).nombre)}).`;return q}
 function qOrdena(r,mixed){
   const evs=EVS.filter(e=>e.tema!=null);let pool;
@@ -1873,7 +1875,7 @@ const GAMES={
  ord:{n:"Ordena la historia",ic:"⏳",d:"Cinco hitos desordenados: ponlos en su sitio.",make:r=>Array.from({length:3},()=>qOrdena(r))}};
 function dailyDoc(n=dayNum()){const r=rng(n*7919+13);return pick(withImg(),r)}
 function dailyQs(n=dayNum()){const r=rng(n*7919+17),d=dailyDoc(n),q1=qDetective(r,true);q1.doc=d;
-  const im=d.imgs[0];q1.media=()=>`<div class="fig" style="margin:6px 0"><img src="${im.f}" alt=""></div>`;q1.opts=temaOpts(d.tema,r);q1.hints=[];q1.extra=[];q1.tag="Fuente del día";q1.why=`<b>${esc(d.id)} · ${esc(d.titulo)}</b>. Epígrafe ${esc(d.ep)}, tema ${d.tema}.`;q1.open=d.id;q1.full=true;
+  const im=d.imgs[0];q1.media=()=>`<div class="fig" style="margin:6px 0"><img src="${im.f}" alt="" loading="lazy" decoding="async"></div>`;q1.opts=temaOpts(d.tema,r);q1.hints=[];q1.extra=[];q1.tag="Fuente del día";q1.why=`<b>${esc(d.id)} · ${esc(d.titulo)}</b>. Epígrafe ${esc(d.ep)}, tema ${d.tema}.`;q1.open=d.id;q1.full=true;
   q1.hints.push(()=>{q1.extra.push(`Tipo de fuente: ${d.tipo}`);return"Tipo de fuente"});
   return[q1,qEpoca(r,d)]}
 function weeklyQs(w=WKN()){const r=rng(w*104729+7);return[qDetective(r),qDetective(r),qDetective(r),qTexto(r),qTexto(r),qQuien(r),qQuien(r),qLoDijo(r),qOrdena(r,true),qOrdena(r,false)]}
@@ -2138,9 +2140,9 @@ function renderClasif(){
   const rk={xpT:me&&me.rank,wk:me&&me.rankW,streak:me&&me.rankS,cards:me&&me.rankC}[tab];
   V.innerHTML=`<div class="vh"><h1>Clasificación de la clase</h1></div>
   <div id="pulso"></div>
-  ${on?`<div class="card lbme"><div><div class="eyebrow" style="margin:0">Participas de forma anónima</div><h2>${me?`Puesto ${me.rank}`:"…"}</h2><p class="note" style="margin:2px 0 0">${me?`De ${d.n} participantes · ${nf(me.xp)} XP · +${nf(me.wxp)} esta semana`:(LBS.busy?"Sincronizando…":"Aún sin sincronizar")}</p></div><div class="row"><button class="btn primary" id="lbup" type="button">Actualizar mis puntos</button><button class="btn" id="lbout" type="button">Salir de la clasificación</button></div></div>`
-   :`<div class="card lbjoin"><h2>Entra en la clasificación</h2><p class="note">Sin alias, sin nombre, sin grupo. Se publican solo tus puntos (XP), tu racha y tus cromos, sin ningún dato que te identifique. Puedes salir cuando quieras y tu fila se borra. No hay cookies ni seguimiento.</p>
-    <div class="row" style="margin-top:12px"><button class="btn primary" id="lbjoin" type="button">Entrar</button><span class="note" id="lbmsg" role="alert"></span></div></div>`}
+  ${on?`<div class="card lbme"><div><div class="eyebrow" style="margin:0">Estás en el ranking</div><h2>${me?`Puesto ${me.rank}`:"…"}</h2><p class="note" style="margin:2px 0 0">${me?`De ${d.n} participantes · ${nf(me.xp)} XP · +${nf(me.wxp)} esta semana`:(LBS.busy?"Sincronizando…":"Aún sin sincronizar")}</p></div><div class="row"><button class="btn primary" id="lbup" type="button">Actualizar mis puntos</button><button class="btn" id="lbout" type="button">Salir del ranking</button></div></div>`
+   :`<div class="card lbjoin"><h2>Ranking opcional</h2><p class="note">Las cifras de la clase y tu posición se cuentan solas. El ranking con puestos es opcional: si entras, se publican tus puntos (XP), tu racha y tus cromos con un identificador aleatorio, sin nombre ni alias. Puedes salir cuando quieras y tu fila se borra.</p>
+    <div class="row" style="margin-top:12px"><button class="btn primary" id="lbjoin" type="button">Entrar en el ranking</button><span class="note" id="lbmsg" role="alert"></span></div></div>`}
   ${LBS.err&&!d?`<div class="warn" style="margin-top:14px">${esc(LBS.err)} <button class="btn small" id="lbretry" type="button">Reintentar</button></div>`:""}
   ${d?`<div class="stats4" style="margin-top:18px"><div class="stt"><b>${d.n}</b><span>participantes</span></div><div class="stt"><b>${nf(d.xp)}</b><span>XP entre todos</span></div><div class="stt"><b>${Math.round(d.mins/60)} h</b><span>de estudio sumadas</span></div><div class="stt"><b>${lbWeekLabel(d.week)}</b><span>inicio de la semana</span></div></div>`:""}
   <div class="lbf"><div class="tlseg" role="tablist" aria-label="Clasificación">${tabs.map(([k,n])=>`<button class="seg" role="tab" data-lt="${k}" aria-current="${tab===k}">${n}</button>`).join("")}</div>
@@ -2153,11 +2155,11 @@ function renderClasif(){
   $("#lbrf").onclick=()=>lbLoad();
   const rt=$("#lbretry");if(rt)rt.onclick=()=>lbLoad();
   const up=$("#lbup");if(up)up.onclick=async()=>{up.disabled=true;const j=await lbPush();if(j&&!j.ok)toast(j.error||"No se pudo actualizar.");else toast("Puntos actualizados");lbLoad()};
-  const out=$("#lbout");if(out)out.onclick=async()=>{if(!out.dataset.sure){out.dataset.sure="1";out.textContent="¿Seguro? Pulsa otra vez";return}const j=await lbCall("DELETE","?id="+lbId());if(j.ok){G().lb.on=0;saveST();LBS.d=null;toast("Has salido de la clasificación");lbLoad()}else toast(j.error||"No se pudo salir.")};
+  const out=$("#lbout");if(out)out.onclick=async()=>{if(!out.dataset.sure){out.dataset.sure="1";out.textContent="¿Seguro? Pulsa otra vez";return}const j=await lbCall("DELETE","?id="+lbId());if(j.ok){G().lb.on=0;saveST();LBS.d=null;toast("Has salido del ranking");lbLoad()}else toast(j.error||"No se pudo salir.")};
   const jn=$("#lbjoin");if(jn)jn.onclick=async()=>{const m=$("#lbmsg");
     jn.disabled=true;m.textContent="Entrando…";const g=G();lbId();g.lb.on=1;delete g.lb.alias;delete g.lb.grp;
     const j=await lbCall("POST","",lbPayload());
-    if(j.ok){saveST();LBS.d=Object.assign({},j);LBS.t=Date.now();toast("Ya participas en la clasificación");lbLoad()}else{g.lb.on=0;jn.disabled=false;m.textContent=j.error||"No se pudo entrar."}};
+    if(j.ok){saveST();LBS.d=Object.assign({},j);LBS.t=Date.now();toast("Estás en el ranking");lbLoad()}else{g.lb.on=0;jn.disabled=false;m.textContent=j.error||"No se pudo entrar."}};
 }
 function lbBanner(){return `<div class="albn alt" id="lbbn" role="link" tabindex="0"><span class="sb" aria-hidden="true">🏆</span><div><h3>Clasificación de la clase</h3><p>${(LBg()&&LBg().on)?"Ya estás dentro: mira tu puesto.":"Compite de forma anónima: puntos, racha y cromos."}</p></div><button class="btn" type="button">Ver clasificación</button></div>`}
 function initClasif(){
@@ -2494,10 +2496,16 @@ function openShare(){const u=shareURL();$("#shq").innerHTML=qrSVG(u);$("#shu").t
 function sharePoster(){const u=shareURL(),f=u.replace(/^https?:\/\//,"").replace(/\/$/,"");
  printHTML(`<!doctype html><meta charset="utf-8"><title>Cartel</title><style>@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;width:210mm;height:296mm;background:#15110d;color:#efe7d6;font-family:Georgia,serif;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22mm 16mm;text-align:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.k{font:700 11pt Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#d9a653}h1{font:300 56pt/.95 Georgia,serif;margin:7mm 0 0;letter-spacing:-.03em}h1 em{display:block;font-size:.58em;color:#d9a653;margin-top:3mm}p{font:italic 16pt Georgia,serif;color:#c9bfab;margin:0 0 4mm}.q{background:#fff;padding:7mm;width:124mm;height:124mm}.q svg{width:100%;height:100%}.u{font:700 26pt Arial,sans-serif;letter-spacing:-.01em;word-break:break-all;color:#fff}.s{font:10pt Arial,sans-serif;color:#a89d88}</style><div><div class="k">2.º de Bachillerato · PAU Madrid</div><h1>Historia de España<em>a la manera de la PAU</em></h1></div><div class="q">${qrSVG(u)}</div><div><p>Escanea el código con la cámara del móvil</p><div class="u">${f}</div></div><div class="s">Textos · fuentes históricas · personajes · exámenes · juegos</div>`)}
 function initNav(){
- const nav=$("#mainnav"),closeAll=()=>$$(".nv-i").forEach(x=>{x.classList.remove("open");x.querySelector(".nv-g").setAttribute("aria-expanded","false")});
- $$(".nv-g",nav).forEach(g=>g.addEventListener("click",e=>{e.stopPropagation();const it=g.parentElement,o=!it.classList.contains("open");closeAll();it.classList.toggle("open",o);g.setAttribute("aria-expanded",String(o))}));
+ const nav=$("#mainnav"),items=$$(".nv-i",nav),wide=()=>matchMedia("(hover:hover) and (min-width:901px)").matches;
+ const set=(it,o)=>{it.classList.toggle("open",o);it.querySelector(".nv-g").setAttribute("aria-expanded",String(o))},closeAll=except=>items.forEach(x=>{if(x!==except)set(x,false)});
+ items.forEach(it=>{let t;const g=it.querySelector(".nv-g");
+  g.addEventListener("click",e=>{e.stopPropagation();const o=wide()||!it.classList.contains("open");closeAll(it);set(it,o)});
+  it.addEventListener("mouseenter",()=>{if(!wide())return;clearTimeout(t);closeAll(it);set(it,true)});
+  it.addEventListener("mouseleave",()=>{if(!wide())return;t=setTimeout(()=>set(it,false),160)});
+  it.addEventListener("focusin",e=>{if(e.target.matches(":focus-visible")){clearTimeout(t);closeAll(it);if(wide())set(it,true)}});
+  it.addEventListener("focusout",e=>{if(e.relatedTarget&&!it.contains(e.relatedTarget))set(it,false)})});
  document.addEventListener("click",e=>{if(!e.target.closest(".nv-i"))closeAll()});
- nav.addEventListener("click",e=>{const b=e.target.closest(".nv-m [data-v]");if(b){const it=b.closest(".nv-i");closeAll();it.classList.add("shut");it.addEventListener("mouseleave",()=>it.classList.remove("shut"),{once:true});setTimeout(()=>it.classList.remove("shut"),1200)}});
+ nav.addEventListener("click",e=>{if(e.target.closest(".nv-m [data-v]")){closeAll();document.activeElement&&document.activeElement.blur&&document.activeElement.blur()}});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeAll();document.body.classList.remove("menu");$("#burger").setAttribute("aria-expanded","false")}});
  $("#burger").onclick=()=>{const o=document.body.classList.toggle("menu");$("#burger").setAttribute("aria-expanded",String(o))};
  const sp=$("#sp");let tk=0;addEventListener("scroll",()=>{if(tk)return;tk=requestAnimationFrame(()=>{tk=0;const h=document.documentElement,m=h.scrollHeight-innerHeight;sp.style.width=(m>0?Math.min(100,scrollY/m*100):0)+"%"})},{passive:true});
@@ -2521,7 +2529,7 @@ function renderInicio(){
    <div class="hcol"><span class="eyebrow">2.º de Bachillerato · PAU Madrid 2026-27</span><h1>Historia de <em>España</em></h1>
     <div id="efx"></div>
     <div class="cta"><button class="btn primary big" data-go="examenes">Generar un examen</button><button class="btn big" data-go="fuentes">Explorar las fuentes</button></div></div>
-   <div class="hcar" id="hcar">${car.map((d,i)=>`<button class="hs ${i?"":"on"}" data-id="${d.id}" aria-label="${esc(d.titulo)}"><div class="hbg" style="background-image:url('${d.imgs[0].f}')"></div><img src="${d.imgs[0].f}" alt="${esc(d.imgs[0].cap||d.titulo)}"><div class="hcap"><b>${esc(d.titulo.length>74?d.titulo.slice(0,72)+"…":d.titulo)}</b><span>${d.tipo} · Epígrafe ${d.ep}${d.year!=null?" · "+fy(d.year):""}</span></div></button>`).join("")}<div class="hdots">${car.map((d,i)=>`<i data-i="${i}" class="${i?"":"on"}"></i>`).join("")}</div></div>
+   <div class="hcar" id="hcar">${car.map((d,i)=>`<button class="hs ${i?"":"on"}" data-id="${d.id}" aria-label="${esc(d.titulo)}"><div class="hbg" style="background-image:url('${d.imgs[0].f}')"></div><img src="${d.imgs[0].f}" alt="${esc(d.imgs[0].cap||d.titulo)}" loading="lazy" decoding="async"><div class="hcap"><b>${esc(d.titulo.length>74?d.titulo.slice(0,72)+"…":d.titulo)}</b><span>${d.tipo} · Epígrafe ${d.ep}${d.year!=null?" · "+fy(d.year):""}</span></div></button>`).join("")}<div class="hdots">${car.map((d,i)=>`<i data-i="${i}" class="${i?"":"on"}"></i>`).join("")}</div></div>
   </div>
   <div class="sech rv"><h2>Para hoy</h2></div>
   <div class="rv" id="hoyx"></div><a id="pulsoH" hidden></a>
@@ -2745,20 +2753,6 @@ function drawTemas(){
   const nb={A:"Bloque A · hasta 1788",B:"Bloque B · siglo XIX",C:"Bloque C · 1902-1975",D:"Bloque D · 1975-hoy"};
   $("#temas").innerHTML=["A","B","C","D"].map(b=>{const ts=TEMAS.filter(t=>t.bloque===b);const open=ts.some(t=>XSEL.has(t.n));return `<details ${open?"open":""}><summary>${nb[b]}</summary><div class="tm">${ts.map(t=>`<label><input type="checkbox" data-t="${t.n}" ${XSEL.has(t.n)?"checked":""}> <span>${t.n}. ${esc(t.nombre)}</span></label>`).join("")}</div></details>`}).join("");
   $$("#temas input").forEach(i=>i.onchange=()=>{i.checked?XSEL.add(+i.dataset.t):XSEL.delete(+i.dataset.t)});
-}
-function ordinalYears(e){return fy(e.y)}
-function cortaPool(ep){
-  const out=[],id=ep.id;
-  DOCS.filter(d=>d.ep===id&&d.bloque==="A"&&d.cuestion).forEach(d=>{const ex=/esquema/i.test(d.cuestion),m=d.clave.apuntes.match(/Esquema:\s*(.*)$/);out.push({text:stem(d.cuestion),ep:id,esq:ex,orient:ex&&m?m[1]:""})});
-  segs(ep.nombre).forEach(s=>out.push({text:"Explique: "+s+".",ep:id,esq:false,orient:""}));
-  out.push({text:"Elabore un esquema sobre: "+ep.nombre.replace(/\.$/,"")+".",ep:id,esq:true,orient:""});
-  const ps=PEOPLE.filter(p=>p.eps.includes(id));
-  const evs=EVS.filter(e=>e.ep===id);
-  ps.forEach(p=>out.push({text:`Defina al personaje «${clean(p.nombre)}» y explique su importancia histórica.`,ep:id,esq:false,orient:`${p.cargo} (${life(p)}). ${p.nota}`}));
-  evs.forEach(e=>{out.push({text:`Explique el acontecimiento: ${e.t}.`,ep:id,esq:false,orient:`${fy(e.y)}.`});out.push({text:`Explique las causas y consecuencias de: ${e.t}.`,ep:id,esq:false,orient:`${fy(e.y)}.`})});
-  const items=[...ps.map(p=>({l:clean(p.nombre),o:`${p.cargo} (${life(p)}). ${p.nota}`})),...evs.map(e=>({l:e.t,o:`${fy(e.y)}: ${e.t}.`}))];
-  for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++)if((i+j)%2===0)out.push({text:`Relacione «${items[i].l}» con «${items[j].l}» dentro de su contexto histórico.`,ep:id,esq:false,orient:`${items[i].o} · ${items[j].o}`});
-  return out;
 }
 function genExam(o){
   const r=rng(o.seed),W=[],N=[];

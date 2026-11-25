@@ -120,6 +120,7 @@ select,input[type=text],input[type=search],input[type=number],textarea{border-co
 
 /* ---- barras oscuras de juegos, álbum y clasificación ---- */
 .albn,.lbme,.lbjoin{border-top:0;border:2px solid var(--ink);border-radius:8px;box-shadow:6px 6px 0 var(--hl);background:var(--ink);color:var(--bg)}
+.lbjoin .note,.lbme .note{color:rgba(255,255,255,.78)}
 .albn .btn,.lbme .btn,.lbjoin .btn{background:var(--hl);color:var(--hl-ink);border-color:var(--hl);box-shadow:3px 3px 0 var(--bg)}
 
 /* ---- búsqueda ---- */
