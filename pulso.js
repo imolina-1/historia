@@ -110,7 +110,7 @@ function body(d) {
     '<div><b data-c="' + Math.round(mn / 60) + '">0</b><span>horas de estudio entre todos</span>' + delta(hoy.mn, " min") + "</div>" +
     '<div><b data-c="' + nw + '">0</b><span>cromos distintos conseguidos' + (lg ? " · " + nf(lg) + " legendarios" : "") + "</span>" + delta(hoy.nw) + "</div></div>" +
     '<div class="pu-row"><div class="pu-c"><h3>Meta de la clase: ' + nf(next) + ' sobres</h3><div class="pu-goal" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><i style="width:0" data-w="' + Math.max(2, pct) + '%"></i></div>' +
-    "<p><b>" + nf(next - pk) + "</b> para llegar a " + nf(next) + (st > 1 ? " · la clase lleva <b>" + st + " días seguidos</b> estudiando" : st === 1 ? " · hoy hay actividad: ¡a por una racha!" : "") + "</p>" +
+    "<p><b>" + nf(next - pk) + "</b> para llegar a " + nf(next) + (st > 1 ? " · la clase lleva <b>" + st + " días seguidos</b> estudiando" : "") + "</p>" +
     '<h3 style="margin-top:16px">Preguntas por día</h3>' + chart(days, "q") + "</div>" +
     '<div class="pu-c"><h3>Aciertos por tema</h3><div class="pu-tm">' + rows + "</div>" +
     '<p style="margin-top:10px">' + (hard ? "Lo más difícil ahora: <b>tema " + hard.n + "</b> (" + Math.round(hard.p * 100) + " %)." : "Aparecerán cuando haya al menos 25 respuestas por tema.") + (best ? " Lo más dominado: <b>tema " + best.n + "</b> (" + Math.round(best.p * 100) + " %)." : "") + "</p></div></div>" +
@@ -143,7 +143,8 @@ function ticker(el, href) {
     if (h.pk) parts.push("<b>" + nf(h.pk) + "</b> " + (h.pk === 1 ? "sobre" : "sobres"));
     if (h.q) parts.push("<b>" + nf(h.q) + "</b> preguntas");
     if (h.mn >= 5) parts.push("<b>" + (h.mn >= 90 ? nf(h.mn / 60) + " h" : nf(h.mn) + " min") + "</b> de estudio");
-    var txt = parts.length ? "Hoy en clase: " + parts.join(" · ") : ((t.pk || 0) ? "La clase ya ha abierto <b>" + nf(t.pk) + "</b> sobres. Hoy, ¿quién abre el primero?" : "Las cifras de la clase aparecerán aquí en cuanto alguien estudie.");
+    if (!parts.length && !(t.pk || 0)) { el.hidden = true; return; }
+    var txt = parts.length ? "Hoy en clase: " + parts.join(" · ") : "La clase lleva <b>" + nf(t.pk) + "</b> sobres abiertos";
     el.className = "pu-tick"; el.href = href || C.link || "#clasif"; el.hidden = false;
     el.innerHTML = '<span class="pu-live"><i aria-hidden="true"></i></span><span>' + txt + '</span><span class="go">Ver la clase en cifras →</span>';
   });

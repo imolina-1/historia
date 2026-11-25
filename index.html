@@ -1052,6 +1052,7 @@ dialog#pk::backdrop{background:#0e0b08}
 :root{--pu-bar:var(--accent);--pu-hi:var(--accent);--pu-hi-ink:var(--accent-ink);--pu-hi2:var(--accent)}
 #pulsoT,#pulsoH{display:flex}#pulsoT[hidden],#pulsoH[hidden]{display:none}
 </style>
+<link rel="stylesheet" href="identidad.css">
 </head>
 <body>
 <div id="sp" aria-hidden="true"></div>
@@ -1583,7 +1584,7 @@ function fcKey(g){
   ST.srs[x.key]=[box,dayNum()+(g2===0?0:(g2===1?1:SRSI[box])),Date.now()];FC.res[g2]++;act();saveST();FC.i++;FC.flip=false;fcDraw()}
 function fcEnd(){
   const r=FC.res,n=r[0]+r[1]+r[2];$("#fcbar").style.width="100%";
-  $("#fcb").innerHTML=`<div class="fend"><h2>${n?"¡Tanda completada!":"Sin tarjetas"}</h2><p class="note">Racha: ${streak()} ${streak()===1?"día":"días"}. Las que fallas vuelven pronto; las que dominas, cada vez más tarde.</p><div class="fres"><div><b>${r[2]}</b>La sabía</div><div><b>${r[1]}</b>Dudosa</div><div><b>${r[0]}</b>No la sabía</div></div><div class="row" style="justify-content:center"><button class="btn primary" id="fcagain">Otra tanda</button><button class="btn" id="fcdone">Cerrar</button></div></div>`;
+  $("#fcb").innerHTML=`<div class="fend"><h2>${n?"Tanda completada":"Sin tarjetas"}</h2><p class="note">Racha: ${streak()} ${streak()===1?"día":"días"}. Las que fallas vuelven pronto; las que dominas, cada vez más tarde.</p><div class="fres"><div><b>${r[2]}</b>La sabía</div><div><b>${r[1]}</b>Dudosa</div><div><b>${r[0]}</b>No la sabía</div></div><div class="row" style="justify-content:center"><button class="btn primary" id="fcagain">Otra tanda</button><button class="btn" id="fcdone">Cerrar</button></div></div>`;
   $("#fcagain").onclick=()=>fcStart(FC.o);$("#fcdone").onclick=()=>$("#fc").close();refreshViews()}
 function repasoOpts(){const g=id=>$(id);return{n:+(g("#rn")?g("#rn").value:12)||12,ev:g("#rev")?g("#rev").value:"",p:g("#rp")?g("#rp").checked:1,e:g("#re")?g("#re").checked:1,f:g("#rf")?g("#rf").checked:1}}
 
@@ -1919,7 +1920,7 @@ function gmEnd(){
   saveST();checkBadges();
   const r=rank();
   $("#gmbar").style.width="100%";
-  $("#gmb").innerHTML=`<div class="fend"><h2>${pts>=GM.max*.8?"¡Gran partida!":(pts>=GM.max*.5?"Buena partida":"A seguir practicando")}</h2><div class="fres"><div><b>${pts}</b>de ${GM.max} puntos</div><div><b>${GM.res.filter(Boolean).length}</b>aciertos de ${GM.res.length}</div><div><b>${r.name}</b>${r.xp} XP</div></div>
+  $("#gmb").innerHTML=`<div class="fend"><h2>${pts>=GM.max*.8?"Gran partida":(pts>=GM.max*.5?"Buena partida":"A seguir practicando")}</h2><div class="fres"><div><b>${pts}</b>de ${GM.max} puntos</div><div><b>${GM.res.filter(Boolean).length}</b>aciertos de ${GM.res.length}</div><div><b>${r.name}</b>${r.xp} XP</div></div>
    ${m.kind==="daily"||m.kind==="weekly"?`<p class="note">Todos tus compañeros han recibido las mismas preguntas: comparad resultados.</p>`:""}
    <div class="row" style="justify-content:center">${m.kind==="daily"||m.kind==="weekly"?"":`<button class="btn primary" id="gmagain">Otra partida</button>`}<button class="btn" id="gmdone">Cerrar</button></div></div>`;
   const a=$("#gmagain");if(a)a.onclick=()=>gmStart(m.kind);$("#gmdone").onclick=()=>$("#gm").close();
@@ -2128,7 +2129,7 @@ function renderClasif(){
   const me=d&&d.me,list=(d&&d[tab])||[];
   const tabs=[["xpT","Total"],["wk","Esta semana"],["streak","Racha"],["cards","Cromos"]];
   const rk={xpT:me&&me.rank,wk:me&&me.rankW,streak:me&&me.rankS,cards:me&&me.rankC}[tab];
-  V.innerHTML=`<div class="vh"><h1>Clasificación de la clase</h1><p>Compite con tus compañeros, de forma anónima. Solo se publican cifras: nadie ve quién eres.</p></div>
+  V.innerHTML=`<div class="vh"><h1>Clasificación de la clase</h1></div>
   <div id="pulso"></div>
   ${on?`<div class="card lbme"><div><div class="eyebrow" style="margin:0">Participas de forma anónima</div><h2>${me?`Puesto ${me.rank}`:"…"}</h2><p class="note" style="margin:2px 0 0">${me?`De ${d.n} participantes · ${nf(me.xp)} XP · +${nf(me.wxp)} esta semana`:(LBS.busy?"Sincronizando…":"Aún sin sincronizar")}</p></div><div class="row"><button class="btn primary" id="lbup" type="button">Actualizar mis puntos</button><button class="btn" id="lbout" type="button">Salir de la clasificación</button></div></div>`
    :`<div class="card lbjoin"><h2>Entra en la clasificación</h2><p class="note">Sin alias, sin nombre, sin grupo. Se publican solo tus puntos (XP), tu racha y tus cromos, sin ningún dato que te identifique. Puedes salir cuando quieras y tu fila se borra. No hay cookies ni seguimiento.</p>
@@ -2138,7 +2139,7 @@ function renderClasif(){
   <div class="lbf"><div class="tlseg" role="tablist" aria-label="Clasificación">${tabs.map(([k,n])=>`<button class="seg" role="tab" data-lt="${k}" aria-current="${tab===k}">${n}</button>`).join("")}</div>
    <button class="btn small" id="lbrf" style="margin-left:auto" type="button">${LBS.busy?"Cargando…":"↻ Refrescar"}</button></div>
   ${me&&rk?`<p class="note" style="margin:10px 0 0">Tu puesto en esta lista: <b>${rk}</b>.</p>`:""}
-  ${list.length?`<ol class="lbk">${list.map((r,i)=>lbRow(r,i,tab,me,Math.max(1,...list.map(x=>({xpT:x.xp,wk:x.wxp,streak:x.streak,cards:x.cards}[tab])))) ).join("")}</ol>`:`<p class="muted" style="margin-top:18px">${LBS.busy?"Cargando…":(d?"Todavía no hay nadie en esta lista. ¡Sé el primero!":"")}</p>`}
+  ${list.length?`<ol class="lbk">${list.map((r,i)=>lbRow(r,i,tab,me,Math.max(1,...list.map(x=>({xpT:x.xp,wk:x.wxp,streak:x.streak,cards:x.cards}[tab])))) ).join("")}</ol>`:`<p class="muted" style="margin-top:18px">${LBS.busy?"Cargando…":(d?"Todavía no hay nadie en esta lista.":"")}</p>`}
   <p class="alleg">Los puntos se calculan en tu dispositivo; el servidor limita las subidas anormales y el profesor puede retirar filas con cifras imposibles. La clasificación se actualiza cada vez que estudias y cuando pulsas «Actualizar».</p>`;
   if(window.PULSO)PULSO.render($("#pulso"));
   $$("[data-lt]",V).forEach(b=>b.onclick=()=>{LBS.tab=b.dataset.lt;renderClasif()});
@@ -2333,7 +2334,7 @@ function tkCom(el){
       const li=(arr,lab)=>arr.length?`<h4 style="margin:12px 0 4px">${lab}</h4><ul class="cov">${arr.map(x=>`<li class="${x.c.ok?"y":"n"}"><i>${x.c.ok?"✓":"✗"}</i><span>${esc(x.t)}</span></li>`).join("")}</ul>`:"";
       const chipsL=(arr,lab)=>arr.length?`<h4 style="margin:12px 0 4px">${lab}</h4><div class="row" style="gap:6px">${arr.map(x=>`<span class="chip ${x.ok?"cok":"cno"}">${x.ok?"✓":"✗"} ${esc(x.t)}</span>`).join("")}</div>`:"";
       const adv=[];if(A.words<120)adv.push("Tu comentario es corto: desarrolla más el contexto y la importancia.");if(A.words>420)adv.push("Es muy largo: asegúrate de ir al grano en cada pregunta.");if(A.conn<3)adv.push("Usa más conectores causales y de conclusión («por tanto», «como consecuencia», «en definitiva»).");if(A.years.length&&A.years.filter(x=>x.ok).length<Math.ceil(A.years.length/3))adv.push("Cita más fechas clave.");if(A.ppl.length&&!A.ppl.some(x=>x.ok))adv.push("No mencionas a ningún personaje del epígrafe.");
-      $("#cmres").innerHTML=`<div class="card" style="margin-top:14px"><div class="row" style="align-items:center"><div class="stt" style="min-width:150px"><b>${A.pct} %</b><span>cobertura orientativa</span></div><div style="flex:1;min-width:200px"><div class="pbar"><i style="width:${A.pct}%"></i></div><p class="note" style="margin:6px 0 0">${A.words} palabras · ${A.conn} conectores${A.pct>=60?" · ¡buen trabajo!":""}</p></div></div>
+      $("#cmres").innerHTML=`<div class="card" style="margin-top:14px"><div class="row" style="align-items:center"><div class="stt" style="min-width:150px"><b>${A.pct} %</b><span>cobertura orientativa</span></div><div style="flex:1;min-width:200px"><div class="pbar"><i style="width:${A.pct}%"></i></div><p class="note" style="margin:6px 0 0">${A.words} palabras · ${A.conn} conectores${A.pct>=60?"":""}</p></div></div>
        ${adv.length?`<div class="info">${adv.map(esc).join("<br>")}</div>`:""}${li(A.ideas,"Ideas principales")}${li(A.ctx,"Contexto e importancia")}${chipsL(A.years,"Fechas")}${chipsL(A.ppl,"Personajes del epígrafe")}
        <details class="clave" style="margin-top:12px"><summary>Ver la clave de corrección</summary>${claveHTML(d)}</details></div>`;
       $("#cmres").scrollIntoView({behavior:"smooth",block:"start"})};
