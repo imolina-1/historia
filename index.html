@@ -1019,6 +1019,30 @@ dialog#pk::backdrop{background:#0e0b08}
 .hoyf{margin:6px 0 0;padding-top:12px;border-top:1px solid var(--line);font:.85rem var(--sans);color:var(--muted)}
 .hoyf .lnk{background:none;border:0;padding:0;font:600 .85rem var(--sans);color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 @media(max-width:560px){.hoy{padding:18px 16px 12px}.hr{grid-template-columns:30px minmax(0,1fr);}.hr .btn{grid-column:2;justify-self:start}.hoyh h3{font-size:1.4rem}}
+/* v14: retratos en cromos y semblanzas; volteo graduado por rareza */
+.cro .art.ph{display:block;background:#1d1610}
+.cro .art.ph:before{display:none}
+.cro .art.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%;display:block;filter:saturate(.9) contrast(1.03)}
+.cro .art.ph:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),inset 0 -14cqw 12cqw -8cqw rgba(0,0,0,.45);pointer-events:none}
+.cro .art.ph i{z-index:2;font-size:20cqw;right:4cqw;bottom:1cqw;-webkit-text-stroke:.3cqw rgba(255,255,255,.7)}
+.pbio{flex:none;width:clamp(84px,22vw,116px);aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:var(--surface2);box-shadow:0 0 0 1px var(--line),0 10px 22px -12px rgba(0,0,0,.5)}
+.pbio img{width:100%;height:100%;object-fit:cover;object-position:50% 16%;display:block}
+.pbio.mn{display:grid;place-items:center;background:var(--cc);color:#fff;font:600 2rem var(--serif);border-radius:50%;aspect-ratio:1;width:72px}
+
+/* común: el giro de siempre. rara: se eleva, gira más lento y destella en plata. legendaria: tiembla, estalla en oro y gira con peso */
+.pkc{position:relative}
+.pkc.g2 .fl.on .in{animation:flip2 1.15s cubic-bezier(.3,.7,.2,1) both;transition:none}
+.pkc.g3 .fl.on .in{animation:flip3 1.7s cubic-bezier(.3,.7,.2,1) both;transition:none}
+@keyframes flip2{0%{transform:rotateY(0) translateZ(0) scale(1)}45%{transform:rotateY(100deg) translateZ(70px) scale(1.07)}100%{transform:rotateY(180deg) translateZ(0) scale(1)}}
+@keyframes flip3{0%{transform:rotateY(0) scale(1)}10%{transform:rotateY(-5deg) scale(1.02) rotate(-1.2deg)}18%{transform:rotateY(5deg) scale(1.04) rotate(1.2deg)}26%{transform:rotateY(-4deg) scale(1.06) rotate(-1deg)}34%{transform:rotateY(3deg) scale(1.07) rotate(.8deg)}62%{transform:rotateY(110deg) translateZ(110px) scale(1.14)}100%{transform:rotateY(180deg) translateZ(0) scale(1)}}
+.pkc.g3:has(.fl.on):before{content:"";position:absolute;z-index:-1;left:50%;top:50%;width:260%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,221,140,.85) 0,rgba(255,196,84,.38) 22%,transparent 58%);animation:burst 1.9s ease-out both;pointer-events:none}
+.pkc.g3:has(.fl.on):after{content:"";position:absolute;z-index:7;left:50%;top:46%;width:6px;height:6px;border-radius:50%;pointer-events:none;color:#ffe9a8;box-shadow:0 -150px 0 0 currentColor,106px -106px 0 0 currentColor,150px 0 0 0 currentColor,106px 106px 0 0 currentColor,0 150px 0 0 currentColor,-106px 106px 0 0 currentColor,-150px 0 0 0 currentColor,-106px -106px 0 0 currentColor,0 -90px 0 -1px currentColor,64px -64px 0 -1px currentColor,90px 0 0 -1px currentColor,64px 64px 0 -1px currentColor,0 90px 0 -1px currentColor,-64px 64px 0 -1px currentColor,-90px 0 0 -1px currentColor,-64px -64px 0 -1px currentColor;animation:sparks 1.6s .55s ease-out both}
+@keyframes burst{0%{opacity:0;transform:translate(-50%,-50%) scale(.15)}30%{opacity:1}100%{opacity:.0;transform:translate(-50%,-50%) scale(1)}}
+@keyframes sparks{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.25)}}
+.pkc.g2:has(.fl.on):before{content:"";position:absolute;z-index:-1;left:50%;top:50%;width:200%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(205,220,240,.55) 0,rgba(170,190,215,.2) 28%,transparent 56%);animation:burst 1.4s ease-out both;pointer-events:none}
+.pkc.g3 .fl.on .face.front{animation:aura 2.6s ease-in-out .9s infinite alternate}
+@keyframes aura{from{box-shadow:0 0 0 2px #ffe9a8,0 0 40px 4px rgba(255,214,120,.45)}to{box-shadow:0 0 0 2px #fff3c8,0 0 78px 14px rgba(255,214,120,.8)}}
+@media(prefers-reduced-motion:reduce){.pkc.g2 .fl.on .in,.pkc.g3 .fl.on .in{animation:none;transition:transform .5s}.pkc.g3:has(.fl.on):before,.pkc.g3:has(.fl.on):after,.pkc.g2:has(.fl.on):before,.pkc.g3 .fl.on .face.front{animation:none}.pkc.g3:has(.fl.on):before,.pkc.g3:has(.fl.on):after,.pkc.g2:has(.fl.on):before{display:none}}
 </style>
 </head>
 <body>
@@ -1257,7 +1281,7 @@ function openPers(id){
   const docs=DOCS.filter(d=>p.eps.includes(d.ep));
   const evs=EVS.filter(e=>p.eps.includes(e.ep)).slice(0,6);
   const wk=p.wk?`https://es.wikipedia.org/wiki/${encodeURIComponent(p.wk)}`:`https://es.wikipedia.org/w/index.php?search=${encodeURIComponent(clean(p.nombre))}`;
-  openDlg(`<div class="row big" style="gap:16px;align-items:center;--cc:${CATS[p.cat][1]}">${monoHTML(p)}<div><div class="meta" style="margin-bottom:6px">${catChip(p)}<span class="chip">Tema ${p.tema}</span></div><h2 style="font-size:1.6rem">${esc(p.nombre)}</h2><div class="note">${esc(life(p))}${p.c?" · fechas aproximadas":""}</div></div></div>`,
+  openDlg(`<div class="row big" style="gap:18px;align-items:center;--cc:${CATS[p.cat][1]}">${p.img?`<span class="pbio"><img src="${p.img}" alt="Retrato de ${esc(clean(p.nombre))}"></span>`:monoHTML(p)}<div><div class="meta" style="margin-bottom:6px">${catChip(p)}<span class="chip">Tema ${p.tema}</span></div><h2 style="font-size:1.6rem">${esc(p.nombre)}</h2><div class="note">${esc(life(p))}${p.c?" · fechas aproximadas":""}</div></div></div>`,
    `<p style="margin:16px 0 6px"><b>${esc(p.cargo)}</b></p>
     <p class="sem">${esc(p.sem||p.nota)}</p>
     <h3 style="font-size:1rem;margin:16px 0 6px">Epígrafes</h3><ul style="margin:0;padding-left:1.1rem">${eps.map(e=>`<li><b>${e.id}</b> · ${esc(e.nombre)}</li>`).join("")}</ul>
@@ -1921,7 +1945,7 @@ const alPad=n=>String(n).padStart(3,"0");
 function cromo(p,o={}){
   const r=alRar(p),cc=CATS[p.cat][1],cn=CATS[p.cat][0],T=o.tag||"button",n=alPad(alN(p.id)),at=T==="button"?` type="button" data-id="${p.id}"`:"";
   if(!o.owned)return `<${T} class="cro lock r${r}"${at} style="--cc:${cc}" aria-label="Cromo ${n} por descubrir"><span class="cn">Nº ${n}</span><span class="cq" aria-hidden="true">?</span><span class="cx">Por descubrir<small>${esc(cn)}</small></span></${T}>`;
-  return `<${T} class="cro r${r}"${at} style="--cc:${cc}"><span class="cn">Nº ${n}</span><span class="cr" aria-label="${["","común","rara","legendaria"][r]}">${"★".repeat(r)}</span><span class="art"><b>${esc(ini(p.nombre))}</b><i>${p.tema}</i></span><span class="tx"><h4>${esc(clean(p.nombre))}</h4><span class="yr">${esc(life(p))}</span><span class="cg">${esc(p.cargo)}</span><span class="nt">${esc(p.nota||"")}</span></span><span class="ft"><span>${esc(cn)}</span><span>Tema ${p.tema}</span></span></${T}>`}
+  return `<${T} class="cro r${r}"${at} style="--cc:${cc}"><span class="cn">Nº ${n}</span><span class="cr" aria-label="${["","común","rara","legendaria"][r]}">${"★".repeat(r)}</span>${p.img?`<span class="art ph"><img src="${p.img}" alt="" loading="lazy"><i>${p.tema}</i></span>`:`<span class="art"><b>${esc(ini(p.nombre))}</b><i>${p.tema}</i></span>`}<span class="tx"><h4>${esc(clean(p.nombre))}</h4><span class="yr">${esc(life(p))}</span><span class="cg">${esc(p.cargo)}</span><span class="nt">${esc(p.nota||"")}</span></span><span class="ft"><span>${esc(cn)}</span><span>Tema ${p.tema}</span></span></${T}>`}
 
 /* sacar un sobre: 3 cromos; se guarda al instante (no se puede repetir la tirada recargando) */
 function alOpen(){
