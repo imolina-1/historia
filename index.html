@@ -1215,7 +1215,15 @@ function init(){
   $("#fcx").onclick=()=>$("#fc").close();$("#fc").addEventListener("keydown",e=>{if(!FC)return;if(e.key===" "||e.key==="Enter"){if(!FC.flip){e.preventDefault();fcKey("f")}}else if(e.key.length===1&&"123".includes(e.key)&&FC.flip)fcKey(String(+e.key-1))});
   initSearch();initV7();initAlbum();initStats();initClasif();initHoy();renderInicio();initPools();initPersonajes();initTiempo();initSimulacro();initExamenes();renderMine();route();syncInit();document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.db&&Date.now()-SYNC.last>60000)pullRemote()});
 }
+let _RV=null;
 function route(){
+  let v=(location.hash||"#inicio").slice(1).split("?")[0];if(!$("#v-"+v))v="inicio";
+  const vt=document.startViewTransition&&_RV!==null&&_RV!==v&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!document.hidden;
+  _RV=v;
+  if(!vt)return routeNow();
+  try{document.documentElement.classList.add("vt");const t=document.startViewTransition(()=>{routeNow()});t.finished.finally(()=>document.documentElement.classList.remove("vt"))}catch(e){document.documentElement.classList.remove("vt");routeNow()}
+}
+function routeNow(){
   let v=(location.hash||"#inicio").slice(1);const qi=v.indexOf("?"),qs=qi<0?"":v.slice(qi+1);if(qi>=0)v=v.slice(0,qi);if(!$("#v-"+v))v="inicio";
   if(v==="linea"&&qs&&window.lineaPend){const q=new URLSearchParams(qs),o={};if(q.get("k"))o.k=q.get("k");else if(q.get("t"))o.t=+q.get("t");else if(q.get("y")!=null&&q.get("y")!==""&&!isNaN(+q.get("y")))o.y=+q.get("y");lineaPend(o)}
   $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));

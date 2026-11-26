@@ -532,3 +532,28 @@ footer.foot a:hover,footer.foot button:hover{color:var(--ink);text-decoration-co
 .sobre .sl em{font:800 11.2cqw/1.1 "Cinzel",var(--serif);letter-spacing:.07em;padding-left:.07em;bottom:15.5%;filter:drop-shadow(0 .4cqw 0 rgba(60,28,0,.9)) drop-shadow(0 .8cqw 1.2cqw rgba(0,0,0,.6))}
 /* el resplandor y el brillo no tocan el borde: el canto de la carta queda limpio */
 .fl .up,.fl .holo{inset:1.6% 1.6% 1.1%;border-radius:3.4%/2.4%}
+
+/* Menú desplegable: elemento seleccionado como una pastilla suave (sin barra ni esquinas duras); el hover es discreto */
+.nv-m button{border-radius:10px;transition:background .14s}
+.nv-m button:hover,.nv-m button:focus-visible{background:var(--surface2);color:var(--ink)}
+.nv-m button:hover i{color:var(--accent)}
+.nv-m button:hover span{color:var(--muted);opacity:1}
+.nv-m button[aria-selected=true]{background:color-mix(in srgb,var(--hl) 30%,var(--surface));box-shadow:none}
+.nv-m button[aria-selected=true]:hover{background:color-mix(in srgb,var(--hl) 42%,var(--surface))}
+@media(max-width:900px){
+  header.top .nv-m button{border-radius:0 10px 10px 0}
+  header.top .nv-m button[aria-selected=true]{border-left-color:var(--ink);background:color-mix(in srgb,var(--hl) 30%,var(--surface))}
+}
+
+/* Transición nativa entre pantallas (View Transitions API); sin soporte o con movimiento reducido, cambio directo */
+@keyframes vtout{to{opacity:0;transform:translateY(-6px)}}
+@keyframes vtin{from{opacity:0;transform:translateY(10px)}}
+html.vt::view-transition-old(root){animation:vtout .14s ease-in both}
+html.vt::view-transition-new(root){animation:vtin .26s cubic-bezier(.2,.7,.2,1) both}
+html.vt header.top{view-transition-name:topbar}
+html.vt::view-transition-group(topbar){animation-duration:0s}
+@media(prefers-reduced-motion:reduce){html.vt::view-transition-old(root),html.vt::view-transition-new(root){animation:none}}
+
+/* Rendimiento: el álbum (244 cromos) solo pinta los temas que están en pantalla; el relleno evita recortar sombras y el salto al pasar el ratón */
+.algrid{content-visibility:auto;contain-intrinsic-block-size:auto 760px;padding:14px;margin:-14px}
+@media(max-width:560px){.algrid{contain-intrinsic-block-size:auto 560px}}
