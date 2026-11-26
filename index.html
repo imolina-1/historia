@@ -8,7 +8,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/bricolage-latin-wdth-normal.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/inter-latin-wght-normal.woff2">
 <link rel="stylesheet" href="linea.css"><link rel="stylesheet" href="pau.css">
-<script defer src="mundo.js"></script><script defer src="nota.js"></script><script defer src="anyo.js"></script><script defer src="pau.js"></script><script defer src="linea.js"></script>
+<script defer src="mundo.js"></script><script defer src="nota.js"></script><script defer src="anyo.js"></script><script defer src="efemerides.js"></script><script defer src="pau.js"></script><script defer src="linea.js"></script>
 <script>window.PULSO_CFG={b:"es",api:"https://historiapau.pages.dev/api/lb",link:"#clasif",xp:function(){return typeof totalXP==="function"?totalXP():0},temas:function(){return(typeof TEMAS!=="undefined"?TEMAS:[]).map(function(t){return{n:t.n,name:t.nombre}})}}</script><script src="pulso.js"></script>
 <script>try{const t=JSON.parse(localStorage.getItem("hde2_theme")||"null");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="robots" content="noindex,nofollow">
@@ -1056,7 +1056,7 @@ dialog#pk::backdrop{background:#0e0b08}
   <nav class="mainnav" id="mainnav" aria-label="Secciones">
     <button type="button" class="nv" data-v="inicio">Inicio</button>
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Estudiar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
-      <button type="button" role="menuitem" data-v="textos"><i>I</i><b>Textos</b><span>Comentarios con clave de corrección</span></button><button type="button" role="menuitem" data-v="fuentes"><i>II</i><b>Fuentes históricas</b><span>Mapas, cuadros, carteles y fotografías</span></button><button type="button" role="menuitem" data-v="personajes"><i>III</i><b>Personajes</b><span>Semblanzas con fechas y enlaces</span></button><button type="button" role="menuitem" data-v="tiempo"><i>IV</i><b>Cronología</b><span>Hitos por tema y epígrafe</span></button><button type="button" role="menuitem" data-v="linea"><i>V</i><b>Línea del tiempo</b><span>Año a año, con hitos, personajes y mundo</span></button><button type="button" role="menuitem" data-v="anyo"><i>VI</i><b>Un año</b><span>Mapa, España, mundo y arte en una pantalla</span></button><button type="button" role="menuitem" data-v="radar"><i>VII</i><b>Radar PAU</b><span>Qué ha caído en la PAU, epígrafe a epígrafe</span></button></div></div>
+      <button type="button" role="menuitem" data-v="textos"><i>I</i><b>Textos</b><span>Comentarios con clave de corrección</span></button><button type="button" role="menuitem" data-v="fuentes"><i>II</i><b>Fuentes históricas</b><span>Mapas, cuadros, carteles y fotografías</span></button><button type="button" role="menuitem" data-v="personajes"><i>III</i><b>Personajes</b><span>Semblanzas con fechas y enlaces</span></button><button type="button" role="menuitem" data-v="tiempo"><i>IV</i><b>Cronología</b><span>Hitos por tema y epígrafe</span></button><button type="button" role="menuitem" data-v="linea"><i>V</i><b>Línea del tiempo</b><span>Año a año, con hitos, personajes y mundo</span></button><button type="button" role="menuitem" data-v="anyo"><i>VI</i><b>Un año</b><span>Mapa, España, mundo y arte en una pantalla</span></button><button type="button" role="menuitem" data-v="efemerides"><i>VII</i><b>Efemérides</b><span>Qué pasó cada día del año</span></button><button type="button" role="menuitem" data-v="radar"><i>VIII</i><b>Radar PAU</b><span>Qué ha caído en la PAU, epígrafe a epígrafe</span></button></div></div>
     <div class="nv-i"><button type="button" class="nv nv-g" aria-haspopup="true" aria-expanded="false">Practicar<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 3.5 3 3 3-3"/></svg></button><div class="nv-m" role="menu">
       <button type="button" role="menuitem" data-v="examenes"><i>I</i><b>Exámenes</b><span>Evaluaciones y ordinario, con solucionario</span></button><button type="button" role="menuitem" data-v="simulacro"><i>II</i><b>Comentario cronometrado</b><span>Comenta un documento con cronómetro</span></button><button type="button" role="menuitem" data-v="juegos"><i>III</i><b>Juegos</b><span>Retos diarios, insignias y rangos</span></button><button type="button" role="menuitem" data-v="taller"><i>IV</i><b>Taller</b><span>Plan, comentario, esquemas y chuleta</span></button><button type="button" role="menuitem" data-v="album"><i>V</i><b>Álbum</b><span>Cromos de personajes y sobres</span></button><button type="button" role="menuitem" data-v="clasif"><i>VI</i><b>Clasificación</b><span>Compite con tu clase, de forma anónima</span></button></div></div>
     <button type="button" class="nv" data-v="estudio">Mi estudio</button>
@@ -1088,6 +1088,7 @@ dialog#pk::backdrop{background:#0e0b08}
 
 <section class="view" id="v-linea" aria-label="Línea del tiempo"><div id="tl2"></div></section>
 <section class="view" id="v-anyo" aria-label="Un año"></section>
+<section class="view" id="v-efemerides" aria-label="Efemérides"></section>
 <section class="view" id="v-radar" aria-label="Radar PAU"></section>
 <section class="view" id="v-tiempo">
   <div class="vh"><h1>Cronología</h1><p>El curso entero, tema a tema.</p></div>
@@ -1200,7 +1201,7 @@ const ini=n=>n.replace(/[«»"]/g,"").replace(/\(.*\)/,"").split(/\s+/).filter(w
 const clean=n=>n.replace(/[«»]/g,"");
 const SEED=(()=>{const d=new Date();return d.getFullYear()*372+d.getMonth()*31+d.getDate()})();
 
-fetch("data.json").then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(d=>{D=d;ALL=d.docs;DOCS=ALL.filter(x=>x.kind!=="fuente"||x.imgs.length);EPS=d.eps;TEMAS=d.temas;PEOPLE=d.people;EVS=d.events;PEND=d.pend;
+fetch("data.json").then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(d=>{D=d;ALL=d.docs;DOCS=ALL.filter(x=>x.kind!=="fuente"||x.imgs.length);EPS=d.eps;TEMAS=d.temas;PEOPLE=d.people;EVS=d.events;EFE=d.efem||[];PEND=d.pend;
   EPS.forEach(e=>{EPM[e.id]=e;e.ndocs=DOCS.filter(x=>x.ep===e.id).length});ALL.forEach(x=>DOCM[x.id]=x);PEOPLE.forEach(p=>PM[p.id]=p);
   $("#loading").remove();init()}).catch(e=>{$("#loading").textContent="No se pudo cargar data.json ("+e.message+"). Vuelve a abrir la página."});
 
@@ -1231,6 +1232,7 @@ function routeNow(){
   $$("nav.mainnav [data-v]").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));navSync(v);
   if(v==="linea")renderLinea();else if(window.lineaStop)lineaStop();
   if(v==="anyo"&&window.renderAnyo){const q=new URLSearchParams(qs);renderAnyo({y:q.get("y")})}
+  if(v==="efemerides"&&window.renderEfem)renderEfem();
   if(v==="radar"&&window.renderPau)renderPau();
   if(v==="tiempo")renderTL();
   if(v==="estudio")renderEstudio();
@@ -1333,7 +1335,7 @@ function readerShell(id){
   db.append(main,side);
   const L=readerList(d),i=L.indexOf(id);
   [L[i+1],L[i-1],L[i+2]].forEach(x=>x&&preDoc(x));
-  $("#dh").insertAdjacentHTML("afterbegin",`<div class="rnav"><button type="button" id="rexp" aria-pressed="false" title="Ampliar a casi toda la pantalla">⤢ Ampliar</button><button type="button" id="rsolo" aria-pressed="false" title="Oculta el panel lateral">Solo texto</button>${document.fullscreenEnabled?'<button type="button" id="rfs" title="Pantalla completa del navegador">⛶ Pantalla completa</button>':""}<span class="sp"></span><button type="button" id="rprev" ${i>0?"":"disabled"} aria-label="Anterior" title="Anterior (←)">←</button><span class="pos">${i>=0?(i+1)+" / "+L.length:""}</span><button type="button" id="rnext" ${i>=0&&i<L.length-1?"":"disabled"} aria-label="Siguiente" title="Siguiente (→)">→</button></div>`);
+  $("#dh").insertAdjacentHTML("afterbegin",`<div class="rnav"><button type="button" id="rexp" aria-pressed="false" title="Ampliar a casi toda la pantalla">⤢ Ampliar</button><button type="button" id="rsolo" aria-pressed="false" title="Oculta el panel lateral">Solo texto</button>${document.fullscreenEnabled?'<button type="button" id="rfs" title="Pantalla completa del navegador">Pantalla completa</button>':""}<span class="sp"></span><button type="button" id="rprev" ${i>0?"":"disabled"} aria-label="Anterior" title="Anterior (←)">←</button><span class="pos">${i>=0?(i+1)+" / "+L.length:""}</span><button type="button" id="rnext" ${i>=0&&i<L.length-1?"":"disabled"} aria-label="Siguiente" title="Siguiente (→)">→</button></div>`);
   $("#rexp").onclick=()=>{wide=!wide;LS.set("wide",wide);if(!wide&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});apply()};
   $("#rsolo").onclick=()=>{if(!wide){wide=true;LS.set("wide",true)}solo=!solo;LS.set("solo",solo);apply()};
   const fs=$("#rfs");if(fs)fs.onclick=()=>{if(document.fullscreenElement){document.exitFullscreen().catch(()=>{})}else{wide=true;LS.set("wide",true);apply();dl.requestFullscreen&&dl.requestFullscreen().catch(()=>{})}};
@@ -1465,7 +1467,7 @@ function studyHTML(d){
    <button class="sbtn ${p.f?"on":""}" data-sact="fav" aria-pressed="${!!p.f}">★ Favorito</button>
    <button class="sbtn ${p.s===1?"on ok":""}" data-sact="dom" aria-pressed="${p.s===1}">✓ Lo domino</button>
    <button class="sbtn ${p.s===2?"on rev":""}" data-sact="rev" aria-pressed="${p.s===2}">↻ Me cuesta</button>
-   <button class="sbtn spk" data-sact="spk" title="Lee el documento en voz alta">🔊 Escuchar</button>
+   <button class="sbtn spk" data-sact="spk" title="Lee el documento en voz alta">Escuchar</button>
    <span class="note" id="sinfo">${esc(infoLine(p))}</span></div>
    <label class="lbl" for="snote" style="display:block;margin-bottom:4px">Mis notas</label>
    <textarea id="snote" rows="3" maxlength="4000" placeholder="Ideas, dudas, lo que quieras recordar de este documento…">${esc(note)}</textarea><div class="note" id="snsave" aria-live="polite"></div></div>`}
@@ -1487,7 +1489,7 @@ function readerHTML(d){
   return `<div class="reader${RP.nums?" nums":""}${RP.ff==="sans"?" sans":""}" data-doc="${d.id}" data-col="1" style="--rsz:${RP.sz}rem;--rlh:${RP.lh}">
    <div class="rtools" role="toolbar" aria-label="Herramientas de lectura">
     <button class="rb" data-r="sm" aria-label="Letra más pequeña">A−</button><button class="rb" data-r="lg" aria-label="Letra más grande">A+</button><button class="rb" data-r="ff" aria-label="Cambiar tipografía">Aa</button><button class="rb" data-r="lh" aria-label="Cambiar interlineado">↕</button><button class="rb ${RP.nums?"on":""}" data-r="nums" aria-pressed="${RP.nums}" title="Numerar párrafos">¶</button><span class="rsep"></span>
-    <button class="rb" data-r="pen" aria-pressed="false" title="Pulsa las frases para subrayarlas">✎ Subrayar</button>
+    <button class="rb" data-r="pen" aria-pressed="false" title="Pulsa las frases para subrayarlas">Subrayar</button>
     <span class="pal"><button class="rdot c1 on" data-r="c1" aria-label="Idea principal" title="Idea principal"></button><button class="rdot c2" data-r="c2" aria-label="Idea secundaria" title="Idea secundaria"></button><button class="rdot c3" data-r="c3" aria-label="Contexto o término" title="Contexto o término"></button></span>
     <button class="rb" data-r="sum">Mis marcas</button><button class="rb" data-r="clr">Borrar</button></div>
    <div class="quote">${body}</div><div class="rsum" hidden></div></div>`}
@@ -1781,29 +1783,20 @@ function checkBadges(){
   clearTimeout(BTM);BTM=setTimeout(()=>{
     try{const g=G(),s=gstats(),fresh=[];
       for(const b of BADGES){if(g.badges[b.id])continue;const[c,t]=b.f(s);if(c>=t){g.badges[b.id]=Date.now();fresh.push(b)}}
-      if(fresh.length){if(g.init)toast("🏅 Nueva insignia: "+fresh.map(b=>b.n).join(", "));g.init=1;LS.set("state",ST);if(typeof pushRemote==="function")setTimeout(pushRemote,1500);const v=(location.hash||"").slice(1);if(v==="juegos")renderJuegos()}
+      if(fresh.length){if(g.init)toast("Nueva insignia: "+fresh.map(b=>b.n).join(", "));g.init=1;LS.set("state",ST);if(typeof pushRemote==="function")setTimeout(pushRemote,1500);const v=(location.hash||"").slice(1);if(v==="juegos")renderJuegos()}
       else if(!g.init){g.init=1;LS.set("state",ST)}
     }catch(e){}},500)}
 
 /* ---------- v7: efemérides (día, mes, año, texto, tema) ---------- */
-const EFE=[
-[2,1,1492,"Los Reyes Católicos entran en Granada: fin de la Reconquista.",3],[12,10,1492,"Colón llega a América (isla de Guanahani).",3],[19,10,1469,"Boda de Isabel de Castilla y Fernando de Aragón en Valladolid.",3],[16,7,1212,"Victoria cristiana en Las Navas de Tolosa.",2],[23,4,1521,"Derrota de los comuneros en Villalar.",3],
-[17,3,1808,"Motín de Aranjuez contra Godoy.",4],[2,5,1808,"Levantamiento del Dos de Mayo en Madrid.",4],[5,5,1808,"Abdicaciones de Bayona: Fernando VII y Carlos IV ceden la Corona a Napoleón.",4],[24,9,1810,"Se reúnen las Cortes de Cádiz en la isla de León.",4],[19,3,1812,"Se promulga la Constitución de Cádiz, «la Pepa».",4],[4,5,1814,"Fernando VII firma en Valencia el decreto que anula la obra de Cádiz.",4],[1,1,1820,"Pronunciamiento de Riego en Cabezas de San Juan: comienza el Trienio Liberal.",4],[29,9,1833,"Muere Fernando VII: comienza la regencia de María Cristina y la cuestión sucesoria.",5],
-[18,9,1868,"Pronunciamiento de Cádiz: comienza la Revolución de 1868, «la Gloriosa».",5],[11,2,1873,"Las Cortes proclaman la Primera República.",5],[3,1,1874,"Golpe del general Pavía: fin de la Primera República.",5],[29,12,1874,"Pronunciamiento de Martínez Campos en Sagunto: restauración borbónica en Alfonso XII.",6],[30,6,1876,"Se promulga la Constitución de 1876.",6],[10,12,1898,"Tratado de París: España pierde Cuba, Puerto Rico y Filipinas.",6],
-[26,7,1909,"Comienza la Semana Trágica de Barcelona.",8],[22,7,1921,"Desastre de Annual en el protectorado de Marruecos.",8],[13,9,1923,"Golpe de Estado de Primo de Rivera.",8],
-[17,8,1930,"Pacto de San Sebastián.",8],[12,4,1931,"Elecciones municipales que desencadenan la caída de la monarquía.",9],[14,4,1931,"Se proclama la Segunda República.",9],[9,12,1931,"Las Cortes aprueban la Constitución de 1931.",9],[10,8,1932,"Intento de golpe del general Sanjurjo («la Sanjurjada»).",9],[19,11,1933,"Elecciones con el primer voto femenino en España.",9],[6,10,1934,"Revolución de octubre: huelga en Asturias y proclamación del Estat Català.",9],[16,2,1936,"Victoria del Frente Popular en las elecciones.",9],
-[18,7,1936,"Comienza la sublevación militar que lleva a la Guerra Civil.",10],[1,10,1936,"Franco es proclamado jefe del Estado en Burgos.",10],[26,4,1937,"Bombardeo de Guernica por la Legión Cóndor.",10],[26,1,1939,"Las tropas franquistas ocupan Barcelona.",10],[28,3,1939,"Las tropas franquistas entran en Madrid.",10],[1,4,1939,"Último parte de guerra: Franco da por terminada la Guerra Civil.",10],
-[21,7,1959,"Plan de Estabilización: fin de la autarquía.",11],[20,12,1973,"ETA asesina al presidente del Gobierno, Carrero Blanco.",11],[27,9,1975,"Últimos fusilamientos del franquismo.",11],[20,11,1975,"Muere Franco: comienza la Transición.",12],
-[15,12,1976,"Referéndum de la Ley para la Reforma Política.",12],[15,6,1977,"Primeras elecciones democráticas desde 1936.",12],[25,10,1979,"Referéndum de los estatutos de Cataluña y el País Vasco.",12],[6,12,1978,"Referéndum que aprueba la Constitución de 1978.",12],[27,12,1978,"El rey sanciona la Constitución de 1978.",12],[28,2,1980,"Referéndum de autonomía de Andalucía (28-F).",12],[23,2,1981,"Intento de golpe de Estado del 23-F.",12],
-[28,10,1982,"Victoria del PSOE de Felipe González: primera alternancia.",13],[12,6,1985,"España firma el Tratado de adhesión a la Comunidad Económica Europea.",14],[1,1,1986,"España ingresa en la Comunidad Económica Europea.",14],[14,12,1988,"Huelga general del 14-D.",13],[1,1,2002,"El euro entra en circulación en España.",14],[11,3,2004,"Atentados terroristas del 11-M en Madrid.",13]];
+let EFE=[];
 function efeToday(){const d=new Date(),dd=d.getDate(),mm=d.getMonth()+1;const hit=EFE.filter(e=>e[0]===dd&&e[1]===mm);if(hit.length)return{hoy:true,list:hit};
   let best=null,bd=1e9;const y=d.getFullYear();for(const e of EFE){for(const yy of [y,y+1]){const t=Date.UTC(yy,e[1]-1,e[0]),n=Math.round((t-Date.UTC(y,d.getMonth(),dd))/864e5);if(n>0&&n<bd){bd=n;best=e}}}
   return{hoy:false,list:best?[best]:[],en:bd}}
 const MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 const efeTxt=e=>`${e[0]} de ${MESES[e[1]-1]} de ${e[2]}`;
 function efeHTML(max){const r=efeToday();if(!r.list.length||(max&&!r.hoy&&r.en>max))return"";
-  return `<div class="efe"><div class="ef1"><span class="eyebrow" style="margin:0">${r.hoy?"Tal día como hoy":"Próxima efeméride · en "+r.en+(r.en===1?" día":" días")}</span>${r.list.map(e=>`<p><b>${efeTxt(e)}.</b> ${esc(e[3])} <button class="lnk" data-efe="${e[4]}">Ver en la cronología</button></p>`).join("")}</div></div>`}
-function renderEf(){const el=$("#efx");if(!el)return;el.innerHTML=efeHTML(14);$$("[data-efe]",el).forEach(b=>b.onclick=()=>{go("tiempo");setTimeout(()=>tlGoTema(+b.dataset.efe),250)})}
+  return `<div class="efe"><div class="ef1"><span class="eyebrow" style="margin:0">${r.hoy?"Tal día como hoy":"Próxima efeméride · en "+r.en+(r.en===1?" día":" días")}</span>${r.list.slice(0,3).map(e=>`<p><b>${efeTxt(e)}.</b> ${esc(e[3])}</p>`).join("")}<button class="lnk" data-go-efe="1">Todas las efemérides</button></div></div>`}
+function renderEf(){const el=$("#efx");if(!el)return;el.innerHTML=efeHTML(14);$$("[data-go-efe]",el).forEach(b=>b.onclick=()=>go("efemerides"))}
 
 /* ---------- v7: motor de juegos ---------- */
 let GM=null;
@@ -1897,7 +1890,7 @@ function gmDraw(keep){
   if(q.type==="mc"){
     h+=q.media()+(q.extra.length?`<div class="ghints">${q.extra.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>`:"")+`</div>`;
     h+=`<div class="gopts" role="group" aria-label="Respuestas">${q.opts.map((o,i)=>`<button type="button" data-o="${i}"><b>${optLetter(i)}</b><span>${esc(o.t)}</span></button>`).join("")}</div>`;
-    if(q.hints.length&&!GM.answered)h+=`<div class="row" style="margin-top:10px"><button class="btn small" id="gmh">💡 Pista (−3 puntos)</button><span class="note">${GM.qh||0} usadas · ${q.hints.length} disponibles</span></div>`
+    if(q.hints.length&&!GM.answered)h+=`<div class="row" style="margin-top:10px"><button class="btn small" id="gmh">Pista (−3 puntos)</button><span class="note">${GM.qh||0} usadas · ${q.hints.length} disponibles</span></div>`
   }else{
     h+=`<ol class="ordl" id="ordl">${q.items.map((e,i)=>`<li data-i="${i}" draggable="true"><span>${esc(e.t)}</span><button type="button" data-mv="-1" aria-label="Subir">↑</button><button type="button" data-mv="1" aria-label="Bajar">↓</button></li>`).join("")}</ol></div><div class="row" style="margin-top:10px"><button class="btn primary" id="ordok">Comprobar</button></div>`}
   h+=`<div id="gmfb" aria-live="polite"></div>`;
@@ -1953,8 +1946,8 @@ function renderJuegos(){
   ${efeHTML()?`<div style="margin-top:14px" id="efj">${efeHTML()}</div>`:""}
   <div class="sech"><h2>Retos para toda la clase</h2><span class="note">Mismas preguntas para toda la clase</span></div>
   <div class="sgrid" style="margin-top:0">
-   <div class="card"><h3 style="font-size:1.1rem">📰 Fuente del día</h3><p class="note" style="margin:4px 0 10px">Una fuente nueva cada día, dos preguntas, hasta 20 puntos.</p>${dd!=null?`<p><b>Hoy: ${dd} / 20</b> ✓</p>`:`<button class="btn primary" data-gm="daily">Jugar ahora</button>`}</div>
-   <div class="card"><h3 style="font-size:1.1rem">⚔ Reto semanal</h3><p class="note" style="margin:4px 0 10px">Diez preguntas mezcladas, hasta 100 puntos. Cambia cada lunes.</p>${ww!=null?`<p><b>Esta semana: ${ww} / 100</b> ✓</p>`:`<button class="btn primary" data-gm="weekly">Jugar ahora</button>`}</div></div>
+   <div class="card"><h3 style="font-size:1.1rem">Fuente del día</h3><p class="note" style="margin:4px 0 10px">Una fuente nueva cada día, dos preguntas, hasta 20 puntos.</p>${dd!=null?`<p><b>Hoy: ${dd} / 20</b> ✓</p>`:`<button class="btn primary" data-gm="daily">Jugar ahora</button>`}</div>
+   <div class="card"><h3 style="font-size:1.1rem">Reto semanal</h3><p class="note" style="margin:4px 0 10px">Diez preguntas mezcladas, hasta 100 puntos. Cambia cada lunes.</p>${ww!=null?`<p><b>Esta semana: ${ww} / 100</b> ✓</p>`:`<button class="btn primary" data-gm="weekly">Jugar ahora</button>`}</div></div>
   <div class="sech"><h2>Juegos libres</h2><span class="note">Sin límite de partidas</span></div>
   <div class="actions2">${Object.entries(GAMES).map(([k,x],i)=>`<button class="act2 k${i+1}" data-gm="${k}"><div class="ic">${x.ic}</div><h3>${x.n}</h3><p>${x.d}</p><p class="note" style="margin:6px 0 0">Mejor: ${best(k)} / ${k==="ord"?30:50}</p></button>`).join("")}</div>
   <div class="sech"><h2>Insignias</h2><span class="note">${got} de ${BADGES.length}</span></div>
@@ -2177,7 +2170,7 @@ function renderClasif(){
   ${LBS.err&&!d?`<div class="warn" style="margin-top:14px">${esc(LBS.err)} <button class="btn small" id="lbretry" type="button">Reintentar</button></div>`:""}
   ${d?`<div class="stats4" style="margin-top:18px"><div class="stt"><b>${d.n}</b><span>participantes</span></div><div class="stt"><b>${nf(d.xp)}</b><span>XP entre todos</span></div><div class="stt"><b>${Math.round(d.mins/60)} h</b><span>de estudio sumadas</span></div><div class="stt"><b>${lbWeekLabel(d.week)}</b><span>inicio de la semana</span></div></div>`:""}
   <div class="lbf"><div class="tlseg" role="tablist" aria-label="Clasificación">${tabs.map(([k,n])=>`<button class="seg" role="tab" data-lt="${k}" aria-current="${tab===k}">${n}</button>`).join("")}</div>
-   <button class="btn small" id="lbrf" style="margin-left:auto" type="button">${LBS.busy?"Cargando…":"↻ Refrescar"}</button></div>
+   <button class="btn small" id="lbrf" style="margin-left:auto" type="button">${LBS.busy?"Cargando…":"Refrescar"}</button></div>
   ${me&&rk?`<p class="note" style="margin:10px 0 0">Tu puesto en esta lista: <b>${rk}</b>.</p>`:""}
   ${list.length?`<ol class="lbk">${list.map((r,i)=>lbRow(r,i,tab,me,Math.max(1,...list.map(x=>({xpT:x.xp,wk:x.wxp,streak:x.streak,cards:x.cards}[tab])))) ).join("")}</ol>`:`<p class="muted" style="margin-top:18px">${LBS.busy?"Cargando…":(d?"Todavía no hay nadie en esta lista.":"")}</p>`}
   <p class="alleg">Los puntos se calculan en tu dispositivo; el servidor limita las subidas anormales y el profesor puede retirar filas con cifras imposibles. La clasificación se actualiza cada vez que estudias y cuando pulsas «Actualizar».</p>`;
@@ -2266,14 +2259,14 @@ function initHoy(){document.addEventListener("click",e=>{const b=e.target.closes
 /* ---------- v7: voz ---------- */
 const TTS=typeof speechSynthesis!=="undefined"&&typeof SpeechSynthesisUtterance!=="undefined";
 let SPK={on:false,btn:null};
-function stopSpeak(){if(TTS)try{speechSynthesis.cancel()}catch(e){}SPK.on=false;if(SPK.btn){SPK.btn.classList.remove("on");SPK.btn.textContent="🔊 Escuchar";SPK.btn=null}}
+function stopSpeak(){if(TTS)try{speechSynthesis.cancel()}catch(e){}SPK.on=false;if(SPK.btn){SPK.btn.classList.remove("on");SPK.btn.textContent="Escuchar";SPK.btn=null}}
 function speakText(txt,btn){
   if(!TTS){toast("Tu navegador no tiene lectura en voz alta.");return}
   if(SPK.on&&SPK.btn===btn){stopSpeak();return}
   stopSpeak();
   const chunks=[];String(txt).replace(/\s+/g," ").split(/(?<=[\.\?\!;:])\s+/).forEach(s=>{while(s.length>220){let k=s.lastIndexOf(",",200);if(k<60)k=s.lastIndexOf(" ",200);chunks.push(s.slice(0,k+1));s=s.slice(k+1)}if(s.trim())chunks.push(s)});
   const vs=speechSynthesis.getVoices(),v=vs.find(x=>/^es[-_]ES/i.test(x.lang))||vs.find(x=>/^es/i.test(x.lang));
-  const rate=LS.get("rate",1);let i=0;SPK.on=true;SPK.btn=btn||null;if(btn){btn.classList.add("on");btn.textContent="⏹ Parar"}
+  const rate=LS.get("rate",1);let i=0;SPK.on=true;SPK.btn=btn||null;if(btn){btn.classList.add("on");btn.textContent="Parar"}
   const next=()=>{if(!SPK.on)return;if(i>=chunks.length){stopSpeak();return}const u=new SpeechSynthesisUtterance(chunks[i++]);u.lang="es-ES";if(v)u.voice=v;u.rate=rate;u.onend=next;u.onerror=()=>stopSpeak();speechSynthesis.speak(u)};
   next()}
 function docVoice(d){return d.kind==="texto"?`${d.titulo}. ${d.descr?d.descr+". ":""}${d.paras.join(" ")}`:`${d.titulo}. ${d.tipo}. ${d.descr||""} ${(d.imgs||[]).map(i=>i.cap).join(". ")}`}
@@ -2281,7 +2274,7 @@ function speakDoc(id,btn){speakText(docVoice(DOCM[id]),btn)}
 
 /* ---------- v7: Taller ---------- */
 let TKTAB=LS.get("tktab","plan");
-const TKT=[["plan","📅 Plan hasta el examen"],["com","🖋 Comentario"],["esq","🗂 Esquemas"],["cmp","⚖ Comparador"],["chu","🧾 Chuleta"],["nota","🎓 Nota PAU"]];
+const TKT=[["plan","Plan hasta el examen"],["com","Comentario"],["esq","Esquemas"],["cmp","Comparador"],["chu","Chuleta"],["nota","Nota PAU"]];
 function openTaller(tab){TKTAB=tab;LS.set("tktab",tab);if((location.hash||"#inicio")==="#taller")renderTaller();else go("taller")}
 function renderTaller(){
   const V=$("#v-taller");if(!V)return;
@@ -2367,7 +2360,7 @@ function tkCom(el){
     const b=$("#cmb");if(!CMID){b.innerHTML="";return}
     const d=DOCM[CMID],sv=(ST.cm||{})[d.id]||{};
     b.innerHTML=`<div class="tk2" style="margin-top:14px"><div class="card"><div class="meta" style="margin-bottom:6px">${chips(d)}</div><h3 style="font-size:1.1rem;margin-bottom:6px">${esc(d.titulo)}</h3>${d.kind==="texto"?`<div class="quote">${d.paras.map(p=>`<p>${esc(p)}</p>`).join("")}</div>${d.ref?`<p class="note">${esc(d.ref)}</p>`:""}`:`<p class="note">${esc(d.tipo)}</p>${figs(d,true)}`}${d.kind==="fuente"?guionHTML(d):""}
-     <div class="row" style="margin-top:8px"><button class="btn small" data-spk>🔊 Escuchar</button><button class="btn small" id="cmo">Abrir ficha</button></div></div>
+     <div class="row" style="margin-top:8px"><button class="btn small" data-spk>Escuchar</button><button class="btn small" id="cmo">Abrir ficha</button></div></div>
     <div class="card"><ol class="note" style="margin:0 0 8px 1.1em;padding:0"><li>Ideas principales y secundarias.</li><li>Contexto histórico e importancia.</li>${d.cuestion?`<li>${esc(d.cuestion)}</li>`:""}</ol>
      <textarea class="ta" id="cmx" rows="14" maxlength="6000" placeholder="Escribe aquí tu comentario…" aria-label="Tu comentario">${esc(sv.x||"")}</textarea>
      <div class="row" style="margin-top:6px"><span class="note" id="cmw"></span><span class="note" id="cms" style="margin-left:auto"></span></div>
@@ -2405,7 +2398,7 @@ function tkEsq(el){
     const e=EPM[ESEL],sv=(ST.esq||{})[ESEL]||{},x=sv.x||{};
     b.innerHTML=`<div class="card" style="margin-top:14px"><div class="meta" style="margin-bottom:6px"><span class="chip ${e.bloque}">Bloque ${e.bloque}</span><span class="chip">Epígrafe ${e.id}</span></div><h3 style="font-size:1.15rem;margin-bottom:10px">${esc(e.nombre)}</h3>
      <div class="tk2">${ESQ.map(([k,n,h])=>`<div class="field"><label for="eq-${k}">${n}</label><textarea class="ta" id="eq-${k}" rows="4" maxlength="1500" placeholder="${esc(h)}">${esc(x[k]||"")}</textarea></div>`).join("")}</div>
-     <div class="row" style="margin-top:10px"><button class="btn primary" id="eqgo">Comprobar mi esquema</button><button class="btn" data-spk>🔊 Escuchar apuntes</button><span class="note" id="eqs"></span></div></div><div id="eqres"></div>`;
+     <div class="row" style="margin-top:10px"><button class="btn primary" id="eqgo">Comprobar mi esquema</button><button class="btn" data-spk>Escuchar apuntes</button><span class="note" id="eqs"></span></div></div><div id="eqres"></div>`;
     const save=()=>{const o=ST.esq[ESEL]||(ST.esq[ESEL]={});o.x=o.x||{};ESQ.forEach(([k])=>o.x[k]=$("#eq-"+k).value.slice(0,1500));o.t=Date.now();saveST();$("#eqs").textContent="Guardado"};
     ESQ.forEach(([k])=>{const t=$("#eq-"+k);taSave(t,save);t.addEventListener("input",()=>$("#eqs").textContent="…")});
     $("[data-spk]",b).onclick=function(){const ds=DOCS.filter(d=>d.ep===ESEL).slice(0,3);speakText(e.nombre+". "+ds.map(d=>d.clave.apuntes).join(" "),this)};
@@ -2464,7 +2457,7 @@ function tkChu(el){
   el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Chuleta imprimible</h2><p class="note" style="margin:4px 0 10px">Una hoja A4 por tema, con espacio para tus notas.</p>
    <div class="row" style="align-items:flex-end"><div class="field"><label for="cht">Tema</label><select id="cht">${TEMAS.map(t=>opt(t.n,temaLbl(t.n).slice(0,50),t.n===CHT)).join("")}</select></div>
    <label class="check"><input type="checkbox" id="cho1" checked> Cronología</label><label class="check"><input type="checkbox" id="cho2" checked> Personajes</label><label class="check"><input type="checkbox" id="cho3" checked> Documentos</label><label class="check"><input type="checkbox" id="cho4" checked> Espacio para notas</label></div>
-   <div class="row" style="margin-top:6px"><button class="btn primary" id="chd">Descargar</button><button class="btn" id="chp">Imprimir</button><button class="btn" data-spk>🔊 Escuchar</button><span class="note" id="chn"></span></div></div><div class="sheetwrap" style="margin-top:14px"><div class="exam" id="csheet"></div></div>`;
+   <div class="row" style="margin-top:6px"><button class="btn primary" id="chd">Descargar</button><button class="btn" id="chp">Imprimir</button><button class="btn" data-spk>Escuchar</button><span class="note" id="chn"></span></div></div><div class="sheetwrap" style="margin-top:14px"><div class="exam" id="csheet"></div></div>`;
   const opts=()=>({ev:$("#cho1").checked,pp:$("#cho2").checked,fu:$("#cho3").checked,no:$("#cho4").checked});
   const draw=()=>{CHT=+$("#cht").value;$("#csheet").innerHTML=chuHTML(CHT,opts());stopSpeak()};
   $("#cht").onchange=draw;["#cho1","#cho2","#cho3","#cho4"].forEach(s=>$(s).onchange=draw);
