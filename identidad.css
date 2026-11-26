@@ -682,3 +682,6 @@ html.legible .cback em b,html.legible .cro .tx h4{font-style:italic}
 #v-radar .zrseg button[aria-pressed=true],#v-radar .zrseg button.on{background:var(--ink);color:var(--paper)}
 .zrgo{border:1.5px solid var(--ink);border-radius:4px}
 .pauq{border:2px solid var(--ink);border-left:6px solid var(--accent);border-radius:4px}
+.efe .lnk[data-go-efe]{display:inline;margin-top:4px;padding:0;font:600 .74rem var(--sans);color:var(--muted);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.efe .lnk[data-go-efe]:hover{color:var(--ink)}
+@media(max-width:520px){.efe .lnk[data-go-efe]{padding:6px 0}}

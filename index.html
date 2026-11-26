@@ -2241,7 +2241,7 @@ function hoyHTML(){
    ${row(2,"3","Repasa "+HOY_N+" tarjetas",Math.min(S.rv,HOY_N)+" de "+HOY_N+" hechas hoy · "+due+(due===1?" pendiente":" pendientes")+" de repaso","Empezar","rv")}
    ${row(3,"4","Refuerza el tema "+P.w.n,esc(P.w.nombre)+" · "+esc(S.P.why),"Ver textos","wk")}
    </ol>
-   <p class="hoyf">De propina: <button class="lnk" type="button" data-hoy="pp">${esc(P.pp.nombre)}</button> · ${esc(P.pp.cargo)}${h.n?` <span class="hn">· ${h.n} ${h.n===1?"sesión completa":"sesiones completas"}</span>`:""}${streak()>0?` <span class="hn">· racha de ${streak()} ${streak()===1?"día":"días"}</span>`:""}</p></div>`}
+   </div>`}
 function renderPauQ(){
   const el=$("#pauq");if(!el||!window.pauDaily)return;const q=pauDaily(dayNum());if(!q){el.innerHTML="";return}
   const e0=EPM[q.eps[0]];if(!e0){el.innerHTML="";return}
