@@ -1968,7 +1968,8 @@ const alPad=n=>String(n).padStart(3,"0");
 function cromo(p,o={}){
   const r=alRar(p),cc=CATS[p.cat][1],cn=CATS[p.cat][0],T=o.tag||"button",n=alPad(alN(p.id)),at=T==="button"?` type="button" data-id="${p.id}"`:"";
   if(!o.owned)return `<${T} class="cro lock r${r}"${at} style="--cc:${cc}" aria-label="Cromo ${n} por descubrir"><span class="cn">Nº ${n}</span><span class="cq" aria-hidden="true">?</span><span class="cx">Por descubrir<small>${esc(cn)}</small></span></${T}>`;
-  return `<${T} class="cro r${r}"${at} style="--cc:${cc}"><span class="co" aria-hidden="true"></span><span class="cn">Nº ${n}</span><span class="cr" aria-label="${["","común","rara","legendaria"][r]}">${"★".repeat(r)}</span>${p.img?`<span class="art ph"><img src="${p.img}" alt="" loading="lazy"><i>${p.tema}</i></span>`:`<span class="art"><b>${esc(ini(p.nombre))}</b><i>${p.tema}</i></span>`}<span class="tx"><h4>${esc(clean(p.nombre))}</h4><span class="yr">${esc(life(p))}</span><span class="cg">${esc(p.cargo)}</span><span class="nt">${esc(p.nota||"")}</span></span><span class="ft"><span>${esc(cn)}</span><span>Tema ${p.tema}</span></span></${T}>`}
+  const art=p.img?`<span class="cv"><img src="${p.img}" alt="" loading="lazy"></span>`:`<span class="cv fb"><i class="ibm"></i><b>${esc(ini(p.nombre))}</b></span>`;
+  return `<${T} class="cro r${r}"${at} style="--cc:${cc}">${art}<span class="fr" aria-hidden="true"></span><span class="cn">Nº ${n}</span><span class="cr" aria-label="${["","común","rara","legendaria"][r]}">${"★".repeat(r)}</span><span class="tx"><h4>${esc(clean(p.nombre))}</h4><span class="yr">${esc(life(p))}</span><span class="cg">${esc(p.cargo)}</span><span class="nt">${esc(p.nota||"")}</span></span><span class="ft"><span>${esc(cn)}</span><span>Tema ${p.tema}</span></span><span class="sh" aria-hidden="true"></span></${T}>`}
 
 /* sacar un sobre: 3 cromos; se guarda al instante (no se puede repetir la tirada recargando) */
 function alOpen(){
@@ -1990,7 +1991,7 @@ function pkShow(){if(!$("#pk").open)$("#pk").showModal();pkSealed()}
 function pkSealed(){
   pkPanelClose();const n=alPacks(),a=AL();
   $("#pkb").innerHTML=n>0
-   ?`<div class="pkh"><span>Sobre nº ${a.opened+1}</span><small>${n} ${n===1?"sobre":"sobres"} por abrir</small></div><button class="sobre" id="pkgo" type="button" aria-label="Abrir el sobre"><span class="sb"><span class="flap"></span><span class="sl"><u aria-hidden="true">★ ★ ★</u><b>H</b><em>Archivo de la<br>Historia de España</em><i>Colección del curso</i></span></span></button><p class="pkn">Toca el sobre para abrirlo.</p>`
+   ?`<div class="pkh"><span>Sobre nº ${a.opened+1}</span><small>${n} ${n===1?"sobre":"sobres"} por abrir</small></div><button class="sobre" id="pkgo" type="button" aria-label="Abrir el sobre"><span class="sb"><span class="flap"></span><span class="sl"><i class="rose"></i><i class="ibm"></i><em>Historia de España</em></span></span></button><p class="pkn">Toca el sobre para abrirlo.</p>`
    :`<div class="pkh"><span>No te quedan sobres</span><small>${alCount()} de ${PEOPLE.length} cromos</small></div><p class="pkn">Ganas un sobre por cada ${AL_XP} puntos de experiencia: lee textos, repasa tarjetas, juega o haz un comentario. Y cada día hay un sobre de regalo.</p><div class="row pkact" style="margin-top:20px"><button class="btn primary" id="pkclose" type="button">Volver al álbum</button></div>`;
   const g=$("#pkgo");if(g){g.onclick=pkTear;g.focus({preventScroll:true})}
   const c=$("#pkclose");if(c)c.onclick=()=>$("#pk").close()}
@@ -2001,7 +2002,7 @@ function pkTear(){
   setTimeout(()=>pkDeal(res),quick?60:980)}
 function pkDeal(res){
   PK={res,n:0,sel:-1};pkPanelClose();
-  $("#pkb").innerHTML=`<div class="pkstage" id="pkst"><div class="pkrow">${res.map((r,i)=>`<div class="pkc g${alRar(r.p)}" style="--i:${i}"><div class="fl" data-i="${i}" role="button" tabindex="0" aria-label="Voltear el cromo ${i+1}"><div class="in"><div class="face back"><div class="cback"><b>H</b><em>Historia de España</em></div></div><div class="face front">${cromo(r.p,{owned:1,tag:"div"})}<span class="up"></span><span class="holo"></span></div></div>${r.isNew?`<span class="nw">¡Nuevo!</span>`:`<span class="nw rp">Repetido · +2 XP</span>`}</div><span class="gl" aria-hidden="true"></span></div>`).join("")}</div><aside class="pkpanel" id="pkpanel" aria-label="Información del cromo" hidden></aside></div><div id="pkfb" aria-live="polite">Toca cada cromo para darle la vuelta.</div><div class="row pkact"><button class="btn" id="pkall" type="button">Voltear todos</button></div>`;
+  $("#pkb").innerHTML=`<div class="pkstage" id="pkst"><div class="pkrow">${res.map((r,i)=>`<div class="pkc g${alRar(r.p)}" style="--i:${i}"><div class="fl" data-i="${i}" role="button" tabindex="0" aria-label="Voltear el cromo ${i+1}"><div class="in"><div class="face back"><div class="cback"><i class="rose"></i><i class="ibm"></i><em>Historia de España</em></div></div><div class="face front">${cromo(r.p,{owned:1,tag:"div"})}<span class="up"></span><span class="holo"></span></div></div>${r.isNew?`<span class="nw">¡Nuevo!</span>`:`<span class="nw rp">Repetido · +2 XP</span>`}</div><span class="gl" aria-hidden="true"></span></div>`).join("")}</div><aside class="pkpanel" id="pkpanel" aria-label="Información del cromo" hidden></aside></div><div id="pkfb" aria-live="polite">Toca cada cromo para darle la vuelta.</div><div class="row pkact"><button class="btn" id="pkall" type="button">Voltear todos</button></div>`;
   const flip=el=>{if(el.classList.contains("on"))return;el.classList.add("on");PK.n++;const r=PK.res[+el.dataset.i],rr=alRar(r.p),pc=el.parentElement;
     el.setAttribute("aria-label","Ver información de "+clean(r.p.nombre));
     setTimeout(()=>pc.classList.add("lit"),[0,900,1200,1800][rr]);
@@ -2054,19 +2055,27 @@ function renderAlbum(){
   $$(".cro",V).forEach(b=>b.onclick=()=>{const p=PM[b.dataset.id];if(!p)return;if(AL().own[p.id])openPers(p.id);else toast("Aún no tienes ese cromo. Gana sobres estudiando.")})}
 function albumBanner(){
   if(!PEOPLE.length)return"";const n=alPacks();
-  return `<div class="albn" id="albn" role="link" tabindex="0"><span class="sb" aria-hidden="true">H</span><div><h3>Álbum de la Historia</h3><p>${alCount()} de ${PEOPLE.length} cromos · ${n} ${n===1?"sobre":"sobres"} por abrir</p></div><button class="btn" type="button">Abrir el álbum</button></div>`}
+  return `<div class="albn" id="albn" role="link" tabindex="0"><span class="sb pk" aria-hidden="true"></span><div><h3>Álbum de la Historia</h3><p>${alCount()} de ${PEOPLE.length} cromos · ${n} ${n===1?"sobre":"sobres"} por abrir</p></div><button class="btn" type="button">Abrir el álbum</button></div>`}
 function initAlbum(){
   const pk=$("#pk");
   pk.addEventListener("close",()=>{PK=null;const v=(location.hash||"").slice(1);if(v==="album")renderAlbum();else if(v==="juegos")renderJuegos();try{renderMyStrip()}catch(e){}});
   pk.addEventListener("click",e=>{if(e.target.closest("#pkx"))pk.close()});
   pk.addEventListener("cancel",e=>{const pn=$("#pkpanel");if(PK&&pn&&!pn.hidden){e.preventDefault();pkPanelClose()}});
   if(!matchMedia("(prefers-reduced-motion:reduce)").matches){let raf=0;const pkb=$("#pkb");
-    const tilt=(e,off)=>{const pc=e.target.closest&&e.target.closest(".pkc.lit");if(!pc&&!off)return;if(e.pointerType==="touch"&&!e.buttons&&!off)return;
-      cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{$$(".pkc.lit .fl",pkb).forEach(fl=>fl.style.transform="");
-        if(off||!pc)return;const fl=$(".fl",pc),r=fl.getBoundingClientRect(),x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),y=Math.max(0,Math.min(1,(e.clientY-r.top)/r.height));
-        pc.style.setProperty("--mx",(x*100).toFixed(0)+"%");pc.style.setProperty("--my",(y*100).toFixed(0)+"%");
-        fl.style.transform=`perspective(800px) rotateX(${((.5-y)*13).toFixed(1)}deg) rotateY(${((x-.5)*15).toFixed(1)}deg)`})};
-    pkb.addEventListener("pointermove",e=>tilt(e,false));pkb.addEventListener("pointerleave",e=>tilt(e,true));pkb.addEventListener("pointerup",e=>{if(e.pointerType==="touch")tilt(e,true)});pkb.addEventListener("pointercancel",e=>tilt(e,true))}
+    const pos=(e,el)=>{const r=el.getBoundingClientRect();return[Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))]};
+    const clear=()=>{$$(".pkc .fl",pkb).forEach(fl=>fl.style.transform="");const sb=$(".sobre .sb",pkb);if(sb)sb.style.transform=""};
+    const tilt=(e,off)=>{
+      const pc=e.target.closest&&e.target.closest(".pkc"),so=e.target.closest&&e.target.closest(".sobre");
+      if(!off&&!pc&&!so)return;if(!off&&e.pointerType==="touch"&&!e.buttons)return;
+      cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{clear();
+        if(off)return;
+        if(pc){const fl=$(".fl",pc),[x,y]=pos(e,fl);pc.style.setProperty("--mx",(x*100).toFixed(0)+"%");pc.style.setProperty("--my",(y*100).toFixed(0)+"%");
+          fl.style.transform=`perspective(800px) rotateX(${((.5-y)*14).toFixed(1)}deg) rotateY(${((x-.5)*16).toFixed(1)}deg)`}
+        else if(so){const sb=$(".sb",so),[x,y]=pos(e,so);so.style.setProperty("--mx",(x*100).toFixed(0)+"%");so.style.setProperty("--my",(y*100).toFixed(0)+"%");so.style.setProperty("--fx",(x*100).toFixed(0)+"%");
+          sb.style.transform=`perspective(700px) rotateX(${((.5-y)*12).toFixed(1)}deg) rotateY(${((x-.5)*14).toFixed(1)}deg)`}})};
+    pkb.addEventListener("pointermove",e=>tilt(e,false));pkb.addEventListener("pointerleave",e=>tilt(e,true));pkb.addEventListener("pointerup",e=>{if(e.pointerType==="touch")tilt(e,true)});pkb.addEventListener("pointercancel",e=>tilt(e,true))
+    /* en el álbum: el brillo sigue al puntero */
+    const alb=$("#v-album");if(alb)alb.addEventListener("pointermove",e=>{const c=e.target.closest&&e.target.closest(".cro:not(.lock)");if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty("--mx",((e.clientX-r.left)/r.width*100).toFixed(0)+"%");c.style.setProperty("--my",((e.clientY-r.top)/r.height*100).toFixed(0)+"%")})}
   document.addEventListener("click",e=>{const b=e.target.closest("#albn");if(b)go("album")});
   document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.id==="albn"){e.preventDefault();go("album")}})}
 
@@ -2231,6 +2240,13 @@ function hoyHTML(){
    ${row(3,"4","Refuerza el tema "+P.w.n,esc(P.w.nombre)+" · "+esc(S.P.why),"Ver textos","wk")}
    </ol>
    <p class="hoyf">De propina: <button class="lnk" type="button" data-hoy="pp">${esc(P.pp.nombre)}</button> · ${esc(P.pp.cargo)}${h.n?` <span class="hn">· ${h.n} ${h.n===1?"sesión completa":"sesiones completas"}</span>`:""}${streak()>0?` <span class="hn">· racha de ${streak()} ${streak()===1?"día":"días"}</span>`:""}</p></div>`}
+function renderPauQ(){
+  const el=$("#pauq");if(!el||!window.pauDaily)return;const q=pauDaily(dayNum());if(!q){el.innerHTML="";return}
+  const e0=EPM[q.eps[0]];if(!e0){el.innerHTML="";return}
+  const s=window.pauStat(e0.id);
+  el.innerHTML=`<div class="pauq"><span class="eyebrow" style="margin:0">Pregunta real de la PAU · ${q.k==="t"?"tema":"cuestión"}</span><p class="pq">${esc(q.s)}${/[.?!…]$/.test(q.s)?"":"."}</p><p class="pm">${esc(q.e.l)} · epígrafe ${e0.id}, ${esc(e0.nombre)}. Ha salido ${s.n} ${s.n===1?"vez":"veces"}.</p><div class="row"><button class="btn small primary" type="button" data-pq="ep">Ver el epígrafe</button><button class="btn small" type="button" data-pq="radar">Ver en el Radar PAU</button></div></div>`;
+  el.querySelector('[data-pq=ep]').onclick=()=>{go("tiempo");setTimeout(()=>{tlGoTema(e0.tema);setTimeout(()=>{const d=document.getElementById("ep"+e0.id);if(d){d.open=true;d.dispatchEvent(new Event("toggle"));d.scrollIntoView({block:"center"})}},150)},80)};
+  el.querySelector('[data-pq=radar]').onclick=()=>pauOpen(e0.id)}
 function renderHoy(){const el=$("#hoyx");if(!el||!DOCS.length)return;el.innerHTML=hoyHTML()}
 function initHoy(){document.addEventListener("click",e=>{const b=e.target.closest("[data-hoy]");if(!b||!b.closest("#hoyx"))return;
   const k=b.dataset.hoy,P=hoyPick();
@@ -2548,7 +2564,7 @@ function renderInicio(){
    <div class="hcar" id="hcar">${car.map((d,i)=>`<button class="hs ${i?"":"on"}" data-id="${d.id}" aria-label="${esc(d.titulo)}"><div class="hbg" style="background-image:url('${d.imgs[0].f}')"></div><img src="${d.imgs[0].f}" alt="${esc(d.imgs[0].cap||d.titulo)}" loading="lazy" decoding="async"><div class="hcap"><b>${esc(d.titulo.length>74?d.titulo.slice(0,72)+"…":d.titulo)}</b><span>${d.tipo} · Epígrafe ${d.ep}${d.year!=null?" · "+fy(d.year):""}</span></div></button>`).join("")}<div class="hdots">${car.map((d,i)=>`<i data-i="${i}" class="${i?"":"on"}"></i>`).join("")}</div></div>
   </div>
   <div class="sech rv"><h2>Para hoy</h2></div>
-  <div class="rv" id="hoyx"></div><a id="pulsoH" hidden></a>
+  <div class="rv" id="hoyx"></div><a id="pulsoH" hidden></a><div class="rv" id="pauq"></div>
   <div class="sech rv"><h2>El curso por evaluaciones</h2><span class="note">Pulsa un tema para verlo en la cronología</span></div>
   <div class="evs rv">${EVD.map(([n,c,s,b,sub])=>{const ts=D.presets[n],eps=EPS.filter(e=>ts.includes(e.tema));const a=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="texto").length,f=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="fuente").length,np=PEOPLE.filter(p=>ts.includes(p.tema)).length;
     return `<div class="ev ${c}"><h3>${n}</h3><div class="sub">${sub}</div><div class="evt">${ts.length>1?"Temas "+ts[0]+" a "+ts[ts.length-1]:""}</div><p class="note" style="margin:0 0 12px">${a} textos · ${f} fuentes · ${np} personajes · ${eps.length} epígrafes</p><div class="row"><button class="btn primary small" data-std="${s}">Generar examen</button><button class="btn small" data-pool="textos" data-b="${b}">Textos</button><button class="btn small" data-pool="fuentes" data-b="${b}">Fuentes</button></div></div>`}).join("")}</div>
@@ -2574,7 +2590,7 @@ function renderInicio(){
   const rv=$$(".rv",V);
   if("IntersectionObserver"in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.08});rv.forEach(x=>io.observe(x))}
   setTimeout(()=>rv.forEach(x=>x.classList.add("in")),1800);
-  renderMyStrip();renderHoy();window.PULSO&&PULSO.ticker($("#pulsoH"));
+  renderMyStrip();renderHoy();renderPauQ();window.PULSO&&PULSO.ticker($("#pulsoH"));
 }
 
 /* ---------- textos y fuentes históricas ---------- */
@@ -2642,7 +2658,7 @@ function initTiempo(){
       <div class="tmh"><span class="tmn">${t.n}</span><div><h2>${esc(t.nombre)}</h2><div class="tmy">${[tlSpan(t),ev.length+(ev.length===1?" hito":" hitos"),np+" personajes",nd+" fuentes"].filter(Boolean).join(" · ")}</div></div></div>
       ${ev.length?`<div class="beads sE">${ev.map(o=>`<button class="bead" data-ev="${o.i}" title="${esc(fy(o.e.y)+" · "+o.e.t)}"><i></i><b>${fy(o.e.y)}</b><span>${esc(o.e.t)}</span></button>`).join("")}</div>`:""}
       <div class="eps">${eps.map(e=>{const ne=EVS.filter(x=>x.ep===e.id).length,npp=PEOPLE.filter(p=>p.eps.includes(e.id)).length,nf=DOCS.filter(d=>d.kind==="fuente"&&d.ep===e.id).length;
-        return `<details class="epd" id="ep${e.id}" data-ep="${e.id}"><summary><span class="epnum">${e.id}</span><span>${esc(e.nombre)}</span><span class="epcnt">${ne} ${ne===1?"hito":"hitos"} · ${npp} ${npp===1?"pers.":"pers."} · ${nf} ${nf===1?"fuente":"fuentes"}</span></summary><div class="epb"></div></details>`}).join("")}</div>
+        return `<details class="epd" id="ep${e.id}" data-ep="${e.id}"><summary><span class="epnum">${e.id}</span><span>${esc(e.nombre)}</span><span class="epcnt">${ne} ${ne===1?"hito":"hitos"} · ${npp} ${npp===1?"pers.":"pers."} · ${nf} ${nf===1?"fuente":"fuentes"}${window.pauStat?(()=>{const q=pauStat(e.id);return q.n?` · PAU ×${q.n}`:" · PAU: aún no"})():""}</span></summary><div class="epb"></div></details>`}).join("")}</div>
     </section>`}).join("");
   $("#tlbody").addEventListener("toggle",e=>{const d=e.target;if(d.matches&&d.matches("details.epd")&&d.open&&!d.dataset.b)tlFill(d)},true);
   $("#tlbody").addEventListener("click",e=>{

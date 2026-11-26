@@ -104,4 +104,16 @@ function init() {
   root.addEventListener("change", function (e) { if (e.target.id === "zrmod") { st.mod = e.target.checked; render(); } });
 }
 window.renderPau = function () { init(); render(); };
+/* utilidades para el resto de la web */
+window.pauStat = function (id) {
+  var n = 0, last = 0;
+  P.forEach(function (e) { if (e.k === "mod") return; var hit = e.i.some(function (it) { return it[1].indexOf(id) >= 0; }); if (hit) { n++; if (e.y > last) last = e.y; } });
+  return { n: n, last: last };
+};
+window.pauDaily = function (day) {
+  var pool = [];
+  P.forEach(function (e) { if (e.k === "mod") return; e.i.forEach(function (it) { if ((it[0] === "c" || it[0] === "t") && it[2].length > 30) pool.push({ e: e, k: it[0], s: it[2], eps: it[1] }); }); });
+  return pool.length ? pool[(day * 2654435761 >>> 0) % pool.length] : null;
+};
+window.pauOpen = function (id) { st.open = id; st.sort = "tema"; st.k = "all"; location.hash = "radar"; if ($("#v-radar") && $("#v-radar").dataset.rd) { render(); var el = $('.zrr[data-ep="' + id + '"]'); if (el) setTimeout(function () { el.scrollIntoView({ block: "center" }); }, 60); } else setTimeout(function () { var el = $('.zrr[data-ep="' + id + '"]'); if (el) el.scrollIntoView({ block: "center" }); }, 200); };
 })();

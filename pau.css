@@ -64,3 +64,7 @@
   .zrdd .zry{grid-area:y}.zrdd .zrk{grid-area:k}.zrdd .zrs{grid-area:s}.zrdd .zrdoc{grid-area:d;justify-self:start}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+.pauq{margin:12px 0 0;padding:16px 20px;border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--surface);border-radius:10px}
+.pauq .pq{margin:8px 0 6px;font:500 1.15rem/1.35 var(--serif);color:var(--ink)}
+.pauq .pm{margin:0 0 12px;font-size:.84rem;color:var(--muted)}
+.pauq .row{display:flex;gap:8px;flex-wrap:wrap}
