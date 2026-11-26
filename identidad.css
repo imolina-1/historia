@@ -304,3 +304,48 @@ footer.foot a:hover,footer.foot button:hover{color:var(--ink);text-decoration-co
   .tlseg{position:sticky;top:var(--hh);z-index:20;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--line)}
   .tlctl{padding:12px 0 4px}
 }
+
+/* ---- Cromos abiertos: siguen vivos y se pueden consultar sin salir de la pantalla ---- */
+.pkc{isolation:isolate;--gc:232,182,102;--sh:.22}
+.pkc.g2{--gc:168,200,238;--sh:.34}
+.pkc.g3{--gc:255,204,106;--sh:.46}
+.pkc .gl{position:absolute;z-index:-1;left:4%;right:4%;bottom:-7%;height:40%;border-radius:50%;background:radial-gradient(ellipse at 50% 85%,rgba(var(--gc),.95),rgba(var(--gc),.28) 55%,transparent 76%);filter:blur(15px);opacity:0;transition:opacity .9s;pointer-events:none}
+.pkc.lit{animation:pkbob 4.8s ease-in-out infinite;animation-delay:calc(var(--i)*-1.3s)}
+.pkc.lit .gl{opacity:.85;animation:pkglow 2.7s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.7s)}
+.pkc.lit .fl{transition:transform .22s ease-out;will-change:transform}
+@keyframes pkbob{0%,100%{translate:0 0;rotate:-.5deg}50%{translate:0 -10px;rotate:.5deg}}
+@keyframes pkglow{from{opacity:.5;transform:scaleX(.94)}to{opacity:1;transform:scaleX(1.1) translateY(4px)}}
+.fl .up,.fl .holo{position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .9s}
+.fl .up{background:linear-gradient(to top,rgba(var(--gc),.62),rgba(var(--gc),0) 36%)}
+.fl .holo{background:radial-gradient(circle at var(--mx,50%) var(--my,22%),rgba(255,255,255,calc(var(--sh) + .1)),transparent 46%),linear-gradient(115deg,transparent 34%,rgba(255,255,255,var(--sh)) 47%,rgba(255,255,255,.04) 54%,transparent 63%);background-size:100% 100%,260% 100%;background-repeat:no-repeat;background-position:0 0,-130% 0}
+.pkc.lit .up{opacity:1;animation:pkup 2.7s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.7s)}
+.pkc.lit .holo{opacity:1;animation:pksheen 5.2s ease-in-out infinite;animation-delay:calc(var(--i)*-1.7s)}
+@keyframes pkup{from{opacity:.45}to{opacity:1}}
+@keyframes pksheen{0%,52%{background-position:0 0,-130% 0}100%{background-position:0 0,230% 0}}
+.pkc.lit .fl{cursor:pointer}
+.pkc.sel{z-index:3}
+.pkc.sel .fl{filter:drop-shadow(0 0 12px rgba(240,207,134,.75))}
+.pkstage{display:flex;align-items:flex-start;justify-content:center;gap:30px;width:min(1180px,100%)}
+.pkstage .pkrow{flex:1 1 auto;min-width:0}
+.pkstage.has-panel .pkc{width:min(205px,18.5vw)}
+.pkpanel{flex:0 0 min(350px,34vw);text-align:left;background:#1a140e;border:1px solid #5b4f3c;border-radius:12px;padding:18px 18px 16px;max-height:min(72vh,600px);overflow:auto;color:#e8dcc2;box-shadow:0 18px 40px -16px #000;position:relative}
+.pkpanel[hidden]{display:none}
+.pkpx{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;border:1px solid #5b4f3c;background:transparent;color:#efe6d3;cursor:pointer;font-size:.85rem}
+.pkpm{display:flex;flex-wrap:wrap;gap:6px;margin:0 36px 10px 0}
+.pkpanel .chip{background:#2c2318;color:#f0cf86;border:1px solid #5b4f3c;border-radius:4px;font-size:.66rem;letter-spacing:.04em;padding:3px 8px}
+.pkpanel h3{font:400 1.55rem/1.15 var(--serif);color:#f4ead6;margin:0 0 4px}
+.pkpl{margin:0 0 10px;font:600 .72rem var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#d9a653}
+.pkpc{margin:0 0 8px;font-weight:700;color:#f4ead6}
+.pks{margin:0 0 12px;line-height:1.55;font-size:.92rem;color:#d9ceb6}
+.pkpanel h4{margin:12px 0 4px;font:700 .66rem var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#d9a653}
+.pkpanel ul{margin:0 0 12px;padding-left:1.1rem;font-size:.84rem;line-height:1.45;color:#cfc4ab}
+.pkpa{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.pkpa .btn{background:transparent;border-color:#5b4f3c;color:#efe6d3;box-shadow:none}
+.pkpa .btn.primary{background:var(--gold);border-color:var(--gold);color:#1a1510}
+@media(max-width:900px){
+  .pkstage{display:block;width:100%}
+  .pkstage.has-panel .pkc{width:min(31vw,170px)}
+  .pkpanel{position:fixed;left:0;right:0;bottom:0;z-index:6;max-height:50vh;border-radius:16px 16px 0 0;border-width:1px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -16px 40px -12px #000}
+  dialog#pk.pnl .pkw{padding-bottom:54vh;justify-content:flex-start;padding-top:64px}
+}
+@media(prefers-reduced-motion:reduce){.pkc.lit,.pkc.lit .gl,.pkc.lit .up,.pkc.lit .holo{animation:none}.pkc .gl{opacity:.6}.fl .up{opacity:.7}}

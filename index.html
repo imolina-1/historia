@@ -1986,7 +1986,7 @@ function alOpen(){
 let PK=null;
 function pkShow(){if(!$("#pk").open)$("#pk").showModal();pkSealed()}
 function pkSealed(){
-  const n=alPacks(),a=AL();
+  pkPanelClose();const n=alPacks(),a=AL();
   $("#pkb").innerHTML=n>0
    ?`<div class="pkh"><span>Sobre nº ${a.opened+1}</span><small>${n} ${n===1?"sobre":"sobres"} por abrir</small></div><button class="sobre" id="pkgo" type="button" aria-label="Abrir el sobre"><span class="flap"></span><span class="sl"><b>H</b><em>Archivo de la Historia de España</em><i>3 cromos</i></span></button><p class="pkn">Toca el sobre para abrirlo.</p>`
    :`<div class="pkh"><span>No te quedan sobres</span><small>${alCount()} de ${PEOPLE.length} cromos</small></div><p class="pkn">Ganas un sobre por cada ${AL_XP} puntos de experiencia: lee textos, repasa tarjetas, juega o haz un comentario. Y cada día hay un sobre de regalo.</p><div class="row pkact" style="margin-top:20px"><button class="btn primary" id="pkclose" type="button">Volver al álbum</button></div>`;
@@ -1998,14 +1998,26 @@ function pkTear(){
   const quick=matchMedia("(prefers-reduced-motion:reduce)").matches;
   setTimeout(()=>pkDeal(res),quick?60:980)}
 function pkDeal(res){
-  PK={res,n:0};
-  $("#pkb").innerHTML=`<div class="pkrow">${res.map((r,i)=>`<div class="pkc g${alRar(r.p)}" style="--i:${i}"><div class="fl" data-i="${i}" role="button" tabindex="0" aria-label="Voltear el cromo ${i+1}"><div class="in"><div class="face back"><div class="cback"><b>H</b></div></div><div class="face front">${cromo(r.p,{owned:1,tag:"div"})}</div></div>${r.isNew?`<span class="nw">¡Nuevo!</span>`:`<span class="nw rp">Repetido · +2 XP</span>`}</div></div>`).join("")}</div><div id="pkfb" aria-live="polite">Toca cada cromo para darle la vuelta.</div><div class="row pkact"><button class="btn" id="pkall" type="button">Voltear todos</button></div>`;
-  const flip=el=>{if(el.classList.contains("on"))return;el.classList.add("on");el.removeAttribute("tabindex");el.setAttribute("aria-label","Cromo volteado");PK.n++;const r=PK.res[+el.dataset.i];
-    const rr=alRar(r.p);$("#pkfb").textContent=`${"★".repeat(rr)} ${["","Común","Rara","Legendaria"][rr]}: ${clean(r.p.nombre)}, ${r.p.cargo.charAt(0).toLowerCase()+r.p.cargo.slice(1)}.`;
+  PK={res,n:0,sel:-1};pkPanelClose();
+  $("#pkb").innerHTML=`<div class="pkstage" id="pkst"><div class="pkrow">${res.map((r,i)=>`<div class="pkc g${alRar(r.p)}" style="--i:${i}"><div class="fl" data-i="${i}" role="button" tabindex="0" aria-label="Voltear el cromo ${i+1}"><div class="in"><div class="face back"><div class="cback"><b>H</b></div></div><div class="face front">${cromo(r.p,{owned:1,tag:"div"})}<span class="up"></span><span class="holo"></span></div></div>${r.isNew?`<span class="nw">¡Nuevo!</span>`:`<span class="nw rp">Repetido · +2 XP</span>`}</div><span class="gl" aria-hidden="true"></span></div>`).join("")}</div><aside class="pkpanel" id="pkpanel" aria-label="Información del cromo" hidden></aside></div><div id="pkfb" aria-live="polite">Toca cada cromo para darle la vuelta.</div><div class="row pkact"><button class="btn" id="pkall" type="button">Voltear todos</button></div>`;
+  const flip=el=>{if(el.classList.contains("on"))return;el.classList.add("on");PK.n++;const r=PK.res[+el.dataset.i],rr=alRar(r.p),pc=el.parentElement;
+    el.setAttribute("aria-label","Ver información de "+clean(r.p.nombre));
+    setTimeout(()=>pc.classList.add("lit"),[0,900,1200,1800][rr]);
+    $("#pkfb").textContent=`${"★".repeat(rr)} ${["","Común","Rara","Legendaria"][rr]}: ${clean(r.p.nombre)}, ${r.p.cargo.charAt(0).toLowerCase()+r.p.cargo.slice(1)}.`;
     if(PK.n>=3)setTimeout(pkDone,650)};
-  $$(".fl",$("#pkb")).forEach(el=>{el.onclick=()=>flip(el);el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip(el)}}});
+  const act=el=>{if(!el.classList.contains("on"))flip(el);else pkPanelOpen(+el.dataset.i)};
+  $$(".fl",$("#pkb")).forEach(el=>{el.onclick=()=>act(el);el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act(el)}}});
   $("#pkall").onclick=()=>{$$(".fl",$("#pkb")).forEach((el,i)=>setTimeout(()=>flip(el),i*260))};
   const f=$(".fl",$("#pkb"));if(f)f.focus({preventScroll:true})}
+function pkPanelClose(){const pn=$("#pkpanel");if(pn)pn.hidden=true;const st=$("#pkst");if(st)st.classList.remove("has-panel");$("#pk").classList.remove("pnl");$$("#pkb .pkc.sel").forEach(c=>c.classList.remove("sel"));if(PK)PK.sel=-1}
+function pkPanelOpen(i){
+  if(!PK)return;if(PK.sel===i){pkPanelClose();return}
+  const p=PK.res[i].p,rr=alRar(p),eps=p.eps.map(e=>EPM[e]).filter(Boolean),pn=$("#pkpanel");
+  const wk=p.wk?`https://es.wikipedia.org/wiki/${encodeURIComponent(p.wk)}`:`https://es.wikipedia.org/w/index.php?search=${encodeURIComponent(clean(p.nombre))}`;
+  pn.innerHTML=`<button class="pkpx" type="button" aria-label="Cerrar la información">✕</button><div class="pkpm"><span class="chip">${"★".repeat(rr)} ${["","Común","Rara","Legendaria"][rr]}</span><span class="chip">${esc(CATS[p.cat][0])}</span><span class="chip">Tema ${p.tema}</span></div><h3>${esc(clean(p.nombre))}</h3><p class="pkpl">${esc(life(p))}${p.c?" · fechas aproximadas":""}</p><p class="pkpc">${esc(p.cargo)}</p><p class="pks">${esc(p.sem||p.nota||"")}</p>${eps.length?`<h4>Epígrafes</h4><ul>${eps.map(e=>`<li><b>${e.id}</b> · ${esc(e.nombre)}</li>`).join("")}</ul>`:""}<div class="pkpa"><button class="btn primary" id="pkfull" type="button">Ficha completa</button><a class="btn" target="_blank" rel="noopener" href="${wk}">Wikipedia ↗</a>${p.rah?`<a class="btn" target="_blank" rel="noopener" href="https://historia-hispanica.rah.es/biografias/${p.rah}">RAH ↗</a>`:""}</div>`;
+  pn.hidden=false;pn.scrollTop=0;PK.sel=i;$("#pkst").classList.add("has-panel");$("#pk").classList.add("pnl");
+  $$("#pkb .pkc").forEach((c,j)=>c.classList.toggle("sel",j===i));
+  $(".pkpx",pn).onclick=pkPanelClose;$("#pkfull").onclick=()=>openPers(p.id)}
 function pkDone(){
   if(!PK)return;const nw=PK.res.filter(r=>r.isNew).length,dup=3-nw,n=alPacks();
   $("#pkfb").innerHTML=`${nw?`<b style="color:#f0cf86">${nw} ${nw===1?"cromo nuevo":"cromos nuevos"}</b>`:"Ninguno nuevo esta vez"}${dup?` · ${dup} ${dup===1?"repetido":"repetidos"} (+${dup*2} XP)`:""}. Llevas ${alCount()} de ${PEOPLE.length}.`;
@@ -2045,6 +2057,14 @@ function initAlbum(){
   const pk=$("#pk");
   pk.addEventListener("close",()=>{PK=null;const v=(location.hash||"").slice(1);if(v==="album")renderAlbum();else if(v==="juegos")renderJuegos();try{renderMyStrip()}catch(e){}});
   pk.addEventListener("click",e=>{if(e.target.closest("#pkx"))pk.close()});
+  pk.addEventListener("cancel",e=>{const pn=$("#pkpanel");if(PK&&pn&&!pn.hidden){e.preventDefault();pkPanelClose()}});
+  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){let raf=0;const pkb=$("#pkb");
+    const tilt=(e,off)=>{const pc=e.target.closest&&e.target.closest(".pkc.lit");if(!pc&&!off)return;if(e.pointerType==="touch"&&!e.buttons&&!off)return;
+      cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{$$(".pkc.lit .fl",pkb).forEach(fl=>fl.style.transform="");
+        if(off||!pc)return;const fl=$(".fl",pc),r=fl.getBoundingClientRect(),x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),y=Math.max(0,Math.min(1,(e.clientY-r.top)/r.height));
+        pc.style.setProperty("--mx",(x*100).toFixed(0)+"%");pc.style.setProperty("--my",(y*100).toFixed(0)+"%");
+        fl.style.transform=`perspective(800px) rotateX(${((.5-y)*13).toFixed(1)}deg) rotateY(${((x-.5)*15).toFixed(1)}deg)`})};
+    pkb.addEventListener("pointermove",e=>tilt(e,false));pkb.addEventListener("pointerleave",e=>tilt(e,true));pkb.addEventListener("pointerup",e=>{if(e.pointerType==="touch")tilt(e,true)});pkb.addEventListener("pointercancel",e=>tilt(e,true))}
   document.addEventListener("click",e=>{const b=e.target.closest("#albn");if(b)go("album")});
   document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.id==="albn"){e.preventDefault();go("album")}})}
 
