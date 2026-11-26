@@ -17,7 +17,7 @@
 <script>try{if(JSON.parse(localStorage.getItem("hde2_legible")))document.documentElement.classList.add("legible")}catch(e){}</script>
 <meta name="description" content="Textos, fuentes históricas, personajes, exámenes y juegos para estudiar Historia de España de 2.º de Bachillerato (PAU Madrid).">
 <meta property="og:type" content="website"><meta property="og:title" content="Historia de España · 2.º Bachillerato"><meta property="og:description" content="Textos con clave, fuentes históricas, personajes, exámenes tipo PAU y juegos."><meta property="og:image" content="https://historiapau.pages.dev/og.png"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315110d'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23d9a653' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23d9a653'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315110d'/%3E%3Crect x='9' y='9' width='46' height='46' rx='8' fill='%23ffc72f'/%3E%3Cpath d='M20 18h6v10h12V18h6v28h-6V34H26v12h-6z' fill='%2315110d'/%3E%3C/svg%3E">
 <style>@font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/fraunces-latin-wght-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-wght-normal.woff2) format("woff2")}
 @font-face{font-family:"Newsreader";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/newsreader-latin-wght-normal.woff2) format("woff2")}
@@ -1795,7 +1795,7 @@ function efeToday(){const d=new Date(),dd=d.getDate(),mm=d.getMonth()+1;const hi
 const MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 const efeTxt=e=>`${e[0]} de ${MESES[e[1]-1]} de ${e[2]}`;
 function efeHTML(max){const r=efeToday();if(!r.list.length||(max&&!r.hoy&&r.en>max))return"";
-  return `<div class="efe"><div class="ef1"><span class="eyebrow" style="margin:0">${r.hoy?"Tal día como hoy":"Próxima efeméride · en "+r.en+(r.en===1?" día":" días")}</span>${r.list.slice(0,3).map(e=>`<p><b>${efeTxt(e)}.</b> ${esc(e[3])}</p>`).join("")}<button class="lnk" data-go-efe="1">Todas las efemérides</button></div></div>`}
+  return `<div class="efe"><div class="ef1"><span class="eyebrow" style="margin:0">${r.hoy?"Tal día como hoy":"Próxima efeméride · en "+r.en+(r.en===1?" día":" días")}</span>${r.list.slice(0,1).map(e=>`<p><b>${efeTxt(e)}.</b> ${esc(e[3])}</p>`).join("")}<button class="lnk" data-go-efe="1">${r.list.length>1?"+"+(r.list.length-1)+" más · ":""}Todas las efemérides</button></div></div>`}
 function renderEf(){const el=$("#efx");if(!el)return;el.innerHTML=efeHTML(14);$$("[data-go-efe]",el).forEach(b=>b.onclick=()=>go("efemerides"))}
 
 /* ---------- v7: motor de juegos ---------- */

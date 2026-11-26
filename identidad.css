@@ -178,8 +178,8 @@ footer.foot a:hover,footer.foot button:hover{color:var(--ink);text-decoration-co
 /* portada más ligera */
 .hero2 .blob{display:none}
 .hero2 .hcol .cta{margin-top:22px}
-.hcol .efe{margin:18px 0 0;padding:10px 14px;box-shadow:none;border-width:1px;max-width:46ch}
-.hcol .efe p{font-size:.92rem;margin:4px 0 0}
+.hcol .efe{margin:12px 0 0;padding:7px 12px;box-shadow:none;border-width:1px;max-width:46ch}
+.hcol .efe p{font-size:.84rem;line-height:1.35;margin:3px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .route{margin-top:26px}
 @media(max-width:600px){footer.foot #fst,footer.foot #fst+i{display:none}}
 /* simulador de nota */
