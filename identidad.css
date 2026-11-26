@@ -385,8 +385,8 @@ footer.foot a:hover,footer.foot button:hover{color:var(--ink);text-decoration-co
 .cro.r2{--gd:#c7d2e0}
 .cro.r2 .fr{border-color:rgba(214,224,238,.85);box-shadow:inset 0 0 0 1.2cqw rgba(214,224,238,.12),inset 0 0 0 calc(1.2cqw + 1px) rgba(214,224,238,.4)}
 .cro.r2 .cr{color:#dbe6f5;text-shadow:0 0 2cqw rgba(190,215,255,.8),0 .4cqw 1.4cqw rgba(0,0,0,.7)}
-.cro.r2:after{content:"";position:absolute;inset:0 0 38% 0;z-index:2;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,#ff5fa2,#ffd35f 22%,#5fffa7 42%,#5fc8ff 62%,#b05fff 82%,#ff5fa2);background-size:320% 320%;background-position:var(--mx,40%) var(--my,30%);mix-blend-mode:color-dodge;opacity:.1;transition:opacity .35s,background-position .1s;animation:none}
-.cro.r2:hover:after,.pkc:hover .cro.r2:after,.fl.on .cro.r2:after{opacity:.34}
+.cro.r2:after{content:"";position:absolute;inset:0 0 38% 0;z-index:2;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 36%,rgba(236,243,255,.5) 49%,transparent 62%);background-size:320% 100%;background-position:calc(100% - var(--mx,40%)) 0;mix-blend-mode:soft-light;opacity:.0;transition:opacity .35s,background-position .1s;animation:none}
+.cro.r2:hover:after,.pkc:hover .cro.r2:after,.fl.on .cro.r2:after{opacity:.55}
 /* legendaria: marco de oro vivo, brillo completo y destellos */
 .cro.r3{--gd:#ffe08a;animation:none;background-size:auto}
 .cro.r3 .fr{border:0;inset:1.8cqw;border-radius:3.4cqw;padding:1.5cqw;background:var(--oro);background-size:260% 100%;animation:orof 6s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);box-shadow:none}
@@ -524,12 +524,9 @@ footer.foot a:hover,footer.foot button:hover{color:var(--ink);text-decoration-co
 .cro.lock .sh{display:none}
 
 /* Rotulación del reverso y del sobre: capitales romanas grabadas en oro */
-@font-face{font-family:"Cinzel";font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/cinzel-latin-wght-normal.woff2) format("woff2")}
 .pkc .fl:not(.on):focus-visible .face.back{box-shadow:0 0 0 3px var(--gold)}
 .fl:focus-visible .face.back{box-shadow:none}
-.cback em{font:800 9.6cqw/1.12 "Cinzel",var(--serif);letter-spacing:.07em;padding-left:.07em;bottom:12%;text-shadow:none;filter:drop-shadow(0 .35cqw 0 rgba(60,28,0,.9)) drop-shadow(0 .8cqw 1.2cqw rgba(0,0,0,.6))}
 .cback u{bottom:8%}
-.sobre .sl em{font:800 11.2cqw/1.1 "Cinzel",var(--serif);letter-spacing:.07em;padding-left:.07em;bottom:15.5%;filter:drop-shadow(0 .4cqw 0 rgba(60,28,0,.9)) drop-shadow(0 .8cqw 1.2cqw rgba(0,0,0,.6))}
 /* el resplandor y el brillo no tocan el borde: el canto de la carta queda limpio */
 .fl .up,.fl .holo{inset:1.6% 1.6% 1.1%;border-radius:3.4%/2.4%}
 
@@ -557,3 +554,42 @@ html.vt::view-transition-group(topbar){animation-duration:0s}
 /* Rendimiento: el álbum (244 cromos) solo pinta los temas que están en pantalla; el relleno evita recortar sombras y el salto al pasar el ratón */
 .algrid{content-visibility:auto;contain-intrinsic-block-size:auto 760px;padding:14px;margin:-14px}
 @media(max-width:560px){.algrid{contain-intrinsic-block-size:auto 560px}}
+
+/* Tarjetas de fuentes: sin el rótulo «Abrir →» (se solapaba con el epígrafe) */
+.card.doc:after,.card.doc:hover:after,.card.doc:focus-visible:after{content:none!important;display:none}
+
+/* ===== Sobre, reverso y regalo: rotulación fina (Newsreader cursiva + versalitas espaciadas) ===== */
+.ctp{position:absolute;left:0;right:0;z-index:3;text-align:center;font:600 2.5cqw/1 var(--sans);letter-spacing:.5em;padding-left:.5em;text-transform:uppercase;color:rgba(233,196,111,.78);pointer-events:none}
+.cback .ctp{top:8.6cqw}
+.sobre .ctp{top:calc(13% + 5.2cqw)}
+.cback em,.sobre .sl em{font:0;letter-spacing:0;padding:0;background:none;-webkit-background-clip:border-box;background-clip:border-box;color:transparent;animation:none;filter:none;text-transform:none}
+.cback em b,.sobre .sl em b,.cback em span,.sobre .sl em span{display:block;width:max-content;margin:0 auto;background:var(--oro);background-size:260% 100%;background-position:var(--mx,10%) 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:orof 7s linear infinite;filter:drop-shadow(0 .35cqw 0 rgba(50,22,0,.85)) drop-shadow(0 .7cqw 1.1cqw rgba(0,0,0,.55))}
+.cback em b,.sobre .sl em b{font:italic 500 17.5cqw/.92 "Newsreader",var(--serif);font-weight:500;letter-spacing:-.012em;padding:0 1.2cqw 1.4cqw 0}
+.cback em span,.sobre .sl em span{margin-top:1.8cqw;font:700 4.3cqw/1 var(--sans);letter-spacing:.46em;padding-left:.46em;text-transform:uppercase}
+.cback em{bottom:12.5%}
+.sobre .sl em{bottom:15%}
+.cback em:before,.sobre .sl em:before{content:none}
+.pkh span{font:italic 500 2.3rem/1 "Newsreader",var(--serif);letter-spacing:-.01em}
+@media(prefers-reduced-motion:reduce){.cback em b,.cback em span,.sobre .sl em b,.sobre .sl em span{animation:none}}
+
+/* Panel del regalo en el álbum */
+.alsum .al2{position:relative;overflow:hidden;border-top:0;gap:18px;padding:28px 32px;background:radial-gradient(120% 140% at 0% 0%,#3a1511 0,#1d0a08 48%,#120605 100%);box-shadow:inset 0 0 0 1px rgba(224,176,88,.4),inset 0 0 0 5px #120605,inset 0 0 0 6px rgba(224,176,88,.22)}
+.alsum .al2:before{content:"";position:absolute;inset:0;background:var(--lac) 0 0/38px 38px;opacity:.07;pointer-events:none}
+.alsum .al2>*{position:relative}
+.alsum .al2 .mini{gap:22px}
+.alsum .al2 .mini .sb{width:70px;border-radius:4px;transform:rotate(-7deg);box-shadow:0 14px 26px -10px #000,0 0 28px rgba(224,176,88,.22),inset 0 0 0 1px rgba(232,186,98,.75);animation:hover 3.6s ease-in-out infinite}
+.alsum .al2 h2{font:italic 500 1.9rem/1.05 "Newsreader",var(--serif);letter-spacing:-.01em;color:#f3e6c8}
+.alsum .al2 h2 b{font:600 2.6rem/.9 "Newsreader",var(--serif);font-style:normal;background:var(--oro);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;margin-right:.08em;vertical-align:-.04em}
+.alsum .al2 p{font:600 .66rem/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#b9a57c;margin-top:7px}
+.alsum .al2 .btn{border-radius:999px;padding:11px 20px;min-height:44px}
+.alsum .al2 .btn.primary{background:linear-gradient(180deg,#ffd96a,#e9b53c);border-color:#f0c24f;color:#241706;box-shadow:0 6px 18px -8px rgba(240,194,79,.7),inset 0 1px 0 rgba(255,255,255,.55)}
+.alsum .al2 .btn.gift{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(232,186,98,.7);color:#f0d59a;background:rgba(224,176,88,.08);position:relative}
+.alsum .al2 .btn.gift:hover{background:rgba(224,176,88,.18);color:#fff0c8}
+.alsum .al2 .btn.gift .gi{flex:none}
+.alsum .al2 .btn.gift .gdot{width:7px;height:7px;border-radius:50%;background:#ffd96a;box-shadow:0 0 0 0 rgba(255,217,106,.7);animation:gdot 2s ease-out infinite}
+@keyframes gdot{to{box-shadow:0 0 0 9px rgba(255,217,106,0)}}
+@media(prefers-reduced-motion:reduce){.alsum .al2 .mini .sb,.alsum .al2 .btn.gift .gdot{animation:none}}
+.cback em span,.sobre .sl em span{padding-top:2.2cqw;margin-top:-.4cqw;line-height:1.2}
+.sobre .ctp{top:calc(13% + 3.6cqw);font-size:2.3cqw}
+.cback em b{aspect-ratio:auto;border:0;border-radius:0;position:static;place-items:normal}
+.sobre .ctp{display:none}
