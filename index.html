@@ -1063,7 +1063,7 @@ dialog#pk::backdrop{background:#0e0b08}
   </nav>
   <div class="tools">
     <button class="srchpill" id="srchb" type="button" aria-label="Buscar (Ctrl+K)" title="Buscar (Ctrl+K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.9-4.9"/></svg><span>Buscar</span><kbd>Ctrl K</kbd></button>
-    <button class="ib" id="shareb" type="button" aria-label="Compartir con QR" title="Compartir con QR"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7"/><rect x="13.5" y="3.5" width="7" height="7"/><rect x="3.5" y="13.5" width="7" height="7"/><path d="M14 14h2.5v2.5M20.5 14v.01M14 20.5h.01M17 20.5h3.5V18"/></svg></button>
+    
     <button class="ib themebtn" id="theme" type="button" aria-label="Cambiar entre modo claro y oscuro"></button>
     <button class="ib burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainnav"><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
   </div>
@@ -1076,7 +1076,7 @@ dialog#pk::backdrop{background:#0e0b08}
 <section class="view" id="v-fuentes"></section>
 
 <section class="view" id="v-personajes">
-  <div class="vh"><h1>Personajes históricos</h1><p>Figuras clave de cada tema, con una breve semblanza, fechas y su relación con los epígrafes. Pulsa una tarjeta para abrirla o situarla en la cronología.</p></div>
+  <div class="vh"><h1>Personajes históricos</h1><p>Figuras clave de cada tema.</p></div>
   <div class="filters">
     <div class="field"><label for="pc">Categoría</label><select id="pc"></select></div>
     <div class="field"><label for="pt">Tema</label><select id="pt"></select></div>
@@ -1090,7 +1090,7 @@ dialog#pk::backdrop{background:#0e0b08}
 <section class="view" id="v-anyo" aria-label="Un año"></section>
 <section class="view" id="v-radar" aria-label="Radar PAU"></section>
 <section class="view" id="v-tiempo">
-  <div class="vh"><h1>Cronología</h1><p>El curso entero, en orden. Cada tema tiene su hilo de hitos; dentro de cada epígrafe encuentras sus hitos, personajes y fuentes. Pulsa cualquier elemento para abrir su ficha.</p></div>
+  <div class="vh"><h1>Cronología</h1><p>El curso entero, tema a tema.</p></div>
   <div class="tlnav" id="tlnav">
     <div class="tlseg" id="tlseg"></div>
     <div class="tlctl">
@@ -1105,7 +1105,7 @@ dialog#pk::backdrop{background:#0e0b08}
 </section>
 
 <section class="view" id="v-simulacro">
-  <div class="vh"><h1>Comentario cronometrado</h1><p>Comenta un documento en condiciones de examen: tres preguntas, cronómetro y autoevaluación con la clave.</p></div>
+  <div class="vh"><h1>Comentario cronometrado</h1><p>Un documento, tres preguntas y cronómetro, como en el examen.</p></div>
   <div class="filters">
     <div class="field"><label for="sb">Bloque</label><select id="sb"><option value="">Todos</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
     <div class="field" style="flex:1;min-width:220px"><label for="sd">Documento</label><select id="sd"></select></div>
@@ -1118,7 +1118,7 @@ dialog#pk::backdrop{background:#0e0b08}
 </section>
 
 <section class="view" id="v-examenes">
-  <div class="vh"><h1>Exámenes</h1><p>Elige un modelo y se genera al instante, con su solucionario. Siguen la estructura del modelo oficial de Madrid 2026-27 (90 minutos, 10 puntos): cuestiones, análisis de documento y desarrollo de tema.</p></div>
+  <div class="vh"><h1>Exámenes</h1><p>Modelos con solucionario, según la estructura oficial de Madrid 2026-27: 90 minutos, 10 puntos.</p></div>
   <div class="stdgrid">
     <button class="std" data-std="ev1"><b>1.ª Evaluación</b><span>Temas 1-3 · Bloque A</span></button>
     <button class="std" data-std="ev2"><b>2.ª Evaluación</b><span>Cuestiones de la 1.ª Ev. · texto, fuente y temas 4-7</span></button>
@@ -1129,7 +1129,7 @@ dialog#pk::backdrop{background:#0e0b08}
     <div class="field"><label for="xs">Espacio de respuesta</label><select id="xs"><option value="1">Normal</option><option value="1.25">Amplio</option><option value="1.5" selected>Muy amplio</option></select></div>
     <button class="btn" id="xrnd" style="align-self:end">Otra versión</button>
   </div>
-  <div id="xout"><div class="card"><p class="note" style="margin:0">Pulsa un modelo para generar el examen. Parte 1: tres cuestiones cortas (se responden dos). Parte 2: un texto y una fuente histórica (se comenta uno). Parte 3: dos opciones de desarrollo.</p></div></div>
+  <div id="xout"><div class="card"><p class="note" style="margin:0">Parte 1: tres cuestiones (se responden dos). Parte 2: un texto y una fuente (se comenta uno). Parte 3: dos desarrollos.</p></div></div>
   <div id="xmine"></div>
   <details class="clave" style="margin-top:22px" id="xcust"><summary>Examen personalizado (elige temas y modo)</summary>
     <div class="card" style="margin-top:12px">
@@ -1146,7 +1146,7 @@ dialog#pk::backdrop{background:#0e0b08}
       <div class="row"><button class="btn primary" id="xgo">Generar examen</button></div>
     </div>
   </details>
-  <div class="card" style="margin-top:14px"><h3 style="font-size:1.05rem">Código de clase</h3><p class="note" style="margin:4px 0 10px">Genera un examen y copia su código: quien lo pegue aquí obtiene exactamente el mismo examen. Útil para que toda la clase haga el mismo modelo.</p>
+  <div class="card" style="margin-top:14px"><h3 style="font-size:1.05rem">Código de clase</h3><p class="note" style="margin:4px 0 10px">Pega el código de un examen para obtener exactamente el mismo.</p>
    <div class="row" style="align-items:flex-end"><div class="field" style="flex:1;min-width:240px"><label for="xcode">Código</label><input id="xcode" placeholder="HE1-…" autocomplete="off"></div><button class="btn" id="xcodeb">Cargar código</button></div></div>
 </section>
 
@@ -1157,7 +1157,7 @@ dialog#pk::backdrop{background:#0e0b08}
 <section class="view" id="v-taller"></section>
 <section class="view" id="v-profe"></section>
 <section class="view" id="v-acerca">
-  <div class="vh"><h1>Créditos y derechos</h1><p>Quién ha hecho esta web, de dónde salen los materiales y cómo se usan.</p></div>
+  <div class="vh"><h1>Créditos y derechos</h1></div>
   <div class="acerca">
    <h2>Autoría</h2><p>Iván Molina Rincón, profesor de Historia. Textos, claves de corrección y selección de fuentes, a partir de los apuntes y materiales de clase. Diseño y programación desarrollados con Claude, de Anthropic.</p>
    <h2>Currículo</h2><p>Decreto 64/2022 de la Comunidad de Madrid (LOMLOE) y modelo de examen de la PAU de Historia de España 2026-27.</p>
@@ -1398,8 +1398,8 @@ const SECS={core:["prog","act","del"],notes:["notes"],hl:["hl"],srs:["srs"],log:
 const SYNCSENT={};
 function renderSyncPill(){
   const el=$("#syncp");if(!el)return;
-  const M={local:["💾",(typeof claude!=="undefined"&&claude&&claude.use)?"Guardado en este navegador. Para sincronizar entre dispositivos, abre la web con tu cuenta de Claude.":"Guardado en este navegador. Para llevar tu progreso a otro dispositivo, usa «Exportar copia» e impórtala allí."],sync:["☁","Sincronizando…"],ok:["☁","Sincronizado con tu cuenta"+(SYNC.last?" · "+new Date(SYNC.last).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}):"")],ro:["💾","Tu cuenta no permite guardar en la nube (hace falta acceso de colaborador). Todo queda en este navegador."],err:["💾","No se pudo contactar con la nube. Todo queda guardado en este navegador."]};
-  const m=M[SYNC.state]||M.local;el.className="syncp "+SYNC.state;el.textContent=m[0]+" "+m[1]}
+  const M={local:["",""],sync:["","Sincronizando…"],ok:["","Sincronizado"+(SYNC.last?" · "+new Date(SYNC.last).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}):"")],ro:["","Sin acceso a la nube: todo queda en este navegador."],err:["","Sin conexión con la nube: todo queda en este navegador."]};
+  const m=M[SYNC.state]||M.local;el.className="syncp "+SYNC.state;el.textContent=m[1];el.style.display=m[1]?"":"none"}
 async function syncInit(){
   try{
     if(typeof claude==="undefined"||!claude.use)return;
@@ -1495,7 +1495,7 @@ function sumRender(R){
   const id=R.dataset.doc,d=DOCM[id],m=(ST.hl[id]||{}).m||{};const L={1:[],2:[],3:[]};
   Object.keys(m).sort((a,b)=>{const[x,y]=a.split(".").map(Number),[u,v]=b.split(".").map(Number);return x-u||y-v}).forEach(k=>{const[pi,si]=k.split(".").map(Number);const t=splitS(d.paras[pi]||"")[si];if(t&&L[m[k]])L[m[k]].push(t)});
   const N={1:"Ideas principales",2:"Ideas secundarias",3:"Contexto y términos"};
-  $(".rsum",R).innerHTML=[1,2,3].filter(c=>L[c].length).map(c=>`<h4>${N[c]}</h4><ul class="rl c${c}">${L[c].map(t=>`<li>${esc(t)}</li>`).join("")}</ul>`).join("")||`<p class="note" style="margin:0">Aún no has subrayado nada. Activa «✎ Subrayar», elige un color y pulsa las frases.</p>`}
+  $(".rsum",R).innerHTML=[1,2,3].filter(c=>L[c].length).map(c=>`<h4>${N[c]}</h4><ul class="rl c${c}">${L[c].map(t=>`<li>${esc(t)}</li>`).join("")}</ul>`).join("")||`<p class="note" style="margin:0">Aún no has subrayado nada.</p>`}
 function readerAct(R,a){
   const id=R.dataset.doc;
   if(a==="sm")RP.sz=Math.max(.9,+(RP.sz-.08).toFixed(2));
@@ -1547,12 +1547,12 @@ function initViewer(){
     else if(k==="ArrowRight")step(1);else if(k==="ArrowLeft")step(-1)});
   addEventListener("resize",()=>{if(vw.open)VW.fitNow()});
   document.addEventListener("click",e=>{
-    const zb=e.target.closest(".zoomb"),img=zb?zb.parentElement.querySelector("img"):e.target.closest(".fig img");
+    const zb=e.target.closest(".zoomb"),img=zb?zb.parentElement.querySelector("img"):e.target.closest(".fig img,.pbio img");
     if(img&&!img.closest(".exam")){
       const root=img.closest("dialog")||img.closest(".view")||document.body;
-      const imgs=$$(".fig img",root).filter(x=>!x.closest(".exam"));
+      const imgs=img.closest(".pbio")?[img]:$$(".fig img",root).filter(x=>!x.closest(".exam"));
       const ttl=img.closest("#dlg")&&$("#dh h2")?$("#dh h2").textContent:"";
-      VW.open(imgs.map(x=>({src:x.currentSrc||x.src,alt:x.alt,t:ttl,cap:(x.closest("figure")&&x.closest("figure").querySelector("figcaption")?x.closest("figure").querySelector("figcaption").firstChild.textContent:x.alt)})),Math.max(0,imgs.indexOf(img)));
+      VW.open(imgs.map(x=>({src:(x.currentSrc||x.src).replace("/500px-","/960px-"),alt:x.alt,t:ttl,cap:(x.closest("figure")&&x.closest("figure").querySelector("figcaption")?x.closest("figure").querySelector("figcaption").firstChild.textContent:x.alt)})),Math.max(0,imgs.indexOf(img)));
       return}
     const R=e.target.closest(".reader");if(!R)return;
     const b=e.target.closest(".rb,.rdot");if(b&&b.dataset.r){readerAct(R,b.dataset.r);return}
@@ -1595,7 +1595,7 @@ function fcKey(g){
   ST.srs[x.key]=[box,dayNum()+(g2===0?0:(g2===1?1:SRSI[box])),Date.now()];FC.res[g2]++;act();saveST();FC.i++;FC.flip=false;fcDraw()}
 function fcEnd(){
   const r=FC.res,n=r[0]+r[1]+r[2];$("#fcbar").style.width="100%";
-  $("#fcb").innerHTML=`<div class="fend"><h2>${n?"Tanda completada":"Sin tarjetas"}</h2><p class="note">Racha: ${streak()} ${streak()===1?"día":"días"}. Las que fallas vuelven pronto; las que dominas, cada vez más tarde.</p><div class="fres"><div><b>${r[2]}</b>La sabía</div><div><b>${r[1]}</b>Dudosa</div><div><b>${r[0]}</b>No la sabía</div></div><div class="row" style="justify-content:center"><button class="btn primary" id="fcagain">Otra tanda</button><button class="btn" id="fcdone">Cerrar</button></div></div>`;
+  $("#fcb").innerHTML=`<div class="fend"><h2>${n?"Tanda completada":"Sin tarjetas"}</h2><p class="note">Racha: ${streak()} ${streak()===1?"día":"días"}.</p><div class="fres"><div><b>${r[2]}</b>La sabía</div><div><b>${r[1]}</b>Dudosa</div><div><b>${r[0]}</b>No la sabía</div></div><div class="row" style="justify-content:center"><button class="btn primary" id="fcagain">Otra tanda</button><button class="btn" id="fcdone">Cerrar</button></div></div>`;
   $("#fcagain").onclick=()=>fcStart(FC.o);$("#fcdone").onclick=()=>$("#fc").close();refreshViews()}
 function repasoOpts(){const g=id=>$(id);return{n:+(g("#rn")?g("#rn").value:12)||12,ev:g("#rev")?g("#rev").value:"",p:g("#rp")?g("#rp").checked:1,e:g("#re")?g("#re").checked:1,f:g("#rf")?g("#rf").checked:1}}
 
@@ -1614,15 +1614,15 @@ function renderEstudio(){
   const h=ST.hist.slice(0,10).reverse(),avg=ST.hist.length?(ST.hist.reduce((s,x)=>s+x.tot,0)/ST.hist.length):0;
   const bars=h.length?`<svg viewBox="0 0 ${h.length*28+8} 74" width="100%" height="74" role="img" aria-label="Notas de los últimos simulacros">${h.map((x,i)=>`<rect x="${i*28+6}" y="${68-Math.max(2,x.tot/4*60)}" width="20" height="${Math.max(2,x.tot/4*60)}" rx="4" fill="var(--accent)" opacity=".85"><title>${esc(x.f)}: ${x.tot.toFixed(1)} / 4</title></rect>`).join("")}</svg>`:"";
   const lst=(arr,empty)=>arr.length?`<ul class="stl">${arr.slice(0,10).map(d=>`<li><button data-d="${d.id}"><b>${esc(d.titulo.length>58?d.titulo.slice(0,56)+"…":d.titulo)}</b><small>${esc(d.id)} · ${esc(d.ep)}</small></button></li>`).join("")}</ul>${arr.length>10?`<p class="note">y ${arr.length-10} más</p>`:""}`:`<p class="note">${empty}</p>`;
-  V.innerHTML=`<div class="vh"><h1>Mi estudio</h1><p>Tu progreso, tus notas y el repaso del día. Todo se guarda solo.</p></div>
+  V.innerHTML=`<div class="vh"><h1>Mi estudio</h1></div>
   <div class="row" style="margin:-6px 0 12px;align-items:center"><span class="syncp" id="syncp"></span></div>
   <div class="stats4"><div class="stt"><b>${streak()}</b><span>${streak()===1?"día":"días"} seguidos</span></div><div class="stt"><b>${seen}<small style="font-size:.9rem;color:var(--muted)"> / ${DOCS.length}</small></b><span>documentos vistos</span></div><div class="stt"><b>${dom}</b><span>marcados «Lo domino»</span></div><div class="stt"><b>${mast}</b><span>tarjetas bien aprendidas</span></div></div>
-  <div class="card"><h2 style="font-size:1.2rem">Repaso de hoy</h2><p class="note" style="margin:4px 0 10px">Tarjetas con repaso espaciado: lo que fallas vuelve pronto; lo que dominas, cada vez más tarde. Hoy te tocan <b>${all.due.length}</b> y quedan <b>${all.neu.length}</b> sin estrenar.</p>
+  <div class="card"><h2 style="font-size:1.2rem">Repaso de hoy</h2><p class="note" style="margin:4px 0 10px">Hoy te tocan <b>${all.due.length}</b> y quedan <b>${all.neu.length}</b> sin estrenar.</p>
    <div class="row" style="align-items:flex-end"><div class="field"><label for="rn">Tarjetas</label><select id="rn"><option>8</option><option selected>12</option><option>20</option><option>30</option></select></div>
    <div class="field"><label for="rev">Materia</label><select id="rev"><option value="">Todo el temario</option><option value="1">1.ª Evaluación</option><option value="2">2.ª Evaluación</option><option value="3">3.ª Evaluación</option></select></div>
    <label class="check"><input type="checkbox" id="rp" checked> Personajes</label><label class="check"><input type="checkbox" id="re" checked> Hitos</label><label class="check"><input type="checkbox" id="rf" checked> Fuentes</label>
    <button class="btn primary" id="rgo" style="margin-bottom:8px">Empezar repaso</button></div></div>
-  <div class="card" style="margin-top:14px"><h2 style="font-size:1.2rem">Progreso por tema</h2><p class="note" style="margin:4px 0 0">Verde: dominado · tono claro: visto. Pulsa un tema para ver sus documentos.</p><div class="tpl">${TEMAS.map(t=>{const ds=DOCS.filter(d=>d.tema===t.n),s=ds.filter(d=>pgOf(d.id).n>0).length,m=ds.filter(d=>pgOf(d.id).s===1).length,N=ds.length||1;return `<button class="tp ${t.bloque}" data-t="${t.n}"><span class="tn">${t.n}</span><span>${esc(t.nombre.length>46?t.nombre.slice(0,44)+"…":t.nombre)}</span><span class="tbar"><i class="d" style="width:${m/N*100}%"></i><i class="v" style="width:${Math.max(0,s-m)/N*100}%"></i></span><span class="tc">${s}/${ds.length}</span></button>`}).join("")}</div></div>
+  <div class="card" style="margin-top:14px"><h2 style="font-size:1.2rem">Progreso por tema</h2><div class="tpl">${TEMAS.map(t=>{const ds=DOCS.filter(d=>d.tema===t.n),s=ds.filter(d=>pgOf(d.id).n>0).length,m=ds.filter(d=>pgOf(d.id).s===1).length,N=ds.length||1;return `<button class="tp ${t.bloque}" data-t="${t.n}"><span class="tn">${t.n}</span><span>${esc(t.nombre.length>46?t.nombre.slice(0,44)+"…":t.nombre)}</span><span class="tbar"><i class="d" style="width:${m/N*100}%"></i><i class="v" style="width:${Math.max(0,s-m)/N*100}%"></i></span><span class="tc">${s}/${ds.length}</span></button>`}).join("")}</div></div>
   <div class="sgrid">
    <div class="card"><h3 style="font-size:1.05rem">Para repasar · «Me cuesta»</h3>${lst(rev,"Marca «Me cuesta» en un documento y aparecerá aquí.")}</div>
    <div class="card"><h3 style="font-size:1.05rem">Favoritos ★</h3>${lst(fav,"Pulsa ★ en un documento para guardarlo aquí.")}</div>
@@ -1630,7 +1630,7 @@ function renderEstudio(){
    <div class="card"><h3 style="font-size:1.05rem">Simulacros</h3>${ST.hist.length?`<p class="note" style="margin:2px 0 6px">${ST.hist.length} guardados · media ${avg.toFixed(1)} / 4</p>${bars}<ul class="stl" style="margin-top:6px">${ST.hist.slice(0,4).map(x=>`<li class="note">${esc(x.f)} · ${esc(x.t.length>40?x.t.slice(0,38)+"…":x.t)} · <b>${x.tot.toFixed(1)}</b></li>`).join("")}</ul>`:`<p class="note">Aún no has guardado ningún simulacro.</p>`}<p style="margin:10px 0 0"><button class="btn small" data-go2="simulacro">Hacer un simulacro</button></p></div>
   </div>
   ${statsHTML()}
-  <div class="card" style="margin-top:14px"><h3 style="font-size:1.05rem">Copia de seguridad</h3><p class="note" style="margin:4px 0 10px">Tu progreso vive en este navegador. Si lo vas a usar en otro dispositivo (o limpias los datos del navegador), exporta una copia e impórtala allí: se combina con lo que ya tengas.</p>
+  <div class="card" style="margin-top:14px"><h3 style="font-size:1.05rem">Copia de seguridad</h3><p class="note" style="margin:4px 0 10px">Tu progreso vive en este navegador. Para usarlo en otro dispositivo, exporta una copia e impórtala allí.</p>
    <div class="row"><button class="btn" id="bkx">Exportar copia</button><button class="btn" id="bki">Importar copia</button><input type="file" id="bkf" accept=".json,application/json" hidden></div><div class="note" id="bknote" style="margin-top:8px"></div></div>${profeCard()}<p class="note" style="margin-top:10px"><a href="#profe">Soy profesor: abrir el panel de clase</a></p>`;
   renderSyncPill();
   $("#rgo").onclick=()=>fcStart(repasoOpts());
@@ -1667,7 +1667,7 @@ function searchRun(q){
   SRES.sort((a,b)=>a.g-b.g||0)}
 function searchDraw(){
   const L=$("#gsl"),q=$("#gsq").value.trim();
-  if(!q){L.innerHTML=`<p class="note" style="padding:10px 12px;margin:0">Escribe para buscar en ${DOCS.length} documentos, ${PEOPLE.length} personajes, ${EVS.length} hitos y ${EPS.length} epígrafes. Los textos se buscan también por su contenido.</p>`;return}
+  if(!q){L.innerHTML=`<p class="note" style="padding:10px 12px;margin:0">Busca entre ${DOCS.length} documentos, ${PEOPLE.length} personajes, ${EVS.length} hitos y ${EPS.length} epígrafes.</p>`;return}
   if(!SRES.length){L.innerHTML=`<p class="note" style="padding:10px 12px;margin:0">Nada con «${esc(q)}».</p>`;return}
   let g=-1,h="";SRES.forEach((r,i)=>{if(r.g!==g){g=r.g;h+=`<div class="sdg">${SGN[g]}</div>`}h+=`<button class="sdi ${i===SSEL?"on":""}" role="option" data-i="${i}"><b>${esc(r.lab.length>90?r.lab.slice(0,88)+"…":r.lab)}</b><span>${esc(r.sub)}</span></button>`});
   L.innerHTML=h;$$(".sdi",L).forEach(b=>b.onclick=()=>searchGo(+b.dataset.i));
@@ -1706,7 +1706,7 @@ function openSaved(id,sol){
   if(sol)$("#xsol").click()}
 function renderMine(){
   const el=$("#xmine");if(!el)return;const L=ST.exams;
-  el.innerHTML=`<div class="sech" style="margin:22px 0 4px"><h2 style="font-size:1.2rem">Mis exámenes guardados</h2></div>`+(L.length?`<div class="mine">${L.map(e=>`<div class="mrow" data-id="${e.id}"><input class="mname" value="${esc(e.name)}" maxlength="90" aria-label="Nombre del examen"><span class="chip">${esc(stdName[e.std]||"Personalizado")}</span><small>${new Date(e.ts).toLocaleDateString("es-ES")}</small><button class="btn small" data-a="open">Abrir</button><button class="btn small" data-a="sol">Solucionario</button><button class="btn small" data-a="dl">Descargar</button><button class="btn small" data-a="del">Eliminar</button></div>`).join("")}</div><p class="note" id="xmnote" style="margin-top:8px"></p>`:`<p class="note">Aún no has guardado ninguno. Genera un examen y pulsa «Guardar en Mis exámenes»: se conserva tal cual, con su solucionario.</p>`);
+  el.innerHTML=`<div class="sech" style="margin:22px 0 4px"><h2 style="font-size:1.2rem">Mis exámenes guardados</h2></div>`+(L.length?`<div class="mine">${L.map(e=>`<div class="mrow" data-id="${e.id}"><input class="mname" value="${esc(e.name)}" maxlength="90" aria-label="Nombre del examen"><span class="chip">${esc(stdName[e.std]||"Personalizado")}</span><small>${new Date(e.ts).toLocaleDateString("es-ES")}</small><button class="btn small" data-a="open">Abrir</button><button class="btn small" data-a="sol">Solucionario</button><button class="btn small" data-a="dl">Descargar</button><button class="btn small" data-a="del">Eliminar</button></div>`).join("")}</div><p class="note" id="xmnote" style="margin-top:8px"></p>`:`<p class="note">Aún no has guardado ninguno.</p>`);
   $$(".mrow",el).forEach(r=>{const id=r.dataset.id;
     $(".mname",r).onchange=ev=>{const e=ST.exams.find(x=>x.id===id);if(e){e.name=ev.target.value.trim()||e.name;e.o.titulo=e.name;e.t2=Date.now();saveST()}};
     $$("[data-a]",r).forEach(b=>b.onclick=()=>{const a=b.dataset.a;
@@ -1932,7 +1932,7 @@ function gmEnd(){
   const r=rank();
   $("#gmbar").style.width="100%";
   $("#gmb").innerHTML=`<div class="fend"><h2>${pts>=GM.max*.8?"Gran partida":(pts>=GM.max*.5?"Buena partida":"A seguir practicando")}</h2><div class="fres"><div><b>${pts}</b>de ${GM.max} puntos</div><div><b>${GM.res.filter(Boolean).length}</b>aciertos de ${GM.res.length}</div><div><b>${r.name}</b>${r.xp} XP</div></div>
-   ${m.kind==="daily"||m.kind==="weekly"?`<p class="note">Todos tus compañeros han recibido las mismas preguntas: comparad resultados.</p>`:""}
+   ${m.kind==="daily"||m.kind==="weekly"?`<p class="note">Mismas preguntas para toda la clase.</p>`:""}
    <div class="row" style="justify-content:center">${m.kind==="daily"||m.kind==="weekly"?"":`<button class="btn primary" id="gmagain">Otra partida</button>`}<button class="btn" id="gmdone">Cerrar</button></div></div>`;
   const a=$("#gmagain");if(a)a.onclick=()=>gmStart(m.kind);$("#gmdone").onclick=()=>$("#gm").close();
   const v=(location.hash||"").slice(1);if(v==="juegos")renderJuegos();renderMyStrip()}
@@ -1944,14 +1944,14 @@ function renderJuegos(){
   const dk=dayKeyN(dayNum()),wk="S"+WKN(),dd=g.daily[dk],ww=g.weekly[wk];
   const s=gstats(),got=BADGES.filter(b=>g.badges[b.id]).length;
   const best=k=>g.log.filter(e=>e.k===k).reduce((m,e)=>Math.max(m,e.pts),0);
-  V.innerHTML=`<div class="vh"><h1>Juegos</h1><p>Aprende jugando: retos diarios para toda la clase, partidas libres, insignias y rangos.</p></div>
+  V.innerHTML=`<div class="vh"><h1>Juegos</h1><p>Retos diarios, partidas libres, insignias y rangos.</p></div>
   <div class="card rank"><div class="rb2" aria-hidden="true">${["🪶","📜","🗄","🧭","🔍","🏺","🎓","🏛"][r.i]}</div><div style="flex:1;min-width:220px"><div class="eyebrow" style="margin:0">Tu rango</div><h2 style="font-size:1.5rem;margin:2px 0 6px">${esc(r.name)}</h2><div class="pbar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div><p class="note" style="margin:6px 0 0">${r.xp} XP${r.next?` · faltan ${r.next-r.xp} para «${esc(r.nname)}»`:" · rango máximo"}</p></div>
    <div class="stats4" style="margin:0;flex:1;min-width:240px"><div class="stt"><b>${streak()}</b><span>días seguidos</span></div><div class="stt"><b>${got}<small style="font-size:.9rem;color:var(--muted)"> / ${BADGES.length}</small></b><span>insignias</span></div></div></div>
   ${albumBanner()}
   ${lbBanner()}
   <a id="pulsoT" hidden></a>
   ${efeHTML()?`<div style="margin-top:14px" id="efj">${efeHTML()}</div>`:""}
-  <div class="sech"><h2>Retos para toda la clase</h2><span class="note">Mismas preguntas para todos: comparad puntuaciones</span></div>
+  <div class="sech"><h2>Retos para toda la clase</h2><span class="note">Mismas preguntas para toda la clase</span></div>
   <div class="sgrid" style="margin-top:0">
    <div class="card"><h3 style="font-size:1.1rem">📰 Fuente del día</h3><p class="note" style="margin:4px 0 10px">Una fuente nueva cada día, dos preguntas, hasta 20 puntos.</p>${dd!=null?`<p><b>Hoy: ${dd} / 20</b> ✓</p>`:`<button class="btn primary" data-gm="daily">Jugar ahora</button>`}</div>
    <div class="card"><h3 style="font-size:1.1rem">⚔ Reto semanal</h3><p class="note" style="margin:4px 0 10px">Diez preguntas mezcladas, hasta 100 puntos. Cambia cada lunes.</p>${ww!=null?`<p><b>Esta semana: ${ww} / 100</b> ✓</p>`:`<button class="btn primary" data-gm="weekly">Jugar ahora</button>`}</div></div>
@@ -2120,7 +2120,7 @@ function statsHTML(){
   let last=null;const prior=Object.keys(s.snap).filter(k=>k<keys[0]).sort().pop();if(prior)last=s.snap[prior];
   const pts=keys.map(k=>{if(s.snap[k]!=null)last=s.snap[k];return last});
   const have=pts.filter(v=>v!=null).length;
-  let xpc=`<p class="note" style="margin:6px 0 0">La gráfica se dibuja a medida que estudies: cada día guarda tus puntos.</p>`;
+  let xpc=`<p class="note" style="margin:6px 0 0">Se irá dibujando a medida que estudies.</p>`;
   if(have>=2){const vs=pts.map(v=>v==null?pts.find(x=>x!=null):v),mn=Math.min(...vs),mx=Math.max(...vs),rg=Math.max(1,mx-mn);
     const X=i=>6+i*(288/29),Y=v=>70-((v-mn)/rg)*56,line=vs.map((v,i)=>`${i?"L":"M"}${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join("");
     xpc=`<svg viewBox="0 0 300 84" width="100%" role="img" aria-label="Puntos de experiencia en los últimos 30 días" class="xpc"><path d="${line}L${X(29)} 76L6 76Z" class="ar"/><path d="${line}" class="ln"/><circle cx="${X(29)}" cy="${Y(vs[29]).toFixed(1)}" r="3"/></svg><div class="xpl"><span>hace 30 días · ${vs[0].toLocaleString("es-ES")} XP</span><span>hoy · <b>${vs[29].toLocaleString("es-ES")} XP</b></span></div>`}
@@ -2129,7 +2129,7 @@ function statsHTML(){
   const weak=rows.filter(r=>r.m>=5).sort((a,b)=>a.p-b.p)[0];
   const tb=rows.map(r=>`<div class="tb${weak&&weak.t===r.t?" weak":""}"><span class="tn">${r.t.n}</span><span class="tt">${esc(r.t.nombre)}</span><span class="tbar"><i style="width:${r.m?Math.round(r.p*100):0}%"></i></span><span class="tv">${r.m?Math.round(r.p*100)+" % · "+r.o+"/"+r.m:"—"}</span></div>`).join("");
   const gm=Object.entries(GAMES).map(([k,x])=>{const[o,m]=s.bg[k]||[0,0];return `<div class="gst"><span aria-hidden="true">${x.ic}</span><b>${m?Math.round(o/m*100)+" %":"—"}</b><small>${esc(x.n)}${m?` · ${m} resp.`:""}</small></div>`}).join("");
-  return `<div class="sech" style="margin-top:34px"><h2>Mis estadísticas</h2><span class="note">Se guardan en este navegador</span></div>
+  return `<div class="sech" style="margin-top:34px"><h2>Mis estadísticas</h2></div>
   <div class="stats4 sm"><div class="stt"><b>${fmtMin(wk)}</b><span>de estudio esta semana</span></div><div class="stt"><b>${fmtMin(tot)}</b><span>en total</span></div><div class="stt"><b>${n?Math.round(ok/n*100)+" %":"—"}</b><span>de aciertos en juegos${n?` (${n})`:""}</span></div><div class="stt"><b>${maxStreak()}</b><span>mejor racha, en días</span></div></div>
   <div class="gapx"></div><div class="card"><h3 style="font-size:1.05rem">Actividad de las últimas 20 semanas</h3><div class="hmw"><div class="hm" role="img" aria-label="Calendario de actividad: ${days} días con estudio">${cells}</div></div><div class="hml"><span>menos</span><i class="hl0"></i><i class="hl1"></i><i class="hl2"></i><i class="hl3"></i><i class="hl4"></i><span>más</span><span class="note" style="margin-left:auto">${days} días con actividad</span></div></div>
   <div class="sgrid two" style="margin-top:14px"><div class="card"><h3 style="font-size:1.05rem">Tus puntos, mes a mes</h3>${xpc}</div>
@@ -2172,7 +2172,7 @@ function renderClasif(){
   V.innerHTML=`<div class="vh"><h1>Clasificación de la clase</h1></div>
   <div id="pulso"></div>
   ${on?`<div class="card lbme"><div><div class="eyebrow" style="margin:0">Estás en el ranking</div><h2>${me?`Puesto ${me.rank}`:"…"}</h2><p class="note" style="margin:2px 0 0">${me?`De ${d.n} participantes · ${nf(me.xp)} XP · +${nf(me.wxp)} esta semana`:(LBS.busy?"Sincronizando…":"Aún sin sincronizar")}</p></div><div class="row"><button class="btn primary" id="lbup" type="button">Actualizar mis puntos</button><button class="btn" id="lbout" type="button">Salir del ranking</button></div></div>`
-   :`<div class="card lbjoin"><h2>Ranking opcional</h2><p class="note">Las cifras de la clase y tu posición se cuentan solas. El ranking con puestos es opcional: si entras, se publican tus puntos (XP), tu racha y tus cromos con un identificador aleatorio, sin nombre ni alias. Puedes salir cuando quieras y tu fila se borra.</p>
+   :`<div class="card lbjoin"><h2>Ranking opcional</h2><p class="note">El ranking con puestos es opcional: si entras, se publican tus puntos (XP), tu racha y tus cromos con un identificador aleatorio, sin nombre ni alias. Puedes salir cuando quieras y tu fila se borra.</p>
     <div class="row" style="margin-top:12px"><button class="btn primary" id="lbjoin" type="button">Entrar en el ranking</button><span class="note" id="lbmsg" role="alert"></span></div></div>`}
   ${LBS.err&&!d?`<div class="warn" style="margin-top:14px">${esc(LBS.err)} <button class="btn small" id="lbretry" type="button">Reintentar</button></div>`:""}
   ${d?`<div class="stats4" style="margin-top:18px"><div class="stt"><b>${d.n}</b><span>participantes</span></div><div class="stt"><b>${nf(d.xp)}</b><span>XP entre todos</span></div><div class="stt"><b>${Math.round(d.mins/60)} h</b><span>de estudio sumadas</span></div><div class="stt"><b>${lbWeekLabel(d.week)}</b><span>inicio de la semana</span></div></div>`:""}
@@ -2241,7 +2241,7 @@ function hoyHTML(){
   const tt=P.doc.titulo.length>64?P.doc.titulo.slice(0,62)+"…":P.doc.titulo;
   const due=dueInfo({p:1,e:1,f:1}).due.length;
   return `<div class="hoy"><div class="hoyh"><svg viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="${n} de 4 tareas hechas"><circle cx="32" cy="32" r="27" class="rb"/><circle cx="32" cy="32" r="27" class="rf" style="stroke-dasharray:${R.toFixed(1)};stroke-dashoffset:${off.toFixed(1)}"/><text x="32" y="38" text-anchor="middle">${n}/4</text></svg>
-   <div><span class="eyebrow" style="margin:0">Unos 10 minutos</span><h3>${n===4?"Sesión completa":"Tu sesión de hoy"}</h3><p class="note" style="margin:3px 0 0">${n===4?"Vuelve mañana: se mantiene tu racha y se renueva todo.":"Cuatro pasos que cambian cada día y se adaptan a tus fallos. Al cerrarlos: +"+HOY_XP+" XP y un sobre."}</p></div></div>
+   <div><span class="eyebrow" style="margin:0">Unos 10 minutos</span><h3>${n===4?"Sesión completa":"Tu sesión de hoy"}</h3><p class="note" style="margin:3px 0 0">${n===4?"Vuelve mañana: se mantiene tu racha y se renueva todo.":"Cuatro pasos al día. Al cerrarlos: +"+HOY_XP+" XP y un sobre."}</p></div></div>
    <ol class="hol">
    ${row(0,"1","Comenta el texto del día",esc(tt)+" · epígrafe "+P.doc.ep,"Abrir","txt")}
    ${row(1,"2","Fuente del día: dos preguntas",S.fd!=null?"Hoy has sacado "+S.fd+" de 20":"Una imagen nueva cada día · hasta 20 puntos","Jugar","fd")}
@@ -2286,7 +2286,7 @@ function openTaller(tab){TKTAB=tab;LS.set("tktab",tab);if((location.hash||"#inic
 function renderTaller(){
   const V=$("#v-taller");if(!V)return;
   stopSpeak();
-  V.innerHTML=`<div class="vh"><h1>Taller</h1><p>Herramientas para estudiar con método: planifica, comenta, esquematiza, compara y prepara tu chuleta.</p></div>
+  V.innerHTML=`<div class="vh"><h1>Taller</h1><p>Planifica, comenta, esquematiza, compara y prepara tu chuleta.</p></div>
   <div class="tkseg" role="tablist" aria-label="Herramientas">${TKT.map(([k,n])=>`<button role="tab" data-tk="${k}" aria-selected="${k===TKTAB}">${n}</button>`).join("")}</div><div id="tkb"></div>`;
   $$("[data-tk]",V).forEach(b=>b.onclick=()=>{TKTAB=b.dataset.tk;LS.set("tktab",TKTAB);renderTaller()});
   ({plan:tkPlan,com:tkCom,esq:tkEsq,cmp:tkCmp,chu:tkChu,nota:window.tkNota}[TKTAB]||tkPlan)($("#tkb"))}
@@ -2320,7 +2320,7 @@ function planToday(P){
 function tkPlan(el){
   const pl=ST.plan||{},P=planCalc(),tdy=dayKeyN(dayNum());
   const dom=DOCS.filter(d=>pgOf(d.id).s===1).length;
-  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Tu plan hasta el examen</h2><p class="note" style="margin:4px 0 12px">Pon la fecha de tu examen y la web reparte los temas por semanas según lo que ya has visto, lo que dominas y lo que te cuesta. Se reajusta solo cada vez que estudias.</p>
+  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Tu plan hasta el examen</h2><p class="note" style="margin:4px 0 12px">Pon la fecha del examen y se reparten los temas por semanas según lo que dominas y lo que te cuesta.</p>
    <div class="row" style="align-items:flex-end"><div class="field"><label for="plf">Fecha del examen</label><input type="date" id="plf" value="${esc(pl.f||"")}" min="${tdy}"></div><div class="field"><label for="pln">Días de estudio por semana</label><select id="pln">${[2,3,4,5,6,7].map(k=>opt(k,k,k===(+pl.n||5))).join("")}</select></div><button class="btn" id="plx"${pl.f?"":" hidden"}>Quitar fecha</button></div></div>
    <div id="plb"></div>`;
   const draw=()=>{
@@ -2355,7 +2355,7 @@ function cmAnalyze(d,txt){
 function tkCom(el){
   const docs=DOCS.filter(d=>d.clave&&(d.clave.ideas||d.clave.apuntes));
   const d0=CMID&&DOCM[CMID]?DOCM[CMID]:null;
-  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Comentario con autocorrección</h2><p class="note" style="margin:4px 0 12px">Elige un documento, escribe tu comentario y comprueba qué ideas, datos y personajes de la clave de corrección has recogido. Es una ayuda orientativa por coincidencia de conceptos: no sustituye la corrección de tu profesor.</p>
+  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Comentario con autocorrección</h2><p class="note" style="margin:4px 0 12px">Escribe tu comentario y comprueba qué ideas, datos y personajes de la clave has recogido. Orienta por coincidencia de conceptos; no sustituye la corrección del profesor.</p>
    <div class="row" style="align-items:flex-end"><div class="field"><label for="cmt">Tema</label><select id="cmt"><option value="">Todos</option>${TEMAS.map(t=>opt(t.n,temaLbl(t.n).slice(0,46),d0&&d0.tema===t.n)).join("")}</select></div>
    <div class="field" style="flex:1;min-width:240px"><label for="cmd">Documento</label><select id="cmd"></select></div><button class="btn" id="cmr">Al azar</button><button class="btn" id="cmh">De «Me cuesta»</button></div></div><div id="cmb"></div>`;
   const fill=()=>{const t=$("#cmt").value;const ls=docs.filter(d=>!t||d.tema===+t);$("#cmd").innerHTML=`<option value="">Elige…</option>`+ls.map(d=>opt(d.id,`${d.id} · ${d.titulo.length>70?d.titulo.slice(0,68)+"…":d.titulo}`,d.id===CMID)).join("")};
@@ -2397,7 +2397,7 @@ function esqCheck(ep,txt){
   const pp=PEOPLE.filter(p=>p.eps.includes(ep)).map(p=>{const toks=nrm(p.nombre).split(/[\s,]+/).filter(t=>t.length>3);return{t:clean(p.nombre),ok:!!toks.length&&toks.some(t=>new RegExp("\\b"+t+"\\b").test(nt))}});
   const all=ev.concat(pp),pct=all.length?Math.round(all.filter(x=>x.ok).length/all.length*100):0;return{ev,pp,pct}}
 function tkEsq(el){
-  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Esquemas para la Parte 1</h2><p class="note" style="margin:4px 0 12px">Rellena un esquema del epígrafe sin mirar los apuntes y luego comprueba si has recogido sus hitos y personajes.</p>
+  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Esquemas para la Parte 1</h2><p class="note" style="margin:4px 0 12px">Rellena el esquema sin mirar los apuntes y comprueba qué hitos y personajes recoges.</p>
    <div class="field" style="max-width:560px"><label for="esel">Epígrafe</label><select id="esel"><option value="">Elige un epígrafe…</option>${TEMAS.map(t=>`<optgroup label="${esc(temaLbl(t.n).slice(0,60))}">${EPS.filter(e=>e.tema===t.n).map(e=>opt(e.id,`${e.id} · ${e.nombre.length>70?e.nombre.slice(0,68)+"…":e.nombre}`,e.id===ESEL)).join("")}</optgroup>`).join("")}</select></div></div><div id="esb"></div>`;
   $("#esel").onchange=()=>{ESEL=$("#esel").value||null;draw()};
   function draw(){
@@ -2428,7 +2428,7 @@ function tkCmp(el){
   const key=()=>CA+"|"+CB;
   const side=n=>{const evs=EVS.filter(e=>e.tema===n).sort((a,b)=>a.y-b.y),ys=evs.map(e=>e.y),ps=PEOPLE.filter(p=>p.tema===n),ds=DOCS.filter(d=>d.tema===n);
     return{n,span:ys.length?`${fy(Math.floor(Math.min(...ys)))} – ${fy(Math.floor(Math.max(...ys)))}`:"—",evs:evs.slice(0,7),ps:ps.slice(0,8),nd:ds.length,nt:ds.filter(d=>d.kind==="texto").length,nf:ds.filter(d=>d.kind==="fuente").length,cats:Object.entries(ps.reduce((o,p)=>(o[p.cat]=(o[p.cat]||0)+1,o),{})).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([c,k])=>`${CATS[c][0]} (${k})`).join(", ")}};
-  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Comparador</h2><p class="note" style="margin:4px 0 10px">Enfrenta dos temas y construye tu propia comparación: la web te da los datos y tú rellenas el análisis.</p>
+  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Comparador</h2><p class="note" style="margin:4px 0 10px">Enfrenta dos temas: la web pone los datos y tú el análisis.</p>
    <div class="row" style="margin-bottom:10px">${CPRE.map(([a,b,n])=>`<button class="chip pbtn" data-cp="${a}-${b}">${esc(n)}</button>`).join("")}</div>
    <div class="row" style="align-items:flex-end"><div class="field"><label for="cpa">Tema A</label><select id="cpa">${TEMAS.map(t=>opt(t.n,temaLbl(t.n).slice(0,44),t.n===CA)).join("")}</select></div><div class="field"><label for="cpb">Tema B</label><select id="cpb">${TEMAS.map(t=>opt(t.n,temaLbl(t.n).slice(0,44),t.n===CB)).join("")}</select></div></div></div><div id="cpbd"></div>`;
   const draw=()=>{
@@ -2461,7 +2461,7 @@ const wrapChu=(body,t)=>`<!DOCTYPE html><html lang="es"><head><meta charset="utf
 function printHTML(html){
   const f=document.createElement("iframe");f.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";f.onload=()=>{try{f.contentWindow.focus();f.contentWindow.print()}catch(e){toast("No se pudo abrir la impresión. Usa «Descargar» y ábrelo en el navegador.")}setTimeout(()=>f.remove(),60000)};f.srcdoc=html;document.body.appendChild(f)}
 function tkChu(el){
-  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Chuleta imprimible</h2><p class="note" style="margin:4px 0 10px">Una hoja A4 por tema con cronología, personajes y documentos, y espacio para tus notas.</p>
+  el.innerHTML=`<div class="card"><h2 style="font-size:1.2rem">Chuleta imprimible</h2><p class="note" style="margin:4px 0 10px">Una hoja A4 por tema, con espacio para tus notas.</p>
    <div class="row" style="align-items:flex-end"><div class="field"><label for="cht">Tema</label><select id="cht">${TEMAS.map(t=>opt(t.n,temaLbl(t.n).slice(0,50),t.n===CHT)).join("")}</select></div>
    <label class="check"><input type="checkbox" id="cho1" checked> Cronología</label><label class="check"><input type="checkbox" id="cho2" checked> Personajes</label><label class="check"><input type="checkbox" id="cho3" checked> Documentos</label><label class="check"><input type="checkbox" id="cho4" checked> Espacio para notas</label></div>
    <div class="row" style="margin-top:6px"><button class="btn primary" id="chd">Descargar</button><button class="btn" id="chp">Imprimir</button><button class="btn" data-spk>🔊 Escuchar</button><span class="note" id="chn"></span></div></div><div class="sheetwrap" style="margin-top:14px"><div class="exam" id="csheet"></div></div>`;
@@ -2479,7 +2479,7 @@ function informe(){
   const g=G(),r=rank();
   return{app:"historia-espana-pau-informe",v:1,alias:g.alias||"",fecha:new Date().toISOString().slice(0,10),temas:ts,sim:{n:ST.hist.length,media:ST.hist.length?+(ST.hist.reduce((s,x)=>s+x.tot,0)/ST.hist.length).toFixed(2):null,ult:ST.hist.slice(0,5).map(x=>x.tot)},racha:streak(),xp:r.xp,rango:r.name,insignias:Object.keys(g.badges).length,tarjetas:Object.values(ST.srs).filter(v=>v[0]>=3).length,comentarios:Object.values(ST.cm||{}).filter(c=>c.r>=60).length,daily:Object.keys(g.daily).length,weekly:g.weekly}}
 function profeCard(){
-  return `<div class="card" style="margin-top:14px"><h3 style="font-size:1.05rem">Informe para el profesor</h3><p class="note" style="margin:4px 0 10px">Genera un archivo pequeño con tu progreso por temas, tus simulacros y tu rango. No incluye tus notas ni lo que escribes en el Taller. Súbelo a Classroom si tu profesor te lo pide.</p>
+  return `<div class="card" style="margin-top:14px"><h3 style="font-size:1.05rem">Informe para el profesor</h3><p class="note" style="margin:4px 0 10px">Un archivo con tu progreso, tus simulacros y tu rango. No incluye tus notas ni lo del Taller.</p>
    <div class="row" style="align-items:flex-end"><div class="field"><label for="ali">Tu nombre o clave</label><input id="ali" maxlength="40" value="${esc(G().alias||"")}" placeholder="Nombre y curso"></div><button class="btn" id="infx">Descargar informe</button></div><div class="note" id="infn" style="margin-top:6px"></div></div>`}
 function wireProfeCard(){
   const a=$("#ali");if(!a)return;a.oninput=()=>{G().alias=a.value.slice(0,40);saveST()};
@@ -2491,10 +2491,10 @@ function renderProfe(){
   const rows=PROF.slice().sort((a,b)=>(b.xp||0)-(a.xp||0));
   const avg=TEMAS.map(t=>{const xs=rows.map(r=>{const x=(r.temas||[]).find(y=>y.n===t.n);return x&&x.tot?x.dom/x.tot:null}).filter(v=>v!=null);return xs.length?xs.reduce((s,v)=>s+v,0)/xs.length:null});
   const cellC=v=>v==null?"transparent":`color-mix(in srgb,#2f8a52 ${Math.round(v*90)}%,var(--surface))`;
-  V.innerHTML=`<div class="vh"><h1>Panel del profesor</h1><p>Carga los informes que tus alumnos descargan desde «Mi estudio». Todo se procesa en tu navegador: no se sube nada a ningún servidor.</p></div>
+  V.innerHTML=`<div class="vh"><h1>Panel del profesor</h1><p>Carga los informes de «Mi estudio». Todo se procesa en tu navegador.</p></div>
   <div class="card"><div class="row"><button class="btn primary" id="pfl">Cargar informes (.json)</button><input type="file" id="pff" accept=".json,application/json" multiple hidden><button class="btn" id="pfc"${rows.length?"":" disabled"}>Descargar tabla (CSV)</button><button class="btn" id="pfz"${rows.length?"":" disabled"}>Vaciar</button><span class="note">${rows.length} informes cargados</span></div></div>
   ${rows.length?`<div class="card" style="margin-top:14px;overflow:auto"><h3 style="font-size:1.05rem;margin-bottom:8px">Alumnos</h3><table class="cmpt"><thead><tr><th>Alumno</th><th>Rango</th><th>XP</th><th>Racha</th><th>Simulacros</th><th>Media</th><th>Tarjetas</th><th>Reto semanal</th><th>Informe</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.alias||"(sin nombre)")}</td><td>${esc(r.rango||"")}</td><td>${r.xp||0}</td><td>${r.racha||0}</td><td>${(r.sim||{}).n||0}</td><td>${(r.sim||{}).media==null?"—":(r.sim.media).toFixed(1)}</td><td>${r.tarjetas||0}</td><td>${r.weekly&&r.weekly[ws]!=null?r.weekly[ws]:"—"}</td><td>${esc(r.fecha||"")}</td></tr>`).join("")}</tbody></table></div>
-  <div class="card" style="margin-top:14px;overflow:auto"><h3 style="font-size:1.05rem;margin-bottom:4px">Mapa de calor: % de documentos dominados</h3><p class="note" style="margin:0 0 8px">Cuanto más verde, más dominado. La última fila es la media de la clase.</p><table class="cmpt heat"><thead><tr><th>Alumno</th>${TEMAS.map(t=>`<th title="${esc(t.nombre)}">T${t.n}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.alias||"(sin nombre)")}</td>${TEMAS.map(t=>{const x=(r.temas||[]).find(y=>y.n===t.n),v=x&&x.tot?x.dom/x.tot:null;return `<td style="background:${cellC(v)}">${v==null?"":Math.round(v*100)}</td>`}).join("")}</tr>`).join("")}<tr><th>Media</th>${avg.map(v=>`<td style="background:${cellC(v)}"><b>${v==null?"":Math.round(v*100)}</b></td>`).join("")}</tr></tbody></table>
+  <div class="card" style="margin-top:14px;overflow:auto"><h3 style="font-size:1.05rem;margin-bottom:4px">Mapa de calor: % de documentos dominados</h3><table class="cmpt heat"><thead><tr><th>Alumno</th>${TEMAS.map(t=>`<th title="${esc(t.nombre)}">T${t.n}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.alias||"(sin nombre)")}</td>${TEMAS.map(t=>{const x=(r.temas||[]).find(y=>y.n===t.n),v=x&&x.tot?x.dom/x.tot:null;return `<td style="background:${cellC(v)}">${v==null?"":Math.round(v*100)}</td>`}).join("")}</tr>`).join("")}<tr><th>Media</th>${avg.map(v=>`<td style="background:${cellC(v)}"><b>${v==null?"":Math.round(v*100)}</b></td>`).join("")}</tr></tbody></table>
    <p class="note" style="margin-top:8px">Temas más flojos: ${TEMAS.map((t,i)=>[t,avg[i]]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]).slice(0,3).map(x=>`<b>T${x[0].n}</b> ${esc(x[0].nombre.slice(0,32))} (${Math.round(x[1]*100)} %)`).join(" · ")||"—"}</p></div>`:""}`;
   $("#pfl").onclick=()=>$("#pff").click();
   profeMod(V);
@@ -2550,7 +2550,7 @@ function initNav(){
  $(".tools").addEventListener("click",e=>{if(!e.target.closest("#burger"))closeMenu()});
  addEventListener("resize",()=>{if(innerWidth>900)closeMenu()});
  const sp=$("#sp");let tk=0;addEventListener("scroll",()=>{if(tk)return;tk=requestAnimationFrame(()=>{tk=0;const h=document.documentElement,m=h.scrollHeight-innerHeight;sp.style.width=(m>0?Math.min(100,scrollY/m*100):0)+"%"})},{passive:true});
- $("#shareb").onclick=openShare;["#shf","#shf2"].forEach(q=>{const b=$(q);if(b)b.onclick=openShare});
+ ["#shf","#shf2"].forEach(q=>{const b=$(q);if(b)b.onclick=openShare});
  $("#shx").onclick=()=>$("#sh").close();$("#sh").addEventListener("click",e=>{if(e.target===$("#sh"))$("#sh").close()});
  $("#shc").onclick=async()=>{try{await navigator.clipboard.writeText(shareURL());toast("Enlace copiado")}catch(e){const r=document.createRange();r.selectNodeContents($("#shu"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Selecciona el enlace y cópialo")}};
  $("#shn").onclick=()=>{navigator.share&&navigator.share({title:"Historia de España · 2.º Bachillerato",url:shareURL()}).catch(()=>{})};
@@ -2574,7 +2574,7 @@ function renderInicio(){
   </div>
   <div class="sech rv"><h2>Para hoy</h2></div>
   <div class="rv" id="hoyx"></div><a id="pulsoH" hidden></a><div class="rv" id="pauq"></div>
-  <div class="sech rv"><h2>El curso por evaluaciones</h2><span class="note">Pulsa un tema para verlo en la cronología</span></div>
+  <div class="sech rv"><h2>El curso por evaluaciones</h2></div>
   <div class="evs rv">${EVD.map(([n,c,s,b,sub])=>{const ts=D.presets[n],eps=EPS.filter(e=>ts.includes(e.tema));const a=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="texto").length,f=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="fuente").length,np=PEOPLE.filter(p=>ts.includes(p.tema)).length;
     return `<div class="ev ${c}"><h3>${n}</h3><div class="sub">${sub}</div><div class="evt">${ts.length>1?"Temas "+ts[0]+" a "+ts[ts.length-1]:""}</div><p class="note" style="margin:0 0 12px">${a} textos · ${f} fuentes · ${np} personajes · ${eps.length} epígrafes</p><div class="row"><button class="btn primary small" data-std="${s}">Generar examen</button><button class="btn small" data-pool="textos" data-b="${b}">Textos</button><button class="btn small" data-pool="fuentes" data-b="${b}">Fuentes</button></div></div>`}).join("")}</div>
   <div class="route rv">${TEMAS.map(t=>`<button class="rt ${t.bloque}" data-tm="${t.n}" title="${esc(t.n+". "+t.nombre)}">${t.n}</button>`).join("")}</div>`;
@@ -2746,7 +2746,7 @@ function startSim(id){
     <div class="row" style="margin-top:14px"><button class="btn primary" id="sfin">Terminar y autoevaluar</button></div><div id="sres"></div></div>`;
   [0,1,2].forEach(i=>$("#sa"+i).addEventListener("input",()=>{$("#sl"+i).textContent=Math.ceil($("#sa"+i).value.length/95)+" líneas aprox."}));
   {const dr=(LS.get("draft",{})||{})[id];let tm=null;
-   if(dr&&dr.a&&dr.a.some(Boolean)){[0,1,2].forEach(i=>{$("#sa"+i).value=dr.a[i]||"";$("#sl"+i).textContent=Math.ceil($("#sa"+i).value.length/95)+" líneas aprox."});$("#sarea .card").insertAdjacentHTML("afterbegin",`<div class="info">He recuperado tu borrador del ${new Date(dr.t).toLocaleDateString("es-ES")}. Se guarda solo mientras escribes.</div>`)}
+   if(dr&&dr.a&&dr.a.some(Boolean)){[0,1,2].forEach(i=>{$("#sa"+i).value=dr.a[i]||"";$("#sl"+i).textContent=Math.ceil($("#sa"+i).value.length/95)+" líneas aprox."});$("#sarea .card").insertAdjacentHTML("afterbegin",`<div class="info">Borrador recuperado (${new Date(dr.t).toLocaleDateString("es-ES")}).</div>`)}
    [0,1,2].forEach(i=>$("#sa"+i).addEventListener("input",()=>{clearTimeout(tm);tm=setTimeout(()=>{const dd=LS.get("draft",{})||{};dd[id]={a:[0,1,2].map(k=>{const e=$("#sa"+k);return e?e.value:""}),t:Date.now()};const ks=Object.keys(dd).sort((a,b)=>dd[b].t-dd[a].t);ks.slice(12).forEach(k=>delete dd[k]);LS.set("draft",dd)},600)}))}
   clearInterval(timer);tick();
   timer=setInterval(()=>{if(!SIM||SIM.done||SIM.paused)return;SIM.left--;tick();if(SIM.left<=0){clearInterval(timer);tick()}},1000);
@@ -2759,7 +2759,7 @@ function finishSim(){
   clearInterval(timer);SIM.done=true;
   const d=DOCM[SIM.id],c=d.clave,items=sentences(c.ideas||c.apuntes).slice(0,10),ep3=EPM[SIM.q3.ep];
   $("#sres").innerHTML=`<div style="margin-top:22px;border-top:1px solid var(--line);padding-top:16px"><h2 style="font-size:1.3rem">Autoevaluación</h2>
-   <p class="note">Marca lo que tu respuesta sí recoge. La puntuación orienta, no sustituye a la corrección del profesor.</p>
+   <p class="note">Marca lo que tu respuesta recoge. Orienta; no sustituye al profesor.</p>
    <h3 style="font-size:1rem">1. Ideas (hasta 1 punto)</h3><ul class="checklist" id="schk">${items.map((t,i)=>`<li><input type="checkbox" id="sc${i}"><label for="sc${i}">${esc(t)}</label></li>`).join("")}</ul>
    <h3 style="font-size:1rem">2. Contexto e importancia (hasta 1,5 puntos)</h3><p>${esc(c.apuntes)}</p>${c.ampliar?`<p class="muted">${esc(c.ampliar)}</p>`:""}
    <div class="field" style="max-width:240px"><label for="sp2">Tu nota (0 a 1,5)</label><input id="sp2" type="number" min="0" max="1.5" step="0.1" value="0"></div>
@@ -2902,7 +2902,7 @@ function showExam(ex,o){
    <div class="sheetwrap"><div class="exam" id="xsheet">${examHTML(ex,o,false)}</div></div></div>`;
   $("#xsheet").style.setProperty("--lh",LH+"mm");
   $("#xsave").onclick=saveExam;
-  $("#xcc").onclick=async()=>{const c=classCode(o);try{await navigator.clipboard.writeText(c);toast("Código copiado: compártelo con tu clase.")}catch(e){$("#xcode").value=c;toast("Copia el código del cuadro «Código de clase».")}};
+  $("#xcc").onclick=async()=>{const c=classCode(o);try{await navigator.clipboard.writeText(c);toast("Código copiado.")}catch(e){$("#xcode").value=c;toast("Copia el código del cuadro «Código de clase».")}};
   $("#xsol").onclick=()=>{const sh=$("#xsheet"),on=sh.dataset.sol==="1";sh.innerHTML=examHTML(ex,o,!on);sh.dataset.sol=on?"0":"1";$("#xsol").textContent=on?"Ver solucionario":"Ver examen"};
   $("#xdl1").onclick=()=>save("examen-historia-espana.html",()=>wrapDoc(examHTML(ex,o,false),o.titulo),"#xnote");
   $("#xdl2").onclick=()=>save("solucionario-historia-espana.html",()=>wrapDoc(examHTML(ex,o,true),o.titulo+" (solucionario)"),"#xnote");

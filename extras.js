@@ -91,16 +91,14 @@ function abrirAjustes(){
   let d=$("#aj");
   if(!d){d=document.createElement("dialog");d.id="aj";d.className="ajd";d.setAttribute("aria-label","Ajustes");
     d.innerHTML='<div class="ajh"><h2>Ajustes</h2><button type="button" class="ajx" aria-label="Cerrar">✕</button></div>'+
-    '<label class="ajr"><span><b>Tipografía legible</b><small>Letra Atkinson Hyperlegible, pensada para leer con menos esfuerzo (útil con dislexia o vista cansada), con más aire entre líneas.</small></span><input type="checkbox" role="switch" id="aj-leg"><i class="sw" aria-hidden="true"></i></label>'+
-    '<label class="ajr"><span><b>Sonidos</b><small>Efectos al abrir sobres y dar la vuelta a los cromos. Apagados por defecto.</small></span><input type="checkbox" role="switch" id="aj-sfx"><i class="sw" aria-hidden="true"></i></label>'+
-    '<p class="ajn" id="aj-off"></p>';
+    '<label class="ajr"><span><b>Tipografía legible</b><small>Atkinson Hyperlegible y más aire entre líneas.</small></span><input type="checkbox" role="switch" id="aj-leg"><i class="sw" aria-hidden="true"></i></label>'+
+    '<label class="ajr"><span><b>Sonidos</b><small>Al abrir sobres y girar cromos.</small></span><input type="checkbox" role="switch" id="aj-sfx"><i class="sw" aria-hidden="true"></i></label>';
     document.body.appendChild(d);
     $(".ajx",d).onclick=()=>d.close();d.addEventListener("click",e=>{if(e.target===d)d.close()});
     $("#aj-leg",d).onchange=e=>{set("legible",e.target.checked);aplicar()};
     $("#aj-sfx",d).onchange=e=>{set("sfx",e.target.checked);if(e.target.checked){SFX.ok()}};
   }
   $("#aj-leg",d).checked=get("legible",false)===true;$("#aj-sfx",d).checked=sonidoOn();
-  $("#aj-off",d).textContent=("serviceWorker" in navigator&&navigator.serviceWorker.controller)?"La web ya funciona sin conexión: lo que has abierto queda guardado en este dispositivo.":"Para usarla sin conexión, ábrela una vez con internet y vuelve a entrar.";
   d.showModal();
 }
 function botonAjustes(){

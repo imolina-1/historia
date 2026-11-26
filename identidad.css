@@ -278,7 +278,6 @@ footer.foot a:hover,footer.foot button:hover{color:var(--ink);text-decoration-co
   header.top .nv-m button:active{background:var(--hl);color:var(--hl-ink)}
   header.top .nv-m button[aria-selected=true]{background:var(--surface2);border-left-color:var(--ink)}
 }
-@media(max-width:520px){#shareb{display:none}}
 
 /* ---- Pantallas táctiles: dianas de pulsación cómodas y sin zoom al enfocar campos ---- */
 @media(pointer:coarse){
@@ -620,3 +619,7 @@ html.legible .cback em b,html.legible .cro .tx h4{font-style:italic}
 .ajd .ajr input:checked+.sw:after{transform:translateX(18px)}
 .ajd .ajr input:focus-visible+.sw{outline:3px solid var(--accent);outline-offset:2px}
 .ajd .ajn{margin:0;padding:14px 20px 18px;color:var(--muted);font:400 .8rem/1.45 var(--sans)}
+
+.pbio:has(img){cursor:zoom-in}
+.pbio img{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+@media(hover:hover){.pbio:hover img{transform:scale(1.04)}}
