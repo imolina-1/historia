@@ -47,7 +47,8 @@ function group() {
 function cardHTML(u) {
   if (u.k === "e") {
     var e = EVS[u.i], ep = EPM[e.ep];
-    return '<li><button type="button" data-k="' + key(u) + '"><span class="th ev" style="--h:' + hueOf(e.tema) + '">' + e.tema + '</span><span class="tx"><b>' + E(e.t) + "</b><small>Hito · " + E(ep ? ep.nombre : "") + "</small></span></button></li>";
+    var eth = e.img ? '<span class="th' + (e.pt ? "" : " ph") + '"><img data-src="' + E(e.img) + '" alt="" decoding="async" draggable="false"></span>' : '<span class="th ev" style="--h:' + hueOf(e.tema) + '">' + e.tema + '</span>';
+    return '<li><button type="button" data-k="' + key(u) + '">' + eth + '<span class="tx"><b>' + E(e.t) + "</b><small>Hito · " + E(ep ? ep.nombre : "") + "</small></span></button></li>";
   }
   if (u.k === "w") {
     var w = MUNDO[u.i];
@@ -157,6 +158,7 @@ function openU_(k) {
     var near = EVS.map(function (v, i) { return { v: v, i: i }; }).filter(function (o) { return o.v.tema === e.tema && o.i !== u.i; })
       .sort(function (a, b) { return Math.abs(a.v.y - e.y) - Math.abs(b.v.y - e.y); }).slice(0, 6).sort(function (a, b) { return a.v.y - b.v.y; });
     h = x + '<div class="k">Tema ' + e.tema + " · " + E(TEMAS[e.tema - 1].nombre) + "</div><h2>" + E(e.t) + '</h2><div class="yr">' + E(yl(e.y)) + " · epígrafe " + E(e.ep) + "</div>" +
+      (e.img ? '<figure class="pimg' + (e.pt ? "" : " dimg") + '"><img src="' + E(e.img) + '" alt="' + E(e.ic || e.t) + '" draggable="false">' + (e.pt ? "" : "<figcaption>" + E(e.ic || "") + "</figcaption>") + "</figure>" : "") +
       "<h3>Epígrafe</h3><p class=\"sub\">" + E(ep ? ep.nombre : "") + "</p>" +
       '<p class="pact"><button type="button" class="pbtn" data-full="e' + u.i + '">Abrir ficha completa</button></p>' + arteLink(e.y) +
       (ps.length ? "<h3>Personajes del epígrafe</h3><div class=\"chs\">" + ps.map(function (p) { return chip(p.nombre, 'data-k="p' + p.id + '"'); }).join("") + "</div>" : "") +

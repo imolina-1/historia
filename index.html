@@ -1968,7 +1968,7 @@ const alPad=n=>String(n).padStart(3,"0");
 function cromo(p,o={}){
   const r=alRar(p),cc=CATS[p.cat][1],cn=CATS[p.cat][0],T=o.tag||"button",n=alPad(alN(p.id)),at=T==="button"?` type="button" data-id="${p.id}"`:"";
   if(!o.owned)return `<${T} class="cro lock r${r}"${at} style="--cc:${cc}" aria-label="Cromo ${n} por descubrir"><span class="cn">Nº ${n}</span><span class="cq" aria-hidden="true">?</span><span class="cx">Por descubrir<small>${esc(cn)}</small></span></${T}>`;
-  return `<${T} class="cro r${r}"${at} style="--cc:${cc}"><span class="cn">Nº ${n}</span><span class="cr" aria-label="${["","común","rara","legendaria"][r]}">${"★".repeat(r)}</span>${p.img?`<span class="art ph"><img src="${p.img}" alt="" loading="lazy"><i>${p.tema}</i></span>`:`<span class="art"><b>${esc(ini(p.nombre))}</b><i>${p.tema}</i></span>`}<span class="tx"><h4>${esc(clean(p.nombre))}</h4><span class="yr">${esc(life(p))}</span><span class="cg">${esc(p.cargo)}</span><span class="nt">${esc(p.nota||"")}</span></span><span class="ft"><span>${esc(cn)}</span><span>Tema ${p.tema}</span></span></${T}>`}
+  return `<${T} class="cro r${r}"${at} style="--cc:${cc}"><span class="co" aria-hidden="true"></span><span class="cn">Nº ${n}</span><span class="cr" aria-label="${["","común","rara","legendaria"][r]}">${"★".repeat(r)}</span>${p.img?`<span class="art ph"><img src="${p.img}" alt="" loading="lazy"><i>${p.tema}</i></span>`:`<span class="art"><b>${esc(ini(p.nombre))}</b><i>${p.tema}</i></span>`}<span class="tx"><h4>${esc(clean(p.nombre))}</h4><span class="yr">${esc(life(p))}</span><span class="cg">${esc(p.cargo)}</span><span class="nt">${esc(p.nota||"")}</span></span><span class="ft"><span>${esc(cn)}</span><span>Tema ${p.tema}</span></span></${T}>`}
 
 /* sacar un sobre: 3 cromos; se guarda al instante (no se puede repetir la tirada recargando) */
 function alOpen(){
@@ -1990,7 +1990,7 @@ function pkShow(){if(!$("#pk").open)$("#pk").showModal();pkSealed()}
 function pkSealed(){
   pkPanelClose();const n=alPacks(),a=AL();
   $("#pkb").innerHTML=n>0
-   ?`<div class="pkh"><span>Sobre nº ${a.opened+1}</span><small>${n} ${n===1?"sobre":"sobres"} por abrir</small></div><button class="sobre" id="pkgo" type="button" aria-label="Abrir el sobre"><span class="flap"></span><span class="sl"><b>H</b><em>Archivo de la Historia de España</em><i>3 cromos</i></span></button><p class="pkn">Toca el sobre para abrirlo.</p>`
+   ?`<div class="pkh"><span>Sobre nº ${a.opened+1}</span><small>${n} ${n===1?"sobre":"sobres"} por abrir</small></div><button class="sobre" id="pkgo" type="button" aria-label="Abrir el sobre"><span class="sb"><span class="flap"></span><span class="sl"><u aria-hidden="true">★ ★ ★</u><b>H</b><em>Archivo de la<br>Historia de España</em><i>Colección del curso</i></span></span></button><p class="pkn">Toca el sobre para abrirlo.</p>`
    :`<div class="pkh"><span>No te quedan sobres</span><small>${alCount()} de ${PEOPLE.length} cromos</small></div><p class="pkn">Ganas un sobre por cada ${AL_XP} puntos de experiencia: lee textos, repasa tarjetas, juega o haz un comentario. Y cada día hay un sobre de regalo.</p><div class="row pkact" style="margin-top:20px"><button class="btn primary" id="pkclose" type="button">Volver al álbum</button></div>`;
   const g=$("#pkgo");if(g){g.onclick=pkTear;g.focus({preventScroll:true})}
   const c=$("#pkclose");if(c)c.onclick=()=>$("#pk").close()}
@@ -2001,7 +2001,7 @@ function pkTear(){
   setTimeout(()=>pkDeal(res),quick?60:980)}
 function pkDeal(res){
   PK={res,n:0,sel:-1};pkPanelClose();
-  $("#pkb").innerHTML=`<div class="pkstage" id="pkst"><div class="pkrow">${res.map((r,i)=>`<div class="pkc g${alRar(r.p)}" style="--i:${i}"><div class="fl" data-i="${i}" role="button" tabindex="0" aria-label="Voltear el cromo ${i+1}"><div class="in"><div class="face back"><div class="cback"><b>H</b></div></div><div class="face front">${cromo(r.p,{owned:1,tag:"div"})}<span class="up"></span><span class="holo"></span></div></div>${r.isNew?`<span class="nw">¡Nuevo!</span>`:`<span class="nw rp">Repetido · +2 XP</span>`}</div><span class="gl" aria-hidden="true"></span></div>`).join("")}</div><aside class="pkpanel" id="pkpanel" aria-label="Información del cromo" hidden></aside></div><div id="pkfb" aria-live="polite">Toca cada cromo para darle la vuelta.</div><div class="row pkact"><button class="btn" id="pkall" type="button">Voltear todos</button></div>`;
+  $("#pkb").innerHTML=`<div class="pkstage" id="pkst"><div class="pkrow">${res.map((r,i)=>`<div class="pkc g${alRar(r.p)}" style="--i:${i}"><div class="fl" data-i="${i}" role="button" tabindex="0" aria-label="Voltear el cromo ${i+1}"><div class="in"><div class="face back"><div class="cback"><b>H</b><em>Historia de España</em></div></div><div class="face front">${cromo(r.p,{owned:1,tag:"div"})}<span class="up"></span><span class="holo"></span></div></div>${r.isNew?`<span class="nw">¡Nuevo!</span>`:`<span class="nw rp">Repetido · +2 XP</span>`}</div><span class="gl" aria-hidden="true"></span></div>`).join("")}</div><aside class="pkpanel" id="pkpanel" aria-label="Información del cromo" hidden></aside></div><div id="pkfb" aria-live="polite">Toca cada cromo para darle la vuelta.</div><div class="row pkact"><button class="btn" id="pkall" type="button">Voltear todos</button></div>`;
   const flip=el=>{if(el.classList.contains("on"))return;el.classList.add("on");PK.n++;const r=PK.res[+el.dataset.i],rr=alRar(r.p),pc=el.parentElement;
     el.setAttribute("aria-label","Ver información de "+clean(r.p.nombre));
     setTimeout(()=>pc.classList.add("lit"),[0,900,1200,1800][rr]);
@@ -2036,7 +2036,7 @@ function renderAlbum(){
   const [c1,t1]=by(1),[c2,t2]=by(2),[c3,t3]=by(3);
   const L=PEOPLE.filter(p=>(!ALF.e||(ALF.e==="si"?own[p.id]:!own[p.id]))&&(!ALF.r||alRar(p)==ALF.r)&&(!ALF.c||p.cat===ALF.c));
   const groups=TEMAS.map(t=>{const all=PEOPLE.filter(p=>p.tema===t.n),got=all.filter(p=>own[p.id]).length,sh=L.filter(p=>p.tema===t.n).sort((x,y)=>alN(x.id)-alN(y.id));return{t,all:all.length,got,sh}}).filter(g=>g.sh.length);
-  V.innerHTML=`<div class="vh"><h1>Álbum de la Historia</h1><p>Colecciona a los ${tot} personajes del curso. Cada sobre trae tres cromos; los ganas estudiando.</p></div>
+  V.innerHTML=`<div class="vh"><h1>Álbum de la Historia</h1><p>Colecciona a los ${tot} personajes del curso.</p></div>
   <div class="alsum"><div class="al1"><div class="big">${k}<small>/ ${tot} cromos</small></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${tot}" aria-valuenow="${k}"><i style="width:${(k/tot*100).toFixed(1)}%"></i></div>
     <div class="rars"><span><b>${c1}/${t1}</b><span class="s">★</span> comunes</span><span><b>${c2}/${t2}</b><span class="s">★★</span> raras</span><span><b>${c3}/${t3}</b><span class="s">★★★</span> legendarias</span></div></div>
    <div class="al2"><div class="mini"><span class="sb" aria-hidden="true"></span><div><h2>${n} ${n===1?"sobre":"sobres"} por abrir</h2><p>Uno cada ${AL_XP} XP, más uno de regalo cada día.</p></div></div>
