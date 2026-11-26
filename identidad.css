@@ -593,3 +593,30 @@ html.vt::view-transition-group(topbar){animation-duration:0s}
 .sobre .ctp{top:calc(13% + 3.6cqw);font-size:2.3cqw}
 .cback em b{aspect-ratio:auto;border:0;border-radius:0;position:static;place-items:normal}
 .sobre .ctp{display:none}
+
+/* ===== Tipografía legible (Atkinson Hyperlegible), activable en Ajustes ===== */
+@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-400-italic.woff2) format("woff2")}
+html.legible{--serif:"Atkinson Hyperlegible",system-ui,sans-serif;--display:var(--serif);--text:"Atkinson Hyperlegible",system-ui,sans-serif;--sans:"Atkinson Hyperlegible",system-ui,sans-serif}
+html.legible body{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;line-height:1.7;letter-spacing:.012em;word-spacing:.04em}
+html.legible h1,html.legible h2,html.legible h3{font-stretch:100%;letter-spacing:0}
+html.legible .cback em b,html.legible .cro .tx h4{font-style:italic}
+
+/* Ajustes */
+.ajd{border:2px solid var(--ink);border-radius:12px;box-shadow:var(--hard);padding:0;max-width:min(460px,92vw);width:100%;background:var(--surface);color:var(--ink)}
+.ajd::backdrop{background:rgba(10,7,4,.55);backdrop-filter:blur(2px)}
+.ajd .ajh{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.ajd h2{margin:0;font:800 1.4rem var(--display)}
+.ajd .ajx{all:unset;cursor:pointer;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;border:1.5px solid var(--line)}
+.ajd .ajx:hover{background:var(--hl);color:var(--hl-ink);border-color:var(--hl)}
+.ajd .ajr{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 20px;border-bottom:1px solid var(--line);cursor:pointer}
+.ajd .ajr b{display:block;font:700 1rem var(--sans)}
+.ajd .ajr small{display:block;margin-top:3px;color:var(--muted);font:400 .82rem/1.4 var(--sans)}
+.ajd .ajr input{position:absolute;opacity:0;pointer-events:none}
+.ajd .sw{flex:none;position:relative;width:46px;height:28px;border-radius:999px;border:2px solid var(--ink);background:var(--surface2);transition:background .2s}
+.ajd .sw:after{content:"";position:absolute;left:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--ink);transition:transform .2s}
+.ajd .ajr input:checked+.sw{background:var(--hl)}
+.ajd .ajr input:checked+.sw:after{transform:translateX(18px)}
+.ajd .ajr input:focus-visible+.sw{outline:3px solid var(--accent);outline-offset:2px}
+.ajd .ajn{margin:0;padding:14px 20px 18px;color:var(--muted);font:400 .8rem/1.45 var(--sans)}

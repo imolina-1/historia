@@ -13,6 +13,8 @@
 <script>try{const t=JSON.parse(localStorage.getItem("hde2_theme")||"null");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#15110d">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Historia PAU">
+<script>try{if(JSON.parse(localStorage.getItem("hde2_legible")))document.documentElement.classList.add("legible")}catch(e){}</script>
 <meta name="description" content="Textos, fuentes históricas, personajes, exámenes y juegos para estudiar Historia de España de 2.º de Bachillerato (PAU Madrid).">
 <meta property="og:type" content="website"><meta property="og:title" content="Historia de España · 2.º Bachillerato"><meta property="og:description" content="Textos con clave, fuentes históricas, personajes, exámenes tipo PAU y juegos."><meta property="og:image" content="https://historiapau.pages.dev/og.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315110d'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23d9a653' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23d9a653'%3EH%3C/text%3E%3C/svg%3E">
@@ -1082,7 +1084,6 @@ dialog#pk::backdrop{background:#0e0b08}
     <div class="field"><label for="po">Orden</label><select id="po"><option value="nac">Por época</option><option value="az">A-Z</option></select></div>
   </div>
   <p class="note" id="pcount"></p><div class="pgrid" id="pgrid"></div>
-  <div class="info" style="margin-top:18px"><b>Sobre las semblanzas.</b> Son resúmenes míos, breves y pensados para el temario. Cada ficha enlaza al artículo exacto de Wikipedia y, cuando existe, a la ficha del <i>Diccionario Biográfico Español</i> de la Real Academia de la Historia (<i>Real Academia de la Historia, DB~e</i>), donde está la biografía autorizada. Las fechas «c.» son aproximadas.</div>
 </section>
 
 <section class="view" id="v-linea" aria-label="Línea del tiempo"><div id="tl2"></div></section>
@@ -1170,7 +1171,7 @@ dialog#pk::backdrop{background:#0e0b08}
 </section>
 
 </main>
-<footer class="foot"><div class="wrap foot-in"><svg class="foot-mk" viewBox="0 0 24 24" width="11" height="11" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z" fill="currentColor"/></svg><p>Historia de España · 2.º Bachillerato · Madrid <i aria-hidden="true">/</i> <span id="fst"></span> <i aria-hidden="true">/</i> <a href="#acerca">Créditos y derechos</a> <i aria-hidden="true">/</i> © 2026 Iván Molina Rincón <i aria-hidden="true">/</i> <button type="button" id="shf">Compartir con QR</button></p></div></footer>
+<footer class="foot"><div class="wrap foot-in"><svg class="foot-mk" viewBox="0 0 24 24" width="11" height="11" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z" fill="currentColor"/></svg><p>Historia de España · 2.º Bachillerato · Madrid <i aria-hidden="true">/</i> <a href="#acerca">Créditos y derechos</a> <i aria-hidden="true">/</i> © 2026 Iván Molina Rincón <i aria-hidden="true">/</i> <button type="button" id="shf">Compartir con QR</button></p></div></footer>
 <dialog id="dlg" aria-label="Detalle"><div class="dwrap"><button class="dx" id="dx" aria-label="Cerrar">✕</button><div id="dh"></div><div id="db"></div></div></dialog>
 <dialog id="vw" aria-label="Visor de imagen"><div class="vwin"><div class="vtop"><div class="vtitle" id="vt"></div><div class="vtools"><span id="vcount"></span><button id="vprev" aria-label="Imagen anterior" hidden>‹</button><button id="vnext" aria-label="Imagen siguiente" hidden>›</button><button id="vzo" aria-label="Alejar">−</button><button id="vz1" aria-label="Tamaño real">100 %</button><button id="vzi" aria-label="Acercar">+</button><button id="vzf" aria-label="Ajustar a la pantalla">Ajustar</button><button id="vcl" aria-label="Cerrar">✕</button></div></div><div class="vstage" id="vs"><img id="vi" alt="" draggable="false"></div><div><div class="vcap" id="vc"></div><div class="vhint">Rueda o pellizco para el zoom · arrastra para moverte · doble clic para acercar · ←/→ para cambiar de imagen</div></div></div></dialog>
 <dialog id="sh" aria-label="Compartir"><div class="shb"><button class="btn small" id="shx" type="button" aria-label="Cerrar">✕</button><h2>Comparte la web</h2><p>Apunta con la cámara del móvil al código.</p><div class="qr" id="shq"></div><div class="url" id="shu"></div><div class="row"><button class="btn primary" id="shc" type="button">Copiar enlace</button><button class="btn" id="shn" type="button">Compartir…</button><button class="btn" id="shp" type="button">Cartel para el aula</button></div></div></dialog>
@@ -1310,9 +1311,9 @@ function openPers(id){
     ${evs.length?`<h3 style="font-size:1rem;margin:16px 0 6px">Hitos del epígrafe</h3><p class="note" style="margin:0">${evs.map(e=>`${fy(e.y)}: ${esc(e.t)}`).join(" · ")}</p>`:""}
     ${docs.length?`<h3 style="font-size:1rem;margin:16px 0 6px">Documentos relacionados</h3><div class="row">${docs.slice(0,8).map(d=>`<button class="btn small" data-d="${d.id}">${d.id} · ${esc(d.titulo.length>38?d.titulo.slice(0,36)+"…":d.titulo)}</button>`).join("")}</div>`:""}
     <div class="row" style="margin-top:18px"><button class="btn primary" id="ptl">Ver en la cronología</button><button class="btn" id="ptl2">En la línea del tiempo</button>
+    ${AL().own[p.id]?`<button class="btn" type="button" data-share="${p.id}">Compartir cromo</button>`:""}
     <a class="btn" target="_blank" rel="noopener" href="${wk}">Wikipedia ↗</a>
-    ${ARTE_X[p.id]?`<a class="btn" target="_blank" rel="noopener" href="${ARTE_URL}#a-${p.id}">En Historia del Arte ↗</a>`:""}${p.rah?`<a class="btn" target="_blank" rel="noopener" href="https://historia-hispanica.rah.es/biografias/${p.rah}">Semblanza en la RAH ↗</a>`:""}</div>
-    <p class="note" style="margin-top:10px">Semblanza escrita por mí como resumen para el temario.${p.wk?` Wikipedia: artículo «${esc(p.wk.replace(/_/g," "))}».`:""} ${p.rah?`Biografía autorizada: <i>Real Academia de la Historia, Diccionario Biográfico Español</i> (el enlace abre la ficha de este personaje).`:"Sin ficha en el DB~e (personaje vivo o extranjero)."}${p.ic?` Imagen: <a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(p.ic.replace(/ /g,"_"))}">Wikimedia Commons</a>${p.ica?` · ${esc(p.ica)}`:""}${p.icl?` · ${esc(p.icl)}`:""}.`:""}</p>`);
+    ${ARTE_X[p.id]?`<a class="btn" target="_blank" rel="noopener" href="${ARTE_URL}#a-${p.id}">En Historia del Arte ↗</a>`:""}${p.rah?`<a class="btn" target="_blank" rel="noopener" href="https://historia-hispanica.rah.es/biografias/${p.rah}">Semblanza en la RAH ↗</a>`:""}</div>`);
   $("#ptl").onclick=()=>{$("#dlg").close();tlFocusPerson(p)};
   $("#ptl2").onclick=()=>{$("#dlg").close();lineaIr({k:"p"+p.id})};
   $$("[data-d]",$("#db")).forEach(b=>b.onclick=()=>openDoc(b.dataset.d));
@@ -2025,7 +2026,7 @@ function pkPanelOpen(i){
   if(!PK)return;if(PK.sel===i){pkPanelClose();return}
   const p=PK.res[i].p,rr=alRar(p),eps=p.eps.map(e=>EPM[e]).filter(Boolean),pn=$("#pkpanel");
   const wk=p.wk?`https://es.wikipedia.org/wiki/${encodeURIComponent(p.wk)}`:`https://es.wikipedia.org/w/index.php?search=${encodeURIComponent(clean(p.nombre))}`;
-  pn.innerHTML=`<button class="pkpx" type="button" aria-label="Cerrar la información">✕</button><div class="pkpm"><span class="chip">${"★".repeat(rr)} ${["","Común","Rara","Legendaria"][rr]}</span><span class="chip">${esc(CATS[p.cat][0])}</span><span class="chip">Tema ${p.tema}</span></div><div class="pkp1"><h3>${esc(clean(p.nombre))}</h3><p class="pkpl">${esc(life(p))}${p.c?" · fechas aproximadas":""}</p><p class="pkpc">${esc(p.cargo)}</p><p class="pks">${esc(p.sem||p.nota||"")}</p></div><div class="pkp2">${eps.length?`<h4>Epígrafes</h4><ul>${eps.map(e=>`<li><b>${e.id}</b> · ${esc(e.nombre)}</li>`).join("")}</ul>`:""}<div class="pkpa"><button class="btn primary" id="pkfull" type="button">Ficha completa</button><a class="btn" target="_blank" rel="noopener" href="${wk}">Wikipedia ↗</a>${p.rah?`<a class="btn" target="_blank" rel="noopener" href="https://historia-hispanica.rah.es/biografias/${p.rah}">RAH ↗</a>`:""}</div></div>`;
+  pn.innerHTML=`<button class="pkpx" type="button" aria-label="Cerrar la información">✕</button><div class="pkpm"><span class="chip">${"★".repeat(rr)} ${["","Común","Rara","Legendaria"][rr]}</span><span class="chip">${esc(CATS[p.cat][0])}</span><span class="chip">Tema ${p.tema}</span></div><div class="pkp1"><h3>${esc(clean(p.nombre))}</h3><p class="pkpl">${esc(life(p))}${p.c?" · fechas aproximadas":""}</p><p class="pkpc">${esc(p.cargo)}</p><p class="pks">${esc(p.sem||p.nota||"")}</p></div><div class="pkp2">${eps.length?`<h4>Epígrafes</h4><ul>${eps.map(e=>`<li><b>${e.id}</b> · ${esc(e.nombre)}</li>`).join("")}</ul>`:""}<div class="pkpa"><button class="btn primary" id="pkfull" type="button">Ficha completa</button><button class="btn" type="button" data-share="${p.id}">Compartir cromo</button><a class="btn" target="_blank" rel="noopener" href="${wk}">Wikipedia ↗</a>${p.rah?`<a class="btn" target="_blank" rel="noopener" href="https://historia-hispanica.rah.es/biografias/${p.rah}">RAH ↗</a>`:""}</div></div>`;
   pn.hidden=false;pn.scrollTop=0;PK.sel=i;$("#pkst").classList.add("has-panel");$("#pk").classList.add("pnl");
   $$("#pkb .pkc").forEach((c,j)=>c.classList.toggle("sel",j===i));
   $(".pkpx",pn).onclick=pkPanelClose;$("#pkfull").onclick=()=>openPers(p.id)}
@@ -2577,7 +2578,6 @@ function renderInicio(){
   <div class="evs rv">${EVD.map(([n,c,s,b,sub])=>{const ts=D.presets[n],eps=EPS.filter(e=>ts.includes(e.tema));const a=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="texto").length,f=DOCS.filter(d=>ts.includes(d.tema)&&d.kind==="fuente").length,np=PEOPLE.filter(p=>ts.includes(p.tema)).length;
     return `<div class="ev ${c}"><h3>${n}</h3><div class="sub">${sub}</div><div class="evt">${ts.length>1?"Temas "+ts[0]+" a "+ts[ts.length-1]:""}</div><p class="note" style="margin:0 0 12px">${a} textos · ${f} fuentes · ${np} personajes · ${eps.length} epígrafes</p><div class="row"><button class="btn primary small" data-std="${s}">Generar examen</button><button class="btn small" data-pool="textos" data-b="${b}">Textos</button><button class="btn small" data-pool="fuentes" data-b="${b}">Fuentes</button></div></div>`}).join("")}</div>
   <div class="route rv">${TEMAS.map(t=>`<button class="rt ${t.bloque}" data-tm="${t.n}" title="${esc(t.n+". "+t.nombre)}">${t.n}</button>`).join("")}</div>`;
-  const fst=$("#fst");if(fst)fst.textContent=`${nt} textos · ${nf} fuentes · ${PEOPLE.length} personajes · ${EVS.length} hitos`;
   const V=$("#v-inicio");
   $$("[data-go]",V).forEach(b=>b.onclick=()=>go(b.dataset.go));
   $$("[data-std]",V).forEach(b=>b.onclick=()=>{go("examenes");runStd(b.dataset.std)});
@@ -2923,5 +2923,6 @@ async function save(name,make,sel){
 }
 
 </script>
+<script src="extras.js" defer></script>
 </body>
 </html>

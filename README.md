@@ -1,6 +1,6 @@
 # Historia de España · 2.º de Bachillerato (PAU)
 
-Web de estudio para Historia de España de 2.º de Bachillerato (Comunidad de Madrid): textos y fuentes históricas con clave de corrección, personajes, cronología por temas y línea del tiempo animada (hitos y personajes año a año), generador de exámenes tipo PAU, juegos, álbum de cromos de personajes con sobres, taller de estudio y progreso personal.
+Web de estudio para Historia de España de 2.º de Bachillerato (Comunidad de Madrid): textos y fuentes históricas con clave de corrección, personajes, cronología, generador de exámenes tipo PAU, juegos, álbum de cromos de personajes con sobres, taller de estudio y progreso personal.
 
 No necesita servidor ni compilación: es una página estática (`index.html` + `data.json` + `img/` + `fonts/`).
 
