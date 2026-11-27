@@ -695,3 +695,5 @@ html.legible .cback em b,html.legible .cro .tx h4{font-style:italic}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .tp .tn{color:#1a1410}}
 .sdi.on span,.sdi:hover span{color:var(--hl-ink);opacity:.78}
 .hoyh .eyebrow{color:var(--hl)}
+
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}

@@ -1,8 +1,8 @@
 /* Funciona sin conexión. Cambia VERSION cuando se publique una versión nueva de la web. */
-const VERSION = "hde-v1";
-const CORE = ["./", "index.html", "identidad.css", "data.json", "extras.js", "fonts/inter-latin-wght-normal.woff2", "fonts/bricolage-latin-wdth-normal.woff2", "fonts/newsreader-latin-wght-normal.woff2", "fonts/newsreader-latin-wght-italic.woff2", "icon-192.png"];
+const VERSION = "hde-v2";
+const CORE = ["./", "index.html", "identidad.css", "linea.css", "pau.css", "data.json", "extras.js", "pau.js", "linea.js", "anyo.js", "efemerides.js", "mundo.js", "nota.js", "pulso.js", "mapas.js", "arte_min.js", "fonts/inter-latin-wght-normal.woff2", "fonts/bricolage-latin-wdth-normal.woff2", "fonts/newsreader-latin-wght-normal.woff2", "fonts/newsreader-latin-wght-italic.woff2", "fonts/fraunces-latin-wght-normal.woff2", "fonts/atkinson-hyperlegible-latin-400-normal.woff2", "fonts/atkinson-hyperlegible-latin-700-normal.woff2", "fonts/atkinson-hyperlegible-latin-400-italic.woff2", "icon-192.png"];
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(VERSION).then(c => Promise.all(CORE.map(u => c.add(u).catch(() => {})))).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(VERSION).then(c => Promise.all(CORE.map(u => c.add(u).catch(() => console.warn("SW: no se pudo precargar", u))))).then(() => self.skipWaiting()));
 });
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim()));

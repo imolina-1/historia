@@ -1,14 +1,14 @@
 /* Historia de España — línea del tiempo a pantalla completa.
    Hitos (EVS) y personajes (PEOPLE) ordenados por año; varios por año. Se activa con #linea.
    Optimizada: solo se maquetan los ~9 años cercanos, las imágenes se cargan al acercarse,
-   el bucle de animación se detiene si no hay nada que mover y se pausa con la pestaña oculta. */
+   el fondo ondula despacio (sin movimiento si el sistema pide reducirlo) y el bucle se pausa con la pestaña oculta. */
 (function () {
 "use strict";
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var LS = { E: true, P: true, W: true };
 var WT = null;                                    // tema de cada hecho mundial: el del hito español más cercano en el tiempo
 var G = [], els = [], N = 0, pos = 0, target = 0, hue = 40, htarget = 40, shown = -1, openU = null;
-var lastHue = 0, built = false, running = false, moved = false, hintOn = true, dirty = true, lastWave = 0;
+var wdirty = true, lastHue = 0, built = false, running = false, moved = false, hintOn = true, dirty = true, lastWave = 0;
 var root, stage, rail, eraEl, bgEl, pn, sc, cv, cx, CW = 0, CH = 0, DPR = 1, cur, hintEl, cntEl;
 var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 var MARKS = [-1200000, -15000, -3000, -218, 409, 711, 1031, 1212, 1479, 1700, 1808, 1898, 1931, 1975, 2000];
@@ -103,7 +103,7 @@ function layout() {
     if (i < lo || i > hi) { if (el._v) { el.style.visibility = "hidden"; el._v = 0; } continue; }
     d = i - pos; a = Math.abs(d);
     if (a > 3.2) { if (el._v) { el.style.visibility = "hidden"; el.style.opacity = 0; el._v = 0; } continue; }
-    if (!el._v) { el._v = 1; el.style.visibility = "visible"; if (a < 5) lazy(el); }
+    if (!el._v) { el._v = 1; el.style.visibility = "visible"; lazy(el); }
     var s = 1 - Math.min(a, 1) * .5 - Math.max(a - 1, 0) * .08;
     var x = (d < 0 ? -1 : 1) * (a < 1 ? a * gap : gap + (a - 1) * gap * .55);
     var o = a < 1 ? 1 - a * .72 : Math.max(0, .28 - (a - 1) * .14), y = a < 1 ? a * 10 : 10;
@@ -116,10 +116,12 @@ function focus() {
   if (!N) return; var i = clamp(Math.round(pos), 0, N - 1); if (i === shown) return;
   if (shown >= 0 && els[shown]) els[shown].classList.remove("f");
   shown = i; els[i].classList.add("f");
-  var g = G[i]; htarget = hueOf(g.tema); eraEl.textContent = TEMAS[g.tema - 1].nombre;
-  if (pn.classList.contains("on") && openU && !g.u.some(function (u) { return key(u) === openU; })) closePn();
+  var g = G[i]; htarget = hueOf(g.tema); eraEl.textContent = TEMAS[g.tema - 1] ? TEMAS[g.tema - 1].nombre : "";
+  /* el panel solo se cierra si el DESTINO no contiene la ficha abierta (al viajar entre años, los intermedios no cuentan) */
+  var dest = G[clamp(Math.round(target), 0, N - 1)] || g;
+  if (pn.classList.contains("on") && openU && !dest.u.some(function (u) { return key(u) === openU; })) closePn();
 }
-function fit() { if (!cv) return; DPR = .6; CW = cv.clientWidth; CH = cv.clientHeight; cv.width = CW * DPR; cv.height = CH * DPR; cx.setTransform(DPR, 0, 0, DPR, 0, 0); }
+function fit() { if (!cv) return; wdirty = true; DPR = .6; CW = cv.clientWidth; CH = cv.clientHeight; cv.width = CW * DPR; cv.height = CH * DPR; cx.setTransform(DPR, 0, 0, DPR, 0, 0); }
 function waves(t) {
   cx.clearRect(0, 0, CW, CH); if (still) t = 0;
   for (var k = 0; k < 3; k++) {
@@ -139,9 +141,9 @@ function tick(now) {
   var dh = htarget - hue; if (dh > 180) dh -= 360; else if (dh < -180) dh += 360;
   var hmove = Math.abs(dh) > .6; if (hmove) { hue += dh * .06; if (now - lastHue > 60) { lastHue = now; bgEl.style.setProperty("--hue", hue.toFixed(0)); } } else if (dh !== 0) { hue = htarget; bgEl.style.setProperty("--hue", hue.toFixed(0)); }
   if (moving || dirty) { layout(); focus(); dirty = false; }
-  if (now - lastWave > (moving ? 80 : 60)) { lastWave = now; waves(now / 1000); }   // el fondo se mueve despacio: ~15 fps bastan
+  if (still) { if (moving || hmove || wdirty) { wdirty = false; waves(0); } }          // con «reducir movimiento» el fondo es estático: solo se redibuja si algo cambia
+  else if (now - lastWave > (moving ? 80 : 60)) { lastWave = now; waves(now / 1000); }   // el fondo ondula despacio: ~15 fps bastan
 }
-function stripTags(s) { return String(s || "").replace(/<[^>]+>/g, ""); }
 function chip(txt, attrs) { return '<button type="button" class="chp" ' + attrs + ">" + E(txt) + "</button>"; }
 function openU_(k) {
   var u = null, gi = -1;
@@ -195,7 +197,7 @@ function railTo(ev) { var r = rail.getBoundingClientRect(); go((ev.clientX - r.l
 function setLayer(l, on, keep) {
   var b = root.querySelector('.tlf [data-l="' + l + '"]'); LS[l] = on;
   if (b) { b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); }
-  var y = G[Math.round(target)] ? G[Math.round(target)].y : 1500, ky = null;
+  var y = G[Math.round(target)] ? G[Math.round(target)].y : 1500;
   if (keep) { var m = keep.charAt(0) === "e" ? EVS[+keep.slice(1)] : keep.charAt(0) === "w" ? MUNDO[+keep.slice(1)] : PM[keep.slice(1)]; if (m) y = m.y != null ? m.y : (m.nac != null ? m.nac : m.mue); }
   closePn(); render();
   var gi = 0; G.some(function (g, k) { if (g.y >= y) { gi = k; return true; } gi = k; return false; }); go(gi); pos = target;
